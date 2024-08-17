@@ -1,0 +1,198 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block navbar%}
+
+<div class="container">
+    {% include "pieces/navbar_white.html" %}
+</div>
+
+{% endblock %}
+
+
+{% block body %}
+
+{% include "pieces/drop_black.html" %}
+
+<div class="container">
+    <div class="heading">
+        <p>Resource Center</p>
+        <h2>Featured News</h2>
+    </div>
+    <div class="featurednews">
+        <div class="newsleft">
+            <div class="newsimage"><img src="{% static 'media/newsimage1.png' %}" alt=""></div>
+            <div class="newscontents">
+                <div class="time">
+                    <span id="titlespan">Featured</span>
+                    <span id="titletime">Nov 22, 2022</span>
+                </div>
+                <div class="newsheader">
+                    <p>The interesting mental health benefits of exercise</p>
+                </div>
+                <div class="newscontent">
+                    <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
+                </div>
+                <div class="option">
+                    <span id="more">Read More</span>
+                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="newsright">
+            <div class="article">
+                <div class="articleimage">
+                    <img src="{% static 'media/articleimage1.png' %}" alt="">
+                </div>
+                <div class="articlecontent">
+                    <p id="articletime">Nov 22, 2022</p>
+                    <p id="article">The interesting mental health benefits of exercise</p>
+                </div>
+            </div>
+            <div class="article">
+                <div class="articleimage">
+                    <img src="{% static 'media/articleimage2.png' %}" alt="">
+                </div>
+                <div class="articlecontent">
+                    <p id="articletime">Nov 22, 2022</p>
+                    <p id="article">The interesting mental health benefits of exercise</p>
+                </div>
+            </div>
+            <div class="article">
+                <div class="articleimage">
+                    <img src="{% static 'media/articleimage3.png' %}" alt="">
+                </div>
+                <div class="articlecontent">
+                    <p id="articletime">Nov 22, 2022</p>
+                    <p id="article">The interesting mental health benefits of exercise</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="topiccards">
+        <h3>Topic Match For You</h3>
+        <ul id="articleoptions">
+            <a href="#">All</a>
+            <a href="#">Fitness</a>
+            <a href="#">Health</a>
+            <a href="#">Recipes</a>
+        </ul>
+    </div>
+    <div class="topcard">
+        <div class="card">
+            <div class="cardimage">
+                <img src="{% static 'media/cardimage1.png' %}" alt="">
+            </div>
+            <div class="cardbody">
+                <div class="carddate">
+                    <span id="cardtitle">Fitness</span>
+                    <span id="cardtime">Nov 22, 2022</span>
+                </div>
+                <h2>The 5 effective fitness morning routines you should follow</h2>
+                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
+                <div class="cardfooter option">
+                    <span id="more">Read More</span>
+                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cardimage">
+                <img src="{% static 'media/cardimage2.png' %}" alt="">
+            </div>
+            <div class="cardbody">
+                <div class="carddate">
+                    <span id="cardtitle">Fitness</span>
+                    <span id="cardtime">Nov 22, 2022</span>
+                </div>
+                <h2>The 5 effective fitness morning routines you should follow</h2>
+                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
+                <div class=" option">
+                    <span id="more">Read More</span>
+                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cardimage">
+                <img src="{% static 'media/cardimage3.png' %}" alt="">
+            </div>
+            <div class="cardbody">
+                <div class="carddate">
+                    <span id="cardtitle">Fitness</span>
+                    <span id="cardtime">Nov 22, 2022</span>
+                </div>
+                <h2>The 5 effective fitness morning routines you should follow</h2>
+                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
+                <div class="cardfooter option">
+                    <span id="more">Read More</span>
+                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cardimage">
+                <img src="{% static 'media/cardimage4.png' %}" alt="">
+            </div>
+            <div class="cardbody">
+                <div class="carddate">
+                    <span id="cardtitle">Fitness</span>
+                    <span id="cardtime">Nov 22, 2022</span>
+                </div>
+                <h2>The 5 effective fitness morning routines you should follow</h2>
+                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
+                <div class="cardfooter option">
+                    <span id="more">Read More</span>
+                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cardimage">
+                <img src="{% static 'media/cardimage5.png' %}" alt="">
+            </div>
+            <div class="cardbody">
+                <div class="carddate">
+                    <span id="cardtitle">Fitness</span>
+                    <span id="cardtime">Nov 22, 2022</span>
+                </div>
+                <h2>The 5 effective fitness morning routines you should follow</h2>
+                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
+                <div class="cardfooter option">
+                    <span id="more">Read More</span>
+                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cardimage">
+                <img src="{% static 'media/cardimage6.png' %}" alt="">
+            </div>
+            <div class="cardbody">
+                <div class="carddate">
+                    <span id="cardtitle">Fitness</span>
+                    <span id="cardtime">Nov 22, 2022</span>
+                </div>
+                <h2>The 5 effective fitness morning routines you should follow</h2>
+                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
+                <div class="cardfooter option">
+                    <span id="more">Read More</span>
+                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+
+{% block getstarted %}
+
+{% include "pieces/getstarted.html" %}
+
+{% endblock %}

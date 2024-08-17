@@ -1,0 +1,24 @@
+{% load static %}
+<nav>
+    <div class="homelogo">
+        <img src="{% static 'media/Group.svg' %}" alt="">
+        <p>Bulking</p>
+    </div>
+    <div id="homemenudiv">
+        <ul id="homemenu">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'home' %}">Programs</a></li>
+            <li><a href="{% url 'trainers' %}">Trainers</a></li>
+            <li><a href="{% url 'membership' %}">Membership</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="homeaccount">
+        <i><img src="{% static 'media/Buy.svg' %}" alt=""></i>
+        <button class="loginButton" id="login" type="submit">Login</button>
+        <button class="signupButton" id="signup" type="submit">Signup</button>
+        <div class="drop">
+            <i id='bars' class="fa-solid fa-bars"></i>
+        </div>
+    </div>
+</nav>

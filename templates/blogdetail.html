@@ -1,0 +1,123 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block navbar%}
+
+<div class="container">
+    {% include "pieces/navbar_white.html" %}
+</div>
+
+{% endblock %}
+
+
+{% block body %}
+
+{% include "pieces/drop_black.html" %}
+
+<div class="container">
+    <div class="blogdetailheader">
+        <div class="bdheaderleft">
+            <span>Resource Center</span>
+            <h2>The 5 effective fitness morning routines you should follow</h2>
+        </div>
+        <div class="bdheaderright">
+            <ul>
+                <li><i><img src="{% static 'media/facebook.svg' %}" alt=""></i></li>
+                <li><i><img src="{% static 'media/linkedin.svg' %}" alt=""></i></li>
+                <li><i><img src="{% static 'media/twitter.svg' %}" alt=""></i></li>
+                <li><i><img src="{% static 'media/social.svg' %}" alt=""></i></li>
+            </ul>
+        </div>
+    </div>
+    <div class="blogdetailrl">
+        <div class="blogdetailcontentleft">
+            <div class="detailimage">
+                <img src="{% static 'media/jumping.png' %}" alt="">
+            </div>
+            <div class="detailframe">
+                <p>Porta purus vel volutpat id facilisis sem. Rhoncus vitae potenti tellus maecenas pellentesque
+                    viverra
+                    suspendisse. Convallis quis sem nulla ipsum sed enim quam ultricies vivamus. Dictum vehicula
+                    amet
+                    tristique imperdiet. Aliquam nullam quis aenean arcu blandit non sit amet dui. </p>
+                <div class="span">
+                    <span id="bold">Cristofer Geidt</span><span id="thin">Training Coach</span>
+                </div>
+                <p id="end">A porta sed nunc amet dolor pharetra. Posuere interdum semper duis semper id. Sem sit
+                    sed
+                    sapien
+                    hendrerit phasellus non. Venenatis lectus lectus vulputate in lacus arcu. Pharetra lacus diam
+                    faucibus sapien ac egestas purus vehicula odio. Volutpat justo purus eu tortor. <br><br>
+
+                    Porta purus vel volutpat id facilisis sem. Rhoncus vitae potenti tellus maecenas pellentesque
+                    viverra suspendisse. Convallis quis sem nulla ipsum sed enim quam ultricies vivamus. Dictum
+                    vehicula
+                    amet tristique imperdiet. Aliquam nullam quis aenean arcu blandit non sit amet dui. <br><br>
+
+                    Viverra urna imperdiet non malesuada. In massa id tellus natoque augue in et, et. Suspendisse
+                    feugiat scelerisque et, viverra urna imperdiet.Vitae interdum quis lacus ut viverra. <br><br>
+                    1.Enim eu turpis egestas pretium aenean pharetra magna ac placerat. <br>
+                    2.Nunc semper velit netus donec commodo. <br>
+                    3.acus hendrerit aliquam habitant eget faucibus venenatis turpis.
+                </p>
+            </div>
+        </div>
+        <div class="blogdetailcontentright">
+            <h3>Latest articles</h3>
+            <div class="blogdetailarticles">
+                <div class="blogdetailarticle">
+                    <p>Fitness</p>
+                    <h2 class="blogarticletitle">The 5 effective fitness morning routines you should follow</h2>
+                    <p class="blogarticledate">Juni 27, 2022</p>
+                </div>
+                <div class="blogdetailarticle">
+                    <p>Health</p>
+                    <h2 class="blogarticletitle">8 innovative design ideas to make your resume pop</h2>
+                    <p class="blogarticledate">Juni 27, 2022</p>
+                </div>
+                <div class="blogdetailarticle">
+                    <p>Fitness</p>
+                    <h2 class="blogarticletitle">14 strength-specific training exercises you can do today</h2>
+                    <p class="blogarticledate">Juni 27, 2022</p>
+                </div>
+            </div>
+            <div class="blogdetailcategories">
+                <h3>Categories</h3>
+                <ul>
+                    <li><span>Fitness</span><i><img src="{% static 'media/arrow-right_black.svg' %}" alt=""></i></li>
+                    <li><span>Health</span><i><img src="{% static 'media/arrow-right_black.svg' %}" alt=""></i></li>
+                    <li><span>Recipes</span><i><img src="{% static 'media/arrow-right_black.svg' %}" alt=""></i></li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="content">
+    <div class="quota">
+        <img src="{% static 'media/quote-up.svg' %}" alt="">
+    </div>
+    <h6>Training Coach</h6>
+    <p>Eget aliquet sit at lacinia. Magna consequat consectetur maecenas amet sagittis mi. Mattis cursus dolor
+        amet quam commodo amet in sed dui. Risus risus sed sed lectus. </p>
+    <div class="reviewcard">
+        <div class="reviewcardimage">
+            <img src="{% static 'media/Ellipse 1.svg' %}" alt="">
+        </div>
+        <div class="reviewcardcontent">
+            <h4>Davis Rosser</h4>
+            <h6>Member</h6>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block getstarted %}
+
+{% include "pieces/getstarted.html" %}
+
+{% endblock %}

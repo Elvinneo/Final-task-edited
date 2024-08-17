@@ -1,0 +1,25 @@
+{% load static %}
+
+<nav>
+    <div class="otherlogo">
+        <img src="{% static 'media/heart_blue.svg' %}" alt="">
+        <p>Bulking</p>
+    </div>
+    <div id="othermenudiv">
+        <ul id="othermenu">
+            <li><a href="{% url 'home' %}">Home</a></li>
+            <li><a href="{% url 'home' %}">Programs</a></li>
+            <li><a href="{% url 'trainers' %}">Trainers</a></li>
+            <li><a href="{% url 'membership' %}">Membership</a></li>
+            <li><a href="{% url 'contact' %}">Contact</a></li>
+        </ul>
+    </div>
+    <div class="otheraccount">
+        <i><img src="{% static 'media/Buyblack.svg' %}" alt=""></i>
+        <button class="loginButton" id="login" type="submit">Login</button>
+        <button class="signupButton" id="signup" type="submit">Signup</button>
+    </div>
+    <div id="drop" class="drop">
+        <i id='barsblack' class="fa-solid fa-bars"></i>
+    </div>
+</nav>

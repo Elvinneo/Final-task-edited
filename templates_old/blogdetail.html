@@ -1,0 +1,227 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulking</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+</head>
+
+<body>
+    <div class="container">
+        <nav>
+            <div class="otherlogo">
+                <img src="{% static 'media/heart_blue.svg' %}" alt="">
+                <p>Bulking</p>
+            </div>
+            <div id="othermenudiv">
+                <ul id="othermenu">
+                    <li><a href="{% url 'home' %}">Home</a></li>
+                    <li><a href="{% url 'home' %}">Programs</a></li>
+                    <li><a href="{% url 'home' %}">Trainers</a></li>
+                    <li><a href="{% url 'membership' %}">Membership</a></li>
+                    <li><a href="{% url 'home' %}">Contact</a></li>
+                </ul>
+            </div>
+            <div class="otheraccount">
+                <i><img src="{% static 'media/Buyblack.svg' %}" alt=""></i>
+                <button class="loginButton" id="login" type="submit">Login</button>
+                <button class="signupButton" id="signup" type="submit">Signup</button>
+            </div>
+            <div id="drop" class="drop">
+                <i id='barsblack' class="fa-solid fa-bars"></i>
+            </div>
+        </nav>
+
+        {% include "overlays.html" %}
+        
+        <div class="drop">
+            <div id="dropmenu" class="dropdownMainBlack">
+                <div class="dropprogramsBlack">
+                    <a href="{% url 'home' %}">Home</a>
+                </div>
+                <div class="dropprogramsBlack">
+                    <a href="{% url 'home' %}">Programs</a>
+                </div>
+                <div class="dropprogramsBlack">
+                    <a href="{% url 'home' %}">Trainers</a>
+                </div>
+                <div class="dropprogramsBlack">
+                    <a href="{% url 'membership' %}">Membership</a>
+                </div>
+                <div class="dropprogramsBlack">
+                    <a href="{% url 'home' %}">Contact</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="blogdetailheader">
+            <div class="bdheaderleft">
+                <span>Resource Center</span>
+                <h2>The 5 effective fitness morning routines you should follow</h2>
+            </div>
+            <div class="bdheaderright">
+                <ul>
+                    <li><i><img src="{% static 'media/facebook.svg' %}" alt=""></i></li>
+                    <li><i><img src="{% static 'media/linkedin.svg' %}" alt=""></i></li>
+                    <li><i><img src="{% static 'media/twitter.svg' %}" alt=""></i></li>
+                    <li><i><img src="{% static 'media/social.svg' %}" alt=""></i></li>
+                </ul>
+            </div>
+        </div>
+        <div class="blogdetailrl">
+            <div class="blogdetailcontentleft">
+                <div class="detailimage">
+                    <img src="{% static 'media/jumping.png' %}" alt="">
+                </div>
+                <div class="detailframe">
+                    <p>Porta purus vel volutpat id facilisis sem. Rhoncus vitae potenti tellus maecenas pellentesque
+                        viverra
+                        suspendisse. Convallis quis sem nulla ipsum sed enim quam ultricies vivamus. Dictum vehicula
+                        amet
+                        tristique imperdiet. Aliquam nullam quis aenean arcu blandit non sit amet dui. </p>
+                    <div class="span">
+                        <span id="bold">Cristofer Geidt</span><span id="thin">Training Coach</span>
+                    </div>
+                    <p id="end">A porta sed nunc amet dolor pharetra. Posuere interdum semper duis semper id. Sem sit
+                        sed
+                        sapien
+                        hendrerit phasellus non. Venenatis lectus lectus vulputate in lacus arcu. Pharetra lacus diam
+                        faucibus sapien ac egestas purus vehicula odio. Volutpat justo purus eu tortor. <br><br>
+
+                        Porta purus vel volutpat id facilisis sem. Rhoncus vitae potenti tellus maecenas pellentesque
+                        viverra suspendisse. Convallis quis sem nulla ipsum sed enim quam ultricies vivamus. Dictum
+                        vehicula
+                        amet tristique imperdiet. Aliquam nullam quis aenean arcu blandit non sit amet dui. <br><br>
+
+                        Viverra urna imperdiet non malesuada. In massa id tellus natoque augue in et, et. Suspendisse
+                        feugiat scelerisque et, viverra urna imperdiet.Vitae interdum quis lacus ut viverra. <br><br>
+                        1.Enim eu turpis egestas pretium aenean pharetra magna ac placerat. <br>
+                        2.Nunc semper velit netus donec commodo. <br>
+                        3.acus hendrerit aliquam habitant eget faucibus venenatis turpis.
+                    </p>
+                </div>
+            </div>
+            <div class="blogdetailcontentright">
+                <h3>Latest articles</h3>
+                <div class="blogdetailarticles">
+                    <div class="blogdetailarticle">
+                        <p>Fitness</p>
+                        <h2 class="blogarticletitle">The 5 effective fitness morning routines you should follow</h2>
+                        <p class="blogarticledate">Juni 27, 2022</p>
+                    </div>
+                    <div class="blogdetailarticle">
+                        <p>Health</p>
+                        <h2 class="blogarticletitle">8 innovative design ideas to make your resume pop</h2>
+                        <p class="blogarticledate">Juni 27, 2022</p>
+                    </div>
+                    <div class="blogdetailarticle">
+                        <p>Fitness</p>
+                        <h2 class="blogarticletitle">14 strength-specific training exercises you can do today</h2>
+                        <p class="blogarticledate">Juni 27, 2022</p>
+                    </div>
+                </div>
+                <div class="blogdetailcategories">
+                    <h3>Categories</h3>
+                    <ul>
+                        <li><span>Fitness</span><i><img src="{% static 'media/arrow-right_black.svg' %}" alt=""></i></li>
+                        <li><span>Health</span><i><img src="{% static 'media/arrow-right_black.svg' %}" alt=""></i></li>
+                        <li><span>Recipes</span><i><img src="{% static 'media/arrow-right_black.svg' %}" alt=""></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <div class="quota">
+            <img src="{% static 'media/quote-up.svg' %}" alt="">
+        </div>
+        <h6>Training Coach</h6>
+        <p>Eget aliquet sit at lacinia. Magna consequat consectetur maecenas amet sagittis mi. Mattis cursus dolor
+            amet quam commodo amet in sed dui. Risus risus sed sed lectus. </p>
+        <div class="reviewcard">
+            <div class="reviewcardimage">
+                <img src="{% static 'media/Ellipse 1.svg' %}" alt="">
+            </div>
+            <div class="reviewcardcontent">
+                <h4>Davis Rosser</h4>
+                <h6>Member</h6>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="getstarted">
+        <div class="container">
+            <div class="start">
+                <div class="desc">
+                    <h3>Discover Your Potential</h3>
+                    <p>Workout was started by James and Mount in 2012. It’s our mission to help people in Denver get
+                        fit,
+                        stay healthy, and live life on their terms without fitness being an obstacle.</p>
+                </div>
+                <div class="submit">
+                    <button>Get Started</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="mainfooter">
+        <div class="container">
+            <div class="maincontent">
+                <div class="symbol">
+                    <div class="info">
+                        <img src="{% static 'media/heart_white.svg' %}" alt="">
+                        <p>Bulking</p>
+                    </div>
+                    <div class="infocontent">
+                        <p>Get fit, stay healthy, and live life on their terms without fitness being an obstacle.
+                        </p>
+                    </div>
+                </div>
+                <div class="menus">
+                    <ul id="row1">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'home' %}">Programs</a></li>
+                        <li><a href="{% url 'membership' %}">Membership</a></li>
+                    </ul>
+                    <ul id="row2">
+                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                        <li><a href="{% url 'home' %}">Contact</a></li>
+                        <li><a href="{% url 'about' %}">About us</a></li>
+                    </ul>
+                </div>
+                <div class="mail">
+                    <p>Newsletter</p>
+                    <div class="form">
+                        <form action="">
+                            <input type="textarea" placeholder="Your email here">
+                            <button>Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="social">
+                <p>© 2024 Nguli® Global Inc.</p>
+                <ul>
+                    <li><a target=”_blank” href="https://www.facebook.com/madbulking/"><img src="{% static 'media/svg.svg' %}" alt=""></a></li>
+                    <li><a target=”_blank” href="https://www.linkedin.com/company/bulking"><img src="{% static 'media/svg (1).svg' %}" alt=""></a></li>
+                    <li><a target=”_blank” href="https://x.com/bulkingbroo"><img src="{% static 'media/svg (3).svg' %}" alt=""></a></li>
+                    <li><a target=”_blank” href="https://www.youtube.com/@Bulkingchanel"><img src="{% static 'media/svg (2).svg' %}" alt=""></a></li>
+                    <li><a target=”_blank” href="https://www.instagram.com/bulkingoficial/"><img src="{% static 'media/svg (4).svg' %}" alt=""></a></li>
+                </ul>
+                <div class="policy">
+                    <p>Terms of Service</p>
+                    <p>Privacy Policy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>

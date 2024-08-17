@@ -1,0 +1,348 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulking</title>
+    <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
+</head>
+
+<body>
+    <section class="member">
+        <div class="container">
+            <nav>
+                <div class="otherlogo">
+                    <img src="{% static 'media/heart_blue.svg' %}" alt="">
+                    <p>Bulking</p>
+                </div>
+                <div id="othermenudiv">
+                    <ul id="othermenu">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'home' %}">Programs</a></li>
+                        <li><a href="{% url 'home' %}">Trainers</a></li>
+                        <li><a href="{% url 'membership' %}">Membership</a></li>
+                        <li><a href="{% url 'home' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="otheraccount">
+                    <i><img src="{% static 'media/Buyblack.svg' %}" alt=""></i>
+                    <button class="loginButton" id="login" type="submit">Login</button>
+                    <button class="signupButton" id="signup" type="submit">Signup</button>
+                </div>
+                <div id="drop" class="drop">
+                    <i id='barsblack' class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+
+            <div class="drop">
+                <div id="dropmenu" class="dropdownMainBlack">
+                    <div class="dropprogramsBlack">
+                        <a href="{% url 'home' %}">Home</a>
+                    </div>
+                    <div class="dropprogramsBlack">
+                        <a href="{% url 'home' %}">Programs</a>
+                    </div>
+                    <div class="dropprogramsBlack">
+                        <a href="{% url 'home' %}">Trainers</a>
+                    </div>
+                    <div class="dropprogramsBlack">
+                        <a href="{% url 'membership' %}">Membership</a>
+                    </div>
+                    <div class="dropprogramsBlack">
+                        <a href="{% url 'home' %}">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="membershipzone">
+            <div class="container">
+                <div class="membership">
+                    <div class="membertitle">
+                        <p>Membership</p>
+                        <h2>Compare Our Plane and Find Your</h2>
+                    </div>
+                    <div class="plans">
+                        <div class="plan">
+                            <div class="types_planes">
+                                <h2>$0</h2>
+                                <h5>/Month</h5>
+                                <h4>Free plan</h4>
+                            </div>
+                            <ul>
+                                <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                                    <p>1 classes per month</p>
+                                </li>
+                                <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                                    <p>Access to online planes</p>
+                                </li>
+                                <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                                    <p>10 health & fitness guides</p>
+                                </li>
+                            </ul>
+                            <button id="purchase">Purchase Plan</button>
+                        </div>
+                        <div class="plan2">
+                            <div class="types_planes">
+                                <h2>$149.00</h2>
+                                <h5>/Month</h5>
+                                <h4>Basic plan</h4>
+                            </div>
+                            <ul>
+                                <li><i><img src="{% static 'media/checkmark-circle-outline_green.svg' %}" alt=""></i>
+                                    <p>8 classes per month</p>
+                                </li>
+                                <li><i><img src="{% static 'media/checkmark-circle-outline_green.svg' %}" alt=""></i>
+                                    <p>All in basic packages</p>
+                                </li>
+                                <li><i><img src="{% static 'media/checkmark-circle-outline_green.svg' %}" alt=""></i>
+                                    <p>1-on-1 personal trainning</p>
+                                </li>
+                            </ul>
+                            <button id="purchase">Purchase Plan</button>
+                        </div>
+                        <div class="plan">
+                            <div class="types_planes">
+                                <h2>$289.00</h2>
+                                <h5>/Month</h5>
+                                <h4>Professional plan</h4>
+                            </div>
+                            <ul>
+                                <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                                    <p>20 classes per month</p>
+                                </li>
+                                <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                                    <p>All in Intermediate package</p>
+                                </li>
+                                <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                                    <p>Access to my online tutorials</p>
+                                </li>
+                            </ul>
+                            <button id="purchase">Purchase Plan</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="overview">
+                <p>Overview</p>
+                <ul>
+                    <li>
+                        <div class="overviewinfo">
+                            <p>Classes per month</p>
+                            <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
+                        </div>
+                        <div class="overviewcontent">
+                            <p>1</p>
+                            <p>8</p>
+                            <p>20</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="overviewinfo">
+                            <p>Access to online classes</p>
+                            <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
+                        </div>
+                        <div class="overviewcontent">
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="overviewinfo">
+                            <p>Health & fitness guides</p>
+                            <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
+                        </div>
+                        <div class="overviewcontent">
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="overviewinfo">
+                            <p>Full Warmup guide</p>
+                            <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
+                        </div>
+                        <div class="overviewcontent">
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="overviewinfo">
+                            <p>Access video Link</p>
+                            <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
+                        </div>
+                        <div class="overviewcontent">
+                            <i><img src="{% static 'media/close-circle.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="overviewinfo">
+                            <p>Full diet plan</p>
+                            <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
+                        </div>
+                        <div class="overviewcontent">
+                            <i><img src="{% static 'media/close-circle.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="overviewinfo">
+                            <p>Nutritional support</p>
+                            <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
+                        </div>
+                        <div class="overviewcontent">
+                            <i><img src="{% static 'media/close-circle.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="overviewinfo">
+                            <p>Full customize plan</p>
+                            <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
+                        </div>
+                        <div class="overviewcontent">
+                            <i><img src="{% static 'media/close-circle.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/close-circle.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="overviewinfo">
+                            <p>Daily progress check up</p>
+                            <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
+                        </div>
+                        <div class="overviewcontent">
+                            <i><img src="{% static 'media/close-circle.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/close-circle.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="overviewinfo">
+                            <p>All Intermediate package</p>
+                            <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
+                        </div>
+                        <div class="overviewcontent">
+                            <i><img src="{% static 'media/close-circle.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/close-circle.svg' %}" alt=""></i>
+                            <i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="review">
+            <div class="container">
+                <div class="descript">
+                    <p>Review</p>
+                    <h3>What Our Happy Clients Say</h3>
+                </div>
+                <div class="content">
+                    <div class="quota">
+                        <img src="{% static 'media/quote-up.svg' %}" alt="">
+                    </div>
+                    <h6>Member Review</h6>
+                    <p>Eget aliquet sit at lacinia. Magna consequat consectetur maecenas amet sagittis mi. Mattis cursus
+                        dolor
+                        amet quam commodo amet in sed dui. Risus risus sed sed lectus. </p>
+                    <div class="reviewcard">
+                        <div class="reviewcardimage">
+                            <img src="{% static 'media/Ellipse 1.svg' %}" alt="">
+                        </div>
+                        <div class="reviewcardcontent">
+                            <h4>Davis Rosser</h4>
+                            <h6>Member</h6>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="actions">
+                    <ul id="arrows">
+                        <li id="arrowleft"><i class="fa-solid fa-arrow-left passivearrow"></i></li>
+                        <li>
+                            <div class="rectangle"></div>
+                        </li>
+                        <li>
+                            <div class="ellipse"></div>
+                        </li>
+                        <li>
+                            <div class="ellipse"></div>
+                        </li>
+                        <li id="arrowright"><i class="fa-solid fa-arrow-right activearrow"></i></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="mainfooter">
+            <div class="container">
+                <div class="maincontent">
+                    <div class="symbol">
+                        <div class="info">
+                            <img src="{% static 'media/heart_white.svg' %}" alt="">
+                            <p>Bulking</p>
+                        </div>
+                        <div class="infocontent">
+                            <p>Get fit, stay healthy, and live life on their terms without fitness being an obstacle.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="menus">
+                        <ul id="row1">
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'home' %}">Programs</a></li>
+                            <li><a href="{% url 'membership' %}">Membership</a></li>
+                        </ul>
+                        <ul id="row2">
+                            <li><a href="{% url 'blog' %}">Blog</a></li>
+                            <li><a href="{% url 'home' %}">Contact</a></li>
+                            <li><a href="{% url 'about' %}">About us</a></li>
+                        </ul>
+                    </div>
+                    <div class="mail">
+                        <p>Newsletter</p>
+                        <div class="form">
+                            <form action="">
+                                <input type="textarea" placeholder="Your email here">
+                                <button>Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="social">
+                    <p>© 2024 Nguli® Global Inc.</p>
+                    <ul>
+                        <li><a target=”_blank” href="https://www.facebook.com/madbulking/"><img
+                                    src="{% static 'media/svg.svg' %}" alt=""></a></li>
+                        <li><a target=”_blank” href="https://www.linkedin.com/company/bulking"><img
+                                    src="{% static 'media/svg (1).svg' %}" alt=""></a></li>
+                        <li><a target=”_blank” href="https://x.com/bulkingbroo"><img
+                                    src="{% static 'media/svg (3).svg' %}" alt=""></a></li>
+                        <li><a target=”_blank” href="https://www.youtube.com/@Bulkingchanel"><img
+                                    src="{% static 'media/svg (2).svg' %}" alt=""></a></li>
+                        <li><a target=”_blank” href="https://www.instagram.com/bulkingoficial/"><img
+                                    src="{% static 'media/svg (4).svg' %}" alt=""></a></li>
+                    </ul>
+                    <div class="policy">
+                        <p>Terms of Service</p>
+                        <p>Privacy Policy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        </div>
+        <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>

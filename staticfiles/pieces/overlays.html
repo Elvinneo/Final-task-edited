@@ -1,0 +1,260 @@
+{% load static %}
+<div id="signupOverlay" class="overlay">
+    <div class="signupmain">
+        <div class="signupcontainer">
+            <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
+            <div class="signupicon">
+                <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
+                <span id="bulk">Bulk</span>
+                <span id="ing">ing</span>
+            </div>
+            <div class="signupheader">
+                <span id="work">Welcome to Work</span>
+                <span id="out">out</span>
+            </div>
+            <div class="signupbuttons">
+                <button id="withgoogle"><img src="{% static 'media/google.svg' %}" alt=""><span>Continue with
+                        Google</span></button>
+                <button id="withapple"><img src="{% static 'media/apple.svg' %}" alt=""><span>Continue with
+                        Apple</span></button>
+            </div>
+            <div class="orsignup">
+                <hr><span>Or Sign Up with</span>
+                <hr>
+            </div>
+            <div class="signupform">
+                <p>Email</p>
+                <form method="post" id="signupmailform" action="">
+                    {% csrf_token %}
+                    <input type="text" id="mailarea" placeholder="Enter your email">
+                    <button id='signupcontinue' type="submit">Continue</button>
+                </form>
+            </div>
+            <div class="terms">
+                <span>I agree to Clara</span>
+                <a href=" {% url 'terms' %}" >Terms of Use</a>
+                <span>and</span>
+                <a href="#">Privacy Policy</a>
+            </div>
+            <div class="reguestlogin">
+                <span>Already have an account?</span>
+                <a href="#" id="signuplogin">Log In</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="signinOverlay" class="overlay">
+    <div class="signinmain">
+        <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
+        <div class="signinicon">
+            <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
+            <span id="bulk">Bulk</span>
+            <span id="ing">ing</span>
+        </div>
+        <div class="signincontent">
+            <div class="signinheader">
+                <h2>Hey there, welome back!</h2>
+            </div>
+            <div class="signinform">
+                <form method="post" class="signinform" id="loginForm" action="#">
+                    {% csrf_token %}
+                    <div class="mailzone">
+                        <label for="email" id="">Email</label>
+                        <input type="text" placeholder="Enter your mail" name="mail"required>
+                    </div>
+                    <div class="passwordzone">
+                        <div class="eye">
+                            <img id="eye" src="{% static 'media/eye-slash.svg' %}" alt="">
+                        </div>
+                        <label for="password">Password</label>
+                        <input class="pass" type="password" placeholder="Enter your password" name="password" required>
+                        <button type="submit" id="toconfirm">Login</button>
+                    </div>
+                </form>
+            </div>
+            <div class="forgotpassword">
+                <h2 id="forgotpassword">Forgot Password?</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="confirmOverlay" class="overlay">
+    <div class="confirm">
+        <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
+        <div class="signinicon">
+            <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
+            <span id="bulk">Bulk</span>
+            <span id="ing">ing</span>
+        </div>
+        <div class="confirmContent">
+            <div class="confirmheader">
+                <h2>Let’s confirm it’s really you</h2>
+                <p>Help us secure your account. Please complete the verifications below</p>
+            </div>
+            <div class="confirmform">
+                <form method="post" action="{% url 'login' %}">
+                    {% csrf_token %}
+                    <div class="confirmzone">
+                        <div class="mailz">
+                            <input type="checkbox" id="getcodebyemail" name="bymail" required>
+                            <label for="bymail">Get the code by email at joseph••••@gm•••.com</label>
+                        </div>
+                        <div class="phonez">
+                            <input type="checkbox" id="getcodebyphone" name="byphone" required>
+                            <label id='phonez' for="byphone">Get the code by text message (SM) at +1 21 726
+                                918</label>
+                        </div>
+                    </div>
+                    <button id='confirmContinue' type="submit">Continue</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="securityOverlay" class="overlay">
+    <div class="security">
+        <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
+        <div class="signinicon">
+            <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
+            <span id="bulk">Bulk</span>
+            <span id="ing">ing</span>
+        </div>
+        <div class="securitycontent">
+            <div class="securityheader">
+                <h2>Enter your security code</h2>
+                <p>We texted your code to tranm••••••••••••@gm•••.com</p>
+            </div>
+            <div class="securityform">
+                <form method="post" id="securitypasswordform">
+                    {% csrf_token %}
+                    <div class="securitypass">
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="0"></div>
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="1"></div>
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="2"></div>
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="3"></div>
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="4"></div>
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="5"></div>
+                    </div>
+                    <button id='securityContinue' type="submit">Continue</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="forgotOverlay" class="overlay">
+    <div class="forgotmain">
+        <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
+        <div class="signinicon">
+            <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
+            <span id="bulk">Bulk</span>
+            <span id="ing">ing</span>
+        </div>
+        <div class="forgotcontent">
+            <div class="forgotheader">
+                <h2>Reset Password</h2>
+                <p>Recover your account password</p>
+            </div>
+            <div class="forgotform">
+                <form method="post" id="forgotmailform">
+                    {% csrf_token %}
+                    <label for="mailarea">Email</label>
+                    <input type="text" id="forgotmailarea" name="mailarea" placeholder="Enter your email">
+                </form>
+                <button id='forgotnext' type="submit">Next</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="forgotVerifyOverlay" class="overlay">
+    <div class="forgotVerify">
+        <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
+        <div class="signinicon">
+            <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
+            <span id="bulk">Bulk</span>
+            <span id="ing">ing</span>
+        </div>
+        <div class="forgotVerifycontent">
+            <div class="forgotVerifyheader">
+                <h2>Enter your verification code</h2>
+                <p>We texted your code to tranm••••••••••••@gm•••.com</p>
+            </div>
+            <div class="forgotVerifyform">
+                <form method="post" id="forgotVerifypasswordform">
+                    {% csrf_token %}
+                    <div class="verifypass">
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="0"></div>
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="1"></div>
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="2"></div>
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="3"></div>
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="4"></div>
+                        <div class="characterverify"><input type="text" maxlength="1" tabindex="5"></div>
+                    </div>
+                    <button id='forgotVerifyNext' type="submit">Next</button>
+                    <div class="resendbutton">
+                        <a href="">Resend</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="newPasswordOverlay" class="overlay">
+    <div class="forgotVerify">
+        <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
+        <div class="signinicon">
+            <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
+            <span id="bulk">Bulk</span>
+            <span id="ing">ing</span>
+        </div>
+        <div class="newPasswordContent">
+            <div class="forgotVerifyheader">
+                <h2>Create New Password</h2>
+            </div>
+            <div class="newPasswordform">
+                <form method="post">
+                    {% csrf_token %}
+                    <div class="passwordzone">
+                        <div class="eye" id="passeye">
+                            <img src="{% static 'media/eye-slash.svg' %}" alt="">
+                        </div>
+                        <label for="oldpass">Password</label>
+                        <input class="pass" type="password" placeholder="Enter your password" name="oldpass">
+                        <div class="eye" id="newpasseye">
+                            <img src="{% static 'media/eye-slash.svg' %}" alt="">
+                        </div>
+                        <label for="oldpass">Password</label>
+                        <input class="pass" type="password" placeholder="Enter your password" name="newpass">
+                    </div>
+                    <button id='NewPasswordNext' type="submit">Next</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div id="successOverlay" class="overlay">
+    <div class="successcontent">
+        <div class="successscontainer">
+            <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
+            <div class="successImage">
+                <img src="{% static 'media/tick-circle.svg' %}" alt="">
+            </div>
+            <div class="newPasswordform">
+                <div class="successheader">
+                    <h2>Success!</h2>
+                    <p>Your password is succesfully created</p>
+                </div>
+                <form method="post">
+                    {% csrf_token %}
+                    <button id='successContinue' type="submit">Continue</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

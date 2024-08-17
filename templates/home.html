@@ -1,0 +1,234 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block navbar%}
+
+<div class="hero">
+    <div class="container">
+        {% include "pieces/navbar_blue.html" %}
+    </div>
+</div>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+{% include "pieces/drop.html" %}
+<div class="hero">
+    <div class="container">
+        <div id="head" class="head">
+            <div class="left">
+                <h1>For Your Health and Fitness Goals in No Time</h1>
+                <p>It doesn’t matter if your goal is to get stronger, burn fat, or to just stay fit our world
+                    class
+                    coaches will guide you every step of the way.</p>
+                <button type="submit">Book a class</button>
+                <div class="logos">
+                    <p>Sponsored by</p>
+                    <ul>
+                        <li><i><img src="{% static 'media/nike-4 1.svg' %}" alt=""></i></li>
+                        <li><i><img src="{% static 'media/esprit-1 1.svg' %}" alt=""></i></li>
+                        <li><i><img src="{% static 'media/apple-watch 1.svg' %}" alt=""></i></li>
+                        <li><i><img src="{%  static 'media/new-balance-2 1.svg' %}" alt=""></i></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="right">
+                <div class="image_main"><img src="{% static 'media/image 6.svg' %}" alt=""></div>
+                <div class="biceps">
+                    <i><img src="{% static 'media/fitness-biceps.svg' %}" alt=""></i>
+                    <h6>Muscle rate</h6>
+                    <h5>2.861</h5>
+                </div>
+                <div class="heart">
+                    <i><img src="{% static 'media/health.svg' %}" alt=""></i>
+                    <h6>Heart rate</h6>
+                    <h5>9281 bpm</h5>
+                </div>
+                <div id="ellips1"></div>
+                <div id="ellips2"></div>
+            </div>
+        </div>
+        <div class="programs">
+            <div class="selections">
+                <div class="selection">
+                    <i><img src="{% static 'media/fitness-biceps_black.svg' %}" alt=""></i>
+                    <h3>Personal Training</h3>
+                    <p>It’s a long estabilished fact that a reader will be distracted by the readable content
+                    </p>
+                    <div class="option">
+                        <span>Learn more</span>
+                        <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                    </div>
+                </div>
+                <div id="selection1" class="selection">
+                    <i><img src="{% static 'media/dumbbell.svg' %}" alt=""></i>
+                    <h3>Workout Programs</h3>
+                    <p>It’s a long estabilished fact that a reader will be distracted by the readable content
+                    </p>
+                    <div class="option">
+                        <span>Learn more</span>
+                        <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                    </div>
+                </div>
+                <div class="selection">
+                    <i><img src="{% static 'media/slim-waist.svg' %}" alt=""></i>
+                    <h3>Program & Diet</h3>
+                    <p>It’s a long estabilished fact that a reader will be distracted by the readable
+                        content</p>
+                    <div class="option">
+                        <span>Learn more</span>
+                        <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            <div class="titledescription">
+                <h3>Training Program For You</h3>
+                <p>Starting a fitness routine can be intimidating, but it helps to have an idea of whar to
+                    expect
+
+                    before joining any class.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="promotions">
+    <div class="container">
+        <div class="title">
+            <h2>We offer something for everybody</h2>
+        </div>
+        <div class="workout">
+            <div class="description">
+                <i><img src="{% static 'media/fitness-biceps_black.svg' %}" alt=""></i>
+                <h2>Crush any strength program with our suite of strength equipment</h2>
+                <ul>
+                    <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                        <p>Fully fitted powerlifting and strongman section</p>
+                    </li>
+                    <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                        <p>Olympic lifting platforms, weights, and bars</p>
+                    </li>
+                    <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                        <p>Small Label-Regular</p>
+                    </li>
+                </ul>
+                <button id="joinnow" type="submit">Join now</button>
+            </div>
+            <div class="image"></div>
+        </div>
+        <div class="workout">
+            <div class="image1"></div>
+            <div class="description1">
+                <i><img src="{% static 'media/heart-checkmark.svg'%}" alt=""></i>
+                <h2>Be guided every step of the way with one of our world class coaches</h2>
+                <ul>
+                    <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                        <p>Weightloss</p>
+                    </li>
+                    <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                        <p>Competitive CrossFit</p>
+                    </li>
+                    <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                        <p>Powerlifting</p>
+                    </li>
+                </ul>
+                <button id="joinnow" type="submit">Join
+                    now</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="membershipzone">
+    <div class="container">
+        <div class="membership">
+            <div class="membertitle">
+                <p>Membership</p>
+                <h2>Crushing your health and fitness goals starts here...</h2>
+            </div>
+            <div class="plans" id="homemembershipplans">
+                <div class="plan">
+                    <div class="types_planes">
+                        <h2>$0</h2>
+                        <h5>/Month</h5>
+                        <h4>Free plan</h4>
+                    </div>
+                    <ul>
+                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                            <p>1 classes per month</p>
+                        </li>
+                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                            <p>Access to online planes</p>
+                        </li>
+                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                            <p>10 health & fitness guides</p>
+                        </li>
+                    </ul>
+                    <button id="purchase" type="submit">Purchase
+                        Plan</button>
+                </div>
+                <div class="plan">
+                    <div class="types_planes">
+                        <h2>$149.00</h2>
+                        <h5>/Month</h5>
+                        <h4>Basic plan</h4>
+                    </div>
+                    <ul>
+                        <li><i><img src="{% static 'media/checkmark-circle-outline_green.svg' %}" alt=""></i>
+                            <p>8 classes per month</p>
+                        </li>
+                        <li><i><img src="{% static 'media/checkmark-circle-outline_green.svg' %}" alt=""></i>
+                            <p>All in basic packages</p>
+                        </li>
+                        <li><i><img src="{% static 'media/checkmark-circle-outline_green.svg' %}" alt=""></i>
+                            <p>1-on-1 personal trainning</p>
+                        </li>
+                    </ul>
+                    <button id="purchase" type="submit" onclick="location.href='{ % url ##### % }'">Purchase
+                        Plan</button>
+                </div>
+                <div class="plan">
+                    <div class="types_planes">
+                        <h2>$289.00</h2>
+                        <h5>/Month</h5>
+                        <h4>Professional plan</h4>
+                    </div>
+                    <ul>
+                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                            <p>20 classes per month</p>
+                        </li>
+                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                            <p>All in Intermediate package</p>
+                        </li>
+                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                            <p>Access to my online tutorials</p>
+                        </li>
+                    </ul>
+                    <button id="purchase" type="submit">Purchase Plan</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+{% endblock %}
+
+
+{% block review %}
+
+{% include "pieces/review.html" %}
+
+{% endblock %}
+
+
+
+{% block getstarted %}
+
+{% include "pieces/getstarted.html" %}
+
+{% endblock %}

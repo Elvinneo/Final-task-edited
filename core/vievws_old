@@ -1,0 +1,57 @@
+# def account(request):
+#     if request.method == 'POST':
+#         if request.POST.get('action') == 'logout':
+#             if request.user.is_authenticated:
+#                 logout(request)
+#         form = AuthenticationForm(request, data=request.POST)
+#         if form.is_valid():
+#             user = form.get_user()
+#             login(request, user)
+#     else:
+#         form = AuthenticationForm()
+
+# def home_view(request):
+#     account(request)
+#     return render(request, 'home.html')
+
+# def about_view(request):
+#     account(request)
+#     return render(request,'about.html')
+
+# def blog_view(request):
+#     account(request)
+#     return render(request,'blog.html')
+
+# def membership_view(request):
+#     account(request)
+#     return render(request,'membership.html')
+
+# def membership_detail_view(request):
+#     account(request)
+#     return render(request,'membership_detail.html')
+
+# def blogdetail_view(request):
+#     account(request)
+#     return render(request,'blogdetail.html')
+
+
+# def overlays_view(request):
+#     account(request)
+#     return render(request,'overlays.html')
+
+# def contact_view(request):
+#     account(request)
+#     return render(request,'contact.html')
+
+# def tos_view(request):
+#     account(request)
+#     return render(request,'tos.html')
+
+
+# def trainers_view(request):
+#     account(request)
+#     return render(request,'trainers.html')
+
+# def programdetail_view(request):
+#     account(request)
+#     return render(request,'programdetail.html')

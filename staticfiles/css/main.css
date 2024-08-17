@@ -1,0 +1,24 @@
+@import url("https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css");
+@import url('https://fonts.cdnfonts.com/css/general-sans');
+@import url("home.css");
+@import url("membership.css");
+@import url("membershipdetail.css");
+@import url("blog.css");
+@import url("blogdetail.css");
+@import url("about.css");
+@import url("contact.css"); 
+@import url("tos.css");
+@import url("programdetail.css");
+@import url("trainers.css"); 
+@import url("responsive.css");
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    box-sizing: border-box;
+    font-family: "General Sans";
+    font-style: normal;
+    user-select: none;
+
+}

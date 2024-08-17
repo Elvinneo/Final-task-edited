@@ -1,0 +1,250 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bulking</title>
+    <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
+</head>
+
+<body>
+    <section class="abouthero">
+        <div class="container">
+            <nav>
+                <div class="homelogo">
+                    <img src="{% static 'media/Group.svg' %}" alt="">
+                    <p>Bulking</p>
+                </div>
+                <div id="homemenudiv">
+                    <ul id="homemenu">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'home' %}">Programs</a></li>
+                        <li><a href="{% url 'home' %}">Trainers</a></li>
+                        <li><a href="{% url 'membership' %}">Membership</a></li>
+                        <li><a href="{% url 'home' %}">Contact</a></li>
+                    </ul>
+                </div>
+                <div class="homeaccount">
+                    <i><img src="{% static 'media/Buy.svg' %}" alt=""></i>
+                    <button class="loginButton" id="login" type="submit" >Login</button>
+                    <button class="signupButton" id="signup" type="submit" >Signup</button>
+                </div>
+                <div class="drop">
+                    <i id='bars' class="fa-solid fa-bars"></i>
+                </div>
+            </nav>
+            
+            {% include "pieces/overlays.html" %}
+
+            <div class="drop">
+                <div id="dropmenu" class="dropdownMain">
+                    <div class="dropprograms">
+                        <a href="{% url 'home' %}">Home</a>
+                    </div>
+                    <div class="dropprograms">
+                        <a href="{% url 'home' %}">Programs</a>
+                    </div>
+                    <div class="dropprograms">
+                        <a href="{% url 'home' %}">Trainers</a>
+                    </div>
+                    <div class="dropprograms">
+                        <a href="{% url 'membership' %}">Membership</a>
+                    </div>
+                    <div class="dropprograms">
+                        <a href="{% url 'home' %}">Contact</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="container">
+            <div class="aboutmain">
+                <div class="aboutmainleft">
+                    <button type="submit" >About us</button>
+                    <h2>Hi, I'm Adison, your personal trainner</h2>
+                </div>
+                <div class="aboutmainright">
+                    <h3>What's my story?</h3>
+                    <p>Consectetur adipiscing elit. Odio amet egestasolm dignissim eu nunc. Id pulvinar enim volutpat
+                        tellus. Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet
+                        non malesuada. Inol massa id tellus natoque augue in et.</p>
+                </div>
+            </div>
+            <div class="aboutrelative">
+                <div class="relimage">
+                    <img src="{% static 'media/relativ1.png' %}" alt="">
+                </div>
+                <div id="relativ1" class="aboutrelativediv">
+                    <div class="relleft">
+                        <i><img src="{% static 'media/video-square.svg' %}" alt=""></i>
+                    </div>
+                    <div class="relright">
+                        <span class="value">1400+</span>
+                        <span class="text">Classes taught</span>
+                    </div>
+                </div>
+                <div id="relativ2" class="aboutrelativediv">
+                    <div class="relleft">
+                        <i><img src="{% static 'media/video-square.svg' %}" alt=""></i>
+                    </div>
+                    <div class="relright">
+                        <span class="value">120+</span>
+                        <span class="text">Years of experience</span>
+                    </div>
+                </div>
+                <div class="circleabsolute"></div>
+            </div>
+
+        </div>
+    </section>
+    <div class="container">
+        <div class="aboutpagecontent">
+            <div class="pageheader">
+                <h2>My Core Work Values</h2>
+                <p>Consectetur adipiscing elit. Odio amet egestasolm dignissim eu nunc. Id pulvinar enim volutpat
+                    tellus. </p>
+            </div>
+            <div class="aboutpagebody">
+                <div class="aboutpagebodyrow">
+                    <div class="aboutpagebodyrowleft">
+                        <i><img src="{% static 'media/fitness-biceps_black.svg' %}" alt=""></i>
+                        <h3>Commitment</h3>
+                        <p>Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet non
+                            malesuada. Inol massa id tellus natoque augue in et.</p>
+                    </div>
+                    <div class="aboutpagebodyright">
+                        <img src="{% static 'media/aboutpageimg1.png' %}" alt="">
+                    </div>
+                </div>
+                <div class="aboutpagebodyrow">
+                    <div class="responsivetext">
+                        <i><img src="{% static 'media/heart-checkmark.svg' %}" alt=""></i>
+                        <h3>Motivation</h3>
+                        <p>Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet non
+                            malesuada. Inol massa id tellus natoque augue in et.</p>
+                    </div>
+                    <div class="aboutpagebodyright">
+                        <img src="{% static 'media/aboutpageimg2.png' %}" alt="">
+                    </div>
+                    <div id="normal" class="aboutpagebodyrowleft">
+                        <i><img src="{% static 'media/heart-checkmark.svg' %}" alt=""></i>
+                        <h3>Motivation</h3>
+                        <p>Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet non
+                            malesuada. Inol massa id tellus natoque augue in et.</p>
+                    </div>
+                </div>
+                <div class="aboutpagebodyrow">
+                    <div class="aboutpagebodyrowleft">
+                        <i><img src="{% static 'media/star-shining.svg' %}" alt=""></i>
+                        <h3>Passion</h3>
+                        <p>Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet non
+                            malesuada. Inol massa id tellus natoque augue in et.</p>
+                    </div>
+                    <div class="aboutpagebodyright">
+                        <img src="{% static 'media/aboutpageimg3.png' %}" alt="">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="review">
+        <div class="container">
+            <div class="descript">
+                <p>Review</p>
+                <h3>What Our Happy Clients Say</h3>
+            </div>
+            <div class="content">
+                <div class="quota">
+                    <img src="{% static 'media/quote-up.svg' %}" alt="">
+                </div>
+                <h6>Member Review</h6>
+                <p>Eget aliquet sit at lacinia. Magna consequat consectetur maecenas amet sagittis mi. Mattis cursus
+                    dolor
+                    amet quam commodo amet in sed dui. Risus risus sed sed lectus. </p>
+                <div class="reviewcard">
+                    <div class="reviewcardimage">
+                        <img src="{% static 'media/Ellipse 1.svg' %}" alt="">
+                    </div>
+                    <div class="reviewcardcontent">
+                        <h4>Davis Rosser</h4>
+                        <h6>Member</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="actions">
+            <ul id="arrows">
+                <li id="arrowleft"><i class="fa-solid fa-arrow-left passivearrow"></i></li>
+                <li>
+                    <div class="rectangle"></div>
+                </li>
+                <li>
+                    <div class="ellipse"></div>
+                </li>
+                <li>
+                    <div class="ellipse"></div>
+                </li>
+                <li id="arrowright"><i class="fa-solid fa-arrow-right activearrow"></i></li>
+            </ul>
+        </div>
+    </div>
+    <div class="mainfooter">
+        <div class="container">
+            <div class="maincontent">
+                <div class="symbol">
+                    <div class="info">
+                        <img src="{% static 'media/heart_white.svg' %}" alt="">
+                        <p>Bulking</p>
+                    </div>
+                    <div class="infocontent">
+                        <p>Get fit, stay healthy, and live life on their terms without fitness being an obstacle.
+                        </p>
+                    </div>
+                </div>
+                <div class="menus">
+                    <ul id="row1">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'home' %}">Programs</a></li>
+                        <li><a href="{% url 'membership' %}">Membership</a></li>
+                    </ul>
+                    <ul id="row2">
+                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                        <li><a href="{% url 'home' %}">Contact</a></li>
+                        <li><a href="{% url 'about' %}">About us</a></li>
+                    </ul>
+                </div>
+                <div class="mail">
+                    <p>Newsletter</p>
+                    <div class="form">
+                        <form action="">
+                            <input type="textarea" placeholder="Your email here">
+                            <button>Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="social">
+                <p>© 2024 Nguli® Global Inc.</p>
+                <ul>
+                    <li><a target=”_blank” href="https://www.facebook.com/madbulking/"><img src="{% static 'media/svg.svg' %}" alt=""></a></li>
+                    <li><a target=”_blank” href="https://www.linkedin.com/company/bulking"><img src="{% static 'media/svg (1).svg' %}" alt=""></a></li>
+                    <li><a target=”_blank” href="https://x.com/bulkingbroo"><img src="{% static 'media/svg (3).svg' %}" alt=""></a></li>
+                    <li><a target=”_blank” href="https://www.youtube.com/@Bulkingchanel"><img src="{% static 'media/svg (2).svg' %}" alt=""></a></li>
+                    <li><a target=”_blank” href="https://www.instagram.com/bulkingoficial/"><img src="{% static 'media/svg (4).svg' %}" alt=""></a></li>
+                </ul>
+                <div class="policy">
+                    <p>Terms of Service</p>
+                    <p>Privacy Policy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>
