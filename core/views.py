@@ -4,17 +4,13 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseForbidden,HttpResponseRedirect
 from django.core.cache import cache
 from .models import Profile
-from django.http import JsonResponse
 from django.core.mail import send_mail
-from django.http import HttpResponseRedirect
 from django.views.decorators.csrf import csrf_exempt
 import random
 import string
-import logging
-
 
 
 def generate_verification_code():
@@ -52,14 +48,27 @@ def email_verification_view(request):
     return JsonResponse({'message': 'Invalid request method.'}, status=405)
 
 
+@csrf_exempt
 def get_verification_code(request):
-    response = JsonResponse({'verification_code': request.session.get('verification_code')})
-    response['Cache-Control'] = 'no-store, no-cache, must-revalidate, proxy-revalidate'
-    response['Pragma'] = 'no-cache'
-    response['Expires'] = '0'
-    return response
-    
+    if request.method == 'GET':
+        token = request.headers.get('Authorization')
+        if token == 'bvmVNBMBMHB24512vbnmmm45vbgfhvn53VGBHJbjghj275fgcgvnf':
+            verification_code = request.session.get('verification_code')
+            response = JsonResponse({'verification_code': verification_code})
+            response['Cache-Control'] = 'no-store, no-cache, must-revalidate, proxy-revalidate'
+            response['Pragma'] = 'no-cache'
+            response['Expires'] = '0'
+            return response
+        else:
+            return JsonResponse({'message': 'Unauthorized access.'}, status=403)
+    return JsonResponse({'message': 'Invalid request method.'}, status=405)
+
+
 def user_data(request):
+    # Token'ı başlıktan çıkarın
+    token = request.headers.get('Authorization', '').split(' ')[-1]
+    if token != 'bvmVNBMBMHB24512vbnmmm45vbgfhvn53VGBHJbjghj275fgcgvnf':
+        return HttpResponseForbidden('Unauthorized')
     users = Profile.objects.all()
     user_data = []
     for user in users:
@@ -69,31 +78,36 @@ def user_data(request):
             'phone': user.phone_number,
             'username': user.username,
         })
-    
-    return JsonResponse(user_data, safe=False)
-logger = logging.getLogger(__name__)
 
-@require_POST
+    return JsonResponse(user_data, safe=False)
+
+
+username_global = None
+password_global = None
+
+@csrf_exempt
 def login_view(request):
-    username = request.POST.get('username')
-    password = request.POST.get('password')
-    print(f'Username: {username}')
-    print(f'Password: {password}')
+    global username_global
+    global password_global
     
-    
-PREDEFINED_USERNAME = 'ElvinBagirov'
-PREDEFINED_PASSWORD = '0844045'
+    if request.method == 'POST':
+        username_global = request.POST.get('username')
+        password_global = request.POST.get('password')
+
+        return JsonResponse({'success': 'Giriş bilgileri kaydedildi'})
+    return JsonResponse({'error': 'Geçersiz istek'})
+
+
 
 def user_auth(request):
     if request.method == 'POST':
         form_id = request.POST.get('form_id')
         action = request.POST.get('action')
         if form_id == 'securitypasswordform':
-            user = authenticate(username=PREDEFINED_USERNAME, password=PREDEFINED_PASSWORD)
+            print(username_global,password_global)
+            user = authenticate(username=username_global, password=password_global)
             if user is not None:
                 login(request, user)
-            else:
-                logger.error("Giriş bilgileri geçersiz.")
         elif action == 'logout':
             logout(request)
     else:

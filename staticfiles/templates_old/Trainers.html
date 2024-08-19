@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Trainers</title>
+        <link rel="stylesheet" href="../static/Trainers.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css" integrity="sha512-Kc323vGBEqzTmouAECnVceyQqyqdsSiqLQISBL29aUW4U/M7pSPA/gEUZQqv1cwx4OnYxTxve5UMg5GT6L4JJg==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    </head>
+    <body>
+        <section class="hero">
+            <div class="container">
+                <nav>
+                    <div class="logo">
+                        <img src="images/headerphoto.png" alt="">
+                        <p>Bulk<span class="ing">ing</span></p>
+                    </div>
+                    <div>
+                        <ul id="menu">
+                            <li>
+                                <a href="home.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="programs.html">Programs</a>
+                            </li>
+                            <li>
+                                <a href="trainers.html">Trainers</a>
+                            </li>
+                            <li>
+                                <a href="membership.html">Membership</a>
+                            </li>
+                            <li>
+                                <a href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="account">
+                        <div class="acount_icon">
+                            <i><img src="images/Buy.png" alt="" class="buy"></i>
+                            <i><img src="images/Ellipse 4.png" alt="" class="ellipse"></i>
+                        </div>
+                        <div class="logs">
+                            <button id="login">Login</button>
+                            <button id="signup">Signup</button>
+                        </div>
+                    </div>
+                    <div id="drop" class="drop">
+                        <i id='barsblack' class="fa-solid fa-bars"></i>
+                    </div>
+                </nav>
+                <div class="drop">
+                    <div id="dropmenu" class="dropdownMainBlack">
+                        <div class="dropprogramsBlack">
+                            <a href="{% url 'home' %}">Home</a>
+                        </div>
+                        <div class="dropprogramsBlack">
+                            <a href="{% url 'home' %}">Programs</a>
+                        </div>
+                        <div class="dropprogramsBlack">
+                            <a href="{% url 'home' %}">Trainers</a>
+                        </div>
+                        <div class="dropprogramsBlack">
+                            <a href="{% url 'membership' %}">Membership</a>
+                        </div>
+                        <div class="dropprogramsBlack">
+                            <a href="{% url 'home' %}">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="container">
+                <div class="trainers_all">
+                    <div class="come">
+                        <h1>Meet
+                            <span class="let">the Team</span>
+                        </h1>
+                        <h6>OurPersonal Trainers are experienced and highly qualified – and they’re all ontheir own inspiring journey too. Click our photos to read more.
+                        </h6>
+                    </div>
+                    <div class="people">
+                        <div class="up">
+                            <div class="card">
+                                <div class="picture">
+                                    <img src="images/Image.png" alt="">
+                                </div>
+                                <div class="name">
+                                    <div class="realname"><h5>Jakob Curtis</h5></div>
+                                    <div class="work"><p>Founder & Owners</p></div>
+                                </div>
+                                <div class="social">
+                                    <div class="icon1">
+                                        <img src="images/icon1.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon2.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon3.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="picture">
+                                    <img src="images/image 9.png" alt="">
+                                </div>
+                                <div class="name">
+                                    <div class="realname"><h5>Ryan Vetrovs</h5></div>
+                                    <div class="work"><p>Coach</p></div>
+                                </div>
+                                <div class="social">
+                                    <div class="icon1">
+                                        <img src="images/icon1.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon2.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon3.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="picture">
+                                    <img src="images/image 10.png" alt="">
+                                </div>
+                                <div class="name">
+                                    <div class="realname"><h5>Marcus Levin</h5></div>
+                                    <div class="work"><p>Coach</p></div>
+                                </div>
+                                <div class="social">
+                                    <div class="icon1">
+                                        <img src="images/icon1.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon2.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon3.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="down">
+                            <div class="card">
+                                <div class="picture">
+                                    <img src="images/image 12.png" alt="">
+                                </div>
+                                <div class="name">
+                                    <div class="realname"><h5>Ahmad Saris</h5></div>
+                                    <div class="work"><p>Coach</p></div>
+                                </div>
+                                <div class="social">
+                                    <div class="icon1">
+                                        <img src="images/icon1.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon2.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon3.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="picture">
+                                    <img src="images/image 11.png" alt="">
+                                </div>
+                                <div class="name">
+                                    <div class="realname"><h5>Phillip Mango</h5></div>
+                                    <div class="work"><p>Coach</p></div>
+                                </div>
+                                <div class="social">
+                                    <div class="icon1">
+                                        <img src="images/icon1.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon2.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon3.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="card">
+                                <div class="picture">
+                                    <img src="images/image 13.png" alt="">
+                                </div>
+                                <div class="name">
+                                    <div class="realname"><h5>Martin Calzoni</h5></div>
+                                    <div class="work"><p>Coach</p></div>
+                                </div>
+                                <div class="social">
+                                    <div class="icon1">
+                                        <img src="images/icon1.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon2.png" alt="">
+                                    </div>
+                                    <div class="icon1">
+                                        <img src="images/icon3.png" alt="">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> 
+                </div>
+            </div>      
+        
+        <div class="container">
+            <div class="value">
+                <div class="together">
+                    <div class="increase">
+                        <div class="increase1">
+                            <h5>My Core Work Values</h5>
+                        </div>
+                        <div class="increase2"><p>Consectetur adipiscing elit. Odio amet egestasolm dignissim eu nunc. Id pulvinar enim volutpat tellus. </p></div>
+                        <div class="decrease1">
+                            <div class="full">
+                                <div class="commitment">
+                                    <div class="commitment1">
+                                        <div class="simvol"><img src="images/fitness-biceps.png" alt=""></div>
+                                        <div class="name"><h6>Commitment</h6></div>
+                                    </div>
+                                    <div class="commitment2"><p>Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada. Inol massa id tellus natoque augue in et.</p></div>
+                                </div>
+                                <div class="commitblue">
+                                    <div class="commitment1">
+                                        <div class="simvol"><img src="images/heart-checkmark.png" alt=""></div>
+                                        <div class="nameblue"><h6>Motivation</h6></div>
+                                    </div>
+                                    <div class="commitblue2"><p>Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada. Inol massa id tellus natoque augue in et.</p></div>
+                                </div>
+                                <div class="commitment">
+                                    <div class="commitment1">
+                                        <div class="simvol"><img src="images/star-shining.png" alt=""></div>
+                                        <div class="name"><h6>Passion</h6></div>
+                                    </div>
+                                    <div class="commitment2"><p>Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada. Inol massa id tellus natoque augue in et.</p></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+     
+        <div class="blue">
+            <div class="intraduce">
+                <div class="discover">
+                    <div class="bold">
+                        <h5>Discover Your Potential</h5>
+                    </div>
+                    <div class="unbold">
+                        <p>Workout was started by James and Mount in 2012. It’s our mission to help people in Denver get fit, stay healthy, and live life on their terms without fitness being an obstacle.</p>
+                    </div>
+                </div>
+                <div class="get">
+                    <button type="submit" onclick="location.href='{ % url  % }'">Get Started</button>
+                </div>
+            </div>
+        </div>
+    
+    </section>
+    <div class="mainfooter">
+        <div class="container">
+            <div class="maincontent">
+                <div class="symbol">
+                    <div class="info">
+                        <img src="images/Group.png" alt="">
+                        <p>Bulk<span>ing</span></p>
+                    </div>
+                    <div class="infocontent">
+                        <p>Get fit, stay healthy, and live life on their terms without fitness being an
+                            obstacle.</p>
+                    </div>
+                </div>
+                <div class="menus">
+                    <ul id="row1">
+                        <li>
+                            <a href="">Home</a>
+                        </li>
+                        <li>
+                            <a href="">Programs</a>
+                        </li>
+                        <li>
+                            <a href="">Membership</a>
+                        </li>
+                    </ul>
+                    <ul id="row2">
+                        <li>
+                            <a href="">Blog</a>
+                        </li>
+                        <li>
+                            <a href="">Contact</a>
+                        </li>
+                        <li>
+                            <a href="">About us</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="mail">
+                    <p>Newsletter</p>
+                    <div class="form">
+                        <form action="">
+                            <input type="textarea" placeholder="Your email here">
+                            <button type="submit" onclick="location.href='{ % url  % }'">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="social">
+                <p>© 2024 Nguli® Global Inc.</p>
+                <ul>
+                    <li>
+                        <i><img src="images/svg.png" alt=""></i>
+                    </li>
+                    <li>
+                        <i><img src="images/svg (1).png" alt=""></i>
+                    </li>
+                    <li>
+                        <i><img src="images/tw.png" alt=""></i>
+                    </li>
+                    <li>
+                        <i><img src="images/svg (2).png" alt=""></i>
+                    </li>
+                    <li>
+                        <i><img src="images/svg (3).png" alt=""></i>
+                    </li>
+                </ul>
+                <div class="policy">
+                    <p>Terms of Service</p>
+                    <p>Privacy Policy</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    </body>
+    </html>

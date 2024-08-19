@@ -31,20 +31,31 @@ function resize() {
 let testedusers = [];
 
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('/api/users/')
-        .then(response => response.json())
-        .then(data => {
-            data.forEach(user => {
-                testedusers[user.id] = {
-                    email: user.email,
-                    phone: user.phone,
-                    username: user.username
-                };
-            });
-        })
-        .catch(error => console.error('Error', error));
+    const token = 'bvmVNBMBMHB24512vbnmmm45vbgfhvn53VGBHJbjghj275fgcgvnf';
+    fetch('/api/users/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token 
+        }
+    })
+    .then(response => {
+        if (!response.ok) {
+            throw new Error('Network response was not ok');
+        }
+        return response.json();
+    })
+    .then(data => {
+        data.forEach(user => {
+            testedusers[user.id] = {
+                email: user.email,
+                phone: user.phone,
+                username: user.username
+            };
+        });
+    })
+    .catch(error => console.error('Error', error));
 });
-
 
 //article option buttons
 
@@ -66,12 +77,6 @@ function addClass(e) {
 //memberships
 
 
-// let membershipplans = document.getElementById("membershipplans")
-// if (membershipplans) {
-//     membershipplans.addEventListener("click", addandremoveclass)
-// }
-
-
 document.querySelectorAll('.plan').forEach(plan => {
     plan.addEventListener('click', addAndRemoveClass);
 });
@@ -82,12 +87,16 @@ function addAndRemoveClass(e) {
     });
     if (e.currentTarget.classList.contains('plan')) {
         e.currentTarget.classList.add('plan2');
+        document.querySelectorAll(".plan2 ul li img").forEach(image=>{image.src="/static/media/checkmark-circle-outline_green.svg";})
+
     }
     document.querySelectorAll('#homemembershipplans .plan').forEach(plan => {
         plan.classList.remove('plan2');
+        document.querySelectorAll(".plan ul li img").forEach(image=>{image.src="static/media/checkmark-circle-outline%201.svg";})
     });
     if (e.currentTarget.classList.contains('plan')) {
         e.currentTarget.classList.add('plan2');
+        document.querySelectorAll(".plan2 ul li img").forEach(image=>{image.src="/static/media/checkmark-circle-outline_green.svg";})
     }
 }
 
@@ -228,6 +237,7 @@ function closer() {
 
 function signup() {
     closewindow()
+    resetFormInDiv(overlays[0].id)
     overlays[0].style.display = "flex"
     document.getElementById("signuplogin").addEventListener("click", login)
     closer()
@@ -235,6 +245,7 @@ function signup() {
 
 function login() {
     closewindow()
+    resetFormInDiv(overlays[1].id)
     overlays[1].style.display = "flex"
     closer()
     document.getElementById("toconfirm").addEventListener("click", confirmaccount)
@@ -246,7 +257,7 @@ function login() {
 
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function (event) {
-        if (form.id === 'securitypasswordform' || form.id === 'logoutForm') {
+        if (form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id=== "loginForm" ) {
             return;
         }
         event.preventDefault();
@@ -254,25 +265,64 @@ document.querySelectorAll('form').forEach(form => {
     });
 });
 
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('loginForm');
+    form.addEventListener('submit', function (event) {
+        const formData = new FormData(form);
+        console.log(formData)
+        const csrfToken = formData.get('csrfmiddlewaretoken');
+        event.preventDefault();
+        fetch('/login/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrfToken
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                const messageElement = document.getElementById('responseMessage');
+                messageElement.innerText = data.success;
+            })
+            .catch(error => {
+                document.getElementById('responseMessage').innerText = 'An error occurred.';
+                console.error('Login fetch error', error);
+            });
+    });
+});
+
+function resetFormInDiv(divId) {
+    let div = document.getElementById(divId);
+    if (div) {
+        let form = div.querySelector('form');
+        if (form) {
+            form.reset();
+        }
+    }
+}
+
 
 function confirmaccount() {
     closewindow()
+    resetFormInDiv(overlays[2].id)
     overlays[2].style.display = "flex";
     document.getElementById("confirmContinue").addEventListener("click", security);
     closer();
-    for (i = 1; i <= testedusers.length; i++) {
+    test = false
+    for (i = 1; i <= testedusers.length - 1; i++) {
         if (testedusers[i].username == username.value) {
             confirmedemail.innerText = testedusers[i].email
             poster.value = testedusers[i].email
             confirmedphone.innerText = testedusers[i].phone
+            test = true
             break
         }
-        else {
-            messageblock.classList.add("alert")
-            messageblock.textContent = "Username is not found !!"
-        }
+    }
+    if (!test) {
+        statusspan.textContent = "Username is not found !"
     }
 }
+
 
 // send email 
 
@@ -287,7 +337,6 @@ function security() {
         console.error('The selected element is not an HTMLFormElement.');
         return;
     }
-
     var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     var formData = new FormData(formElement);
     fetch('/email_verification/', {
@@ -308,6 +357,7 @@ function security() {
         });
 
     closewindow()
+    resetFormInDiv(overlays[3].id)
     overlays[3].style.display = "flex"
     closer()
 
@@ -317,16 +367,25 @@ function security() {
 
 async function fetchVerificationCode() {
     try {
-        const response = await fetch(`/get-verification-code/`);
+        const response = await fetch(`/get-verification-code/`, {
+            method: 'GET',
+            headers: {
+                'Authorization': 'bvmVNBMBMHB24512vbnmmm45vbgfhvn53VGBHJbjghj275fgcgvnf',
+                'Content-Type': 'application/json'
+            }
+        });
+        if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+        }
         const data = await response.json();
         if (data.verification_code) {
             return data.verification_code;
         } else {
-            console.error('Verifying code is not found');
+            console.error('Verification code is not found');
             return null;
         }
     } catch (error) {
-        console.error('Error', error);
+        console.error('Error:', error);
         return null;
     }
 }
@@ -337,6 +396,7 @@ function endofsignin() {
     let globalCode;
     async function main() {
         globalCode = await fetchVerificationCode();
+        console.log(globalCode  + verifycharacters)
         if (globalCode == verifycharacters) {
             closewindow()
         } else {
@@ -352,12 +412,14 @@ function endofsignin() {
 
 function iforgotpassword() {
     closewindow()
+    resetFormInDiv(overlays[4].id)
     overlays[4].style.display = "flex"
     document.getElementById("forgotnext").addEventListener("click", forgotnext)
     closer()
 }
 
 function forgotnext() {
+    resetFormInDiv(overlays[5].id)
     overlays[5].style.display = "flex"
     document.getElementById("forgotVerifyNext").addEventListener("click", verifypass)
     closer()
@@ -365,6 +427,7 @@ function forgotnext() {
 
 function verifypass() {
     closewindow()
+    resetFormInDiv(overlays[6].id)
     overlays[6].style.display = "flex"
     document.getElementById("NewPasswordNext").addEventListener("click", createpass)
     document.querySelectorAll(".eye").forEach(eye => { eye.addEventListener("mousedown", textviewer) })
@@ -452,4 +515,30 @@ function checkcart() {
 
 }
 
+let buttoncontinue = document.getElementById("confirmContinue")
+
+document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
+    checkbox.addEventListener('change', () => {
+        document.querySelectorAll('input[type="checkbox"]').forEach(otherCheckbox => {
+            if (otherCheckbox !== checkbox) {
+                otherCheckbox.checked = false;
+            }
+            if (checkbox.checked) {
+                buttoncontinue.disabled = false;
+            } else {
+                buttoncontinue.disabled = true;
+            }
+        });
+    });
+});
+
+if (passwordfield && usernamefield) {
+    passwordfield.addEventListener("change", testbuttons)
+    usernamefield.addEventListener("change", testbuttons)
+}
+function testbuttons() {
+    if (!passwordfield.value == "" && !usernamefield.value == "") {
+        document.getElementById("toconfirm").disabled = false
+    }
+}
 

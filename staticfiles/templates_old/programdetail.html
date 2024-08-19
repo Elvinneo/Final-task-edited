@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Program Detail</title>
+        <link rel="stylesheet" href="../static/programdetail.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    </head>
+    <body>
+        <section class="hero">
+            <div class="container">
+                <nav>
+                    <div class="logo">
+                        <img src="images/headerphoto.png" alt="">
+                        <p>Bulk<span class="ing">ing</span></p>
+                    </div>
+                    <div>
+                        <ul id="menu">
+                            <li>
+                                <a href="home.html">Home</a>
+                            </li>
+                            <li>
+                                <a href="programs.html">Programs</a>
+                            </li>
+                            <li>
+                                <a href="trainers.html">Trainers</a>
+                            </li>
+                            <li>
+                                <a href="membership.html">Membership</a>
+                            </li>
+                            <li>
+                                <a href="contact.html">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="account">
+                        <div class="acount_icon">
+                            <i><img src="images/Buy.png" alt="" class="buy"></i>
+                            <i><img src="images/Ellipse 4.png" alt="" class="ellipse"></i>
+                        </div>
+                        <div class="logs">
+                            <button id="login">Login</button>
+                            <button id="signup">Signup</button>
+                        </div>
+                    </div>
+                    <div id="drop" class="drop">
+                        <i id='barsblack' class="fa-solid fa-bars"></i>
+                    </div>
+                </nav>
+                <div class="drop">
+                    <div id="dropmenu" class="dropdownMainBlack">
+                        <div class="dropprogramsBlack">
+                            <a href="{% url 'home' %}">Home</a>
+                        </div>
+                        <div class="dropprogramsBlack">
+                            <a href="{% url 'home' %}">Programs</a>
+                        </div>
+                        <div class="dropprogramsBlack">
+                            <a href="{% url 'home' %}">Trainers</a>
+                        </div>
+                        <div class="dropprogramsBlack">
+                            <a href="{% url 'membership' %}">Membership</a>
+                        </div>
+                        <div class="dropprogramsBlack">
+                            <a href="{% url 'home' %}">Contact</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            </div>
+            <div class="container">
+                <div class="personal_training">
+                    <div class="left">
+                        <div class="come">
+                            <h1>Personal
+                                <span class="let">Training</span>
+                            </h1>
+                            <h6>It’s a long estabilished fact that a reader will be distracted by the
+                                readable content</h6>
+                        </div>
+                        <div class="figure">
+                            <div class="figure1">
+                                <div class="daring">
+                                    <img src="images/fitness-biceps.png" alt="">
+                                </div>
+                                <div class="bar">
+                                    <div class="velvet">
+                                        <p>01</p>
+                                    </div>
+                                    <div class="limelight">
+                                        <h6>Power Up</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="figure1">
+                                <div class="daring">
+                                    <img src="images/timer.png" alt="">
+                                </div>
+                                <div class="bar">
+                                    <div class="velvet">
+                                        <p>02</p>
+                                    </div>
+                                    <div class="limelight">
+                                        <h6>Be Flexible</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="figure1">
+                                <div class="daring">
+                                    <img src="images/fitness-dumbbell.png" alt="">
+                                </div>
+                                <div class="bar">
+                                    <div class="velvet">
+                                        <p>03</p>
+                                    </div>
+                                    <div class="limelight">
+                                        <h6>Super Body Toning</h6>
+                                    </div>
+                                </div>
+
+                            </div>
+
+                        </div>
+                        <div class="picture">
+                            <img src="images/body.jfif" alt="">
+                            <div class="buton">
+                                <i class="fas fa-play" style="color: #ffffff;" ></i>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <div class="up">
+                                <h5>What is this class about?</h5>
+                            </div>
+                            <div class="down">
+                                <p>Pretium sed tempor vestibulum sit urna. Potenti purus sodales in enim nunc.
+                                    In et auctor fusce sit donec condimentum. Diam ultrices enim nunc ornare id
+                                    aliquet sed arcu commodo. Aliquam morbi fermentum amet dui ullamcorper praesent
+                                    elit. Viverra nam massa cursus leo blandit eget eu. Tempor enim neque metus nunc
+                                    sodales at eros. Malesuada placerat vestibulum amet sit tempor mi dignissim.
+                                    Feugiat nullam urna gravida vulputate mi eleifend laoreet.
+                                </p>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <div class="up">
+                                <h5>Is this the right fitness class for me?</h5>
+                            </div>
+                            <div class="down">
+                                <p>Viverra urna imperdiet non malesuada. In massa id tellus natoque augue in et,
+                                    et. Suspendisse feugiat
+                                    <span>scelerisque</span>
+                                    et, viverra urna imperdiet.Vitae interdum quis lacus ut viverra.
+                                    <br>
+                                    1. Enim eu turpis egestas pretium aenean pharetra magna ac placerat.
+                                    <br>
+                                    2. Nunc semper velit netus donec commodo.
+                                    <br>
+                                    3. Lacus hendrerit aliquam habitant eget faucibus venenatis turpis
+                                </p>
+                            </div>
+                        </div>
+                        <div class="text">
+                            <div class="up">
+                                <h5>How can I take a trial class?</h5>
+                            </div>
+                            <div class="down">
+                                <p>Diam ultrices enim nunc ornare id aliquet sed arcu commodo. Aliquam morbi
+                                    fermentum amet dui ullamcorper praesent elit. Viverra nam massa cursus leo
+                                    blandit eget eu. Tempor enim neque metus nunc sodales at eros. Malesuada
+                                    placerat vestibulum amet sit tempor mi dignissim. Feugiat nullam urna gravida
+                                    vulputate mi eleifend laoreet.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="right">
+                        <div class="first">
+                            <div class="complex">
+                                <h5>Details Program</h5>
+                            </div>
+                            <div class="simple">
+                                <p>It’s a long estabilished fact that a reader will be distracted by the
+                                    readable content</p>
+                            </div>
+                        </div>
+                        <div class="second">
+                            <div class="line">
+                                <div class="object">
+                                    <img src="images/clock.png" alt="">
+                                </div>
+                                <div class="type">
+                                    <p>Duration:
+                                        <span>60 minutes</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="second">
+                            <div class="line">
+                                <div class="object">
+                                    <img src="images/star.png" alt="">
+                                </div>
+                                <div class="type">
+                                    <p>Intensity:
+                                        <span>High</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="second">
+                            <div class="line">
+                                <div class="object">
+                                    <img src="images/award.png" alt="">
+                                </div>
+                                <div class="type">
+                                    <p>Fitness Level:
+                                        <span>Intermediate</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="second">
+                            <div class="line">
+                                <div class="object">
+                                    <img src="images/calendar.png" alt="">
+                                </div>
+                                <div class="type">
+                                    <p>Schedule:
+                                        <span>Monday, Friday</span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="third">
+                            <button>
+                                <p>Book a Class</p>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="container">
+                <div class="page2">
+                    <div class="onward">
+                        <div class="onward1">
+                            <button>
+                                <p>Review</p>
+                            </button>
+                        </div>
+                        <div class="onward2">
+                            <h6>What Our Happy
+                                <br>
+                                Clients Say</h6>
+                        </div>
+                    </div>
+                    <div class="presently">
+                        <div class="simvol">
+                            <img src="images/quote-up.png" alt="">
+                        </div>
+                        <div class="together">
+                            <div class="recommend">
+                                <div class="recommend1">
+                                    <p>Member Review</p>
+                                </div>
+                                <div class="recommend2">
+                                    Eget aliquet sit at lacinia. Magna consequat consectetur maecenas amet sagittis
+                                    mi. Mattis cursus dolor amet quam commodo amet in sed dui. Risus risus sed sed
+                                    lectus.
+                                </div>
+                            </div>
+                            <div class="person">
+                                <div class="person1">
+                                    <img src="images/Ellipse 1.png" alt="">
+                                </div>
+                                <div class="personjoin">
+                                    <div class="person2">
+                                        <h6>Davis Rosser</h6>
+                                    </div>
+                                    <div class="person3">
+                                        <p>Member</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="temperate">
+                        <div class="arrowleft">
+                            <img src="images/arrow-left.png" alt="">
+                        </div>
+                        <div class="change">
+                            <div class="ellipse"></div>
+                            <img src="images/Ellipse 2.png" alt="">
+                            <img src="images/Ellipse 2.png" alt="">
+                        </div>
+                        <div class="arrowright">
+                            <img src="images/arrow-right.png" alt="">
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div class="mainfooter">
+            <div class="container">
+                <div class="maincontent">
+                    <div class="symbol">
+                        <div class="info">
+                            <img src="images/Group.png" alt="">
+                            <p>Bulk<span>ing</span></p>
+                        </div>
+                        <div class="infocontent">
+                            <p>Get fit, stay healthy, and live life on their terms without fitness being an
+                                obstacle.</p>
+                        </div>
+                    </div>
+                    <div class="menus">
+                        <ul id="row1">
+                            <li>
+                                <a href="">Home</a>
+                            </li>
+                            <li>
+                                <a href="">Programs</a>
+                            </li>
+                            <li>
+                                <a href="">Membership</a>
+                            </li>
+                        </ul>
+                        <ul id="row2">
+                            <li>
+                                <a href="">Blog</a>
+                            </li>
+                            <li>
+                                <a href="">Contact</a>
+                            </li>
+                            <li>
+                                <a href="">About us</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="mail">
+                        <p>Newsletter</p>
+                        <div class="form">
+                            <form action="">
+                                <input type="textarea" placeholder="Your email here">
+                                <button type="submit" onclick="location.href='{ % url  % }'">Send</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="social">
+                    <p>© 2024 Nguli® Global Inc.</p>
+                    <ul>
+                        <li>
+                            <i><img src="images/svg.png" alt=""></i>
+                        </li>
+                        <li>
+                            <i><img src="images/svg (1).png" alt=""></i>
+                        </li>
+                        <li>
+                            <i><img src="images/tw.png" alt=""></i>
+                        </li>
+                        <li>
+                            <i><img src="images/svg (2).png" alt=""></i>
+                        </li>
+                        <li>
+                            <i><img src="images/svg (3).png" alt=""></i>
+                        </li>
+                    </ul>
+                    <div class="policy">
+                        <p>Terms of Service</p>
+                        <p>Privacy Policy</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+    <script src="programdetail.js"></script>
+</body>
+</html>

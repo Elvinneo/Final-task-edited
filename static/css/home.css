@@ -759,6 +759,11 @@ nav {
     letter-spacing: 0.1px;
 }
 
+.plan2 ul li i img{
+    width: 24px;
+    height: 24px;
+}
+
 .descript button {
     color: #064BB4;
     font-size: 16px;

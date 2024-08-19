@@ -57,7 +57,7 @@
                 <h2>Hey there, welome back!</h2>
             </div>
             <div class="signinform">
-                <form  class="signinform" id="loginForm" >
+                <form  class="signinform" id="loginForm" action="{% url 'login_view' %}" method="post">
                     {% csrf_token %}
                     <div class="mailzone">
                         <label for="username" id="">Username</label>
@@ -69,7 +69,7 @@
                         </div>
                         <label for="password">Password</label>
                         <input class="pass" id="password" type="password" placeholder="Enter your password" name="password" required>
-                        <button type="submit" id="toconfirm" name="login">Login</button>
+                        <button type="submit" id="toconfirm" name="login" >Login</button>
                     </div>
                 </form>
             </div>
@@ -104,7 +104,7 @@
                             <label for="bymail">Get the code by email at <span id="confirmedemail"></span></label>
                         </div>
                         <div class="phonez">
-                            <input type="checkbox" id="getcodebyphone" name="byphone" disabled>
+                            <input type="checkbox" id="getcodebyphone" name="byphone">
                             <label id='phonez' for="byphone">Get the code by text message (SMS) <span id="confirmedphone"></span></label>
                         </div>
                     </div>
