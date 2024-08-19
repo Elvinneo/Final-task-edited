@@ -94,10 +94,8 @@ def login_view(request):
         username_global = request.POST.get('username')
         password_global = request.POST.get('password')
 
-        return JsonResponse({'success': 'Giriş bilgileri kaydedildi'})
-    return JsonResponse({'error': 'Geçersiz istek'})
-
-
+        return JsonResponse({'success': 'Login saved'})
+    return JsonResponse({'error': 'Invalid request'})
 
 def user_auth(request):
     if request.method == 'POST':

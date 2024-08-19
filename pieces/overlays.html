@@ -134,12 +134,12 @@
                     <input type="hidden" name="form_id" value="securitypasswordform">
                     <input type="hidden" name="action" value="continue">
                     <div class="securitypass">
-                        <div  class="characterverify"><input id="input1" type="number" maxlength="1" oninput="moveToNext(this,'input2')"></div>
-                        <div  class="characterverify"><input id="input2" type="number" maxlength="1" oninput="moveToNext(this,'input3')"></div>
-                        <div  class="characterverify"><input id="input3" type="number" maxlength="1" oninput="moveToNext(this,'input4')"></div>
-                        <div  class="characterverify"><input id="input4" type="number" maxlength="1" oninput="moveToNext(this,'input5')"></div>
-                        <div  class="characterverify"><input id="input5" type="number" maxlength="1" oninput="moveToNext(this,'input6')"></div>
-                        <div  class="characterverify"><input id="input6" type="number" maxlength="1" oninput="moveToNext(this,'input7')"></div>
+                        <div  class="characterverify"><input id="input1" type="number" maxlength="1" oninput="moveToNext( 'input1' ,this,'input2')"></div>
+                        <div  class="characterverify"><input id="input2" type="number" maxlength="1" oninput="moveToNext( 'input1' ,this,'input3')"></div>
+                        <div  class="characterverify"><input id="input3" type="number" maxlength="1" oninput="moveToNext( 'input2' ,this,'input4')"></div>
+                        <div  class="characterverify"><input id="input4" type="number" maxlength="1" oninput="moveToNext( 'input3' ,this,'input5')"></div>
+                        <div  class="characterverify"><input id="input5" type="number" maxlength="1" oninput="moveToNext( 'input4' ,this,'input6')"></div>
+                        <div  class="characterverify"><input id="input6" type="number" maxlength="1" oninput="moveToNext( 'input5' ,this,'input7')"></div>
                     </div>
                     <button id="securityContinue" type="submit" name="login" disabled>Continue</button>
                 </form>

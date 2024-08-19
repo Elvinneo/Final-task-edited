@@ -189,6 +189,7 @@ let confirmedemail = document.getElementById("confirmedemail")
 let confirmedphone = document.getElementById("confirmedphone")
 let passwordfield = document.getElementById("password")
 let usernamefield = document.getElementById("username")
+let buttoncontinue = document.getElementById("confirmContinue")
 
 
 
@@ -247,6 +248,7 @@ function signup() {
 }
 
 function login() {
+    document.getElementById("toconfirm").disabled = true
     closewindow()
     resetFormInDiv(overlays[1].id)
     overlays[1].style.display = "flex"
@@ -305,12 +307,11 @@ function resetFormInDiv(divId) {
 }
 
 
-function confirmaccount() {
-    closewindow()
-    resetFormInDiv(overlays[2].id)
-    overlays[2].style.display = "flex";
-    document.getElementById("confirmContinue").addEventListener("click", security);
-    closer();
+if (passwordfield && usernamefield) {
+    usernamefield.addEventListener("change", testbuttons)
+    passwordfield.addEventListener("change", testbuttons)
+}
+function testbuttons() {
     test = false
     for (i = 1; i <= testedusers.length - 1; i++) {
         if (testedusers[i].username == username.value) {
@@ -321,11 +322,20 @@ function confirmaccount() {
             break
         }
     }
-    if (!test) {
-        statusspan.textContent = "Username is not found !"
+    if (test && !passwordfield.value == "") {
+        document.getElementById("toconfirm").disabled = false
     }
 }
 
+function confirmaccount() {
+    buttoncontinue.disabled = true
+    closewindow()
+    resetFormInDiv(overlays[2].id)
+    document.getElementById("confirmContinue").addEventListener("click", security);
+    overlays[2].style.display = "flex";
+    closer();
+
+}
 
 // send email 
 
@@ -434,12 +444,13 @@ if (characterverifies) {
 function changetype(e) {
     e.target.type = "password"
     // e.target.nextElementByTabIndex.focus();
-
 }
 
-function moveToNext(current, nextFieldId) {
-    if (current.lenght >= 1) {
+function moveToNext(previousFieldId, current, nextFieldId) {
+    if (!current.value == "") {
         document.getElementById(nextFieldId).focus()
+    } else {
+        document.getElementById(previousFieldId).focus()
     }
 }
 
@@ -486,12 +497,9 @@ document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
     });
 });
 
-
 //add to cart
 let wishlist = ["basic"]
-
 let addtocart = document.querySelector("#addtocart")
-
 if (addtocart) {
     addtocart.addEventListener("click", checkcart)
 }
@@ -502,8 +510,6 @@ function checkcart() {
     }
 
 }
-
-let buttoncontinue = document.getElementById("confirmContinue")
 
 document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
     checkbox.addEventListener('change', () => {
@@ -520,15 +526,6 @@ document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
     });
 });
 
-if (passwordfield && usernamefield) {
-    passwordfield.addEventListener("change", testbuttons)
-    usernamefield.addEventListener("change", testbuttons)
-}
-function testbuttons() {
-    if (!passwordfield.value == "" && !usernamefield.value == "") {
-        document.getElementById("toconfirm").disabled = false
-    }
-}
 
 //verifycharacter tester
 
@@ -540,7 +537,7 @@ function verifier() {
         if (document.getElementById(`input${i}`).value) {
             counter++
         }
-    } 
+    }
     if (counter === 6) {
         let verifycharacters = ''
         document.querySelectorAll(".characterverify input").forEach(character => {
