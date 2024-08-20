@@ -199,8 +199,8 @@ let mailto = document.getElementById("mailto")
 let messageblock = document.getElementById("messageblock")
 let confirmedemail = document.getElementById("confirmedemail")
 let confirmedphone = document.getElementById("confirmedphone")
-let passwordfield = document.getElementById("password")
-let usernamefield = document.getElementById("username")
+let passwordfield = document.getElementById("passwordlogin")
+let usernamefield = document.getElementById("usernamelogin")
 let buttoncontinue = document.getElementById("confirmContinue")
 
 
@@ -267,8 +267,6 @@ function login() {
     closer()
     document.getElementById("toconfirm").addEventListener("click", confirmaccount)
     document.getElementById("forgotpassword").addEventListener("click", iforgotpassword)
-    eyeforEach(eye => { eye.addEventListener("mousedown", textviewer) })
-    eyeforEach(eye => { eye.addEventListener("mouseup", passwordviewer) })
 }
 
 
@@ -302,7 +300,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 messageElement.innerText = data.success;
             })
             .catch(error => {
-                document.getElementById('responseMessage').innerText = 'An error occurred.';
                 console.error('Login fetch error', error);
             });
     });
@@ -318,7 +315,6 @@ function resetFormInDiv(divId) {
     }
 }
 
-
 if (passwordfield && usernamefield) {
     usernamefield.addEventListener("change", testbuttons)
     passwordfield.addEventListener("change", testbuttons)
@@ -326,7 +322,7 @@ if (passwordfield && usernamefield) {
 function testbuttons() {
     test = false
     for (i = 1; i <= testedusers.length - 1; i++) {
-        if (testedusers[i].username == username.value) {
+        if (testedusers[i].username == usernamelogin.value) {
             confirmedemail.innerText = testedusers[i].email
             poster.value = testedusers[i].email
             confirmedphone.innerText = testedusers[i].phone

@@ -1317,8 +1317,8 @@ nav {
     cursor: pointer;
 }
 
-#usernamearea,
-#mailarea,
+#username,
+#email,
 #forgotmailarea {
     outline: none;
     display: flex;
@@ -1331,8 +1331,8 @@ nav {
     background: #FFF;
 }
 
-#passwordarea,
-#passwordrepeatarea {
+#password,
+#password_repeat {
     width: 190px;
     outline: none;
     display: flex;

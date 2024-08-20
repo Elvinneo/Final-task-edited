@@ -14,6 +14,11 @@ import string
 from django.contrib.auth.models import User
 from .forms import SignupForm
 
+from django.shortcuts import render, redirect
+from django.contrib.auth import login
+from django.contrib.auth.models import User
+from .forms import SignupForm
+
 def signup_view(request):
     if request.method == 'POST':
         form = SignupForm(request.POST)
@@ -22,8 +27,8 @@ def signup_view(request):
             email = form.cleaned_data.get('email')
             password = form.cleaned_data.get('password')
             user = User.objects.create_user(username=username, email=email, password=password)
-            print (user)
             login(request, user)
+            return redirect('home')
     else:
         form = SignupForm()
     return render(request, 'home.html', {'form': form})
