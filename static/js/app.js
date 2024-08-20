@@ -74,8 +74,20 @@ function addClass(e) {
     e.target.classList.add("active")
 }
 
-//memberships
+// eyes
 
+eye = document.querySelectorAll('.eye')
+eye1 = document.querySelectorAll('.eye1')
+if (eye) {
+    eye.forEach(eye => { eye.addEventListener("mousedown", textviewer) })
+    eye.forEach(eye => { eye.addEventListener("mouseup", passwordviewer) })
+}
+if (eye1) {
+    eye1.forEach(eye => { eye.addEventListener("mousedown", textviewer) })
+    eye1.forEach(eye => { eye.addEventListener("mouseup", passwordviewer) })
+}
+
+//memberships
 
 document.querySelectorAll('.plan').forEach(plan => {
     plan.addEventListener('click', addAndRemoveClass);
@@ -255,14 +267,14 @@ function login() {
     closer()
     document.getElementById("toconfirm").addEventListener("click", confirmaccount)
     document.getElementById("forgotpassword").addEventListener("click", iforgotpassword)
-    document.querySelectorAll(".eye").forEach(eye => { eye.addEventListener("mousedown", textviewer) })
-    document.querySelectorAll(".eye").forEach(eye => { eye.addEventListener("mouseup", passwordviewer) })
+    eyeforEach(eye => { eye.addEventListener("mousedown", textviewer) })
+    eyeforEach(eye => { eye.addEventListener("mouseup", passwordviewer) })
 }
 
 
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function (event) {
-        if (form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm") {
+        if (form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm" || form.id === 'signupmailform') {
             return;
         }
         event.preventDefault();
@@ -428,8 +440,6 @@ function verifypass() {
     resetFormInDiv(overlays[6].id)
     overlays[6].style.display = "flex"
     document.getElementById("NewPasswordNext").addEventListener("click", createpass)
-    document.querySelectorAll(".eye").forEach(eye => { eye.addEventListener("mousedown", textviewer) })
-    document.querySelectorAll(".eye").forEach(eye => { eye.addEventListener("mouseup", passwordviewer) })
     closer()
 }
 let passes = document.querySelectorAll(".pass")

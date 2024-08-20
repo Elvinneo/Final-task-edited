@@ -140,7 +140,7 @@ nav {
     display: block;
 }
 
-.alert{
+.alert {
     padding-left: 30px;
     padding-left: 80px;
     width: 100%;
@@ -148,13 +148,14 @@ nav {
     font-size: 16px;
     background-color: rgb(206, 157, 157);
 }
-.status{
+
+.status {
     align-items: flex-start;
     display: flex;
     flex-direction: column;
     text-align: center;
     position: absolute;
-    top:80px ;
+    top: 80px;
     left: 70px;
     font-size: 14px;
     color: rgb(176, 250, 2);
@@ -690,7 +691,7 @@ nav {
     gap: 24px;
 }
 
-.bask{
+.bask {
     padding-right: 10px;
     width: 20px;
     height: 20px;
@@ -759,7 +760,7 @@ nav {
     letter-spacing: 0.1px;
 }
 
-.plan2 ul li i img{
+.plan2 ul li i img {
     width: 24px;
     height: 24px;
 }
@@ -1047,10 +1048,11 @@ nav {
     gap: 10px;
 }
 
-#form{
+#form {
     display: flex;
     gap: 10px;
 }
+
 .mail {
     display: flex;
     flex-direction: column;
@@ -1162,9 +1164,9 @@ nav {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 32px;
+    gap: 12px;
     width: 500px;
-    height: 590px;
+    height: 600px;
     border-radius: 24px;
     background: #FFF;
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.08);
@@ -1184,10 +1186,22 @@ nav {
     cursor: pointer;
 }
 
+.passdiv input {
+    width: 45%;
+
+}
+
+.passdiv {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 12px;
+}
+
 .signupicon {
     display: flex;
     justify-content: center;
     align-items: center;
+    padding-top: 20px;
 
 }
 
@@ -1195,7 +1209,7 @@ nav {
     color: #1C1C1E;
     font-size: 20px;
     font-weight: 600;
-    line-height: 24px;
+    line-height: 20px;
     letter-spacing: 1.3px;
 }
 
@@ -1203,7 +1217,7 @@ nav {
     color: #1C1C1E;
     font-size: 20px;
     font-weight: 400;
-    line-height: 24px;
+    line-height: 20px;
     letter-spacing: 1.3px;
 }
 
@@ -1294,7 +1308,6 @@ nav {
 #forgotcontinue {
     display: flex;
     padding: 16px;
-    margin: 20px 0;
     padding-inline: 170px;
     justify-content: center;
     align-items: center;
@@ -1304,11 +1317,25 @@ nav {
     cursor: pointer;
 }
 
+#usernamearea,
 #mailarea,
 #forgotmailarea {
     outline: none;
     display: flex;
     width: 400px;
+    height: 52px;
+    padding-left: 16px;
+    align-items: center;
+    border-radius: 24px;
+    border: 1px solid #E9EBED;
+    background: #FFF;
+}
+
+#passwordarea,
+#passwordrepeatarea {
+    width: 190px;
+    outline: none;
+    display: flex;
     height: 52px;
     padding-left: 16px;
     align-items: center;
@@ -1449,7 +1476,7 @@ nav {
     border: none;
 }
 
-.logoutbutton{
+.logoutbutton {
     cursor: pointer;
     display: flex;
     background-color: #f36e6e;
@@ -1487,6 +1514,34 @@ nav {
     align-items: center;
 }
 
+.eye1 {
+    position: absolute;
+    top: 400 px;
+    right: 50px;
+    display: flex;
+    width: 18px;
+    height: 18px;
+    justify-content: center;
+    align-items: center;
+}
+
+
+#eye1 {
+    position: absolute;
+    top: 420px !important;
+    left: 205px !important;
+}
+
+#eye2 {
+    position: absolute;
+    top: 420px !important;
+    right: 70px !important;
+
+}
+
+.signupmain {
+    position: relative;
+}
 
 /*---------------------------------------------forgotPassword-------------------------------------------------------*/
 
