@@ -25,13 +25,15 @@
             <div class="signupform">
                 <form method="post" id="securitypasswordform" action="{% url 'signup' %}">
                     {% csrf_token %}
-                    
+
                     <label class="signuplabel" for="username">Username</label>
-                    <input id="username" type="text" placeholder="Enter your Username" name="username" required autocomplete="username">
-                    
+                    <input id="username" type="text" placeholder="Enter your Username" name="username" required
+                        autocomplete="username">
+
                     <label class="signuplabel" for="email">E-mail</label>
-                    <input id="email" type="email" placeholder="Enter your e-mail" name="email" required autocomplete="email">
-                    
+                    <input id="email" type="email" placeholder="Enter your e-mail" name="email" required
+                        autocomplete="email">
+
                     <p>Password</p>
                     <div class="passdiv">
                         <div class="pass1">
@@ -39,23 +41,25 @@
                                 <img id="e" src="{% static 'media/eye-slash.svg' %}" alt="">
                             </div>
                             <label class="pass1" for="password"></label>
-                            <input id="password" type="password" placeholder="Create password" name="password" required autocomplete="new-password">
+                            <input id="password" type="password" placeholder="Create password" name="password" required
+                                autocomplete="new-password">
                         </div>
                         <div class="pass2">
                             <div class="eye1" id="eye2">
                                 <img id="ey" src="{% static 'media/eye-slash.svg' %}" alt="">
                             </div>
                             <label class="pass1" for="password_repeat"></label>
-                            <input id="password_repeat" type="password" placeholder="Repeat password" name="password_repeat" required autocomplete="new-password">
+                            <input id="password_repeat" type="password" placeholder="Repeat password"
+                                name="password_repeat" required autocomplete="new-password">
                         </div>
                     </div>
                     <button id="signupcontinue" type="submit">Continue</button>
                 </form>
-                
+
             </div>
             <div class="terms">
                 <span>I agree to Clara</span>
-                <a href=" {% url 'terms' %}" >Terms of Use</a>
+                <a href=" {% url 'terms' %}">Terms of Use</a>
                 <span>and</span>
                 <a href="#">Privacy Policy</a>
             </div>
@@ -69,6 +73,15 @@
 
 <div id="signinOverlay" class="overlay">
     <div class="signinmain">
+        <div class="messageblock">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
         <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
         <div class="signinicon">
             <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
@@ -80,18 +93,20 @@
                 <h2>Hey there, welcome back!</h2>
             </div>
             <div class="signinform">
-                <form  class="signinform" id="loginForm" action="{% url 'login_view' %}" method="post">
+                <form class="signinform" id="loginForm" action="{% url 'login_view' %}" method="post">
                     {% csrf_token %}
                     <div class="mailzone">
                         <label for="username" id="">Username</label>
-                        <input id ="usernamelogin" type="text" placeholder="Enter your Username" name="username"required>
+                        <input id="usernamelogin" type="text" placeholder="Enter your Username" name="username"
+                            required>
                     </div>
                     <div class="passwordzone">
                         <div class="eye">
                             <img id="eye" src="{% static 'media/eye-slash.svg' %}" alt="">
                         </div>
                         <label for="password">Password</label>
-                        <input class="pass" id="passwordlogin" type="password" placeholder="Enter your password" name="password" required>
+                        <input class="pass" id="passwordlogin" type="password" placeholder="Enter your password"
+                            name="password" required>
                         <button type="submit" id="toconfirm" name="login" disabled>Login</button>
                     </div>
                 </form>
@@ -105,6 +120,15 @@
 
 <div id="confirmOverlay" class="overlay">
     <div class="confirm">
+        <div class="messageblock">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
         <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
         <div class="signinicon">
             <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
@@ -117,18 +141,19 @@
                 <p>Help us secure your account. Please complete the verifications below</p>
             </div>
             <div class="confirmform">
-                <form  id="emailform">
+                <form id="emailform">
                     {% csrf_token %}
                     <div class="confirmzone">
                         <div class="mailz">
-                            <input type="checkbox" id="getcodebyemail" name="bymail"  >
+                            <input type="checkbox" id="getcodebyemail" name="bymail">
                             <input type="hidden" name="email" value="" id="poster">
                             <input type="hidden" name="form_id" value="email_form">
                             <label for="bymail">Get the code by email at <span id="confirmedemail"></span></label>
                         </div>
                         <div class="phonez">
                             <input type="checkbox" id="getcodebyphone" name="byphone" disabled>
-                            <label id='phonez' for="byphone">Get the code by text message (SMS)<span id="confirmedphone"></span></label>
+                            <label id='phonez' for="byphone">Get the code by text message (SMS)<span
+                                    id="confirmedphone"></span></label>
                         </div>
                     </div>
                     <button id='confirmContinue' type="submit" disabled>Continue</button>
@@ -140,6 +165,15 @@
 
 <div id="securityOverlay" class="overlay">
     <div class="security">
+        <div class="messageblock">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
         <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
         <div class="signinicon">
             <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
@@ -149,20 +183,26 @@
         <div class="securitycontent">
             <div class="securityheader">
                 <h2>Enter your security code</h2>
-                <p>We texted your code to  <span id = "mailto"></span> </p>
+                <p>We texted your code to <span id="mailto"></span> </p>
             </div>
             <div class="securityform">
-                <form method="post" id="securitypasswordform">       
+                <form method="post" id="securitypasswordform">
                     {% csrf_token %}
                     <input type="hidden" name="form_id" value="securitypasswordform">
                     <input type="hidden" name="action" value="continue">
                     <div class="securitypass">
-                        <div  class="characterverify"><input id="input1" type="number" maxlength="1" oninput="moveToNext( 'input1' ,this,'input2')"></div>
-                        <div  class="characterverify"><input id="input2" type="number" maxlength="1" oninput="moveToNext( 'input1' ,this,'input3')"></div>
-                        <div  class="characterverify"><input id="input3" type="number" maxlength="1" oninput="moveToNext( 'input2' ,this,'input4')"></div>
-                        <div  class="characterverify"><input id="input4" type="number" maxlength="1" oninput="moveToNext( 'input3' ,this,'input5')"></div>
-                        <div  class="characterverify"><input id="input5" type="number" maxlength="1" oninput="moveToNext( 'input4' ,this,'input6')"></div>
-                        <div  class="characterverify"><input id="input6" type="number" maxlength="1" oninput="moveToNext( 'input5' ,this,'input7')"></div>
+                        <div class="characterverify"><input id="input1" type="number" maxlength="1"
+                                oninput="moveToNext( 'input1' ,this,'input2')"></div>
+                        <div class="characterverify"><input id="input2" type="number" maxlength="1"
+                                oninput="moveToNext( 'input1' ,this,'input3')"></div>
+                        <div class="characterverify"><input id="input3" type="number" maxlength="1"
+                                oninput="moveToNext( 'input2' ,this,'input4')"></div>
+                        <div class="characterverify"><input id="input4" type="number" maxlength="1"
+                                oninput="moveToNext( 'input3' ,this,'input5')"></div>
+                        <div class="characterverify"><input id="input5" type="number" maxlength="1"
+                                oninput="moveToNext( 'input4' ,this,'input6')"></div>
+                        <div class="characterverify"><input id="input6" type="number" maxlength="1"
+                                oninput="moveToNext( 'input5' ,this,'securityContinue')"></div>
                     </div>
                     <button id="securityContinue" type="submit" name="login" disabled>Continue</button>
                 </form>
@@ -173,6 +213,15 @@
 
 <div id="forgotOverlay" class="overlay">
     <div class="forgotmain">
+        <div class="messageblock">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
         <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
         <div class="signinicon">
             <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
@@ -188,9 +237,12 @@
                 <form method="post" id="forgotmailform">
                     {% csrf_token %}
                     <label for="mailarea">Email</label>
-                    <input type="text" id="forgotmailarea" name="mailarea" placeholder="Enter your username">
+                    <input type="hidden" name="email" value="" id="poster">
+                    <input type="hidden" name="form_id" value="verify_form">
+                    <input type="text" id="forgotmailarea" name="email" placeholder="Enter your username" required
+                        autocomplete="email">
                 </form>
-                <button id='forgotnext' type="submit">Next</button>
+                <button id='forgotnext' type="submit" disabled>Next</button>
             </div>
         </div>
     </div>
@@ -198,6 +250,15 @@
 
 <div id="forgotVerifyOverlay" class="overlay">
     <div class="forgotVerify">
+        <div class="messageblock">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
         <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
         <div class="signinicon">
             <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
@@ -207,19 +268,27 @@
         <div class="forgotVerifycontent">
             <div class="forgotVerifyheader">
                 <h2>Enter your verification code</h2>
-                <p>We texted your code to tranm••••••••••••@gm•••.com</p>
+                <p>We texted your code to </p>
+                <p id="verifyemailaddress"></p>
             </div>
             <div class="forgotVerifyform">
                 <form method="post" id="forgotVerifypasswordform">
                     {% csrf_token %}
                     <div class="verifypass">
-                        <div id="input1" class="characterverify"><input id="input1"input type="number" maxlength="1" oninput="moveToNext(this,'input2')"></div>
-                        <div id="input2" class="characterverify"><input id="input2"input type="number" maxlength="1" oninput="moveToNext(this,'input3')"></div>
-                        <div id="input3" class="characterverify"><input id="input3"input type="number" maxlength="1" oninput="moveToNext(this,'input4')"></div>
-                        <div id="input4" class="characterverify"><input id="input4"input type="number" maxlength="1" oninput="moveToNext(this,'input5')"></div>
-                        <div id="input5" class="characterverify"><input id="input5"input type="number" maxlength="1" oninput="moveToNext(this,'input6')"></div>
-                        <div id="input6" class="characterverify"><input id="input6"input type="number" maxlength="1" oninput="moveToNext(this,'input7')"></div>                    </div>
-                    <button id='forgotVerifyNext' type="submit">Next</button>
+                        <div class="characterverify"><input id="input7" type="number" maxlength="1"
+                                oninput="moveToNext( 'input7' ,this,'input8')"></div>
+                        <div class="characterverify"><input id="input8" type="number" maxlength="1"
+                                oninput="moveToNext( 'input7' ,this,'input9')"></div>
+                        <div class="characterverify"><input id="input9" type="number" maxlength="1"
+                                oninput="moveToNext( 'input8' ,this,'input10')"></div>
+                        <div class="characterverify"><input id="input10" type="number" maxlength="1"
+                                oninput="moveToNext( 'input9' ,this,'input11')"></div>
+                        <div class="characterverify"><input id="input11" type="number" maxlength="1"
+                                oninput="moveToNext( 'input10' ,this,'input12')"></div>
+                        <div class="characterverify"><input id="input12" type="number" maxlength="1"
+                                oninput="moveToNext( 'input11' ,this,'input12')"></div>
+                    </div>
+                    <button id='forgotVerifyNext' type="submit" disabled>Next</button>
                     <div class="resendbutton">
                         <a href="">Resend</a>
                     </div>
@@ -231,6 +300,15 @@
 
 <div id="newPasswordOverlay" class="overlay">
     <div class="forgotVerify">
+        <div class="messageblock">
+            {% if messages %}
+            <div class="messages">
+                {% for message in messages %}
+                <p class="message {{ message.tags }}">{{ message }}</p>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
         <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
         <div class="signinicon">
             <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
@@ -242,19 +320,29 @@
                 <h2>Create New Password</h2>
             </div>
             <div class="newPasswordform">
-                <form method="post">
+                <form method="post" id='passwordchange'>
                     {% csrf_token %}
                     <div class="passwordzone">
-                        <div class="eye" id="passeye">
+                        <div class="eye" id="oldpass-eye">
                             <img src="{% static 'media/eye-slash.svg' %}" alt="">
                         </div>
-                        <label for="oldpass">Password</label>
-                        <input class="pass" type="password" placeholder="Enter your password" name="oldpass">
-                        <div class="eye" id="newpasseye">
+                        <label for="id_old_password">Old password</label>
+                        <input class="pass" type="password" placeholder="Enter your old password" name="old_password"
+                            id="id_old_password">
+
+                        <div class="eye" id="newpass-eye">
                             <img src="{% static 'media/eye-slash.svg' %}" alt="">
                         </div>
-                        <label for="oldpass">Password</label>
-                        <input class="pass" type="password" placeholder="Enter your password" name="newpass">
+                        <label for="id_new_password1">New password</label>
+                        <input class="pass" type="password" placeholder="Enter your new password" name="new_password1"
+                            id="id_new_password1">
+
+                        <div class="eye" id="newpassagain-eye">
+                            <img src="{% static 'media/eye-slash.svg' %}" alt="">
+                        </div>
+                        <label for="id_new_password2">New password again</label>
+                        <input class="pass" type="password" placeholder="Enter your new password again"
+                            name="new_password2" id="id_new_password2">
                     </div>
                     <button id='NewPasswordNext' type="submit">Next</button>
                 </form>

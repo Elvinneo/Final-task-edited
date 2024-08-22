@@ -22,7 +22,10 @@ urlpatterns = [
     path('get-verification-code/', get_verification_code, name='get_verification_code'),
     path('login/', login_view, name='login_view'),
     path('signup/',signup_view, name='signup'),
-
+    path('change-password/', password_change_view, name='password_change'),
 ]
+
+
+
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

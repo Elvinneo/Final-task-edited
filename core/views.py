@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth import authenticate, login, logout,update_session_auth_hash
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth.forms import AuthenticationForm,PasswordChangeForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse, HttpResponseForbidden,HttpResponseRedirect
@@ -11,11 +11,6 @@ from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 import random
 import string
-from django.contrib.auth.models import User
-from .forms import SignupForm
-
-from django.shortcuts import render, redirect
-from django.contrib.auth import login
 from django.contrib.auth.models import User
 from .forms import SignupForm
 
@@ -33,7 +28,6 @@ def signup_view(request):
         form = SignupForm()
     return render(request, 'home.html', {'form': form})
 
-
 def generate_verification_code():
     return ''.join(random.choices(string.digits, k=6))
 
@@ -41,7 +35,7 @@ def generate_verification_code():
 def send_verification_email(email, code):
     subject = 'Your Verification Code'
     message = f'Your verification code is {code}.'
-    from_email = 'elvinbagirov@windowslive.com'
+    from_email = 'bulkingsite@hotmail.com'
     try:
         mail_sent = send_mail(subject, message, from_email, [email])
         return mail_sent > 0
@@ -86,7 +80,6 @@ def get_verification_code(request):
 
 
 def user_data(request):
-    # Token'ı başlıktan çıkarın
     token = request.headers.get('Authorization', '').split(' ')[-1]
     if token != 'bvmVNBMBMHB24512vbnmmm45vbgfhvn53VGBHJbjghj275fgcgvnf':
         return HttpResponseForbidden('Unauthorized')
@@ -102,7 +95,6 @@ def user_data(request):
 
     return JsonResponse(user_data, safe=False)
 
-
 username_global = None
 password_global = None
 
@@ -110,13 +102,11 @@ password_global = None
 def login_view(request):
     global username_global
     global password_global
-    
     if request.method == 'POST':
         username_global = request.POST.get('username')
         password_global = request.POST.get('password')
-
-        return JsonResponse({'success': 'Login saved'})
-    return JsonResponse({'error': 'Invalid request'})
+        messages.success(request, 'İşlem başarılı!') 
+    return render(request,request.path)
 
 def user_auth(request):
     if request.method == 'POST':
@@ -131,6 +121,21 @@ def user_auth(request):
             logout(request)
     else:
         form = AuthenticationForm()
+        
+        
+def password_change_view(request):
+    if request.method == 'POST':
+        form = PasswordChangeForm(data=request.POST, user=request.user)
+        if form.is_valid():
+            user = form.save()
+            update_session_auth_hash(request, user)
+            messages.success(request, 'Password change successfully')
+            return render(request, request.path)
+    else:
+        form = PasswordChangeForm(user=request.user)
+    return render(request, request.path)
+
+
 
 def home_view(request):
     user_auth(request)
@@ -167,7 +172,6 @@ def contact_view(request):
 def tos_view(request):
     user_auth(request)
     return render(request,'tos.html')
-
 
 def trainers_view(request):
     user_auth(request)

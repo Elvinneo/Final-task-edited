@@ -2,7 +2,6 @@
 
 {% include "pieces/overlays.html" %}
 
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -11,12 +10,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Bulking</title>
     <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
-    <link rel="icon" href="{% static 'favicon.ico' %}" type="image/x-icon">
+    <link rel="shortcut icon" href="{% static '/media/fitness-biceps.ico' %}" >
 </head>
 
 <body>
     {% block navbar %}
-
 
     {% endblock %}
     <div class="status">
@@ -24,13 +22,6 @@
         <h2>Welcome, {{ user.username }}!</h2>
         {% endif %}
     </div>
-    <h3 id="messageblock"></h3>
-    {% if messages %}
-    {% for message in messages %}
-    <div class="alert">{{ message }}</div>
-    {% endfor %}
-    {% endif %}
-
 
 
     {% block body %}

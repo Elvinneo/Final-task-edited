@@ -1,4 +1,5 @@
 from pathlib import Path
+from django.contrib import messages
 import os
 
 
@@ -14,9 +15,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.office365.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'elvinbagirov@windowslive.com'
+EMAIL_HOST_USER = 'bulkingsite@hotmail.com'
 EMAIL_HOST_PASSWORD = '0844045EBb'
-DEFAULT_FROM_EMAIL = 'elvinbagirov@windowslive.com'
+DEFAULT_FROM_EMAIL = 'bulkingsite@hotmail.com'
 
 # Application definition
 
@@ -144,3 +145,10 @@ CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 LOGIN_REDIRECT_URL = '/'
 
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}

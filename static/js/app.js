@@ -202,7 +202,8 @@ let confirmedphone = document.getElementById("confirmedphone")
 let passwordfield = document.getElementById("passwordlogin")
 let usernamefield = document.getElementById("usernamelogin")
 let buttoncontinue = document.getElementById("confirmContinue")
-
+let forgotmailarea = document.getElementById("forgotmailarea")
+let pass = document.querySelectorAll(".pass")
 
 
 function buttonhider() {
@@ -272,7 +273,7 @@ function login() {
 
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function (event) {
-        if (form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm" || form.id === 'signupmailform') {
+        if (form.id === "passwordchange" || form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm" || form.id === 'signupmailform') {
             return;
         }
         event.preventDefault();
@@ -315,6 +316,9 @@ function resetFormInDiv(divId) {
     }
 }
 
+
+// verification login fields
+
 if (passwordfield && usernamefield) {
     usernamefield.addEventListener("change", testbuttons)
     passwordfield.addEventListener("change", testbuttons)
@@ -335,6 +339,27 @@ function testbuttons() {
     }
 }
 
+// verification forgot password fields
+
+if (forgotmailarea) {
+    forgotmailarea.addEventListener("change", testmailfields)
+
+}
+function testmailfields() {
+    test = false
+    for (i = 1; i <= testedusers.length - 1; i++) {
+        if (testedusers[i].email == forgotmailarea.value) {
+            confirmedemail.innerText = testedusers[i].email
+            document.getElementById("verifyemailaddress").textContent = forgotmailarea.value
+            test = true
+            break
+        }
+    }
+    if (test) {
+        document.getElementById("forgotnext").disabled = false
+    }
+}
+
 function confirmaccount() {
     buttoncontinue.disabled = true
     closewindow()
@@ -342,18 +367,17 @@ function confirmaccount() {
     document.getElementById("confirmContinue").addEventListener("click", security);
     overlays[2].style.display = "flex";
     closer();
-
 }
 
 // send email 
 
-function security() {
+function verificationCodeSender(form) {
     if (document.getElementById("getcodebyphone").checked) {
         mailto.innerText = testedusers[i].phone
     } else {
         mailto.innerText = testedusers[i].email
     }
-    var formElement = document.getElementById('emailform');
+    var formElement = document.getElementById(form);
     if (!(formElement instanceof HTMLFormElement)) {
         console.error('The selected element is not an HTMLFormElement.');
         return;
@@ -376,10 +400,16 @@ function security() {
             console.error('Error:', error);
             alert('An error occurred. Please try again.');
         });
+}
 
+function security() {
+    verificationCodeSender('emailform')
     closewindow()
     resetFormInDiv(overlays[3].id)
+    start = 1
+    console.log(start)
     overlays[3].style.display = "flex"
+    document.getElementById("input1").focus()
     closer()
 
 }
@@ -425,9 +455,13 @@ function iforgotpassword() {
 }
 
 function forgotnext() {
+    verificationCodeSender('forgotmailform')
     resetFormInDiv(overlays[5].id)
     overlays[5].style.display = "flex"
+    start = 7
+    console.log(start)
     document.getElementById("forgotVerifyNext").addEventListener("click", verifypass)
+    document.getElementById("input7").focus()
     closer()
 }
 
@@ -435,6 +469,7 @@ function verifypass() {
     closewindow()
     resetFormInDiv(overlays[6].id)
     overlays[6].style.display = "flex"
+    document.getElementById("NewPasswordNext").disabled = true
     document.getElementById("NewPasswordNext").addEventListener("click", createpass)
     closer()
 }
@@ -449,7 +484,6 @@ if (characterverifies) {
 
 function changetype(e) {
     e.target.type = "password"
-    // e.target.nextElementByTabIndex.focus();
 }
 
 function moveToNext(previousFieldId, current, nextFieldId) {
@@ -535,11 +569,18 @@ document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
 
 //verifycharacter tester
 
-document.querySelectorAll(".characterverify").forEach(char => { char.addEventListener("change", verifier) })
+let start
 
-function verifier() {
+document.querySelectorAll(".characterverify").forEach(char => {
+    char.addEventListener("change", function () {
+        verifier(start);
+    });
+});
+
+
+function verifier(start) {
     let counter = 0
-    for (i = 1; i <= 6; i++) {
+    for (i = start; i <= start + 5; i++) {
         if (document.getElementById(`input${i}`).value) {
             counter++
         }
@@ -554,10 +595,30 @@ function verifier() {
             globalCode = await fetchVerificationCode();
             if (globalCode == verifycharacters) {
                 document.getElementById('securityContinue').disabled = false
+                document.getElementById('forgotVerifyNext').disabled = false
             } else {
                 alert("Verifycation code is invalid")
             }
         }
         main();
+    }
+}
+
+//password change overlayer buton activator
+
+if (pass) {
+    pass.forEach(passwordzone => {
+        passwordzone.addEventListener('change', activator)
+    })
+}
+
+function activator() {
+    if (
+        document.getElementById('id_old_password') && document.getElementById('id_new_password') && document.getElementById('id_repeat_password')) {
+        if (document.getElementById('id_new_password').value === document.getElementById('id_repeat_password').value) {
+            document.getElementById("NewPasswordNext").disabled = false
+        }else{
+            alert("Passwords is not same")
+        }
     }
 }

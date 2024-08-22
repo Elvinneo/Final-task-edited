@@ -1382,11 +1382,11 @@ nav {
     position: relative;
     display: flex;
     width: 500px;
-    height: 550px;
+    height: 600px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 32px;
+    gap: 30px;
     border-radius: 24px;
     background: #FFF;
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.08);
@@ -1410,11 +1410,10 @@ nav {
 
 .signincontent {
     display: flex;
-    padding: 24px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 32px;
+    gap: 25px;
 }
 
 .mailzone {
@@ -1505,7 +1504,7 @@ nav {
 
 .eye {
     position: absolute;
-    top: 350px;
+    top: 370px;
     right: 50px;
     display: flex;
     width: 18px;
@@ -1549,18 +1548,22 @@ nav {
 .forgotVerify {
     display: flex;
     position: relative;
-    padding: 48px;
     width: 500px;
-    height: 450px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 32px;
+    gap: 24px;
     border-radius: 24px;
     background: #FFF;
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.08);
 }
+.forgotmain{
+    height: 550px;
+}
 
+.forgotVerify{
+    height: 580px !important;
+}
 .forgotcontent {
     display: flex;
     width: 500px;
@@ -1598,6 +1601,7 @@ nav {
     display: flex;
     width: 400px;
     padding: 16px;
+    margin-top: 20px;
     justify-content: center;
     align-items: center;
     border-radius: 24px;
@@ -1979,4 +1983,39 @@ nav {
     line-height: 24px;
     letter-spacing: 0.08px;
     border: none;
+}
+
+
+/*----------------------------------------------------Messages styles---------------------------------------*/
+
+.messages {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.messages .message {
+    border-radius: 20px;
+    padding: 25px 100px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    color: #fff;
+}
+
+.messages .message.success {
+    background-color: #a8f89d;
+}
+
+
+.messages .message.error {
+    background-color: #f5938c;
+}
+
+.messages .message.info {
+    background-color: #75b9f0;
+}
+
+
+.messages .message.warning {
+    background-color: #e9d085;
 }
