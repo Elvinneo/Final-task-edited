@@ -1157,7 +1157,7 @@
 
     .signinmain {
         width: 350px;
-        height: 600px;
+        height: 550px;
         gap: 0;
     }
 
@@ -1192,11 +1192,16 @@
         font-size: 16px;
         line-height: 22px;
     }
+    .eye {
+        position: absolute;
+        top: 330px;
+        right: 30px;
+    }
 
     .forgotmain,
     .forgotVerify {
         width: 350px;
-        height: 550px;
+        height: 450px;
         gap: 0;
     }
 

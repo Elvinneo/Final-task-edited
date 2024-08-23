@@ -17,3 +17,7 @@ class SignupForm(forms.ModelForm):
 
         if password and password_repeat and password != password_repeat:
             raise ValidationError('Passwords do not match')
+
+
+class PasswordResetRequestForm(forms.Form):
+    email = forms.EmailField(label='Email Address', max_length=254)

@@ -196,7 +196,6 @@ let newPasswordOverlay = document.getElementById("newPasswordOverlay")
 let successOverlay = document.getElementById("successOverlay")
 let poster = document.getElementById("poster")
 let mailto = document.getElementById("mailto")
-let messageblock = document.getElementById("messageblock")
 let confirmedemail = document.getElementById("confirmedemail")
 let confirmedphone = document.getElementById("confirmedphone")
 let passwordfield = document.getElementById("passwordlogin")
@@ -204,6 +203,7 @@ let usernamefield = document.getElementById("usernamelogin")
 let buttoncontinue = document.getElementById("confirmContinue")
 let forgotmailarea = document.getElementById("forgotmailarea")
 let pass = document.querySelectorAll(".pass")
+let globalemail
 
 
 function buttonhider() {
@@ -273,11 +273,10 @@ function login() {
 
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function (event) {
-        if (form.id === "passwordchange" || form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm" || form.id === 'signupmailform') {
+        if (form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm" || form.id === 'signupmailform') {
             return;
         }
         event.preventDefault();
-        console.log('form gönderilmedi.');
     });
 });
 
@@ -285,7 +284,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('loginForm');
     form.addEventListener('submit', function (event) {
         const formData = new FormData(form);
-        console.log(formData)
         const csrfToken = formData.get('csrfmiddlewaretoken');
         event.preventDefault();
         fetch('/login/', {
@@ -301,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 messageElement.innerText = data.success;
             })
             .catch(error => {
-                console.error('Login fetch error', error);
+                console.error('eror', error);
             });
     });
 });
@@ -394,11 +392,32 @@ function verificationCodeSender(form) {
     })
         .then(response => response.json())
         .then(data => {
-            alert(data.message);
+            if(data.status=="success"){
+                Swal.fire({
+                    title: 'Info',
+                    text: 'A verification  code has been sent to your email',
+                    icon: 'info',
+                    confirmButtonText: 'Ok'
+                });
+                return;
+            }
+            else{
+                Swal.fire({
+                    title: 'Info',
+                    text: 'Check email or phone field',
+                    icon: 'info',
+                    confirmButtonText: 'Ok'
+                });
+
+            }
         })
         .catch(error => {
-            console.error('Error:', error);
-            alert('An error occurred. Please try again.');
+            Swal.fire({
+                title: 'Error',
+                text: 'An error occured',
+                icon: 'info',
+                confirmButtonText: 'Ok'
+            });
         });
 }
 
@@ -407,7 +426,6 @@ function security() {
     closewindow()
     resetFormInDiv(overlays[3].id)
     start = 1
-    console.log(start)
     overlays[3].style.display = "flex"
     document.getElementById("input1").focus()
     closer()
@@ -432,11 +450,21 @@ async function fetchVerificationCode() {
         if (data.verification_code) {
             return data.verification_code;
         } else {
-            console.error('Verification code is not found');
+            Swal.fire({
+                title: 'Invalid Code!',
+                text: 'Verification code is not found',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
             return null;
         }
     } catch (error) {
-        console.error('Error:', error);
+        Swal.fire({
+            title: 'Error',
+            text: 'An error occured',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+        });
         return null;
     }
 }
@@ -459,8 +487,8 @@ function forgotnext() {
     resetFormInDiv(overlays[5].id)
     overlays[5].style.display = "flex"
     start = 7
-    console.log(start)
     document.getElementById("forgotVerifyNext").addEventListener("click", verifypass)
+    globalemail = forgotmailarea.value
     document.getElementById("input7").focus()
     closer()
 }
@@ -473,6 +501,7 @@ function verifypass() {
     document.getElementById("NewPasswordNext").addEventListener("click", createpass)
     closer()
 }
+
 let passes = document.querySelectorAll(".pass")
 let next = document.getElementById("forgotnext")
 let characterverifies = document.querySelectorAll(".characterverify")
@@ -566,11 +595,9 @@ document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
     });
 });
 
-
 //verifycharacter tester
 
 let start
-
 document.querySelectorAll(".characterverify").forEach(char => {
     char.addEventListener("change", function () {
         verifier(start);
@@ -597,14 +624,19 @@ function verifier(start) {
                 document.getElementById('securityContinue').disabled = false
                 document.getElementById('forgotVerifyNext').disabled = false
             } else {
-                alert("Verifycation code is invalid")
+                Swal.fire({
+                    title: 'Invalid Code!',
+                    text: 'Verification code is invalid',
+                    icon: 'error',
+                    confirmButtonText: 'Ok'
+                });
             }
         }
         main();
     }
 }
 
-//password change overlayer buton activator
+// password controller
 
 if (pass) {
     pass.forEach(passwordzone => {
@@ -614,11 +646,56 @@ if (pass) {
 
 function activator() {
     if (
-        document.getElementById('id_old_password') && document.getElementById('id_new_password') && document.getElementById('id_repeat_password')) {
-        if (document.getElementById('id_new_password').value === document.getElementById('id_repeat_password').value) {
+        document.getElementById('id_new_password1').value && document.getElementById('id_new_password2').value) {
+        if (document.getElementById('id_new_password1').value === document.getElementById('id_new_password2').value) {
             document.getElementById("NewPasswordNext").disabled = false
-        }else{
-            alert("Passwords is not same")
+            changer()
+        } else {
+            Swal.fire({
+                title: 'Passwords',
+                text: 'Passwords is not same',
+                icon: 'error',
+                confirmButtonText: 'Ok'
+            });
         }
     }
 }
+
+
+function changer() {
+    const passwordChangeForm = document.getElementById('passwordchange');
+
+    if (passwordChangeForm) {
+        passwordChangeForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const newPassword1 = document.getElementById('id_new_password1').value;
+            const newPassword2 = document.getElementById('id_new_password2').value;
+            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+            email = globalemail
+
+            fetch('/password-change/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken,
+                },
+                body: JSON.stringify({ new_password1: newPassword1, new_password2: newPassword2, email: email })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        overlays[6].style.display = "flex"
+                    } else if (data.status === 'error') {
+                        Swal.fire({
+                            title: 'Error',
+                            text: data.message,
+                            icon: 'error',
+                            confirmButtonText: 'Ok'
+                        });
+                    }
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    }
+}
+

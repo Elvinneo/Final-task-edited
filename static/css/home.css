@@ -1382,7 +1382,7 @@ nav {
     position: relative;
     display: flex;
     width: 500px;
-    height: 600px;
+    height: 550px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1504,7 +1504,7 @@ nav {
 
 .eye {
     position: absolute;
-    top: 370px;
+    top: 360px;
     right: 50px;
     display: flex;
     width: 18px;
@@ -1558,11 +1558,11 @@ nav {
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.08);
 }
 .forgotmain{
-    height: 550px;
+    height: 450px;
 }
 
 .forgotVerify{
-    height: 580px !important;
+    height: 480px !important;
 }
 .forgotcontent {
     display: flex;
