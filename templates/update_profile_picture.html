@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    
+    <div id="profileUpdater" class="profileUpdater">
+        <div class="profileUpdaterContent">
+            
+            <h2>Update Profile Picture</h2>
+            <form id="profilePictureForm" method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                <label for="id_profile_picture">Select a new profile picture:</label>
+                <input type="file" id="id_profile_picture" name="profile_picture" accept="image/*" required>
+                <button type="submit">Update Picture</button>
+            </form>            
+        </div>
+    </div>
+</body>
+</html>

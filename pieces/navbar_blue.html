@@ -24,16 +24,26 @@
             <button class="loginButton" id="login" type="submit" name="login">Login</button>
             <button class="signupButton" id="signup" type="submit" name="signup">Signup</button>
         </form>
-        {% if user.is_authenticated %}
-        <form id="logoutForm" method="post">
-            {% csrf_token %}
-            <input type="hidden" name="action" value="logout">
-            <button id="logoutbutton" class="logoutbutton" type="submit">Logout</button>
-        </form>
-        {% endif %}
         <div class="drop" display="none">
             <i id='bars' class="fa-solid fa-bars"></i>
         </div>
-        
+        {% if user.is_authenticated %}
+        <div class="profiles">
+            {% if user.profile.profile_picture %}
+            <img id="profilepictureimage" src="{{ user.profile.profile_picture.url }}" alt="">
+            {% else %}
+            <img id="profilepictureimage" src="{% static '/media/empty.jpg'%}" alt="">
+            {% endif %}
+        </div>
+        {% endif %}
+        <div class="profilecontents">
+            <span id="usernamfield">{{ user.username }}</span>
+            <span id="changephoto" onclick="toggledrop()">Change photo</span>
+            <form id="logoutForm" method="post">
+                {% csrf_token %}
+                <input type="hidden" name="action" value="logout">
+                <button id="logoutbutton" class="logoutbutton" type="submit">Logout</button>
+            </form>
+        </div>
     </div>
 </nav>

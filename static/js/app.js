@@ -204,6 +204,8 @@ let buttoncontinue = document.getElementById("confirmContinue")
 let forgotmailarea = document.getElementById("forgotmailarea")
 let pass = document.querySelectorAll(".pass")
 let globalemail
+let resendbutton = document.getElementById("resend")
+
 
 
 function buttonhider() {
@@ -243,12 +245,16 @@ if (securityContinue) {
     securityContinue.addEventListener("click", endofsignin)
 }
 
+if (resendbutton) {
+    resendbutton.addEventListener("click", () => verificationCodeSender('emailform'));
+}
+
 function closewindow() {
     overlays.forEach(overlay => { overlay.style.display = "none" });
 }
 
 function closer() {
-    document.querySelectorAll(".close").forEach(closeoverlay => { closeoverlay.addEventListener('click', closewindow) })
+    closeoverlays.forEach(closeoverlay => { closeoverlay.addEventListener('click', closewindow) })
 
 }
 
@@ -367,7 +373,8 @@ function confirmaccount() {
     closer();
 }
 
-// send email 
+// send email
+
 
 function verificationCodeSender(form) {
     if (document.getElementById("getcodebyphone").checked) {
@@ -392,7 +399,7 @@ function verificationCodeSender(form) {
     })
         .then(response => response.json())
         .then(data => {
-            if(data.status=="success"){
+            if (data.status == "success") {
                 Swal.fire({
                     title: 'Info',
                     text: 'A verification  code has been sent to your email',
@@ -401,7 +408,7 @@ function verificationCodeSender(form) {
                 });
                 return;
             }
-            else{
+            else {
                 Swal.fire({
                     title: 'Info',
                     text: 'Check email or phone field',
@@ -661,7 +668,6 @@ function activator() {
     }
 }
 
-
 function changer() {
     const passwordChangeForm = document.getElementById('passwordchange');
 
@@ -684,7 +690,7 @@ function changer() {
                 .then(response => response.json())
                 .then(data => {
                     if (data.status === 'success') {
-                        overlays[6].style.display = "flex"
+                        overlays[7].style.display = "flex"
                     } else if (data.status === 'error') {
                         Swal.fire({
                             title: 'Error',
@@ -697,5 +703,88 @@ function changer() {
                 .catch(error => console.error('Error:', error));
         });
     }
+    if (document.getElementById("successContinue")) {
+        this.addEventListener("click", () => { overlays[7].style.display = 'none' })
+    }
+
 }
 
+// profiles
+
+let profilicon = document.querySelector(".profiles");
+if (profilicon) {
+    profilicon.addEventListener("click", toggledrop);
+}
+function toggledrop() {
+    let profileContents = document.querySelector(".profilecontents");
+    if (profileContents) {
+        if (profileContents.classList.contains("showed")) {
+            profileContents.classList.remove("showed");
+            setTimeout(() => {
+                profileContents.style.display = 'none';
+            }, 300);
+        } else {
+            profileContents.style.display = 'flex';
+            setTimeout(() => {
+                profileContents.classList.add("showed");
+            }, 10);
+        }
+    }
+}
+
+let updater = document.getElementById("profileUpdater")
+let changebutton = document.getElementById("changephoto")
+
+if (updater && changephoto) {
+    changephoto.addEventListener("click", changeprofilephoto)
+}
+function changeprofilephoto() {
+    updater.style.display = "flex"
+
+}
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    let profileForm = document.getElementById('profilePictureForm');
+    let profileUpdater = document.getElementById('profileUpdater');
+    closer()
+
+
+    if (profileForm) {
+        profileForm.addEventListener('submit', function (event) {
+            event.preventDefault();
+            let formData = new FormData(profileForm);
+
+            fetch('/update-profile-picture/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+                }
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        if (data.new_picture_url) {
+                            document.getElementById('profilepictureimage').src = data.new_picture_url;
+                            profileUpdater.style.display = 'none';
+                            Swal.fire({
+                                title: 'Profile picture',
+                                text: 'Profile picture updated successfully!',
+                                icon: 'success',
+                                confirmButtonText: 'Ok'
+                            });
+                        }
+                    }})
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        title: 'Error',
+                        text: 'An error occurred. Please try again.',
+                        icon: 'error',
+                        confirmButtonText: 'Ok'
+                    });
+                });
+        });
+    }
+});

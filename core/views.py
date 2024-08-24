@@ -4,7 +4,7 @@ from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
-from django.http import JsonResponse, HttpResponseForbidden
+from django.http import JsonResponse, HttpResponseForbidden,HttpResponse
 from django.core.cache import cache
 from .models import Profile
 from django.core.mail import send_mail
@@ -16,6 +16,7 @@ from django.contrib.auth.models import User
 from .forms import SignupForm
 from django.contrib.auth.forms import SetPasswordForm
 from django.conf import settings
+from .forms import ProfilePictureForm
 
 def signup_view(request):
     if request.method == 'POST':
@@ -93,7 +94,6 @@ def user_data(request):
             'phone': user.phone_number,
             'username': user.username,
         })
-
     return JsonResponse(user_data, safe=False)
 
 username_global = None
@@ -143,6 +143,22 @@ def password_change(request):
         except json.JSONDecodeError:
             return JsonResponse({'status': 'error', 'message': 'Invalid JSON.'}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
+
+
+#
+@login_required
+def update_profile_picture(request):
+    if request.method == 'POST':
+        form = ProfilePictureForm(request.POST, request.FILES, instance=request.user.profile)
+        if form.is_valid():
+            form.save()
+            new_picture_url = request.user.profile.profile_picture.url
+            return JsonResponse({'success': True, 'new_picture_url': new_picture_url})
+        else:
+            return JsonResponse({'success': False, 'error': 'Form is not valid'})
+    return JsonResponse({'success': False, 'error': 'Invalid request'})
+
+
 
 def home_view(request):
     user_auth(request)

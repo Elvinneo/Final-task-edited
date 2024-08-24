@@ -95,7 +95,7 @@
                             required>
                     </div>
                     <div class="passwordzone">
-                        <div class="eye">
+                        <div class="eye" id="logineye">
                             <img id="eye" src="{% static 'media/eye-slash.svg' %}" alt="">
                         </div>
                         <label for="password">Password</label>
@@ -259,7 +259,7 @@
                     </div>
                     <button id='forgotVerifyNext' type="submit" disabled>Next</button>
                     <div class="resendbutton">
-                        <a href="">Resend</a>
+                        <a href=""><button id="resend">Resend</button></a>
                     </div>
                 </form>
             </div>
@@ -282,7 +282,7 @@
                 <h2>Create New Password</h2>
             </div>
             <div class="newPasswordform">
-                <form method="post" id="passwordchange" >
+                <form method="post" id="passwordchange">
                     {% csrf_token %}
                     <div class="passwordzone">
                         <div class="eye" id="newpass-eye">
@@ -326,3 +326,20 @@
         </div>
     </div>
 </div>
+
+
+
+<div id="profileUpdater" class="overlay">
+    <div class="overlayContent">
+        <h2>Update Profile Picture</h2>
+        <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
+        <form id="profilePictureForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <label for="id_profile_picture">Select a new profile picture:</label>
+            <input type="file" id="id_profile_picture" name="profile_picture" accept="image/*" required>
+            <button type="submit" id="changephotobutton">Update Picture</button>
+        </form>
+    </div>
+</div>
+
+

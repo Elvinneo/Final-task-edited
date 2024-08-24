@@ -23,7 +23,8 @@ urlpatterns = [
     path('login/', login_view, name='login_view'),
     path('signup/',signup_view, name='signup'),
     path('password-change/', password_change, name='password_change'),
-]
+    path('update-profile-picture/', update_profile_picture, name='update_profile_picture'),
+]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 
 

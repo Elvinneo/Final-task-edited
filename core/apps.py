@@ -11,3 +11,5 @@ class MyProfilesConfig(AppConfig):
 
     def ready(self):
         import core.signals
+        
+        

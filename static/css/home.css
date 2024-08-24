@@ -137,7 +137,8 @@ nav {
 }
 
 .Show {
-    display: block;
+    display: flex;
+    flex-direction: column;
 }
 
 .alert {
@@ -160,7 +161,7 @@ nav {
     font-size: 14px;
     color: rgb(176, 250, 2);
     font-weight: 400;
-    z-index: 5;
+    z-index: 2;
 }
 
 .dropdownMainBlack a {
@@ -1478,12 +1479,11 @@ nav {
 .logoutbutton {
     cursor: pointer;
     display: flex;
-    background-color: #f36e6e;
-    padding: 12px 16px;
+    background-color: inherit;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
-    border: 1px solid #FFF;
+    border: none;
+    font-size: 20px;
 }
 
 .forgotpassword {
@@ -1502,15 +1502,10 @@ nav {
     letter-spacing: 0.08px;
 }
 
-.eye {
+#logineye {
     position: absolute;
     top: 360px;
-    right: 50px;
-    display: flex;
-    width: 18px;
-    height: 18px;
-    justify-content: center;
-    align-items: center;
+    right: 40px;
 }
 
 .eye1 {
@@ -1538,6 +1533,21 @@ nav {
 
 }
 
+
+#newpass-eye {
+    position: absolute;
+    top: 240px;
+    right: 40px;
+}
+
+#newpassagain-eye {
+    position: absolute;
+    top: 330px;
+    right: 40px;
+
+}
+
+
 .signupmain {
     position: relative;
 }
@@ -1557,13 +1567,15 @@ nav {
     background: #FFF;
     box-shadow: 0px 64px 64px -48px rgba(15, 15, 15, 0.08);
 }
-.forgotmain{
+
+.forgotmain {
     height: 450px;
 }
 
-.forgotVerify{
+.forgotVerify {
     height: 480px !important;
 }
+
 .forgotcontent {
     display: flex;
     width: 500px;
@@ -1756,7 +1768,7 @@ nav {
     letter-spacing: 0.16px;
 }
 
-.successcontent {
+.successcontent ,.overlayContent{
     position: relative;
     width: 280px;
     display: flex;
@@ -2019,3 +2031,116 @@ nav {
 .messages .message.warning {
     background-color: #e9d085;
 }
+
+.profiles {
+    position: absolute;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+
+.profiles img {
+    width: 100%;
+}
+
+.profilecontents {
+    display: none;
+    opacity: 0;
+    max-height: 0;
+    overflow: hidden;
+    transition: opacity 0.3s ease, max-height 0.3s ease;
+    flex-direction: column;
+    position: absolute;
+    top: 80px;
+    z-index: 3;
+    right: 20px;
+    width: 120px;
+    height: 90px;
+    background-color: #84a4f5;
+    border-radius: 16px;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+.profilecontents.showed {
+    display: flex; 
+    opacity: 1;
+    max-height: 500px; 
+}
+
+
+#usernamfield,#changephoto {
+    width: 90%;
+    background-color: #84a4f5;
+    padding-left: 10px;
+    color: white;
+    font-size: 14px;
+
+}
+
+#logoutbutton {
+    color: white;
+    padding-right:40px;
+    font-size: 16px;
+}
+
+#logoutbutton:hover,
+#usernamfield:hover,
+#changephoto:hover{
+    color: #2a3383;
+    font-weight: 600;
+    transform: scale(1.05);
+    transition: 0.05s;
+}
+
+
+
+  .profileUpdater .close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+  }
+  
+
+  .overlayContent{
+    width: 300px;
+    height: 400px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:30px;
+  }
+
+  .overlayContent form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap:30px;
+  }
+
+  .overlaycontent h2{
+    width: 200px;
+    font-size: 20px;
+    margin: 0 auto;
+    text-align: center;
+  }
+
+  #id_profile_picture{
+    font-size: 16px;
+    padding-left:10px ;
+    width: 250px;
+
+  }
+
+  #changephotobutton{
+    font-size: 16px;
+    padding: 10px 15px ;
+    background-color: #b0b0d6;
+    border-radius: 20px;
+    font-weight: 400;
+    color: white;
+    margin-top: 50px;
+  }
