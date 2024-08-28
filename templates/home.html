@@ -30,10 +30,9 @@
                 <div class="logos">
                     <p>Sponsored by</p>
                     <ul>
-                        <li><i><img src="{% static 'media/nike-4 1.svg' %}" alt=""></i></li>
-                        <li><i><img src="{% static 'media/esprit-1 1.svg' %}" alt=""></i></li>
-                        <li><i><img src="{% static 'media/apple-watch 1.svg' %}" alt=""></i></li>
-                        <li><i><img src="{%  static 'media/new-balance-2 1.svg' %}" alt=""></i></li>
+                        {% for sponsor in sponsores %}
+                        <li><img src="{{ sponsor.icon.url }}" alt="{{ sponsor.name }}"></li>
+                        {% endfor %}
                     </ul>
                 </div>
             </div>
@@ -54,44 +53,35 @@
             </div>
         </div>
         <div class="programs">
-            <div class="selections">
+                <div class="selections">
+                {% for program in programs%}
+                {% if forloop.counter == 2 %}
+                <div class="selection" id="selection1">
+                    <i><img src="{{program.icon.url}}" alt=""></i>
+                    <h3>{{program.name}}</h3>
+                    <p>{{program.explanation|safe}}</p>
+                    <div class="option">
+                        <span>Learn more</span>
+                        <a href="{% url 'programdetail' program.id %}"><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                    </div>
+                </div>
+                {% else %}
                 <div class="selection">
-                    <i><img src="{% static 'media/fitness-biceps_black.svg' %}" alt=""></i>
-                    <h3>Personal Training</h3>
-                    <p>It’s a long estabilished fact that a reader will be distracted by the readable content
-                    </p>
+                    <i><img src="{{program.icon.url}}" alt=""></i>
+                    <h3>{{program.name}}</h3>
+                    <p>{{program.explanation|safe}}</p>
                     <div class="option">
                         <span>Learn more</span>
-                        <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                        <a href="{% url 'programdetail' program.id %}"><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
                     </div>
                 </div>
-                <div id="selection1" class="selection">
-                    <i><img src="{% static 'media/dumbbell.svg' %}" alt=""></i>
-                    <h3>Workout Programs</h3>
-                    <p>It’s a long estabilished fact that a reader will be distracted by the readable content
-                    </p>
-                    <div class="option">
-                        <span>Learn more</span>
-                        <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
-                    </div>
-                </div>
-                <div class="selection">
-                    <i><img src="{% static 'media/slim-waist.svg' %}" alt=""></i>
-                    <h3>Program & Diet</h3>
-                    <p>It’s a long estabilished fact that a reader will be distracted by the readable
-                        content</p>
-                    <div class="option">
-                        <span>Learn more</span>
-                        <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
-                    </div>
-                </div>
+                {% endif %}
+                {% endfor%}
             </div>
             <div class="titledescription">
                 <h3>Training Program For You</h3>
                 <p>Starting a fitness routine can be intimidating, but it helps to have an idea of whar to
-                    expect
-
-                    before joining any class.</p>
+                    expect before joining any class.</p>
             </div>
         </div>
     </div>
@@ -150,85 +140,46 @@
                 <h2>Crushing your health and fitness goals starts here...</h2>
             </div>
             <div class="plans" id="homemembershipplans">
-                <div class="plan">
-                    <div class="types_planes">
-                        <h2>$0</h2>
-                        <h5>/Month</h5>
-                        <h4>Free plan</h4>
-                    </div>
-                    <ul>
-                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
-                            <p>1 classes per month</p>
-                        </li>
-                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
-                            <p>Access to online planes</p>
-                        </li>
-                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
-                            <p>10 health & fitness guides</p>
-                        </li>
-                    </ul>
-                    <button id="purchase" type="submit">Purchase
-                        Plan</button>
-                </div>
+                {% for plan in plans %}
+                {% if forloop.counter == 2%}
                 <div class="plan plan2">
-                    <div class="types_planes">
-                        <h2>$149.00</h2>
-                        <h5>/Month</h5>
-                        <h4>Basic plan</h4>
+                    {% else %}
+                    <div class="plan">
+                        {% endif%}
+                        <div class="types_planes">
+                            <h2 id="planprice">$ {{plan.price}}</h2>
+                            <h5>/Month</h5>
+                            <h4>{{plan.name}}</h4>
+                        </div>
+                        <ul>
+                            <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                                <p>{{ plan.classes }} classes per month</p>
+                            </li>
+                            <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                                <p>{{ plan.packages }}</p>
+                            </li>
+                            <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
+                                <p>{{ plan.tutorials }}</p>
+                            </li>
+                        </ul>
+                        <a id="purchase" href="{% url 'membership_detail' plan.id %}">Purchase Plan</a>
                     </div>
-                    <ul>
-                        <li><i><img src="{% static 'media/checkmark-circle-outline_green.svg' %}" alt=""></i>
-                            <p>8 classes per month</p>
-                        </li>
-                        <li><i><img src="{% static 'media/checkmark-circle-outline_green.svg' %}" alt=""></i>
-                            <p>All in basic packages</p>
-                        </li>
-                        <li><i><img src="{% static 'media/checkmark-circle-outline_green.svg' %}" alt=""></i>
-                            <p>1-on-1 personal trainning</p>
-                        </li>
-                    </ul>
-                    <button id="purchase" type="submit" onclick="location.href='{ % url ##### % }'">Purchase
-                        Plan</button>
-                </div>
-                <div class="plan">
-                    <div class="types_planes">
-                        <h2>$289.00</h2>
-                        <h5>/Month</h5>
-                        <h4>Professional plan</h4>
-                    </div>
-                    <ul>
-                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
-                            <p>20 classes per month</p>
-                        </li>
-                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
-                            <p>All in Intermediate package</p>
-                        </li>
-                        <li><i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
-                            <p>Access to my online tutorials</p>
-                        </li>
-                    </ul>
-                    <button id="purchase" type="submit">Purchase Plan</button>
+                    {% endfor %}
                 </div>
             </div>
         </div>
     </div>
-</div>
 
+    {% endblock %}
 
+    {% block review %}
 
-{% endblock %}
+    {% include "pieces/review.html" %}
 
+    {% endblock %}
 
-{% block review %}
+    {% block getstarted %}
 
-{% include "pieces/review.html" %}
+    {% include "pieces/getstarted.html" %}
 
-{% endblock %}
-
-
-
-{% block getstarted %}
-
-{% include "pieces/getstarted.html" %}
-
-{% endblock %}
+    {% endblock %}

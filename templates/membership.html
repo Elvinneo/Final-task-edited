@@ -24,6 +24,20 @@
                     <h2>Compare Our Plane and Find Your</h2>
                 </div>
                 <div class="plans" id="membershipplans">
+                    {% for plan in plans %}
+                    {% if forloop.counter == 2 %}
+                    <div class="plan plan2">
+                        <div class="types_planes">
+                            <h2>$ {{plan.price}}</h2>
+                            <h5>/Month</h5>
+                            <h4>{{plan.name}}</h4>
+                        </div>
+                        <div class="plancontent">
+                            <p>{{plan.content|safe}}</p>
+                        </div>
+                        <a href="{% url 'membership_detail' plan.id %}"><button id="purchase">Purchase Plan</button></a>
+                    </div>
+                    {% else %}
                     <div class="plan">
                         <div class="types_planes">
                             <h2>$0</h2>
@@ -31,32 +45,12 @@
                             <h4>Free plan</h4>
                         </div>
                         <div class="plancontent">
-                            <p>It’s a long estabilished fact that a reader will be distracted by the readable content</p>
+                            <p>{{plan.content|safe}}</p>
                         </div>
-                        <button id="purchase">Purchase Plan</button>
+                        <a href="{% url 'membership_detail' plan.id %}"><button id="purchase">Purchase Plan</button></a>
                     </div>
-                    <div class="plan plan2">
-                        <div class="types_planes">
-                            <h2>$149.00</h2>
-                            <h5>/Month</h5>
-                            <h4>Basic plan</h4>
-                        </div>
-                        <div class="plancontent">
-                            <p>It’s a long estabilished fact that a reader will be distracted by the readable content</p>
-                        </div>
-                        <button id="purchase">Purchase Plan</button>
-                    </div>
-                    <div class="plan">
-                        <div class="types_planes">
-                            <h2>$289.00</h2>
-                            <h5>/Month</h5>
-                            <h4>Professional plan</h4>
-                        </div>
-                        <div class="plancontent">
-                            <p>It’s a long estabilished fact that a reader will be distracted by the readable content</p>
-                        </div>
-                        <button id="purchase">Purchase Plan</button>
-                    </div>
+                    {% endif %}
+                    {% endfor %}
                 </div>
             </div>
         </div>
@@ -82,9 +76,12 @@
                         <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
                     </div>
                     <div class="overviewcontent">
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
                     </div>
                 </li>
                 <li>
@@ -93,10 +90,12 @@
                         <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
                     </div>
                     <div class="overviewcontent">
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
                         <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
-                    </div>
+                        </div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
                 </li>
                 <li>
                     <div class="overviewinfo">
@@ -104,9 +103,12 @@
                         <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
                     </div>
                     <div class="overviewcontent">
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
                     </div>
                 </li>
                 <li>
@@ -116,8 +118,10 @@
                     </div>
                     <div class="overviewcontent">
                         <div class="ovcont"><i><img src="{% static 'media/close-circle.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
                     </div>
                 </li>
                 <li>
@@ -127,8 +131,10 @@
                     </div>
                     <div class="overviewcontent">
                         <div class="ovcont"><i><img src="{% static 'media/close-circle.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
                     </div>
                 </li>
                 <li>
@@ -138,8 +144,10 @@
                     </div>
                     <div class="overviewcontent">
                         <div class="ovcont"><i><img src="{% static 'media/close-circle.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
                     </div>
                 </li>
                 <li>
@@ -150,7 +158,8 @@
                     <div class="overviewcontent">
                         <div class="ovcont"><i><img src="{% static 'media/close-circle.svg' %}" alt=""></i></div>
                         <div class="ovcont"><i><img src="{% static 'media/close-circle.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
                     </div>
                 </li>
                 <li>
@@ -161,7 +170,8 @@
                     <div class="overviewcontent">
                         <div class="ovcont"><i><img src="{% static 'media/close-circle.svg' %}" alt=""></i></div>
                         <div class="ovcont"><i><img src="{% static 'media/close-circle.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
                     </div>
                 </li>
                 <li>
@@ -172,7 +182,8 @@
                     <div class="overviewcontent">
                         <div class="ovcont"><i><img src="{% static 'media/close-circle.svg' %}" alt=""></i></div>
                         <div class="ovcont"><i><img src="{% static 'media/close-circle.svg' %}" alt=""></i></div>
-                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i></div>
+                        <div class="ovcont"><i><img src="{% static 'media/checkmark-circle-outline.svg' %}" alt=""></i>
+                        </div>
                     </div>
                 </li>
             </ul>

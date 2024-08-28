@@ -2,13 +2,53 @@ from django.db import models
 from django.contrib.auth.models import User
 import random
 from django.utils import timezone
+from ckeditor.fields import RichTextField
+
+class Plan(models.Model):
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00,verbose_name='Plan dəyəri')
+    name = models.CharField(max_length=100,verbose_name='Plan adı')
+    classes = models.CharField(max_length=100,verbose_name='Daxil olan sinif sayı')
+    packages = models.CharField(max_length=100,verbose_name='Daxil olanlar')
+    tutorials=models.CharField(max_length=100,verbose_name='Qaynaqlar')
+    content=RichTextField(max_length=500,verbose_name='Məlumat',default='')
+    about=RichTextField(max_length=1000,verbose_name='Haqqında',default='')
+    istheright=RichTextField(max_length=1000,verbose_name='Niye bu plan?',default='')
+
+    
+class Program(models.Model):
+    name = models.CharField(max_length=100,verbose_name='Program adı')
+    explanation = RichTextField(max_length=100,verbose_name='Proqram açıqlaması')
+    icon = models.FileField(verbose_name="Program ikonu")
+    video=models.FileField(upload_to='Program_videos/')
+    question1=models.CharField(max_length=100,verbose_name='Sual1')
+    answer1=RichTextField(max_length=500,verbose_name='Cavab1')
+    question2=models.CharField(max_length=100,verbose_name='Sual2')
+    answer2=RichTextField(max_length=500,verbose_name='Cavab2')
+    question3=models.CharField(max_length=100,verbose_name='Sual3')
+    answer3=RichTextField(max_length=500,verbose_name='Cavab3')
+    duration=models.CharField(max_length=100,verbose_name='Müddət')
+    intensity=models.CharField(max_length=100,verbose_name='İntensivlik')
+    level=models.CharField(max_length=100,verbose_name='Səviyyəsiz')
+    schedule=models.CharField(max_length=100,verbose_name='Planlama')
+
 
 class Profile(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     phone_number = models.CharField(max_length=20, blank=True, null=True)
     email = models.EmailField(blank=True, null=True)
-    username=models.CharField(max_length=20, blank=True, null=True)
+    username = models.CharField(max_length=20, blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
+    program = models.ForeignKey(Program, on_delete=models.SET_NULL, null=True, blank=True, related_name='profiles')
+    plan = models.ForeignKey(Plan, on_delete=models.SET_NULL, null=True, blank=True, related_name='profiles')
+
+    def get_plan_name(self):
+        return self.plan.name if self.plan else "No Plan"
+    
+    def get_program_name(self):
+        return self.program.name if self.program else "No Program"
+    
+    def __str__(self):
+        return self.user.username
 
 class EmailVerification(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
@@ -29,3 +69,26 @@ class PasswordResetCode(models.Model):
     expired_at = models.DateTimeField()
     def is_valid(self):
         return timezone.now() <= self.expired_at
+
+
+class Sponsore(models.Model):
+    name = models.CharField(max_length=100,verbose_name="Sponsor adı")
+    email = models.EmailField(max_length=100,verbose_name="Email")
+    icon = models.ImageField(verbose_name='Sponsor ikonu')
+
+class Member(models.Model):
+    user= models.OneToOneField(User, on_delete=models.CASCADE)
+    programs = models.ManyToManyField(Program)
+    plans = models.OneToOneField(Plan,on_delete=models.CASCADE)
+    ishappy=models.BooleanField(default=False)
+    
+class Trainer(models.Model):
+    name = models.CharField(max_length=100,verbose_name='Adı')
+    surname = models.CharField(max_length=100,verbose_name='Soyadı')
+    photo=models.FileField()
+    email = models.EmailField(max_length=100,verbose_name='Email')
+    phone = models.CharField(max_length=20,verbose_name='Telefon')
+    classes=models.CharField(max_length=100,verbose_name='Vəzifəsi')
+    facebook=models.CharField(max_length=100,verbose_name='Facebook')
+    linkedin=models.CharField(max_length=100,verbose_name='Linkedin')
+    twitter=models.CharField(max_length=100,verbose_name='twitter')

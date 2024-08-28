@@ -25,153 +25,34 @@
                 <p>OurPersonal Trainers are experienced and highly qualified – and they’re all ontheir own inspiring
                     journey too. Click our photos to read more.</p>
             </div>
-
         </div>
         <div class="people">
+            {% for trainer in trainers %}
             <div class="trainerscard">
                 <div class="picture">
-                    <img src="{% static 'media/Image.png' %}" alt="">
+                    <img src="{{ trainer.photo.url }}" alt="">
                 </div>
                 <div class="name">
                     <div class="realname">
-                        <h5>Jakob Curtis</h5>
+                        <h5>{{ trainer.name }} {{ trainer.surname }}</h5>
                     </div>
                     <div class="work">
-                        <p>Founder & Owners</p>
+                        <p>{{trainer.classes}}</p>
                     </div>
                 </div>
                 <div class="divsocial">
                     <div class="icon1">
-                        <img src="{% static 'media/icon1.png' %}" alt="">
+                        <a href="{{ trainer.facebook }}" target="_blank"><img src="{% static 'media/icon1.png' %}" alt=""></a>
                     </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon2.png' %}" alt="">
+                    <div class="icon2">
+                        <a href="{{ trainer.linkedin }}" target="_blank" ><img src="{% static 'media/icon2.png' %}" alt=""></a>
                     </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon3.png' %}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="trainerscard">
-                <div class="picture">
-                    <img src="{% static 'media/image 9.png' %}" alt="">
-                </div>
-                <div class="name">
-                    <div class="realname">
-                        <h5>Ryan Vetrovs</h5>
-                    </div>
-                    <div class="work">
-                        <p>Coach</p>
-                    </div>
-                </div>
-                <div class="divsocial">
-                    <div class="icon1">
-                        <img src="{% static 'media/icon1.png' %}" alt="">
-                    </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon2.png' %}" alt="">
-                    </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon3.png' %}" alt="">
+                    <div class="icon3">
+                        <a href="{{ trainer.twitter }}" target="_blank"><img src="{% static 'media/icon3.png' %}" alt=""></a>
                     </div>
                 </div>
             </div>
-            <div class="trainerscard">
-                <div class="picture">
-                    <img src="{% static 'media/image 10.png' %}" alt="">
-                </div>
-                <div class="name">
-                    <div class="realname">
-                        <h5>Marcus Levin</h5>
-                    </div>
-                    <div class="work">
-                        <p>Coach</p>
-                    </div>
-                </div>
-                <div class="divsocial">
-                    <div class="icon1">
-                        <img src="{% static 'media/icon1.png' %}" alt="">
-                    </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon2.png' %}" alt="">
-                    </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon3.png' %}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="trainerscard">
-                <div class="picture">
-                    <img src="{% static 'media/image 12.png' %}" alt="">
-                </div>
-                <div class="name">
-                    <div class="realname">
-                        <h5>Ahmad Saris</h5>
-                    </div>
-                    <div class="work">
-                        <p>Coach</p>
-                    </div>
-                </div>
-                <div class="divsocial">
-                    <div class="icon1">
-                        <img src="{% static 'media/icon1.png' %}" alt="">
-                    </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon2.png' %}" alt="">
-                    </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon3.png' %}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="trainerscard">
-                <div class="picture">
-                    <img src="{% static 'media/image 11.png' %}" alt="">
-                </div>
-                <div class="name">
-                    <div class="realname">
-                        <h5>Phillip Mango</h5>
-                    </div>
-                    <div class="work">
-                        <p>Coach</p>
-                    </div>
-                </div>
-                <div class="divsocial">
-                    <div class="icon1">
-                        <img src="{% static 'media/icon1.png' %}" alt="">
-                    </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon2.png' %}" alt="">
-                    </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon3.png' %}" alt="">
-                    </div>
-                </div>
-            </div>
-            <div class="trainerscard">
-                <div class="picture">
-                    <img src="{% static 'media/image 13.png' %}" alt="">
-                </div>
-                <div class="name">
-                    <div class="realname">
-                        <h5>Martin Calzoni</h5>
-                    </div>
-                    <div class="work">
-                        <p>Coach</p>
-                    </div>
-                </div>
-                <div class="divsocial">
-                    <div class="icon1">
-                        <img src="{% static 'media/icon1.png' %}" alt="">
-                    </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon2.png' %}" alt="">
-                    </div>
-                    <div class="icon1">
-                        <img src="{% static 'media/icon3.png' %}" alt="">
-                    </div>
-                </div>
-            </div>
+            {% endfor %}
         </div>
     </div>
 </div>

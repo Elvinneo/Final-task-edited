@@ -70,10 +70,20 @@ nav {
     flex-direction: row;
     display: none;
     backdrop-filter: blur(10px);
-
-
+}
+.dropmenu {
+    display: none;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.5s ease-out;
+    background-color: #f0f0f0;
 }
 
+.open{
+    display: flex;
+    max-height: 500px;
+    flex-direction: column;
+}
 .dropdownMain {
     color: #064BB4;
 }
@@ -101,6 +111,8 @@ nav {
 
 .dropprograms,
 .dropprogramsBlack {
+
+    width: 80%;
     height: 50px;
     font-size: 18px;
     font-weight: 400;
@@ -2000,37 +2012,6 @@ nav {
 
 /*----------------------------------------------------Messages styles---------------------------------------*/
 
-.messages {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
-
-.messages .message {
-    border-radius: 20px;
-    padding: 25px 100px;
-    margin-bottom: 10px;
-    border-radius: 4px;
-    color: #fff;
-}
-
-.messages .message.success {
-    background-color: #a8f89d;
-}
-
-
-.messages .message.error {
-    background-color: #f5938c;
-}
-
-.messages .message.info {
-    background-color: #75b9f0;
-}
-
-
-.messages .message.warning {
-    background-color: #e9d085;
-}
 
 .profiles {
     position: absolute;
@@ -2047,6 +2028,7 @@ nav {
 
 .profilecontents {
     display: none;
+    color: #1d1d94;
     opacity: 0;
     max-height: 0;
     overflow: hidden;
@@ -2056,46 +2038,54 @@ nav {
     top: 80px;
     z-index: 3;
     right: 20px;
-    width: 120px;
-    height: 90px;
-    background-color: #84a4f5;
-    border-radius: 16px;
-    align-items: center;
+    width: 260px;
+    height: 180px;
+    background-color:#bfe1e7;
+    border-radius: 12px;
+    align-items: flex-start;
     justify-content: center;
-    gap: 10px;
+    gap: 20px;
+    padding: 20px;
+    font-size: 15px;
+    font-weight: 500;
 }
+
 .profilecontents.showed {
     display: flex; 
     opacity: 1;
     max-height: 500px; 
 }
 
+.buttons{
+    display: flex;
+    gap: 15px;
+}
 
-#usernamfield,#changephoto {
-    width: 90%;
-    background-color: #84a4f5;
-    padding-left: 10px;
-    color: white;
-    font-size: 14px;
-
+#changephoto {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 120px;
+    height: 40px;
+    background-color: #5ef03254;
+    color: #fff;
+    border-radius: 15px
 }
 
 #logoutbutton {
+    padding: 11px 10px;
+    font-size: 14px;
+    background-color: #ec0c0c57;
+    border-radius: 15px;
     color: white;
-    padding-right:40px;
-    font-size: 16px;
 }
 
 #logoutbutton:hover,
-#usernamfield:hover,
 #changephoto:hover{
-    color: #2a3383;
     font-weight: 600;
-    transform: scale(1.05);
+    transform: scale(1.08);
     transition: 0.05s;
 }
-
-
 
   .profileUpdater .close {
     position: absolute;

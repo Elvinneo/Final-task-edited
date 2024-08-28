@@ -1,3 +1,4 @@
+
 // dropdown menu
 
 let menu = document.querySelector(".drop").childNodes[1]
@@ -9,16 +10,43 @@ if (menu) {
     menu.addEventListener('click', openMenu)
 }
 
+
+document.querySelectorAll(".selection").forEach(selected =>
+    selected.addEventListener('click', idadder)
+);
+
+function idadder(e) {
+    const container = e.target.parentElement;
+    const selections = container.querySelectorAll('.selection');
+    selections.forEach(item => {
+        if (item === e.target) {
+            item.id = "selection1";
+        } else {
+            item.id = '';
+        }
+    });
+}
 function openMenu() {
     dropmenu.classList.toggle("Show")
+    let configElement = document.getElementById('config-data');
+    let configData = JSON.parse(configElement.textContent);
     if (test) {
         nav.style.padding = "15px 0px"
         test = false;
+    }
+    if ((configData.is_authenticated)) {
+        nav.style.padding = "15px 0px 130px"
+        test = true
     } else {
         nav.style.padding = "15px 0px 70px"
         test = true
     }
+    setTimeout(() => {
+        dropmenu.classList.toggle("Show");
+    }, 8000);
+
 }
+
 
 window.addEventListener("resize", resize)
 
@@ -111,7 +139,6 @@ function addAndRemoveClass(e) {
         document.querySelectorAll(".plan2 ul li img").forEach(image => { image.src = "/static/media/checkmark-circle-outline_green.svg"; })
     }
 }
-
 
 // Happy client's comments
 
@@ -207,12 +234,11 @@ let globalemail
 let resendbutton = document.getElementById("resend")
 
 
-
 function buttonhider() {
     document.addEventListener('DOMContentLoaded', function () {
-        var configElement = document.getElementById('config-data');
-        var configData = JSON.parse(configElement.textContent);
-        var isLoggedIn = configData.is_authenticated;
+        let configElement = document.getElementById('config-data');
+        let configData = JSON.parse(configElement.textContent);
+        let isLoggedIn = configData.is_authenticated;
         if (!isLoggedIn) {
             document.getElementById("login").style.display = "flex"
             document.getElementById("signup").style.display = "flex"
@@ -302,10 +328,9 @@ document.addEventListener('DOMContentLoaded', function () {
             .then(response => response.json())
             .then(data => {
                 const messageElement = document.getElementById('responseMessage');
-                messageElement.innerText = data.success;
             })
             .catch(error => {
-                console.error('eror', error);
+                console.error('error', error);
             });
     });
 });
@@ -319,7 +344,6 @@ function resetFormInDiv(divId) {
         }
     }
 }
-
 
 // verification login fields
 
@@ -611,7 +635,6 @@ document.querySelectorAll(".characterverify").forEach(char => {
     });
 });
 
-
 function verifier(start) {
     let counter = 0
     for (i = start; i <= start + 5; i++) {
@@ -670,7 +693,6 @@ function activator() {
 
 function changer() {
     const passwordChangeForm = document.getElementById('passwordchange');
-
     if (passwordChangeForm) {
         passwordChangeForm.addEventListener('submit', function (event) {
             event.preventDefault();
@@ -710,11 +732,11 @@ function changer() {
 }
 
 // profiles
-
 let profilicon = document.querySelector(".profiles");
 if (profilicon) {
     profilicon.addEventListener("click", toggledrop);
 }
+
 function toggledrop() {
     let profileContents = document.querySelector(".profilecontents");
     if (profileContents) {
@@ -728,6 +750,15 @@ function toggledrop() {
             setTimeout(() => {
                 profileContents.classList.add("showed");
             }, 10);
+
+            setTimeout(() => {
+                if (profileContents.classList.contains("showed")) {
+                    profileContents.classList.remove("showed");
+                    setTimeout(() => {
+                        profileContents.style.display = 'none';
+                    }, 300);
+                }
+            }, 3000);
         }
     }
 }
@@ -738,23 +769,20 @@ let changebutton = document.getElementById("changephoto")
 if (updater && changephoto) {
     changephoto.addEventListener("click", changeprofilephoto)
 }
+
 function changeprofilephoto() {
     updater.style.display = "flex"
 
 }
 
-
 document.addEventListener('DOMContentLoaded', function () {
     let profileForm = document.getElementById('profilePictureForm');
     let profileUpdater = document.getElementById('profileUpdater');
     closer()
-
-
     if (profileForm) {
         profileForm.addEventListener('submit', function (event) {
             event.preventDefault();
             let formData = new FormData(profileForm);
-
             fetch('/update-profile-picture/', {
                 method: 'POST',
                 body: formData,
@@ -775,7 +803,8 @@ document.addEventListener('DOMContentLoaded', function () {
                                 confirmButtonText: 'Ok'
                             });
                         }
-                    }})
+                    }
+                })
                 .catch(error => {
                     console.error('Error:', error);
                     Swal.fire({
@@ -788,3 +817,80 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function () {
+    var form = document.getElementById('bookaclass');
+    var isAuthenticated = document.querySelector('meta[name="is_authenticated"]').getAttribute('content') === 'True';
+
+    if (form) {
+        form.addEventListener('submit', function (event) {
+            if (!isAuthenticated) {
+                login()
+                return;
+            }
+            event.preventDefault();
+            if (profile_programId) {
+                if (profile_programId == programId) {
+                    Swal.fire({
+                        title: 'Existing Program Selection',
+                        text: 'This program has already been selected.',
+                        icon: 'info',
+                        confirmButtonText: 'Ok'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            document.querySelector('#bookaclass').submit();
+                        }
+                    });
+                } else {
+                    Swal.fire({
+                        title: 'Change Program',
+                        text: 'You are about to change your current schedule. Do you want to continue?',
+                        icon: 'warning',
+                        showCancelButton: true,
+                        confirmButtonText: 'Yes, change it',
+                        cancelButtonText: 'No, cancel'
+                    }).then((result) => {
+                        if (result.isConfirmed) {
+                            Swal.fire({
+                                title: 'Success!',
+                                text: 'Program changed successfully!',
+                                icon: 'success',
+                                confirmButtonText: 'Ok'
+                            }).then(() => {
+                                document.querySelector('#bookaclass').submit();
+                            });
+                        }
+                    });
+                }
+            } else {
+                document.querySelector('#bookaclass').submit();
+            }
+        });
+    } else {
+        console.error('Form not found.');
+    }
+});
+
+
+// prices calculater
+
+
+let months = document.getElementById("months");
+let priceElement = document.getElementById("price");
+let total = document.getElementById("total");
+
+let price = parseFloat(priceElement.textContent.replace('$', ''));
+if (months) {
+    months.addEventListener("change", calculate);
+}
+
+function calculate() {
+    let selectedMonths = parseFloat(months.value);
+    if (!isNaN(selectedMonths) && selectedMonths > 0) {
+        total.innerText = ` $ ${price * selectedMonths}`;
+    } else {
+        total.innerText = ' $ 0';
+    }
+}
+calculate();
+

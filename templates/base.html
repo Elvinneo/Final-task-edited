@@ -8,9 +8,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="is_authenticated" content="{{ user.is_authenticated }}">
     <title>Bulking</title>
     <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
-    <link rel="shortcut icon" href="{% static '/media/fitness-biceps.ico' %}" >   
+    <link rel="shortcut icon" href="{% static '/media/fitness-biceps.ico' %}">
 </head>
 
 <body>
@@ -95,7 +96,7 @@
                                 src="{% static 'media/svg (4).svg' %}" alt=""></a></li>
                 </ul>
                 <div class="policy">
-                    <p>Terms of Service</p>
+                    <a href="{% url 'terms' %}"><p>Terms of Service</p></a>
                     <p>Privacy Policy</p>
                 </div>
             </div>
@@ -110,8 +111,13 @@
     }
 </script>
 
+<script>
+    let profile_programId = "{{ user.profile.program_id}}"
+    let programId = "{{ program.id }}";
+
+</script>
+
 <script src="{% static 'js/app.js' %}"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
 
 </html>

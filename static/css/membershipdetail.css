@@ -281,3 +281,19 @@
     border: 1px solid  #dadaec;
     cursor: pointer;
 }
+
+#pric{
+    color: #09080D;
+    font-size: 22px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.2px;
+}
+
+#total{
+    color: #e60f0f;
+    font-size: 29px;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: 0.2px;
+}

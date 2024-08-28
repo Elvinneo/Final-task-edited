@@ -17,7 +17,7 @@
     <div class="membershipdetail">
         <div class="detailcontent">
             <div class="contentheader">
-                <h1>Basic Plan</h1>
+                <h1>{{ plan.name }}</h1>
                 <p>It’s a long estabilished fact that a reader will be distracted by the readable content</p>
             </div>
             <div class="features">
@@ -53,35 +53,11 @@
             </div>
             <div class="baseabout">
                 <h3>About the plan</h3>
-                <p>Diam ante tortor diam mauris. Feugiat fames in et neque. Sem mollis sagittis id bibendum
-                    vitae magna risus. Feugiat adipiscing gravida bibendum adipiscing vel fermentum potenti.
-                    Mus
-                    ipsum consequat morbi aenean orci mauris integer eu. Purus accumsan non a ut aliquet
-                    volutpat leo. At vitae porttitor blandit porta. Pretium sed tempor vestibulum sit urna.
-                    Potenti purus sodales in enim nunc. In et auctor fusce sit donec condimentum. Diam
-                    ultrices
-                    enim nunc ornare id aliquet sed arcu commodo. Aliquam morbi fermentum amet dui
-                    ullamcorper
-                    praesent elit. Viverra nam massa cursus leo blandit eget eu. Tempor enim neque metus
-                    nunc
-                    sodales at eros. Malesuada placerat vestibulum amet sit tempor mi dignissim. Feugiat
-                    nullam
-                    urna gravida vulputate mi eleifend laoreet. Nunc facilisis egestas faucibus eget
-                    suspendisse. In id pulvinar sem lectus lectus eu. Aliquam elementum semper faucibus
-                    volutpat
-                    facilisis mi.</p>
+                <p>{{plan.about|safe}}</p>
 
                 <div class="contentinfo">
                     <h3>Is this the right package for me?</h3>
-                    <p>Consectetur adipiscing elit. Odio amet egestas dignissim eu nunc. Id pulvinar enim
-                        volutpat
-                        tellus. Cras tellus ac dui at sed.</p>
-                    <p>Viverra urna imperdiet non malesuada. In massa id tellus natoque augue in et, et.
-                        Suspendisse
-                        feugiat scelerisque et, viverra urna imperdiet.Vitae interdum quis lacus ut viverra.
-                        Enim eu turpis egestas pretium aenean pharetra magna ac placerat.
-                        Nunc semper velit netus donec commodo.
-                        Lacus hendrerit aliquam habitant eget faucibus venenatis turpis</p>
+                    <p>{{plan.istheright|safe}}</p>
                 </div>
             </div>
         </div>
@@ -95,30 +71,31 @@
                 <ul>
                     <li>
                         <i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
-                        <p>8 classes per month</p>
+                        <p>{{ plan.classes }} classes per month</p>
                     </li>
                     <li>
                         <i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
-                        <p>All in basic package</p>
+                        <p>{{ plan.packages }} </p>
                     </li>
                     <li>
                         <i><img src="{% static 'media/checkmark-circle-outline 1.svg' %}" alt=""></i>
-                        <p>1-on-1 personal trainning</p>
+                        <p>{{ plan.tutorials }}</p>
                     </li>
                 </ul>
             </div>
             <div class="reserveduration">
                 <p>Package Duration</p>
-                <select name="" id="">
-                    <option value="">1 Month</option>
-                    <option value="">8 Months</option>
-                    <option value="">20 Months</option>
+                <select name="" id="months">
+                    <option value="1">1 Month</option>
+                    <option value="8">8 Months</option>
+                    <option value="20">20 Months</option>
                 </select>
             </div>
             <div class="reserveprice">
-                <span>$149.00</span>
+                <span id="price">$ {{ plan.price}}</span>
                 <span id="month">/Month</span>
             </div>
+            <div><span id="pric">Total price : </span><span id="total"></span></div>
             <div class="reservebuttons">
                 <button id="purchasebutton">Purchase Now</button>
                 <button id="addtocart">Add to Chart</button>

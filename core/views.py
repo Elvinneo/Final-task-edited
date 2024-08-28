@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.forms import AuthenticationForm
@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse, HttpResponseForbidden,HttpResponse
 from django.core.cache import cache
-from .models import Profile
+from .models import *
 from django.core.mail import send_mail
 from django.views.decorators.csrf import csrf_exempt
 import random
@@ -113,6 +113,7 @@ def user_auth(request):
         form_id = request.POST.get('form_id')
         action = request.POST.get('action')
         if form_id == 'securitypasswordform':
+            print(username_global ,password_global)
             user = authenticate(username=username_global, password=password_global)
             if user is not None:
                 login(request, user)
@@ -144,8 +145,6 @@ def password_change(request):
             return JsonResponse({'status': 'error', 'message': 'Invalid JSON.'}, status=400)
     return JsonResponse({'status': 'error', 'message': 'Invalid request method'}, status=405)
 
-
-#
 @login_required
 def update_profile_picture(request):
     if request.method == 'POST':
@@ -158,11 +157,27 @@ def update_profile_picture(request):
             return JsonResponse({'success': False, 'error': 'Form is not valid'})
     return JsonResponse({'success': False, 'error': 'Invalid request'})
 
-
+def book_class(request, program_id):
+    program = get_object_or_404(Program, id=program_id)
+    user_profile, created = Profile.objects.get_or_create(user=request.user)
+    if user_profile.program and user_profile.program.id == program.id:
+        request.session['error_message'] = 'This program has already been selected.'
+        return redirect('programdetail',program_id=program_id)
+    user_profile.program = program
+    user_profile.save()
+    request.session['success_message'] = 'Membership successfully updated!'
+    return redirect('programdetail',program_id=program_id)
 
 def home_view(request):
+    sponsores=Sponsore.objects.all()
+    plans=Plan.objects.all()
+    programs=Program.objects.all()
     user_auth(request)
-    return render(request,'home.html')
+    context = {
+        'sponsores': sponsores,
+        'plans': plans,
+        'programs': programs,}
+    return render(request,'home.html',context)
 
 def about_view(request):
     user_auth(request)
@@ -174,11 +189,13 @@ def blog_view(request):
 
 def membership_view(request):
     user_auth(request)
-    return render(request,'membership.html')
+    plans=Plan.objects.all()
+    return render(request,'membership.html',{'plans':plans})
 
-def membership_detail_view(request):
+def membership_detail_view(request,plan_id):
     user_auth(request)
-    return render(request,'membership_detail.html')
+    plan = get_object_or_404(Plan, id=plan_id)
+    return render(request,'membership_detail.html',{'plan': plan})
 
 def blogdetail_view(request):
     user_auth(request)
@@ -197,10 +214,11 @@ def tos_view(request):
     return render(request,'tos.html')
 
 def trainers_view(request):
+    trainers=Trainer.objects.all()
     user_auth(request)
-    return render(request,'trainers.html')
+    return render(request,'trainers.html',{'trainers':trainers})
 
-def programdetail_view(request):
+def programdetail_view(request, program_id):
     user_auth(request)
-    return render(request,'programdetail.html')
-
+    program = get_object_or_404(Program, id=program_id)
+    return render(request, 'programdetail.html', {'program': program})

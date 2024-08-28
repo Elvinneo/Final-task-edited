@@ -38,12 +38,16 @@
         {% endif %}
         <div class="profilecontents">
             <span id="usernamfield">{{ user.username }}</span>
-            <span id="changephoto" onclick="toggledrop()">Change photo</span>
-            <form id="logoutForm" method="post">
-                {% csrf_token %}
-                <input type="hidden" name="action" value="logout">
-                <button id="logoutbutton" class="logoutbutton" type="submit">Logout</button>
-            </form>
+            <span id="programfield">Program : {{ user.profile.get_program_name }}</span>
+            <span id="planfield"> Plan : {{ user.profile.get_plan_name }}</span>
+            <div class="buttons">
+                <div id="changephoto">Change photo</div>
+                <form id="logoutForm" method="post">
+                    {% csrf_token %}
+                    <input type="hidden" name="action" value="logout">
+                    <button id="logoutbutton" class="logoutbutton" type="submit">Logout</button>
+                </form>
+            </div>
         </div>
     </div>
 </nav>

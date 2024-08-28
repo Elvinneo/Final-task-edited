@@ -10,13 +10,13 @@ urlpatterns = [
     path('', home_view, name="home"),
     path('about/' , about_view,name="about"),
     path('membership/' ,membership_view,name="membership"),
-    path('membership_detail/' , membership_detail_view,name="membership_detail"),
+    path('membership_detail/<int:plan_id>/', membership_detail_view,name="membership_detail"),
     path('blog/' , blog_view,name="blog"),
     path('blog_detail/' , blogdetail_view,name="blogdetail"),
     path('contact/', contact_view,name="contact"),
     path('terms/', tos_view,name="terms"),
     path('trainers/', trainers_view,name="trainers"),
-    path('programdetail/', programdetail_view,name="programdetail"),
+    path('programdetail/<int:program_id>/', programdetail_view, name='programdetail'),
     path('api/users/', user_data, name='user_data'),
     path('email_verification/', email_verification_view, name='email_verification'),
     path('get-verification-code/', get_verification_code, name='get_verification_code'),
@@ -24,6 +24,10 @@ urlpatterns = [
     path('signup/',signup_view, name='signup'),
     path('password-change/', password_change, name='password_change'),
     path('update-profile-picture/', update_profile_picture, name='update_profile_picture'),
+    path('book-class/<int:program_id>/', book_class, name='book_class'),
+    
+    
+    
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
 

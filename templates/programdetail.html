@@ -18,10 +18,9 @@
         <div class="programcontent">
             <div class="contentheader">
                 <div class="persontitle">
-                    <span id="personal">Personal</span>
-                    <span id="training">Training</span>
+                    <span id="personal">{{program.name}}</span>
                 </div>
-                <p>It’s a long estabilished fact that a reader will be distracted by the readable content</p>
+                <p>{{program.explanation|safe}}</p>
             </div>
             <div class="features">
                 <ul>
@@ -56,7 +55,7 @@
             </div>
             <div class="video">
                 <video id="myvideo">
-                    <source src="{% static 'media/no_limits.mp4'%}" type="video/mp4">
+                    <source src="{{program.video.url}}" type="video/mp4">
                     Your browser does not support HTML5 video.
                 </video>
                 <div id="playbutton">
@@ -67,36 +66,16 @@
                 </div>
             </div>
             <div class="baseabout">
-                <h3>What is this class about?</h3>
-                <p>Pretium sed tempor vestibulum sit urna. Potenti purus sodales in enim nunc.
-                    In et auctor fusce sit donec condimentum. Diam ultrices enim nunc ornare id
-                    aliquet sed arcu commodo. Aliquam morbi fermentum amet dui ullamcorper praesent
-                    elit. Viverra nam massa cursus leo blandit eget eu. Tempor enim neque metus nunc
-                    sodales at eros. Malesuada placerat vestibulum amet sit tempor mi dignissim.
-                    Feugiat nullam urna gravida vulputate mi eleifend laoreet.</p>
+                <h3>{{program.question1}}</h3>
+                <p>{{program.answer1|safe}}</p>
             </div>
             <div class="contentinfo">
-                <h3>Is this the right fitness class for me?</h3>
-                <p>Viverra urna imperdiet non malesuada. In massa id tellus natoque augue in et,
-                    et. Suspendisse feugiat
-                    <span>scelerisque</span>
-                    et, viverra urna imperdiet.Vitae interdum quis lacus ut viverra.
-                    <br>
-                    1. Enim eu turpis egestas pretium aenean pharetra magna ac placerat.
-                    <br>
-                    2. Nunc semper velit netus donec commodo.
-                    <br>
-                    3. Lacus hendrerit aliquam habitant eget faucibus venenatis turpis.
-                </p>
+                <h3>{{program.question2}}</h3>
+                <p>{{program.answer2|safe}}</p>
             </div>
             <div class="text">
-                <h3>How can I take a trial class?</h5>
-                    <p>Diam ultrices enim nunc ornare id aliquet sed arcu commodo. Aliquam morbi
-                        fermentum amet dui ullamcorper praesent elit. Viverra nam massa cursus leo
-                        blandit eget eu. Tempor enim neque metus nunc sodales at eros. Malesuada
-                        placerat vestibulum amet sit tempor mi dignissim. Feugiat nullam urna gravida
-                        vulputate mi eleifend laoreet.
-                    </p>
+                <h3>{{program.question3}}</h5>
+                    <p>{{program.answer3|safe}}</p>
             </div>
         </div>
         <div class="chooseprogram">
@@ -113,7 +92,7 @@
                         <div class="programduratiodiv">
                             <div class="durationdivs">
                                 <span class="durationkey">Duration:</span>
-                                <span class="durationvalue">60 minutes</span>
+                                <span class="durationvalue">{{program.duration}}</span>
                             </div>
                         </div>
                     </li>
@@ -124,7 +103,7 @@
                         <div class="programduratiodiv">
                             <div class="durationdivs">
                                 <span class="durationkey">Intensity:</span>
-                                <span class="durationvalue">High</span>
+                                <span class="durationvalue">{{program.intensity}}</span>
                             </div>
                         </div>
                     </li>
@@ -135,7 +114,7 @@
                         <div class="programduratiodiv">
                             <div class="durationdivs">
                                 <span class="durationkey">Fitness Level:</span>
-                                <span class="durationvalue">Intermediate</span>
+                                <span class="durationvalue">{{program.level}}</span>
                             </div>
                         </div>
                     </li>
@@ -146,25 +125,25 @@
                         <div class="programduratiodiv">
                             <div class="durationdivs">
                                 <span class="durationkey">Schedule:</span>
-                                <span class="durationvalue">Monday,Friday</span>
+                                <span class="durationvalue">{{program.schedule}}</span>
                             </div>
                         </div>
                     </li>
                 </ul>
             </div>
-            <form action="" id="bookaclass">
+            <div action="" id="bookaclas">
                 <div class="programbutton">
-                    <button id="bookaclas">Book a class</button>
+                    <form id="bookaclass" action="{% url 'book_class' program.id %}" method="post">
+                        {% csrf_token %}
+                        <button id="bookaclasbuton" type="submit">Book a Class</button>
+                    </form>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
 </div>
 
-
-
 {% endblock %}
-
 
 {% block review %}
 

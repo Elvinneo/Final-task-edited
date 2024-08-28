@@ -55,7 +55,7 @@ body {
 }
 
 
-.trainerscardd {
+.trainerscard {
     display: flex;
     padding: 12px 12px 24px 12px;
     flex-direction: column;
@@ -67,7 +67,7 @@ body {
 }
 
 .picture {
-    width: 100%;
+    width: 180px;
     height: 200px;
     flex-shrink: 0;
     border-radius: 8px;
@@ -111,7 +111,7 @@ body {
     margin: 0 auto;
     height: 40px;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 10px;
 }
 
