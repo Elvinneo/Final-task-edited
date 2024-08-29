@@ -892,16 +892,15 @@ nav {
     gap: 16px;
 }
 
-
 .activearrow {
     font-size: 24px;
-
+    cursor: pointer;
 }
 
 .passivearrow {
     filter: opacity(0.5);
     font-size: 16px;
-
+    cursor:not-allowed
 }
 
 .rectangle {
@@ -2020,6 +2019,7 @@ nav {
     height: 40px;
     border-radius: 50%;
     overflow: hidden;
+    cursor: pointer;
 }
 
 .profiles img {
@@ -2059,6 +2059,7 @@ nav {
 .buttons{
     display: flex;
     gap: 15px;
+    cursor: pointer;
 }
 
 #changephoto {
@@ -2069,7 +2070,7 @@ nav {
     height: 40px;
     background-color: #5ef03254;
     color: #fff;
-    border-radius: 15px
+    border-radius: 15px;
 }
 
 #logoutbutton {
@@ -2122,6 +2123,7 @@ nav {
     font-size: 16px;
     padding-left:10px ;
     width: 250px;
+    cursor: pointer;
 
   }
 
@@ -2133,4 +2135,5 @@ nav {
     font-weight: 400;
     color: white;
     margin-top: 50px;
+    cursor: pointer;
   }

@@ -11,6 +11,7 @@
 @import url("programdetail.css");
 @import url("trainers.css"); 
 @import url("responsive.css");
+@import url("programs.css");
 
 * {
     margin: 0;

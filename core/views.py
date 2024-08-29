@@ -1,7 +1,6 @@
 from django.shortcuts import render, redirect,get_object_or_404
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
-from django.contrib.auth.forms import AuthenticationForm
 from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.http import JsonResponse, HttpResponseForbidden,HttpResponse
@@ -13,10 +12,9 @@ import random
 import string
 import json
 from django.contrib.auth.models import User
-from .forms import SignupForm,ContactMessageForm
-from django.contrib.auth.forms import SetPasswordForm
+from .forms import SignupForm,ContactMessageForm,ProfilePictureForm
+from django.contrib.auth.forms import SetPasswordForm,AuthenticationForm
 from django.conf import settings
-from .forms import ProfilePictureForm
 
 def signup_view(request):
     if request.method == 'POST':
@@ -208,10 +206,30 @@ def membership_detail_view(request,plan_id):
     plan = get_object_or_404(Plan, id=plan_id)
     return render(request,'membership_detail.html',{'plan': plan})
 
-def blogdetail_view(request,blog_id):
+def blogdetail_view(request, blog_id):
     user_auth(request)
+    trainers = Trainer.objects.all()
     blog = get_object_or_404(Blog, id=blog_id)
-    return render(request,'blogdetail.html',{'blog':blog})
+    blogs = Blog.objects.all().order_by('-created_at')[:3]
+    content = blog.contents
+    words = content.split()
+    first_part = ' '.join(words[:47])
+    second_part = ' '.join(words[47:])
+    fitness_blogs = Blog.objects.filter(category='Fitness').order_by('-created_at')[:3]
+    health_blogs = Blog.objects.filter(category='Health').order_by('-created_at')[:3]
+    recipes_blogs = Blog.objects.filter(category='Recipes').order_by('-created_at')[:3]
+
+    context = {
+        'trainers': trainers,
+        'blog': blog,
+        'blogs': blogs,
+        'first_part': first_part,
+        'second_part': second_part,
+        'fitness_blogs': fitness_blogs,
+        'health_blogs': health_blogs,
+        'recipes_blogs': recipes_blogs,
+    }
+    return render(request, 'blogdetail.html', context)
 
 def overlays_view(request):
     user_auth(request)
@@ -239,6 +257,11 @@ def trainers_view(request):
     trainers=Trainer.objects.all()
     user_auth(request)
     return render(request,'trainers.html',{'trainers':trainers})
+
+def programs_view(request):
+    user_auth(request)
+    programs=Program.objects.all()
+    return render(request,'programs.html',{'programs':programs})
 
 def programdetail_view(request, program_id):
     user_auth(request)

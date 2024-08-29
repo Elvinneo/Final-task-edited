@@ -1,0 +1,236 @@
+.likeness {
+    background:  #F9F9FB;
+    margin-bottom: 120px;
+    margin-top: 120px;
+}
+
+.likeness .Range {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 56px;
+}
+
+.likeness .convey {
+    display: flex;
+    padding: 32px 40px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+}
+
+.introduction {
+    gap: 40px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.accordion_header {
+    display: flex;
+    justify-content: space-between;
+    color: #1A202C;
+    font-size: 24px;
+    font-weight: 600;
+    line-height: 40px;
+    min-height: 50px;
+    align-items: center;
+    cursor: pointer;
+}
+
+.accordion_header h4 {
+    margin: 0;
+}
+
+.introduction_col {
+    width: 100%;
+    overflow: hidden;
+}
+
+.introduction_col p {
+    color:  #636366;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+    height: 0;
+    overflow: hidden;
+    transition: height 0.3s linear;
+}
+
+.likeness .screwdriver {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 24px;
+    background: #FFF;
+    max-width: 875px;
+}
+
+.outpost {
+    display: inline-flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.outpost1 button {
+    display: flex;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid  #E9EBED;
+}
+
+.outpost1 button p {
+    color: #064BB4;
+    font-size: 14px;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.07px;
+}
+
+.outpost2 {
+    color: #171725;
+    text-align: center;
+    font-size: 40px;
+    font-weight: 500;
+    line-height: 48px;
+    letter-spacing: 0.2px;
+}
+
+.pioneer {
+    display: flex;
+    gap: 80px;
+    margin-bottom: 120px;
+    margin-top: 120px;
+}
+
+.clump {
+    width: calc(40% - 80px * 0.4);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.clump1 {
+    color: #1C1C1E;
+    font-size: 72px;
+    font-weight: 500;
+    line-height: 80px;
+    letter-spacing: 0.36px;
+}
+
+.clump1 span {
+    color:  #1C1C1E;
+    font-size: 72px;
+    font-weight: 400;
+    line-height: 80px;
+    letter-spacing: 0.36px;
+}
+
+.clump2 {
+    color:  #636366;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+}
+
+.clump button {
+    display: flex;
+    padding: 16px 40px;
+    border: none;
+    justify-content: center;
+    align-items: center;
+    margin-top: 25px;
+    gap: 8px;
+    border-radius: 32px;
+    background: #BCFF5E;
+    color: #1C1C1E;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+}
+
+.varies {
+    display: flex;
+    width: calc(60% - 80px * 0.6);
+    flex-direction: column;
+    gap: 12px;
+}
+
+.awkward h6 {
+    width: 504px;
+    color:  #1C1C1E;
+    font-size: 24px;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: 0.12px;
+}
+
+.adjust {
+    display: flex;
+    padding: 12px 0px;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.adjust1 {
+    display: flex;
+    width: 699px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.adjust1 h6 {
+    color: #1C1C1E;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0.1px;
+}
+
+.adjust2 {
+    color: #636366;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+}
+
+.perfect {
+    display: flex;
+    width: 699px;
+    padding: 12px 0px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.perfect h6 {
+    color:  #1C1C1E;
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 28px;
+    letter-spacing: 0.1px;
+}
+
+.page2 {
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 120px;
+    padding-bottom: 80px;
+    background: #F9F9FB;
+}
+
+.program_html {
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+}

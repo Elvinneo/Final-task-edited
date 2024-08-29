@@ -17,7 +17,7 @@ class ProgramsAdmin(admin.ModelAdmin):
     
 @admin.register(Trainer)
 class TrainersAdmin(admin.ModelAdmin):
-    list_display = ( 'name', 'surname','classes')
+    list_display = ( 'name', 'surname','position')
     
 @admin.register(Contact)
 class ContactsAdmin(admin.ModelAdmin):
@@ -30,5 +30,5 @@ class ContactMessageAdmin(admin.ModelAdmin):
     
 @admin.register(Blog)
 class BlogAdmin(admin.ModelAdmin):
-    list_display = ('title', 'media', 'classes','created_at', )
-    search_fields = ('title', 'classes', 'created_at')
+    list_display = ('title', 'media', 'category','created_at', )
+    search_fields = ('title', 'category', 'created_at')

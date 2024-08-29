@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block navbar%}
+
+<div class="container">
+    {% include "pieces/navbar_white.html" %}
+</div>
+
+{% endblock %}
+
+{% block body %}
+
+{% include "pieces/drop_black.html" %}
+
+<div class="container">
+    <div class="likeness">
+        <div class="Range">
+            <div class="outpost">
+                <div class="outpost1">
+                    <button>
+                        <p>Programs</p>
+                    </button>
+                </div>
+                <div class="outpost2">
+                    <h6>Browse Our Available
+                        <br>
+                        Programs
+                    </h6>
+                </div>
+            </div>
+        <div class="program program_html">
+                <div class="selections">
+                {% for program in programs%}
+                {% if forloop.counter == 2 %}
+                <div class="selection" id="selection1">
+                    <i><img src="{{program.icon.url}}" alt=""></i>
+                    <h3>{{program.name}}</h3>
+                    <p>{{program.explanation|safe}}</p>
+                    <div class="option">
+                        <span>Learn more</span>
+                        <a href="{% url 'programdetail' program.id %}"><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                    </div>
+                </div>
+                {% else %}
+                <div class="selection">
+                    <i><img src="{{program.icon.url}}" alt=""></i>
+                    <h3>{{program.name}}</h3>
+                    <p>{{program.explanation|safe}}</p>
+                    <div class="option">
+                        <span>Learn more</span>
+                        <a href="{% url 'programdetail' program.id %}"><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor%}
+            </div>
+        </div>
+        </div>
+    </div>
+</div>
+<div class="container">
+    <div class="pioneer">
+        <div class="clump">
+            <div class="clump1">
+                <h3>FAQ<span>s</span></h3>
+            </div>
+            <div class="clump2">
+                <p>Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet non
+                    malesuada.</p>
+            </div>
+            <button><a href="{% url 'programdetail' 2 %}">Book a Class</a></button>
+        </div>
+        <div class="varies">
+            <h3>Maybe your question is have been answered, check this out!</h3>
+            <div class="introduction">
+                <div class="introduction_col open">
+                    <div class="accordion_header">
+                        <h4>
+                            1.1 Our Terms & Conditions
+                        </h4><i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <p>This place is reserved for you to put some text content that you think would make sense here.</p>
+                </div>
+                <div class="introduction_col">
+                    <div class="accordion_header">
+                        <h4>
+                            1.2 Collection of personal data
+                        </h4><i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <p>Here you can put any text that you think would be suitable and relevant to this particular
+                        section of the website.</p>
+                </div>
+                <div class="introduction_col">
+                    <div class="accordion_header">
+                        <h4>
+                            1.3 Purpose of collection of personal data
+                        </h4><i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <p>Here you can put any text that you think would be suitable and relevant to this particular
+                        section of the website.</p>
+                </div>
+                <div class="introduction_col">
+                    <div class="accordion_header">
+                        <h4>
+                            1.4 Usage of your personal data
+                        </h4><i class="fa-solid fa-angle-down"></i>
+                    </div>
+                    <p>Here you can put any text that you think would be suitable and relevant to this particular
+                        section of the website.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</section>
+
+{% endblock %}
+
+{% block review %}
+
+{% include "pieces/review.html" %}
+
+{% endblock %}

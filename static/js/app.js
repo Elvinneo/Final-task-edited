@@ -1,15 +1,65 @@
 
-// dropdown menu
-
 let menu = document.querySelector(".drop").childNodes[1]
 let dropmenu = document.getElementById("dropmenu")
 let nav = document.querySelector("nav")
 let test = true
+let overlays = document.querySelectorAll(".overlay")
+let closeoverlays = document.querySelectorAll(".close")
+let signupbuttons = document.querySelectorAll(".signupButton")
+let loginbuttons = document.querySelectorAll(".loginButton")
+let signupOverlay = document.getElementById("signupOverlay")
+let signinOverlay = document.getElementById("signinOverlay")
+let confirmOverlay = document.getElementById("confirmOverlay")
+let securityOverlay = document.getElementById("securityOverlay")
+let securityContinue = document.getElementById("securityContinue")
+let forgotoverlay = document.getElementById("forgotOverlay")
+let forgotVerify = document.getElementById("forgotVerifyOverlay")
+let newPasswordOverlay = document.getElementById("newPasswordOverlay")
+let successOverlay = document.getElementById("successOverlay")
+let poster = document.getElementById("poster")
+let mailto = document.getElementById("mailto")
+let confirmedemail = document.getElementById("confirmedemail")
+let confirmedphone = document.getElementById("confirmedphone")
+let passwordfield = document.getElementById("passwordlogin")
+let usernamefield = document.getElementById("usernamelogin")
+let buttoncontinue = document.getElementById("confirmContinue")
+let forgotmailarea = document.getElementById("forgotmailarea")
+let pass = document.querySelectorAll(".pass")
+let globalemail
+let resendbutton = document.getElementById("resend")
+let path = window.location.pathname;
+let page = path.split("/")
+let activeClass
+let articleoptions = document.getElementById("articleoptions")
+let testedusers = [];
+let eye = document.querySelectorAll('.eye')
+let eye1 = document.querySelectorAll('.eye1')
+let arrows = document.getElementById("arrows")
+let arrowleft = document.getElementById("arrowleft")
+let arrowright = document.getElementById("arrowright")
+let happyClientsCount = 2
+let startcount = 1
+let passes = document.querySelectorAll(".pass")
+let next = document.getElementById("forgotnext")
+let characterverifies = document.querySelectorAll(".characterverify")
+let verifycode = []
+let pause = document.getElementById("pausebutton")
+let play = document.getElementById("playbutton")
+let video = document.getElementById("myvideo")
+let wishlist = ["basic"]
+let addtocart = document.querySelector("#addtocart")
+let months = document.getElementById("months");
+let priceElement = document.getElementById("price");
+let total = document.getElementById("total");
+let price
+let updater = document.getElementById("profileUpdater")
+let changebutton = document.getElementById("changephoto")
+let profilicon = document.querySelector(".profiles");
+
 
 if (menu) {
     menu.addEventListener('click', openMenu)
 }
-
 
 document.querySelectorAll(".selection").forEach(selected =>
     selected.addEventListener('click', idadder)
@@ -26,6 +76,7 @@ function idadder(e) {
         }
     });
 }
+
 function openMenu() {
     dropmenu.classList.toggle("Show")
     let configElement = document.getElementById('config-data');
@@ -47,16 +98,12 @@ function openMenu() {
 
 }
 
-
 window.addEventListener("resize", resize)
-
 function resize() {
     if (window.innerWidth > 1000) {
         dropmenu.classList.remove("Show")
     }
 }
-
-let testedusers = [];
 
 document.addEventListener('DOMContentLoaded', function () {
     const token = 'bvmVNBMBMHB24512vbnmmm45vbgfhvn53VGBHJbjghj275fgcgvnf';
@@ -86,9 +133,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 //article option buttons
-
-let articleoptions = document.getElementById("articleoptions")
 if (articleoptions) {
+    articleoptions.childNodes[1].classList.add("active")
     articleoptions.addEventListener("click", addClass)
 }
 
@@ -100,12 +146,32 @@ function addClass(e) {
     }
     e.preventDefault()
     e.target.classList.add("active")
+    activeClass = document.getElementsByClassName("active")[0].textContent
+
 }
+
+// blog category filtration
+
+document.addEventListener('DOMContentLoaded', function () {
+    const categoryLinks = document.querySelectorAll('#articleoptions a');
+    const cards = document.querySelectorAll('.topcard .card');
+    categoryLinks.forEach(link => {
+        link.addEventListener('click', function (event) {
+            event.preventDefault();
+            const category = this.getAttribute('data-category');
+            cards.forEach(card => {
+                if (category === 'all' || card.getAttribute('data-category') === category) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+});
 
 // eyes
 
-eye = document.querySelectorAll('.eye')
-eye1 = document.querySelectorAll('.eye1')
 if (eye) {
     eye.forEach(eye => { eye.addEventListener("mousedown", textviewer) })
     eye.forEach(eye => { eye.addEventListener("mouseup", passwordviewer) })
@@ -141,13 +207,6 @@ function addAndRemoveClass(e) {
 }
 
 // Happy client's comments
-
-let arrows = document.getElementById("arrows")
-let arrowleft = document.getElementById("arrowleft")
-let arrowright = document.getElementById("arrowright")
-let happyClientsCount = 2
-let startcount = 1
-
 
 if (arrows) {
     arrowleft.addEventListener("click", less)
@@ -206,34 +265,6 @@ function more() {
     }
 }
 
-// Login and Signup buttons overlays
-
-let overlays = document.querySelectorAll(".overlay")
-let closeoverlays = document.querySelectorAll(".close")
-let signupbuttons = document.querySelectorAll(".signupButton")
-let loginbuttons = document.querySelectorAll(".loginButton")
-let signupOverlay = document.getElementById("signupOverlay")
-let signinOverlay = document.getElementById("signinOverlay")
-let confirmOverlay = document.getElementById("confirmOverlay")
-let securityOverlay = document.getElementById("securityOverlay")
-let securityContinue = document.getElementById("securityContinue")
-let forgotoverlay = document.getElementById("forgotOverlay")
-let forgotVerify = document.getElementById("forgotVerifyOverlay")
-let newPasswordOverlay = document.getElementById("newPasswordOverlay")
-let successOverlay = document.getElementById("successOverlay")
-let poster = document.getElementById("poster")
-let mailto = document.getElementById("mailto")
-let confirmedemail = document.getElementById("confirmedemail")
-let confirmedphone = document.getElementById("confirmedphone")
-let passwordfield = document.getElementById("passwordlogin")
-let usernamefield = document.getElementById("usernamelogin")
-let buttoncontinue = document.getElementById("confirmContinue")
-let forgotmailarea = document.getElementById("forgotmailarea")
-let pass = document.querySelectorAll(".pass")
-let globalemail
-let resendbutton = document.getElementById("resend")
-
-
 function buttonhider() {
     document.addEventListener('DOMContentLoaded', function () {
         let configElement = document.getElementById('config-data');
@@ -251,10 +282,6 @@ function buttonhider() {
 }
 
 buttonhider()
-
-var path = window.location.pathname;
-var page = path.split("/")
-
 
 if (signupbuttons) {
     signupbuttons.forEach(signupbutton => {
@@ -301,7 +328,6 @@ function login() {
     document.getElementById("toconfirm").addEventListener("click", confirmaccount)
     document.getElementById("forgotpassword").addEventListener("click", iforgotpassword)
 }
-
 
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function (event) {
@@ -371,8 +397,8 @@ function testbuttons() {
 
 if (forgotmailarea) {
     forgotmailarea.addEventListener("change", testmailfields)
-
 }
+
 function testmailfields() {
     test = false
     for (i = 1; i <= testedusers.length - 1; i++) {
@@ -398,8 +424,6 @@ function confirmaccount() {
 }
 
 // send email
-
-
 function verificationCodeSender(form) {
     if (document.getElementById("getcodebyphone").checked) {
         mailto.innerText = testedusers[i].phone
@@ -533,11 +557,6 @@ function verifypass() {
     closer()
 }
 
-let passes = document.querySelectorAll(".pass")
-let next = document.getElementById("forgotnext")
-let characterverifies = document.querySelectorAll(".characterverify")
-let verifycode = []
-
 if (characterverifies) {
     characterverifies.forEach(characterverify => { characterverify.addEventListener('change', changetype) })
 }
@@ -568,10 +587,6 @@ function passwordviewer(e) {
     e.target.parentElement.nextElementSibling.nextElementSibling.type = "password"
 }
 
-let pause = document.getElementById("pausebutton")
-let play = document.getElementById("playbutton")
-let video = document.getElementById("myvideo")
-
 if (play && pause) {
     play.addEventListener("click", () => {
         play.style.display = "none"
@@ -598,8 +613,7 @@ document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
 });
 
 //add to cart
-let wishlist = ["basic"]
-let addtocart = document.querySelector("#addtocart")
+
 if (addtocart) {
     addtocart.addEventListener("click", checkcart)
 }
@@ -732,7 +746,7 @@ function changer() {
 }
 
 // profiles
-let profilicon = document.querySelector(".profiles");
+
 if (profilicon) {
     profilicon.addEventListener("click", toggledrop);
 }
@@ -763,8 +777,6 @@ function toggledrop() {
     }
 }
 
-let updater = document.getElementById("profileUpdater")
-let changebutton = document.getElementById("changephoto")
 
 if (updater && changephoto) {
     changephoto.addEventListener("click", changeprofilephoto)
@@ -869,13 +881,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 });
 
-
 // prices calculater
-
-let months = document.getElementById("months");
-let priceElement = document.getElementById("price");
-let total = document.getElementById("total");
-let price
 
 if (months) {
     price = parseFloat(priceElement.textContent.replace('$', ''));
@@ -897,48 +903,126 @@ function calculate() {
 
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('contactform');
-    form.addEventListener('submit', function (event) {
-        event.preventDefault();
-        const formData = new FormData(form);
-        fetch('/contact/', {
-            method: 'POST',
-            body: formData,
-            headers: {
-                'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
-            }
-        })
-            .then(response => response.json())
-            .then(data => {
-                if (data.success) {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success',
-                        text: data.message,
-                    })
-                        .then(() => {
-                            form.reset(); 
-                        });
-                } else {
-                    let errorMessages = '';
-                    for (const [field, messages] of Object.entries(data.errors)) {
-                        messages.forEach(error => {
-                            errorMessages += error + '<br>';
-                        });
-                    }
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        html: errorMessages,
-                    });
+    if (form) {
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            const formData = new FormData(form);
+            fetch('/contact/', {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
                 }
             })
-            .catch(error => {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Error',
-                    text: 'An unexpected error occurred.',
+                .then(response => response.json())
+                .then(data => {
+                    if (data.success) {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Success',
+                            text: data.message,
+                        })
+                            .then(() => {
+                                form.reset();
+                            });
+                    } else {
+                        let errorMessages = '';
+                        for (const [field, messages] of Object.entries(data.errors)) {
+                            messages.forEach(error => {
+                                errorMessages += error + '<br>';
+                            });
+                        }
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Oops...',
+                            html: errorMessages,
+                        });
+                    }
+                })
+                .catch(error => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error',
+                        text: 'An unexpected error occurred.',
+                    });
                 });
+        })
+    };
+});
+
+
+//blog category accordions
+
+document.addEventListener('DOMContentLoaded', function () {
+    const headers = document.querySelectorAll('.accordion-header');
+    headers.forEach(header => {
+        header.addEventListener('click', function () {
+            const item = this.parentElement;
+            const body = item.querySelector('.accordion-body');
+            document.querySelectorAll('.accordion-item.active .accordion-body').forEach(openBody => {
+                if (openBody !== body) {
+                    openBody.classList.remove('open');
+                    setTimeout(() => {
+                        openBody.style.maxHeight = '0';
+                        openBody.style.opacity = '0';
+                    }, 500);
+                    item.classList.remove('active');
+                }
             });
+            if (body.classList.contains('open')) {
+                body.classList.remove('open');
+                setTimeout(() => {
+                    body.style.maxHeight = '0';
+                    body.style.opacity = '0';
+                }, 500);
+                item.classList.remove('active');
+            } else {
+                body.style.maxHeight = body.scrollHeight + 'px';
+                body.style.opacity = '1';
+                body.classList.add('open');
+                item.classList.add('active');
+            }
+        });
+    });
+});
+
+
+
+
+
+
+
+
+//Mirqafar js kodlar
+
+const lists = [...document.querySelectorAll(".introduction_col")];
+lists.map((li) => {
+    const p = li.querySelector("p");
+    const icon = li.querySelector(".fa-solid");
+    if (li.classList.contains("open")) {
+        p.style.height = p.scrollHeight + "px";
+        icon.classList.remove("fa-angle-down");
+        icon.classList.add("fa-angle-up");
+    }
+    li.querySelector(".accordion_header").addEventListener("click", () => {
+        if (p.style.height && p.style.height !== "0px") {
+            p.style.height = 0;
+            icon.classList.remove("fa-angle-up");
+            icon.classList.add("fa-angle-down");
+            return;
+        }
+        lists.forEach((otherLi) => {
+            if (otherLi !== li) {
+                const otherP = otherLi.querySelector("p");
+                const otherIcon = otherLi.querySelector(".fa-solid");
+                otherP.style.height = 0;
+                otherIcon.classList.remove("fa-angle-up");
+                otherIcon.classList.add("fa-angle-down");
+            }
+        });
+        p.style.height = p.scrollHeight + "px";
+        icon.classList.remove("fa-angle-down");
+        icon.classList.add("fa-angle-up");
     });
 });

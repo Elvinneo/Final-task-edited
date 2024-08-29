@@ -26,18 +26,19 @@
             <div class="newsimage"><img src="{{ lastblog.media.url }}" alt=""></div>
             <div class="newscontents">
                 <div class="time">
-                    <span id="titlespan">{{ lastblog.classes }}</span>
+                    <span id="titlespan">{{ lastblog.category }}</span>
                     <span id="titletime">{{ lastblog.created_at|date:"M. d, Y"}}</span>
                 </div>
                 <div class="newsheader">
                     <p>{{lastblog.title}}</p>
                 </div>
                 <div class="newscontent">
-                    <p>{{ lastblog.contents|safe|truncatewords:10}}</p>
+                    <p>{{ lastblog.contents|safe|truncatewords:50}}</p>
                 </div>
                 <div class="option">
                     <span id="more">Read More</span>
-                    <a href="{% if blog.id %}{% url 'blogdetail' blog.id %}{% else %}{% url 'blogdetail' last_blog_id %}{% endif %}">
+                    <a
+                        href="{% if blog.id %}{% url 'blogdetail' blog.id %}{% else %}{% url 'blogdetail' last_blog_id %}{% endif %}">
                         <img src="{% static 'media/arrow-right.svg' %}" alt="">
                     </a>
                 </div>
@@ -54,32 +55,29 @@
                     <p id="article">{{ blog.title }}</p>
                 </div>
             </div>
-
             {% endfor %}
         </div>
     </div>
     <div class="topiccards">
         <h3>Topic Match For You</h3>
         <ul id="articleoptions">
-            <a href="#">All</a>
-            <a href="#">Fitness</a>
-            <a href="#">Health</a>
-            <a href="#">Recipes</a>
-        </ul>
+            <a href="#" data-category="all">All</a>
+            <a href="#" data-category="fitness">Fitness</a>
+            <a href="#" data-category="health">Health</a>
+            <a href="#" data-category="recipes">Recipes</a>
+        </div>
     </div>
     <div class="topcard">
-        {% for blog in blogs%}
-        <div class="card">
+        {% for blog in blogs %}
+        <div class="card" data-category="{{ blog.category|lower }}">
             <div class="cardimage">
                 <img src="{{ blog.media.url }}" alt="">
             </div>
             <div class="cardbody">
                 <div class="carddate">
-                    <span id="cardtitle">{{blog.classes}}</span>
-                    <span id="cardtime">{{ blog.created_at|date:"M. d, Y" }}</span>
+                    <h2>{{ blog.category }}</h2> {{ blog.created_at|date:"M. d, Y" }}
                 </div>
-                <h2>{{ blog.title }}</h2>
-                <p >{{blog.contents|safe|truncatewords:5}}</p>
+                <p>{{ blog.title }}</p>
                 <div class="cardfooter option">
                     <span id="more">Read More</span>
                     <a href="{% if blog.id %}{% url 'blogdetail' blog.id %}{% else %}{% url 'blogdetail' last_blog_id %}{% endif %}">
@@ -90,6 +88,7 @@
         </div>
         {% endfor %}
     </div>
+    
 </div>
 
 

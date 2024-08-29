@@ -13,7 +13,6 @@ class Plan(models.Model):
     content=RichTextField(max_length=500,verbose_name='Məlumat',default='')
     about=RichTextField(max_length=1000,verbose_name='Haqqında',default='')
     istheright=RichTextField(max_length=1000,verbose_name='Niye bu plan?',default='')
-
     
 class Program(models.Model):
     name = models.CharField(max_length=100,verbose_name='Program adı')
@@ -70,7 +69,6 @@ class PasswordResetCode(models.Model):
     def is_valid(self):
         return timezone.now() <= self.expired_at
 
-
 class Sponsore(models.Model):
     name = models.CharField(max_length=100,verbose_name="Sponsor adı")
     email = models.EmailField(max_length=100,verbose_name="Email")
@@ -88,7 +86,7 @@ class Trainer(models.Model):
     photo=models.FileField()
     email = models.EmailField(max_length=100,verbose_name='Email')
     phone = models.CharField(max_length=20,verbose_name='Telefon')
-    classes=models.CharField(max_length=100,verbose_name='Vəzifəsi')
+    position=models.CharField(max_length=100,verbose_name='Vəzifəsi',default='')
     facebook=models.CharField(max_length=100,verbose_name='Facebook')
     linkedin=models.CharField(max_length=100,verbose_name='Linkedin')
     twitter=models.CharField(max_length=100,verbose_name='twitter')
@@ -110,10 +108,20 @@ class Contact(models.Model):
     
 class Blog(models.Model):
     title = models.CharField(max_length=100,verbose_name='Başlıq')
-    contents = RichTextField(max_length=300,verbose_name='Proqram açıqlaması')
+    contents = RichTextField(max_length=1800,verbose_name='Proqram açıqlaması')
     media  = models.ImageField(upload_to='blog',verbose_name='Media')
     created_at = models.DateTimeField(auto_now_add=True,verbose_name='Yaradılma tarixi')
-    classes =models.CharField(max_length=100,verbose_name='Mövzu')
+    category = models.CharField(max_length=100,verbose_name='Mövzu',default='')
+    author = models.ForeignKey(Trainer,on_delete=models.CASCADE,default='')
+    @property
+    def author_name(self):
+        return self.author.name  + ' ' + self.author.surname
+    @property
+    def author_position(self):
+        return self.author.position
+
+   
+    
 
 
     
