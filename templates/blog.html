@@ -23,52 +23,39 @@
     </div>
     <div class="featurednews">
         <div class="newsleft">
-            <div class="newsimage"><img src="{% static 'media/newsimage1.png' %}" alt=""></div>
+            <div class="newsimage"><img src="{{ lastblog.media.url }}" alt=""></div>
             <div class="newscontents">
                 <div class="time">
-                    <span id="titlespan">Featured</span>
-                    <span id="titletime">Nov 22, 2022</span>
+                    <span id="titlespan">{{ lastblog.classes }}</span>
+                    <span id="titletime">{{ lastblog.created_at|date:"M. d, Y"}}</span>
                 </div>
                 <div class="newsheader">
-                    <p>The interesting mental health benefits of exercise</p>
+                    <p>{{lastblog.title}}</p>
                 </div>
                 <div class="newscontent">
-                    <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
+                    <p>{{ lastblog.contents|safe|truncatewords:10}}</p>
                 </div>
                 <div class="option">
                     <span id="more">Read More</span>
-                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                    <a href="{% if blog.id %}{% url 'blogdetail' blog.id %}{% else %}{% url 'blogdetail' last_blog_id %}{% endif %}">
+                        <img src="{% static 'media/arrow-right.svg' %}" alt="">
+                    </a>
                 </div>
             </div>
         </div>
         <div class="newsright">
+            {% for blog in blogs|slice:":3"%}
             <div class="article">
                 <div class="articleimage">
-                    <img src="{% static 'media/articleimage1.png' %}" alt="">
+                    <img src="{{blog.media.url }}" alt="">
                 </div>
                 <div class="articlecontent">
-                    <p id="articletime">Nov 22, 2022</p>
-                    <p id="article">The interesting mental health benefits of exercise</p>
+                    <p id="articletime">{{ blog.created_at|date:"M. d, Y" }}</p>
+                    <p id="article">{{ blog.title }}</p>
                 </div>
             </div>
-            <div class="article">
-                <div class="articleimage">
-                    <img src="{% static 'media/articleimage2.png' %}" alt="">
-                </div>
-                <div class="articlecontent">
-                    <p id="articletime">Nov 22, 2022</p>
-                    <p id="article">The interesting mental health benefits of exercise</p>
-                </div>
-            </div>
-            <div class="article">
-                <div class="articleimage">
-                    <img src="{% static 'media/articleimage3.png' %}" alt="">
-                </div>
-                <div class="articlecontent">
-                    <p id="articletime">Nov 22, 2022</p>
-                    <p id="article">The interesting mental health benefits of exercise</p>
-                </div>
-            </div>
+
+            {% endfor %}
         </div>
     </div>
     <div class="topiccards">
@@ -81,108 +68,27 @@
         </ul>
     </div>
     <div class="topcard">
+        {% for blog in blogs%}
         <div class="card">
             <div class="cardimage">
-                <img src="{% static 'media/cardimage1.png' %}" alt="">
+                <img src="{{ blog.media.url }}" alt="">
             </div>
             <div class="cardbody">
                 <div class="carddate">
-                    <span id="cardtitle">Fitness</span>
-                    <span id="cardtime">Nov 22, 2022</span>
+                    <span id="cardtitle">{{blog.classes}}</span>
+                    <span id="cardtime">{{ blog.created_at|date:"M. d, Y" }}</span>
                 </div>
-                <h2>The 5 effective fitness morning routines you should follow</h2>
-                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
+                <h2>{{ blog.title }}</h2>
+                <p >{{blog.contents|safe|truncatewords:5}}</p>
                 <div class="cardfooter option">
                     <span id="more">Read More</span>
-                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
+                    <a href="{% if blog.id %}{% url 'blogdetail' blog.id %}{% else %}{% url 'blogdetail' last_blog_id %}{% endif %}">
+                        <img src="{% static 'media/arrow-right.svg' %}" alt="">
+                    </a>
                 </div>
             </div>
         </div>
-        <div class="card">
-            <div class="cardimage">
-                <img src="{% static 'media/cardimage2.png' %}" alt="">
-            </div>
-            <div class="cardbody">
-                <div class="carddate">
-                    <span id="cardtitle">Fitness</span>
-                    <span id="cardtime">Nov 22, 2022</span>
-                </div>
-                <h2>The 5 effective fitness morning routines you should follow</h2>
-                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
-                <div class=" option">
-                    <span id="more">Read More</span>
-                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="cardimage">
-                <img src="{% static 'media/cardimage3.png' %}" alt="">
-            </div>
-            <div class="cardbody">
-                <div class="carddate">
-                    <span id="cardtitle">Fitness</span>
-                    <span id="cardtime">Nov 22, 2022</span>
-                </div>
-                <h2>The 5 effective fitness morning routines you should follow</h2>
-                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
-                <div class="cardfooter option">
-                    <span id="more">Read More</span>
-                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="cardimage">
-                <img src="{% static 'media/cardimage4.png' %}" alt="">
-            </div>
-            <div class="cardbody">
-                <div class="carddate">
-                    <span id="cardtitle">Fitness</span>
-                    <span id="cardtime">Nov 22, 2022</span>
-                </div>
-                <h2>The 5 effective fitness morning routines you should follow</h2>
-                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
-                <div class="cardfooter option">
-                    <span id="more">Read More</span>
-                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="cardimage">
-                <img src="{% static 'media/cardimage5.png' %}" alt="">
-            </div>
-            <div class="cardbody">
-                <div class="carddate">
-                    <span id="cardtitle">Fitness</span>
-                    <span id="cardtime">Nov 22, 2022</span>
-                </div>
-                <h2>The 5 effective fitness morning routines you should follow</h2>
-                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
-                <div class="cardfooter option">
-                    <span id="more">Read More</span>
-                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
-                </div>
-            </div>
-        </div>
-        <div class="card">
-            <div class="cardimage">
-                <img src="{% static 'media/cardimage6.png' %}" alt="">
-            </div>
-            <div class="cardbody">
-                <div class="carddate">
-                    <span id="cardtitle">Fitness</span>
-                    <span id="cardtime">Nov 22, 2022</span>
-                </div>
-                <h2>The 5 effective fitness morning routines you should follow</h2>
-                <p>Suspendisse feugiat scelerisque et, viverra urna imperdiet non malesuada...</p>
-                <div class="cardfooter option">
-                    <span id="more">Read More</span>
-                    <a href=""><img src="{% static 'media/arrow-right.svg' %}" alt=""></a>
-                </div>
-            </div>
-        </div>
+        {% endfor %}
     </div>
 </div>
 

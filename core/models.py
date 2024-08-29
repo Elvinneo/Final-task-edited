@@ -92,3 +92,28 @@ class Trainer(models.Model):
     facebook=models.CharField(max_length=100,verbose_name='Facebook')
     linkedin=models.CharField(max_length=100,verbose_name='Linkedin')
     twitter=models.CharField(max_length=100,verbose_name='twitter')
+    
+class ContactMessage(models.Model):
+    full_name = models.CharField(max_length=100)
+    email = models.EmailField()
+    phone = models.CharField(max_length=15, blank=True, null=True)
+    title = models.CharField(max_length=100, blank=True, null=True)
+    message = models.TextField()
+
+    def __str__(self):
+        return f"{self.full_name} - {self.title}"
+
+class Contact(models.Model):
+    phone = models.CharField(max_length=20,verbose_name='Telefon')
+    email = models.EmailField(max_length=100,verbose_name='Email')
+    address  = models.CharField(max_length=100,verbose_name='Ünvan')
+    
+class Blog(models.Model):
+    title = models.CharField(max_length=100,verbose_name='Başlıq')
+    contents = RichTextField(max_length=300,verbose_name='Proqram açıqlaması')
+    media  = models.ImageField(upload_to='blog',verbose_name='Media')
+    created_at = models.DateTimeField(auto_now_add=True,verbose_name='Yaradılma tarixi')
+    classes =models.CharField(max_length=100,verbose_name='Mövzu')
+
+
+    

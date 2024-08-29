@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Sponsore,Plan,Program,Trainer
+from .models import Sponsore,Plan,Program,Trainer,ContactMessage,Contact,Blog
 admin.site.register
 
 
@@ -18,3 +18,17 @@ class ProgramsAdmin(admin.ModelAdmin):
 @admin.register(Trainer)
 class TrainersAdmin(admin.ModelAdmin):
     list_display = ( 'name', 'surname','classes')
+    
+@admin.register(Contact)
+class ContactsAdmin(admin.ModelAdmin):
+    list_display = ( 'address', 'email','phone')
+    
+@admin.register(ContactMessage)
+class ContactMessageAdmin(admin.ModelAdmin):
+    list_display = ('full_name', 'email', 'phone', 'title', 'message')
+    search_fields = ('full_name', 'email', 'title')
+    
+@admin.register(Blog)
+class BlogAdmin(admin.ModelAdmin):
+    list_display = ('title', 'media', 'classes','created_at', )
+    search_fields = ('title', 'classes', 'created_at')

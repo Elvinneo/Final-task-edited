@@ -41,7 +41,8 @@
 
 
 #comheadh6 {
-    width: 70%;
+
+    margin: 30px auto;
     color: #636366;
     font-size: 16px;
     font-weight: 400;
@@ -63,7 +64,7 @@
     flex-direction: column;
     justify-content: center;
     align-items: flex-end;
-    gap: 48px;
+    gap: 16px;
 }
 
 .input-row {

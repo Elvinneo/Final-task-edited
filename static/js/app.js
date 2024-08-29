@@ -305,7 +305,7 @@ function login() {
 
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function (event) {
-        if (form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm" || form.id === 'signupmailform') {
+        if (form.id === 'contactform' || form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm" || form.id === 'signupmailform') {
             return;
         }
         event.preventDefault();
@@ -866,22 +866,21 @@ document.addEventListener('DOMContentLoaded', function () {
                 document.querySelector('#bookaclass').submit();
             }
         });
-    } else {
-        console.error('Form not found.');
     }
 });
 
 
 // prices calculater
 
-
 let months = document.getElementById("months");
 let priceElement = document.getElementById("price");
 let total = document.getElementById("total");
+let price
 
-let price = parseFloat(priceElement.textContent.replace('$', ''));
 if (months) {
+    price = parseFloat(priceElement.textContent.replace('$', ''));
     months.addEventListener("change", calculate);
+    calculate();
 }
 
 function calculate() {
@@ -892,5 +891,54 @@ function calculate() {
         total.innerText = ' $ 0';
     }
 }
-calculate();
 
+
+//contact message sent
+
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('contactform');
+    form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(form);
+        fetch('/contact/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success',
+                        text: data.message,
+                    })
+                        .then(() => {
+                            form.reset(); 
+                        });
+                } else {
+                    let errorMessages = '';
+                    for (const [field, messages] of Object.entries(data.errors)) {
+                        messages.forEach(error => {
+                            errorMessages += error + '<br>';
+                        });
+                    }
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        html: errorMessages,
+                    });
+                }
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'An unexpected error occurred.',
+                });
+            });
+    });
+});

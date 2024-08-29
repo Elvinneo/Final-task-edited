@@ -13,7 +13,7 @@ import random
 import string
 import json
 from django.contrib.auth.models import User
-from .forms import SignupForm
+from .forms import SignupForm,ContactMessageForm
 from django.contrib.auth.forms import SetPasswordForm
 from django.conf import settings
 from .forms import ProfilePictureForm
@@ -184,8 +184,19 @@ def about_view(request):
     return render(request,'about.html')
 
 def blog_view(request):
-    user_auth(request)
-    return render(request,'blog.html')
+    lastblog = Blog.objects.last()
+    blogs = Blog.objects.all()
+    if blogs.exists():
+        last_blog_id = blogs.last().id
+    else:
+        last_blog_id = None
+
+    context = {
+        'lastblog': lastblog,
+        'blogs': blogs,
+        'last_blog_id': last_blog_id
+    }
+    return render(request, 'blog.html', context)
 
 def membership_view(request):
     user_auth(request)
@@ -197,17 +208,28 @@ def membership_detail_view(request,plan_id):
     plan = get_object_or_404(Plan, id=plan_id)
     return render(request,'membership_detail.html',{'plan': plan})
 
-def blogdetail_view(request):
+def blogdetail_view(request,blog_id):
     user_auth(request)
-    return render(request,'blogdetail.html')
+    blog = get_object_or_404(Blog, id=blog_id)
+    return render(request,'blogdetail.html',{'blog':blog})
 
 def overlays_view(request):
     user_auth(request)
     return render(request,'overlays.html')
 
 def contact_view(request):
-    user_auth(request)
-    return render(request,'contact.html')
+    contacts=Contact.objects.get()
+    if request.method == 'POST':
+        form = ContactMessageForm(request.POST)
+        if form.is_valid():
+            form.save()
+            response = {'success': True, 'message': 'Your message has been sent successfully!'}
+        else:
+            errors = form.errors.as_json() 
+            response = {'success': False, 'errors': errors}
+        return JsonResponse(response) 
+
+    return render(request, 'contact.html', {'contact':contacts})
 
 def tos_view(request):
     user_auth(request)
