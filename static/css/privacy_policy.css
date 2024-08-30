@@ -1,0 +1,66 @@
+body {
+    font-family: Arial, sans-serif;
+    color: #333;
+    background-color: #f5f5f5;
+}
+
+.privacy-policy {
+    margin: 80px auto;
+}
+
+.privacy-policy h1 {
+    color:  #1C1C1E;
+    font-family: "Noto Sans Hanunoo", sans-serif;
+    font-size: 72px;
+    font-weight: 700;
+    line-height: 80px;
+    letter-spacing: 0.36px;
+    margin-bottom: 20px;
+}
+
+.updated-date {
+    font-size: 14px;
+    color: #777;
+    margin-bottom: 40px;
+}
+
+.privacy-policy h2 {
+    font-size: 28px;
+    margin-bottom: 20px;
+    color: #09080D;
+}
+
+.privacy-policy h3 {
+    font-size: 22px;
+    margin-bottom: 15px;
+    color: #1C1C1E;
+}
+
+.privacy-policy p {
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+    color: #1C1C1E;
+}
+
+.privacy-policy ul {
+    list-style-type: disc;
+    margin-left: 20px;
+    margin-bottom: 20px;
+}
+
+.privacy-policy ul li {
+    list-style: inside;
+    font-size: 16px;
+    color: #1C1C1E;
+    margin-bottom: 10px;
+}
+
+.privacy-policy a {
+    color: #27ae60;
+    text-decoration: none;
+}
+
+.privacy-policy a:hover {
+    text-decoration: underline;
+}

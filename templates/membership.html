@@ -40,9 +40,9 @@
                     {% else %}
                     <div class="plan">
                         <div class="types_planes">
-                            <h2>$0</h2>
+                            <h2>$ {{plan.price}}</h2>
                             <h5>/Month</h5>
-                            <h4>Free plan</h4>
+                            <h4>{{plan.name}}</h4>
                         </div>
                         <div class="plancontent">
                             <p>{{plan.content|safe}}</p>
@@ -65,9 +65,9 @@
                         <i><img src="{% static 'media/info-circle.svg' %}" alt=""></i>
                     </div>
                     <div class="overviewcontent">
-                        <p>1</p>
-                        <p>8</p>
-                        <p>20</p>
+                        <div class="ovcon"><p>1</p></div>
+                        <div class="ovcon"><p>8</p></div>
+                        <div class="ovcon"><p>20</p></div>
                     </div>
                 </li>
                 <li>

@@ -36,33 +36,23 @@
                     {% csrf_token %}
                     <div class="input-row">
                         <label>Full Name</label>
-                        <div class="input-group">
-                            <input type="text" name="full_name" placeholder="What’s your Name?" required>
-                        </div>
+                        <input class="input-group" type="text" name="full_name" placeholder="What’s your Name?" required>
                     </div>
                     <div class="input-row">
                         <label>Email</label>
-                        <div class="input-group">
-                            <input type="email" name="email" placeholder="What’s your Email?" required>
-                        </div>
+                        <input class="input-group" type="email" name="email" placeholder="What’s your Email?" required>
                     </div>
                     <div class="input-row">
                         <label>Phone</label>
-                        <div class="input-group">
-                            <input type="number" name="phone" placeholder="Phone">
-                        </div>
+                        <input class="input-group" type="number" name="phone" placeholder="Phone">
                     </div>
                     <div class="input-row">
                         <label>Input Title</label>
-                        <div class="input-group2">
-                            <input type="text" name="title" placeholder="Message title here">
-                        </div>
+                        <input class="input-group" type="text" name="title" placeholder="Message title here">
                     </div>
                     <div class="input-row">
                         <label>Message</label>
-                        <div class="input-group2">
-                            <input  type="text" name="message" id="textarea" placeholder="Write your message...">
-                        </div>
+                        <textarea class="input-group2" type="textarea" name="message" id="textarea" placeholder="Write your message..."></textarea>
                     </div>
                     <button id="sendmessagebutton" type="submit">Send Message</button>
                 </form>

@@ -1,0 +1,131 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block navbar %}
+
+<div class="container">
+    {% include "pieces/navbar_white.html" %}
+</div>
+
+{% endblock %}
+
+{%  block body %}
+
+{% include 'pieces/drop_black.html' %}
+
+<div class="container">
+    <div class="wire">
+        <div class="tiresome">
+            <div class="messed">
+                <h6>Get your package</h6>
+            </div>
+            <div class="detain">
+                <div class="detain1">
+                    <p>Pay with</p>
+                </div>
+                <div class="detain2">
+                    <i class="fa-regular fa-circle" style="color: #E5E5E7;"></i>
+                    <div class="detain21">
+                        <img src="{%static '/media/XMLID3.png' %}" alt="">
+                        <h6>PayPal</h6>
+                    </div>
+                </div>
+            </div>
+            <div class="detain">
+                <div class="detain2">
+                    <i class="fa-regular fa-circle" style="color: #E5E5E7;"></i>
+                    <div class="detain21">
+                        <img src="{% static  '/media/ApplePay.png' %}">
+                    </div>
+                </div>
+            </div>
+            <div class="feebly">
+                <p>Or using a credit card</p>
+            </div>
+            <form action="" id="paymentform">
+                <div class="loose1">
+                    <div class="obvious">
+                        <h6>Cardholder Name</h6>
+                    </div>
+                    <div class="neat"><input type="text"></div>
+                </div>
+                <div class="loose1">
+                    <div class="obvious">
+                        <h6>Card Number</h6>
+                    </div>
+                    <div class="neat">
+                        <input type="text" placeholder="Ex:  31111 1111 1111 1111">
+                    </div>
+                </div>
+                <div class="secret">
+                    <div class="facilities">
+                        <div class="coral">
+                            <h6>Postal Code</h6>
+                        </div>
+                        <input type="text" placeholder="Postal or ZIP code">
+                    </div>
+                    <div class="facilities">
+                        <div class="coral">
+                            <h6>Expiration</h6>
+                        </div>
+                        <input type="text" placeholder="MM/YY">
+                    </div>
+                    <div class="facilities">
+                        <div class="coral">
+                            <h6>CVV</h6>
+                        </div>
+                        <input type="text">
+                    </div>
+                </div>
+                <div class="thus">
+                    <i class="fa-regular fa-circle" style="color: #E5E5E7;"></i>
+                    <h6>Save card</h6>
+                </div>
+            </form>
+            <button>
+                <h6>Confirm and pay</h6>
+            </button>
+        </div>
+        <div class="aisle">
+            <div class="phase">
+                <h4>$149.00<span>/Month</span></h4>
+            </div>
+            <div class="major">
+                <div class="major1">
+                    <h6>Basic Plan</h6>
+                </div>
+                <div class="major2">
+                    <p>It’s a long estabilished fact that a reader will be distracted by the readable content</p>
+                </div>
+            </div>
+            <div class="includes">
+                <div class="includes1">
+                    <h6>What’s Includes:</h6>
+                </div>
+                <div class="includes2">
+                    <div class="empty"><img src="{% static '/media/checkmark-circle-outline 1.png' %}" alt=""></div>
+                    <h6>8 classes per month</h6>
+                </div>
+                <div class="includes2">
+                    <div class="empty"><img src="{% static '/media/checkmark-circle-outline 1.png' %}" alt=""></div>
+                    <h6>All in basic package</h6>
+                </div>
+                <div class="includes2">
+                    <div class="empty"><img src="{% static '/media/checkmark-circle-outline 1.png' %}" alt=""></div>
+                    <h6>1-on-1 personal trainning</h6>
+                </div>
+            </div>
+            <div class="tad">
+                <div class="tad1">
+                    <h6>Package Duration</h6>
+                </div>
+                <div class="tad2">
+                    <input type="text" placeholder="1 Month">
+                    <i class="fa-solid fa-caret-down"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

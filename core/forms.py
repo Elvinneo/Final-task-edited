@@ -33,3 +33,10 @@ class ContactMessageForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
         fields = ['full_name', 'email', 'phone', 'title', 'message']
+        
+        from django import forms
+
+class FAQForm(forms.Form):
+    full_name = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'placeholder': 'Full Name'}))
+    email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
+    message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Write your message...', 'rows': 7}))

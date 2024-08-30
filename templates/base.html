@@ -71,7 +71,7 @@
                     <div class="form">
                         <form action="">
                             <input id="mailforminput" type="textarea" placeholder="Your email here">
-                            <button>Send</button>
+                            <button id="mailbutton">Send</button>
                         </form>
                     </div>
                 </div>
@@ -93,7 +93,7 @@
                 </ul>
                 <div class="policy">
                     <a href="{% url 'terms' %}"><p>Terms of Service</p></a>
-                    <p>Privacy Policy</p>
+                    <a href="{% url 'privacy_policy' %}"><p>Privacy Policy</p></a>
                 </div>
             </div>
         </div>

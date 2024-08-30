@@ -67,6 +67,7 @@
 }
 
 .outpost {
+    margin-top: 20px;
     display: inline-flex;
     flex-direction: column;
     align-items: center;
@@ -100,10 +101,10 @@
 }
 
 .pioneer {
+    width: 100%;
     display: flex;
     gap: 80px;
-    margin-bottom: 120px;
-    margin-top: 120px;
+    margin: 120px 0;
 }
 
 .clump {
@@ -138,7 +139,7 @@
     letter-spacing: 0.08px;
 }
 
-.clump button {
+.clump button , .introduction button {
     display: flex;
     padding: 16px 40px;
     border: none;
@@ -153,6 +154,10 @@
     font-weight: 500;
     line-height: 24px;
     letter-spacing: 0.08px;
+}
+
+.form{
+    height: 70px;
 }
 
 .varies {

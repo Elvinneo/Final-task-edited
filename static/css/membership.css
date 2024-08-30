@@ -21,17 +21,19 @@
 .overviewinfo {
     display: flex;
     min-width: 35%;
-
     align-items: flex-start;
     gap: 4px;
 }
-
+.ovcon{
+    margin-left: 20px;
+}
 .overviewcontent {
+    margin-left: 50px;
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: flex-start;
-    gap: 32px;
+    gap: 300px;
 }
 
 .overviewcontent i,
@@ -79,7 +81,7 @@
 }
 
 .overview>p {
-    margin: 5% 1%;
+    margin: 5% 2%;
     width: 100%;
     color: #064BB4;
 }

@@ -56,7 +56,6 @@ let updater = document.getElementById("profileUpdater")
 let changebutton = document.getElementById("changephoto")
 let profilicon = document.querySelector(".profiles");
 
-
 if (menu) {
     menu.addEventListener('click', openMenu)
 }
@@ -331,7 +330,7 @@ function login() {
 
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function (event) {
-        if (form.id === 'contactform' || form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm" || form.id === 'signupmailform') {
+        if (form.id === 'faqform' || form.id === 'contactform' || form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm" || form.id === 'signupmailform') {
             return;
         }
         event.preventDefault();
@@ -987,13 +986,44 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-
-
-
-
-
-
-
+faqform = document.getElementById('faqform')
+if (faqform) {
+    document.getElementById('faqform').addEventListener('submit', function (event) {
+        event.preventDefault();
+        var formData = new FormData(this);
+        fetch('/faq/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: data.message,
+                        confirmButtonText: 'OK'
+                    }).then(() => {
+                        document.getElementById('faqform').reset();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: data.message,
+                        confirmButtonText: 'OK'
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            });
+    });
+}
 //Mirqafar js kodlar
 
 const lists = [...document.querySelectorAll(".introduction_col")];

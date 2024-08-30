@@ -1627,6 +1627,12 @@
         right: 30px;
     
     }
+    .pioneer{
+        flex-wrap: wrap;
+    }
+    .clump , .varies{
+        width: 100%;
+    }
     
     
 }

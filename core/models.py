@@ -120,8 +120,20 @@ class Blog(models.Model):
     def author_position(self):
         return self.author.position
 
-   
+class FAQQuestion(models.Model):
+    full_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    message = models.TextField()
+    normalized_message = models.CharField(max_length=255, blank=True, null=True)
+    created_at = models.DateTimeField(auto_now_add=True)
+    count = models.PositiveIntegerField(default=1)
+    def __str__(self):
+        return self.message[:50]
     
+class Answer(models.Model):
+    question = models.ForeignKey(FAQQuestion, on_delete=models.CASCADE, related_name='answers')
+    answer_text = models.TextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
-
-    
+    def __str__(self):
+        return self.answer_text[:50]

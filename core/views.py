@@ -12,9 +12,11 @@ import random
 import string
 import json
 from django.contrib.auth.models import User
-from .forms import SignupForm,ContactMessageForm,ProfilePictureForm
+from .forms import SignupForm,ContactMessageForm,ProfilePictureForm,FAQForm
 from django.contrib.auth.forms import SetPasswordForm,AuthenticationForm
 from django.conf import settings
+import re
+
 
 def signup_view(request):
     if request.method == 'POST':
@@ -261,9 +263,57 @@ def trainers_view(request):
 def programs_view(request):
     user_auth(request)
     programs=Program.objects.all()
-    return render(request,'programs.html',{'programs':programs})
+    faqs = FAQQuestion.objects.prefetch_related('answers').all()
+    seen_messages = set()
+    unique_faqs = []
+    for faq in faqs:
+        if faq.message not in seen_messages:
+            seen_messages.add(faq.message)
+            unique_faqs.append(faq)
+    context={'programs':programs,
+             'faqs':unique_faqs}
+    return render(request,'programs.html',context)
 
 def programdetail_view(request, program_id):
     user_auth(request)
     program = get_object_or_404(Program, id=program_id)
     return render(request, 'programdetail.html', {'program': program})
+
+def privacy_policy_view(request):
+    user_auth(request)
+    return render(request, 'privacy_policy.html')
+
+def payment_view(request):
+    user_auth(request)
+    return render(request, 'payment.html')
+
+def faq_view(request):
+    user_auth(request)
+    faqs = FAQQuestion.objects.prefetch_related('answers').all()
+    seen_messages = set()
+    unique_faqs = []
+
+    for faq in faqs:
+        if faq.message not in seen_messages:
+            seen_messages.add(faq.message)
+            unique_faqs.append(faq)
+
+    if request.method == 'POST':
+        form = FAQForm(request.POST)
+        if form.is_valid():
+            full_name = form.cleaned_data['full_name']
+            email = form.cleaned_data['email']
+            message = form.cleaned_data['message']
+            message = message.lower().strip()
+            normalized_message = re.sub(r'\W+', ' ', message)
+            faq, created = FAQQuestion.objects.get_or_create(
+                email=email,
+                normalized_message=normalized_message,
+                defaults={'full_name': full_name}
+            )
+            if not created:
+                faq.count += 1
+                faq.save()
+            return JsonResponse({'status': 'success', 'message': 'Your question has been submitted successfully.'})
+        return JsonResponse({'status': 'error', 'message': 'There was an error with your submission.'})
+    return render(request, 'FAQ.html', {'faqs': unique_faqs})
