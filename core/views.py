@@ -342,6 +342,11 @@ def wishlist_view(request):
     return JsonResponse({'status': 'success', 'wishlist_items': serializer.data})
 
 
+def wishdelete(request,id):
+    item=Wishlist.objects.get(id=id)
+    item.delete()
+    return JsonResponse({'status': 'success', 'message': 'Plan deleted on the wishlist'})
+
 def payment_view(request, plan_id):
     user_auth(request)
     plan = get_object_or_404(Plan, id=plan_id)

@@ -1,4 +1,3 @@
-
 let menu = document.querySelector(".drop").childNodes[1]
 let dropmenu = document.getElementById("dropmenu")
 let nav = document.querySelector("nav")
@@ -59,6 +58,11 @@ let isAuthenticated = document.querySelector('meta[name="is_authenticated"]').ge
 let faqform = document.getElementById('faqform')
 const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 let wishview = document.getElementById("wishview")
+const result = {};
+let currentIndex = 0;
+let wishdelete = document.getElementById("wishdelete")
+let temporary = {}
+
 
 if (menu) {
     menu.addEventListener('click', openMenu)
@@ -615,10 +619,18 @@ document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
 
 //add to cart
 
+
+
 function checkcart() {
     if (wishlist) {
-        document.querySelector(".red").style.display = 'block'
-        document.getElementById("wishview").disabled = false
+        if (!localStorage.getItem('temporary')) {
+            overlays[9].style.display = 'none';
+            document.querySelector(".red").style.display = 'none'
+            document.getElementById("wishview").disabled = true
+        } else {
+            document.querySelector(".red").style.display = 'block'
+            document.getElementById("wishview").disabled = false
+        }
     }
 
 }
@@ -1037,6 +1049,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.addEventListener('DOMContentLoaded', () => {
+
+    checkcart()
     const addToCartButton = document.getElementById('addtocart');
     if (addToCartButton) {
         addToCartButton.addEventListener('click', testisauth)
@@ -1064,7 +1078,11 @@ document.addEventListener('DOMContentLoaded', () => {
                         text: data.message,
                     });
                 })
-                .then(() => { checkcart() })
+                .then(() => {
+                    temporary[1] = planId
+                    localStorage.setItem('temporary', temporary);
+                    checkcart()
+                })
         }
     }
 });
@@ -1088,20 +1106,22 @@ function wishviewer() {
         .then(data => {
             const wishlistItems = document.getElementById('wishlist-items');
             wishlistItems.innerHTML = '';
-
             if (data.status === 'success') {
+                let startid = 0
                 data.wishlist_items.forEach(item => {
+                    result[startid] = item.id;
+                    startid++
                     const listItem = document.createElement('li');
                     listItem.innerHTML = `
-                    <span id="planidhidden" style="display: none;">${item.plan.id}</span>
-                    <strong>Plan:</strong> ${item.plan.name} <br><br>
-                    <strong>User:</strong> ${item.user.username} <br><br>
-                    <strong>Amount:</strong> $ ${item.amount} <br><br>
-                    <strong>Months:</strong> ${item.months} <br><br>
-                    <strong>Added At:</strong> ${new Date(item.added_at).toLocaleString()}
+                    <span id="planidhidden" style="display: block;">${item.id}</span>
+                    <strong>Plan: </strong> ${item.plan.name} <br><br>
+                    <strong>User: </strong> ${item.user.username} <br><br>
+                    <strong>Amount: </strong> $ ${item.amount} <br><br>
+                    <strong>Months: </strong> ${item.months} <br><br>
+                    <strong>Added At: </strong> ${new Date(item.added_at).toLocaleString()}
                 `;
                     wishlistItems.appendChild(listItem);
-                });
+                }); console.log(result)
 
                 setupSlider();
             } else {
@@ -1128,8 +1148,6 @@ function setupSlider() {
     const items = document.getElementById('wishlist-items');
     const prevBtn = document.getElementById('prev-btn');
     const nextBtn = document.getElementById('next-btn');
-
-    let currentIndex = 0;
     const itemWidth = items.querySelector('li').offsetWidth;
     const itemCount = items.children.length;
 
@@ -1155,9 +1173,50 @@ function setupSlider() {
             moveTo(currentIndex + 1);
         }
     });
-
     updateButtons();
 }
+
+if (wishdelete) {
+    wishdelete.addEventListener('submit', function (event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        wishId = result[currentIndex]
+        formData.append('form_id', this.id);
+        fetch(`/wishdelete/${wishId}/`, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRFToken': csrfToken
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                Swal.fire({
+                    icon: data.status === 'success' ? 'success' : 'error',
+                    title: data.status === 'success' ? 'Success' : 'Error',
+                    text: data.message,
+                });
+            })
+            .then(() => {
+                delete result[currentIndex];
+                if (Object.keys(result).length === 0) {
+                    localStorage.removeItem('temporary');
+                    temporary={}
+                    checkcart()
+
+                }
+            })
+    })
+};
+
+checkcart()
+
+
+
+
+
+
 
 
 
@@ -1209,4 +1268,9 @@ lists.map((li) => {
         icon.classList.add("fa-angle-up");
     });
 });
+
+
+
+
+
 

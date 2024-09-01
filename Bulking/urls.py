@@ -31,6 +31,7 @@ urlpatterns = [
     path('book-class/<int:program_id>/', book_class, name='book_class'),
     path('add_to_wishlist/<int:plan_id>/',add_to_wishlist, name='add_to_wishlist'),
     path('wishlist/', wishlist_view, name='wishlist'),
+    path('wishdelete/<int:id>/', wishdelete, name='wishdelete'),
     path('payment_success/',payment_success, name='payment_success'),
 
     
