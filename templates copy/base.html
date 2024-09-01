@@ -1,0 +1,116 @@
+{% load static %}
+
+{% include "pieces/overlays.html" %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="is_authenticated" content="{{ user.is_authenticated }}">
+    <title>Bulking</title>
+    <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
+    <link rel="shortcut icon" href="{% static '/media/fitness-biceps.ico' %}">
+</head>
+
+<body>
+    {% block navbar %}
+
+    {% endblock %}
+    <div class="status">
+        {% if user.is_authenticated %}
+        <h2>Welcome, {{ user.username }}!</h2>
+        {% endif %}
+    </div>
+
+
+    {% block body %}
+
+
+    {% endblock %}
+
+
+    {% block review %}
+
+
+    {% endblock %}
+
+    {% block getstarted %}
+
+    {% endblock %}
+
+    <div class="mainfooter">
+        <div class="container">
+            <div class="maincontent">
+                <div class="symbol">
+                    <div class="info">
+                        <img src="{% static 'media/heart_white.svg' %}" alt="">
+                        <p>Bulking</p>
+                    </div>
+                    <div class="infocontent">
+                        <p>Get fit, stay healthy, and live life on their terms without fitness being an
+                            obstacle.
+                        </p>
+                    </div>
+                </div>
+                <div class="menus">
+                    <ul id="row1">
+                        <li><a href="{% url 'home' %}">Home</a></li>
+                        <li><a href="{% url 'programs' %}">Programs</a></li>
+                        <li><a href="{% url 'membership' %}">Membership</a></li>
+                    </ul>
+                    <ul id="row2">
+                        <li><a href="{% url 'blog' %}">Blog</a></li>
+                        <li><a href="{% url 'contact' %}">Contact</a></li>
+                        <li><a href="{% url 'about' %}">About us</a></li>
+                    </ul>
+                </div>
+                <div class="mail">
+                    <p>Newsletter</p>
+                    <div class="form">
+                        <form action="">
+                            <input id="mailforminput" type="textarea" placeholder="Your email here">
+                            <button id="mailbutton">Send</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <hr>
+            <div class="social">
+                <p>© 2024 Nguli® Global Inc.</p>
+                <ul>
+                    <li><a target=”_blank” href="https://www.facebook.com/madbulking/"><img
+                                src="{% static 'media/svg.svg' %}" alt=""></a></li>
+                    <li><a target=”_blank” href="https://www.linkedin.com/company/bulking"><img
+                                src="{% static 'media/svg (1).svg' %}" alt=""></a></li>
+                    <li><a target=”_blank” href="https://x.com/bulkingbroo"><img src="{% static 'media/svg (3).svg' %}"
+                                alt=""></a></li>
+                    <li><a target=”_blank” href="https://www.youtube.com/@Bulkingchanel"><img
+                                src="{% static 'media/svg (2).svg' %}" alt=""></a></li>
+                    <li><a target=”_blank” href="https://www.instagram.com/bulkingoficial/"><img
+                                src="{% static 'media/svg (4).svg' %}" alt=""></a></li>
+                </ul>
+                <div class="policy">
+                    <a href="{% url 'terms' %}"><p>Terms of Service</p></a>
+                    <a href="{% url 'privacy_policy' %}"><p>Privacy Policy</p></a>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+
+<script type="application/json" id="config-data">
+    {
+        "is_authenticated": {{ user.is_authenticated|yesno:"true,false" }}
+    }
+</script>
+
+<script>
+    let profile_programId = "{{ user.profile.program_id}}"
+    let programId = "{{ program.id }}";
+</script>
+<script src="{% static 'js/app.js' %}"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</html>

@@ -18,7 +18,7 @@ urlpatterns = [
     path('trainers/', trainers_view,name="trainers"),
     path('programs/', programs_view,name="programs"),
     path('privacy_policy/', privacy_policy_view,name="privacy_policy"),
-    path('payment/', payment_view,name="payment"),
+    path('payment/<int:plan_id>/',payment_view, name='payment'),
     path('faq/',faq_view,name="faq"),
     path('programdetail/<int:program_id>/', programdetail_view, name='programdetail'),
     path('api/users/', user_data, name='user_data'),
@@ -29,6 +29,9 @@ urlpatterns = [
     path('password-change/', password_change, name='password_change'),
     path('update-profile-picture/', update_profile_picture, name='update_profile_picture'),
     path('book-class/<int:program_id>/', book_class, name='book_class'),
+    path('add_to_wishlist/<int:plan_id>/',add_to_wishlist, name='add_to_wishlist'),
+    path('wishlist/', wishlist_view, name='wishlist'),
+    path('payment_success/',payment_success, name='payment_success'),
 
     
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block navbar%}
+
+<div class="container">
+    {% include "pieces/navbar_white.html" %}
+</div>
+
+
+
+{% endblock %}
+
+{% block body %}
+
+{% include "pieces/drop_black.html" %}
+<div class="container">
+    <div class="trainers_all">
+        <div class="come">
+            <div class="comespans">
+                <span id="comespanmeet">Meet</span>
+                <span id="comespanteam" class="let">the Team</span>
+            </div>
+            <div class="trainersheadercontent">
+                <p>OurPersonal Trainers are experienced and highly qualified – and they’re all ontheir own inspiring
+                    journey too. Click our photos to read more.</p>
+            </div>
+        </div>
+        <div class="people">
+            {% for trainer in trainers %}
+            <div class="trainerscard">
+                <div class="picture">
+                    <img src="{{ trainer.photo.url }}" alt="">
+                </div>
+                <div class="name">
+                    <div class="realname">
+                        <h5>{{ trainer.name }} {{ trainer.surname }}</h5>
+                    </div>
+                    <div class="work">
+                        <p>{{ trainer.position }}</p>
+                    </div>
+                </div>
+                <div class="divsocial">
+                    <div class="icon1">
+                        <a href="{{ trainer.facebook }}" target="_blank"><img src="{% static 'media/icon1.png' %}" alt=""></a>
+                    </div>
+                    <div class="icon2">
+                        <a href="{{ trainer.linkedin }}" target="_blank" ><img src="{% static 'media/icon2.png' %}" alt=""></a>
+                    </div>
+                    <div class="icon3">
+                        <a href="{{ trainer.twitter }}" target="_blank"><img src="{% static 'media/icon3.png' %}" alt=""></a>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+<div class="featuredjob">
+    <div class="featuredjobcontent">
+        <div class="titleanddescription">
+            <h5 id="increasetitle">My Core Work Values</h5>
+            <p id="increasebody">Consectetur adipiscing elit. Odio amet egestasolm dignissim eu nunc. Id pulvinar enim
+                volutpat
+                tellus. </p>
+        </div>
+        <div class="jobs">
+            <div class="cardlist">
+                <div class="logoandtitle">
+                    <div class="jobicon"><img src="{% static 'media/fitness-biceps.png' %}" alt=""></div>
+                    <div class="jobtitle">
+                        <h6>Commitment</h6>
+                    </div>
+                </div>
+                <div class="cardcontent">
+                    <p>Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet
+                        non malesuada. Inol massa id tellus natoque augue in et.</p>
+                </div>
+            </div>
+            <div class="cardlist selectedcard">
+                <div class="logoandtitle  selectedcard">
+                    <div class="jobicon  selectedcard"><img src="{% static 'media/heart-checkmark.png' %}" alt=""></div>
+                    <div class="jobtitle  selectedcard">
+                        <h6>Motivation</h6>
+                    </div>
+                </div>
+                <div class="cardcontent">
+                    <p>Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet
+                        non malesuada. Inol massa id tellus natoque augue in et.</p>
+                </div>
+            </div>
+            <div class="cardlist">
+                <div class="logoandtitle">
+                    <div class="jobicon"><img src="{% static 'media/star-shining.png' %}" alt=""></div>
+                    <div class="jobtitle">
+                        <h6>Passion</h6>
+                    </div>
+                </div>
+                <div class="cardcontent">
+                    <p>Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet
+                        non malesuada. Inol massa id tellus natoque augue in et.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script type="application/json" id="config-data">
+    {
+        "is_authenticated": {{ user.is_authenticated|yesno:"true,false" }}
+    }
+</script>
+
+
+{% endblock %}
+
+{% block getstarted %}
+
+{% include "pieces/getstarted.html" %}
+
+{% endblock %}

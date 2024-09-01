@@ -1,0 +1,103 @@
+{% extends "base.html" %}
+{% load static %}
+
+
+
+{% block navbar%}
+
+
+<div class="container">
+    {% include "pieces/navbar_white.html" %}
+</div>
+
+
+{% endblock %}
+
+
+{% block body %}
+
+{% include "pieces/drop_black.html" %}
+
+<div class="container">
+    <div class="contacts">
+
+
+        <div class="come">
+            <div class="comehead">
+                <h1>Let's get</h1>
+                <span class="let"> in touch!</span>
+            </div>
+            <h6 id="comheadh6">Cras tellus ac dui at sed. Suspendisse feugiat scelerisque et, viverra urna imperdiet non
+                malesuada.</h6>
+        </div>
+        <div class="mistake">
+            <div class="window">
+                <form id="contactform" method="post" action="{% url 'contact' %}">
+                    {% csrf_token %}
+                    <div class="input-row">
+                        <label>Full Name</label>
+                        <input class="input-group" type="text" name="full_name" placeholder="What’s your Name?" required>
+                    </div>
+                    <div class="input-row">
+                        <label>Email</label>
+                        <input class="input-group" type="email" name="email" placeholder="What’s your Email?" required>
+                    </div>
+                    <div class="input-row">
+                        <label>Phone</label>
+                        <input class="input-group" type="number" name="phone" placeholder="Phone">
+                    </div>
+                    <div class="input-row">
+                        <label>Input Title</label>
+                        <input class="input-group" type="text" name="title" placeholder="Message title here">
+                    </div>
+                    <div class="input-row">
+                        <label>Message</label>
+                        <textarea class="input-group2" type="textarea" name="message" id="textarea" placeholder="Write your message..."></textarea>
+                    </div>
+                    <button id="sendmessagebutton" type="submit">Send Message</button>
+                </form>
+            </div>
+            <div class="via">
+                <div class="contactinfo">
+                    <div class="contactinfoheader">
+                        <h4>Contact Details</h4>
+                        <div class="contactinfocontent">
+                            <p>Fill up the form and our team will get back to you with in 24 hours.</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="contactcontent">
+                    <div class="fromtel">
+                        <div class="telright">
+                            <div class="telrighttel">
+                                <img src="{% static 'media/call.png' %}" alt="">
+                            </div>
+                        </div>
+                        <div class="telleft">
+                            <h5>{{contact.phone}}</h5>
+                        </div>
+                    </div>
+                    <div class="frommail">
+                        <div class="frommailright">
+                            <div class="telrighttel"><img src="{% static 'media/sms.png' %}" alt=""></div>
+                        </div>
+                        <div class="frommailleft">
+                            <h5>{{contact.email}}</h5>
+                        </div>
+                    </div>
+                    <div class="fromaddress">
+                        <div class="fromaddressright">
+                            <div class="telrighttel"><img src="{% static 'media/location.png' %}" alt=""></div>
+                        </div>
+                        <div class="fromaddressleft">
+                            <h5>{{contact.address}}</h5>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

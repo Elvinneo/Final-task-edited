@@ -116,8 +116,6 @@
     background: #FFF;
 }
 
-
-
 .mistake button {
     padding: 16px 40px;
     border-radius: 24px;
@@ -191,6 +189,14 @@
     font-weight: 400;
     line-height: 24px;
     letter-spacing: 0.08px;
+}
+
+.contactinfocontent{
+    padding: 15px;
+}
+
+.contactinfoheader h4{
+    padding-left: 15px;
 }
 
 .contactcontent {

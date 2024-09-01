@@ -31,6 +31,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'account',
     'core.apps.CoreConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -106,7 +107,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Baku'
 
 USE_I18N = True
 
@@ -120,17 +121,17 @@ AUTHENTICATION_BACKENDS = [
 
 STATIC_URL = 'static/'
 
-
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 STATIC_URL = 'static/'
+
 STATICFILES_DIRS = BASE_DIR / "static",
+
 STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 

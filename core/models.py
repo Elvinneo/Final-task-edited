@@ -37,8 +37,8 @@ class Profile(models.Model):
     email = models.EmailField(blank=True, null=True)
     username = models.CharField(max_length=20, blank=True, null=True)
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
-    program = models.ForeignKey(Program, on_delete=models.SET_NULL, null=True, blank=True, related_name='profiles')
-    plan = models.ForeignKey(Plan, on_delete=models.SET_NULL, null=True, blank=True, related_name='profiles')
+    program = models.ForeignKey('Program', on_delete=models.SET_NULL, null=True, blank=True, related_name='profiles')
+    plan = models.ForeignKey('Plan', on_delete=models.SET_NULL, null=True, blank=True, related_name='profiles')
 
     def get_plan_name(self):
         return self.plan.name if self.plan else "No Plan"
@@ -137,3 +137,28 @@ class Answer(models.Model):
 
     def __str__(self):
         return self.answer_text[:50]
+
+
+class Wishlist(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
+    added_at = models.DateTimeField(auto_now_add=True)
+    amount = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)
+    months = models.PositiveIntegerField(verbose_name="Months",default=1)
+
+    class Meta:
+        unique_together = ('user', 'plan')
+    
+    def __str__(self):
+        return f"{self.user} - {self.plan} added on {self.added_at}"
+    
+    def save(self, *args, **kwargs):
+        if self.plan and self.months:
+            self.amount = self.plan.price * self.months
+        super().save(*args, **kwargs)
+
+class Payment(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    plan = models.ForeignKey(Plan, on_delete=models.CASCADE)
+    amount = models.DecimalField(max_digits=10, decimal_places=2)
+    paid_at = models.DateTimeField(auto_now_add=True)

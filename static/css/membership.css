@@ -21,8 +21,8 @@
 .overviewinfo {
     display: flex;
     min-width: 35%;
-    align-items: flex-start;
-    gap: 4px;
+    align-items: center;
+    gap: 10px;
 }
 .ovcon{
     margin-left: 20px;

@@ -32,6 +32,7 @@
     gap: 32px;
     border-radius: 20px;
     background: #FFF;
+    padding: 30px;
 }
 
 
@@ -176,6 +177,7 @@
     font-weight: 400;
     line-height: 26px;
     letter-spacing: 0.09px;
+    padding: 10px;
 }
 
 .chooseprogram {

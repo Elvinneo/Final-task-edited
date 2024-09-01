@@ -1631,7 +1631,8 @@
         flex-wrap: wrap;
     }
     .clump , .varies{
-        width: 100%;
+        width: 90% !important;
+        margin: 0 auto;
     }
     
     

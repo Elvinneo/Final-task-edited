@@ -1,0 +1,152 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block navbar%}
+
+<div class="container">
+    {% include "pieces/navbar_white.html" %}
+</div>
+
+{% endblock %}
+
+
+{% block body %}
+
+{% include "pieces/drop_black.html" %}
+<div class="container">
+    <div class="progdetail">
+        <div class="programcontent">
+            <div class="contentheader">
+                <div class="persontitle">
+                    <span id="personal">{{program.name}}</span>
+                </div>
+                <p>{{program.explanation|safe}}</p>
+            </div>
+            <div class="features">
+                <ul>
+                    <li>
+                        <div class="icon">
+                            <i><img src="{% static 'media/fitness-biceps_black.svg' %}"></i>
+                        </div>
+                        <div class="chdescription">
+                            <p id="descriptionnumber">01</p>
+                            <p id="descriptioninfo">Power up</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <i><img src="{% static 'media/timer.svg' %}"></i>
+                        </div>
+                        <div class="chdescription">
+                            <p id="descriptionnumber">02</p>
+                            <p id="descriptioninfo">Be Flexible</p>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="icon">
+                            <i><img src="{% static 'media/dumbbell.svg' %}"></i>
+                        </div>
+                        <div class="chdescription">
+                            <p id="descriptionnumber">03</p>
+                            <p id="descriptioninfo">Super Body Toning</p>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div class="video">
+                <video id="myvideo">
+                    <source src="{{program.video.url}}" type="video/mp4">
+                    Your browser does not support HTML5 video.
+                </video>
+                <div id="playbutton">
+                    <i class="fa-solid fa-play"></i>
+                </div>
+                <div id="pausebutton">
+                    <i class="fa-solid fa-pause"></i>
+                </div>
+            </div>
+            <div class="baseabout">
+                <h3>{{program.question1}}</h3>
+                <p>{{program.answer1|safe}}</p>
+            </div>
+            <div class="contentinfo">
+                <h3>{{program.question2}}</h3>
+                <p>{{program.answer2|safe}}</p>
+            </div>
+            <div class="text">
+                <h3>{{program.question3}}</h5>
+                    <p>{{program.answer3|safe}}</p>
+            </div>
+        </div>
+        <div class="chooseprogram">
+            <div class="chooseprogrameheader">
+                <h3>Details Program</h3>
+                <p>It’s a long estabilished fact that a reader will be distracted by the readable content</p>
+            </div>
+            <div class="chooseprogramincludes">
+                <ul>
+                    <li>
+                        <div class="programicondiv">
+                            <i><img src="{% static 'media/timer.svg' %}" alt=""></i>
+                        </div>
+                        <div class="programduratiodiv">
+                            <div class="durationdivs">
+                                <span class="durationkey">Duration:</span>
+                                <span class="durationvalue">{{program.duration}}</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="programicondiv">
+                            <i><img src="{% static 'media/star.svg' %}" alt=""></i>
+                        </div>
+                        <div class="programduratiodiv">
+                            <div class="durationdivs">
+                                <span class="durationkey">Intensity:</span>
+                                <span class="durationvalue">{{program.intensity}}</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="programicondiv">
+                            <i><img src="{% static 'media/award.svg' %}" alt=""></i>
+                        </div>
+                        <div class="programduratiodiv">
+                            <div class="durationdivs">
+                                <span class="durationkey">Fitness Level:</span>
+                                <span class="durationvalue">{{program.level}}</span>
+                            </div>
+                        </div>
+                    </li>
+                    <li>
+                        <div class="programicondiv">
+                            <i><img src="{% static 'media/calendar.svg' %}" alt=""></i>
+                        </div>
+                        <div class="programduratiodiv">
+                            <div class="durationdivs">
+                                <span class="durationkey">Schedule:</span>
+                                <span class="durationvalue">{{program.schedule}}</span>
+                            </div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+            <div action="" id="bookaclas">
+                <div class="programbutton">
+                    <form id="bookaclass" action="{% url 'book_class' program.id %}" method="post">
+                        {% csrf_token %}
+                        <button id="bookaclasbuton" type="submit">Book a Class</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+{% block review %}
+
+{% include "pieces/review.html" %}
+
+{% endblock %}

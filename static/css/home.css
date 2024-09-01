@@ -28,6 +28,18 @@ nav {
     padding: 15px 0;
 }
 
+#homemembershipplans {
+    width: 90%;
+    margin: 0 auto;
+}
+
+#homemembertitle {
+    width: 90%;
+    margin: 0 auto;
+    padding: 0;
+}
+
+
 #homemenu,
 #othermenu {
     display: flex;
@@ -35,7 +47,7 @@ nav {
     gap: 40px;
 }
 
-#homemenu  li a,
+#homemenu li a,
 #othermenu li a {
     opacity: 0.7;
     color: #FFF;
@@ -51,7 +63,8 @@ nav {
     text-decoration: none;
 }
 
-#homemenu li, #othermenu li{
+#homemenu li,
+#othermenu li {
     position: relative;
 }
 
@@ -548,7 +561,7 @@ nav {
 
 .promotions {
     background: #F9F9FB;
-    padding: 120px 0;
+    padding-top: 120px;
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -1068,16 +1081,18 @@ nav {
 }
 
 .green_dot {
-    width: 12px;
-    height: 12px;
+    width: 11px;
+    height: 11px;
     position: absolute;
     left: 19px;
-    top:18px;
+    top: 18px;
     border-radius: 50%;
     z-index: 2;
 }
 
-
+.green_dot img {
+    width: 100%;
+}
 
 #form {
     display: flex;
@@ -1585,10 +1600,10 @@ nav {
 /*---------------------------------------------forgotPassword-------------------------------------------------------*/
 
 .forgotmain,
-.forgotVerify {
+.forgotVerify,
+#wishmain {
     display: flex;
     position: relative;
-    width: 500px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
@@ -1603,8 +1618,85 @@ nav {
 }
 
 .forgotVerify {
-    height: 480px !important;
+    height: 480px;
 }
+
+#wishmain {
+    height: 550px;
+    width: 500px;
+}
+
+.paybuttons{
+    display: flex;
+    gap: 0px;
+    flex-wrap: wrap;
+    flex-direction: row-reverse;
+    align-items: baseline;
+    align-content: space-around;
+    justify-content: space-around;
+}
+
+.wishheader {
+    width: 85%;
+    display: flex;
+    gap: 30px;
+    flex-direction: column;
+    padding: 0 40px;
+}
+
+
+.wishcontent {
+    width: 100%;
+}
+
+.wishform {
+    width: 100%;
+}
+
+#wishlist-items-container {
+    display: flex;
+    align-items: center;
+    position: relative;
+    width: 100%;
+ 
+}
+
+#wishlist-items-wrapper {
+    overflow: hidden;
+    width: 100%;
+}
+
+#wishlist-items {
+    display: flex;
+    transition: transform 0.3s ease;
+    white-space: nowrap;
+}
+
+#wishlist-items li {
+    list-style-type: none;
+    background: #f9f9f9;
+    border: 1px solid #ddd;
+    padding: 20px;
+    margin: 0;
+    border-radius: 5px;
+    width: 100%;
+    flex-shrink: 0;
+    display: inline;
+}
+
+button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 24px;
+    color: #333;
+    margin: 0 10px;
+}
+
+button:hover {
+    color: #007bff;
+}
+
 
 .forgotcontent {
     display: flex;
@@ -1640,13 +1732,18 @@ nav {
 }
 
 #forgotnext {
+    margin: 0 auto;
+}
+
+#forgotnext,
+#selectandpay {
     display: flex;
-    width: 400px;
-    padding: 16px;
+    width: 350px;
+    padding: 12px;
     margin-top: 20px;
     justify-content: center;
     align-items: center;
-    border-radius: 24px;
+    border-radius: 20px;
     border: none;
     background: #BCFF5E;
 }

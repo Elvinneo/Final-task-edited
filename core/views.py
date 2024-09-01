@@ -16,6 +16,7 @@ from .forms import SignupForm,ContactMessageForm,ProfilePictureForm,FAQForm
 from django.contrib.auth.forms import SetPasswordForm,AuthenticationForm
 from django.conf import settings
 import re
+from .serializers import WishlistSerializer
 
 
 def signup_view(request):
@@ -233,23 +234,22 @@ def blogdetail_view(request, blog_id):
     }
     return render(request, 'blogdetail.html', context)
 
-def overlays_view(request):
-    user_auth(request)
-    return render(request,'overlays.html')
-
 def contact_view(request):
-    contacts=Contact.objects.get()
+    user_auth(request)
+    contacts = Contact.objects.get()
     if request.method == 'POST':
-        form = ContactMessageForm(request.POST)
-        if form.is_valid():
-            form.save()
-            response = {'success': True, 'message': 'Your message has been sent successfully!'}
-        else:
-            errors = form.errors.as_json() 
-            response = {'success': False, 'errors': errors}
-        return JsonResponse(response) 
+        form_id = request.POST.get('form_id')
+        if form_id == 'contactform': 
+            form = ContactMessageForm(request.POST)
+            if form.is_valid():
+                form.save()
+                response = {'success': True, 'message': 'Your message has been sent successfully!'}
+            else:
+                errors = form.errors.as_json()
+                response = {'success': False, 'errors': errors}
+            return JsonResponse(response) 
+    return render(request, 'contact.html', {'contact': contacts})
 
-    return render(request, 'contact.html', {'contact':contacts})
 
 def tos_view(request):
     user_auth(request)
@@ -283,10 +283,6 @@ def privacy_policy_view(request):
     user_auth(request)
     return render(request, 'privacy_policy.html')
 
-def payment_view(request):
-    user_auth(request)
-    return render(request, 'payment.html')
-
 def faq_view(request):
     user_auth(request)
     faqs = FAQQuestion.objects.prefetch_related('answers').all()
@@ -297,23 +293,69 @@ def faq_view(request):
         if faq.message not in seen_messages:
             seen_messages.add(faq.message)
             unique_faqs.append(faq)
-
     if request.method == 'POST':
-        form = FAQForm(request.POST)
-        if form.is_valid():
-            full_name = form.cleaned_data['full_name']
-            email = form.cleaned_data['email']
-            message = form.cleaned_data['message']
-            message = message.lower().strip()
-            normalized_message = re.sub(r'\W+', ' ', message)
-            faq, created = FAQQuestion.objects.get_or_create(
-                email=email,
-                normalized_message=normalized_message,
-                defaults={'full_name': full_name}
-            )
-            if not created:
-                faq.count += 1
-                faq.save()
-            return JsonResponse({'status': 'success', 'message': 'Your question has been submitted successfully.'})
-        return JsonResponse({'status': 'error', 'message': 'There was an error with your submission.'})
+        form_id = request.POST.get('form_id')
+        if form_id == 'faqform': 
+            form = FAQForm(request.POST)
+            if form.is_valid():
+                full_name = form.cleaned_data['full_name']
+                email = form.cleaned_data['email']
+                message = form.cleaned_data['message']
+                message = message.lower().strip()
+                normalized_message = re.sub(r'\W+', ' ', message)
+                faq, created = FAQQuestion.objects.get_or_create(
+                    email=email,
+                    normalized_message=normalized_message,
+                    defaults={'full_name': full_name}
+                )
+                if not created:
+                    faq.count += 1
+                    faq.save()
+                return JsonResponse({'status': 'success', 'message': 'Your question has been submitted successfully.'})
+            return JsonResponse({'status': 'error', 'message': 'There was an error with your submission.'})
     return render(request, 'FAQ.html', {'faqs': unique_faqs})
+
+def add_to_wishlist(request, plan_id):
+    plan = get_object_or_404(Plan, id=plan_id)
+    try:
+        data = json.loads(request.body)
+        months = int(data.get('months'))
+        if months <= 0:
+            raise ValueError
+    except (ValueError, TypeError, KeyError):
+        return JsonResponse({'status': 'error', 'message': 'Invalid data.'}, status=400)
+    wishlist_item, created = Wishlist.objects.get_or_create(
+        user=request.user,
+        plan=plan,
+        defaults={'months': months}
+    )
+    if not created:
+        wishlist_item.months = months
+        wishlist_item.save()
+    
+    return JsonResponse({'status': 'success', 'message': 'Plan added to wishlist with amount.'})
+
+@login_required
+def wishlist_view(request):
+    wishlist_items = Wishlist.objects.filter(user=request.user)
+    serializer = WishlistSerializer(wishlist_items, many=True)
+    return JsonResponse({'status': 'success', 'wishlist_items': serializer.data})
+
+
+def payment_view(request, plan_id):
+    user_auth(request)
+    plan = get_object_or_404(Plan, id=plan_id)
+    context = {
+        'plan_name': plan.name,
+        'price': plan.price,
+        'classes': plan.classes,
+        'packages': plan.packages,
+        'tutorials': plan.tutorials,
+        'content': plan.content,
+        'about': plan.about,
+        'istheright': plan.istheright
+    }
+    return render(request, 'payment.html', context)
+
+def payment_success(request):
+    return JsonResponse({'status': 'success', 'message': 'Payment processed successfully.'})

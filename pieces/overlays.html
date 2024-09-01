@@ -341,3 +341,41 @@
 </div>
 
 
+<div id="wishviewoverlay" class="overlay">
+    <div id="wishmain">
+        <div class="close"><img src="{% static 'media/close.svg' %}" alt=""></div>
+        <div class="signinicon">
+            <i><img src="{% static 'media/heartblack.png' %}" alt=""></i>
+            <span id="bulk">Bulk</span>
+            <span id="ing">ing</span>
+        </div>
+        <div class="wishcontent">
+            <div class="wishheader">
+                <h2>Your cart</h2>
+                <span>Please select the items you wish to purchase</span>
+            </div>
+            <div class="wishform">
+                <div id="wishlist-items-container">
+                    <button id="prev-btn" aria-label="Previous Item">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div id="wishlist-items-wrapper">
+                        <ul id="wishlist-items">
+                        </ul>
+                    </div>
+                    <button id="next-btn" aria-label="Next Item">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="paybuttons">
+                    <form action="" method="post">
+                        <div class="delete">
+                            <button type="submit"><i class="fa-regular fa-trash-can"></i></button>
+                        </div>
+                    </form>
+                    <button id='selectandpay' type="submit">Go to payment page</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

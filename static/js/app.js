@@ -55,6 +55,10 @@ let price
 let updater = document.getElementById("profileUpdater")
 let changebutton = document.getElementById("changephoto")
 let profilicon = document.querySelector(".profiles");
+let isAuthenticated = document.querySelector('meta[name="is_authenticated"]').getAttribute('content') === 'True';
+let faqform = document.getElementById('faqform')
+const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+let wishview = document.getElementById("wishview")
 
 if (menu) {
     menu.addEventListener('click', openMenu)
@@ -341,7 +345,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('loginForm');
     form.addEventListener('submit', function (event) {
         const formData = new FormData(form);
-        const csrfToken = formData.get('csrfmiddlewaretoken');
         event.preventDefault();
         fetch('/login/', {
             method: 'POST',
@@ -434,7 +437,6 @@ function verificationCodeSender(form) {
         console.error('The selected element is not an HTMLFormElement.');
         return;
     }
-    var csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     var formData = new FormData(formElement);
     fetch('/email_verification/', {
         method: 'POST',
@@ -613,13 +615,10 @@ document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
 
 //add to cart
 
-if (addtocart) {
-    addtocart.addEventListener("click", checkcart)
-}
-
 function checkcart() {
     if (wishlist) {
         document.querySelector(".red").style.display = 'block'
+        document.getElementById("wishview").disabled = false
     }
 
 }
@@ -711,9 +710,7 @@ function changer() {
             event.preventDefault();
             const newPassword1 = document.getElementById('id_new_password1').value;
             const newPassword2 = document.getElementById('id_new_password2').value;
-            const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
             email = globalemail
-
             fetch('/password-change/', {
                 method: 'POST',
                 headers: {
@@ -798,7 +795,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 method: 'POST',
                 body: formData,
                 headers: {
-                    'X-CSRFToken': document.querySelector('input[name="csrfmiddlewaretoken"]').value
+                    'X-CSRFToken': csrfToken
                 }
             })
                 .then(response => response.json())
@@ -830,9 +827,7 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 document.addEventListener('DOMContentLoaded', function () {
-    var form = document.getElementById('bookaclass');
-    var isAuthenticated = document.querySelector('meta[name="is_authenticated"]').getAttribute('content') === 'True';
-
+    let form = document.getElementById('bookaclass');
     if (form) {
         form.addEventListener('submit', function (event) {
             if (!isAuthenticated) {
@@ -897,7 +892,6 @@ function calculate() {
     }
 }
 
-
 //contact message sent
 
 document.addEventListener('DOMContentLoaded', function () {
@@ -906,12 +900,13 @@ document.addEventListener('DOMContentLoaded', function () {
         form.addEventListener('submit', function (event) {
             event.preventDefault();
             const formData = new FormData(form);
+            formData.append('form_id', form.id);
             fetch('/contact/', {
                 method: 'POST',
                 body: formData,
                 headers: {
                     'X-Requested-With': 'XMLHttpRequest',
-                    'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                    'X-CSRFToken': csrfToken
                 }
             })
                 .then(response => response.json())
@@ -986,44 +981,202 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-faqform = document.getElementById('faqform')
+
 if (faqform) {
-    document.getElementById('faqform').addEventListener('submit', function (event) {
+    faqform.addEventListener('submit', function (event) {
         event.preventDefault();
-        var formData = new FormData(this);
+        const formData = new FormData(this);
+        formData.append('form_id', this.id);
         fetch('/faq/', {
             method: 'POST',
             body: formData,
             headers: {
                 'X-Requested-With': 'XMLHttpRequest',
-                'X-CSRFToken': document.querySelector('[name=csrfmiddlewaretoken]').value
+                'X-CSRFToken': csrfToken
             }
         })
             .then(response => response.json())
             .then(data => {
-                if (data.status === 'success') {
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Success!',
-                        text: data.message,
-                        confirmButtonText: 'OK'
-                    }).then(() => {
-                        document.getElementById('faqform').reset();
-                    });
-                } else {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: data.message,
-                        confirmButtonText: 'OK'
-                    });
-                }
+                Swal.fire({
+                    icon: data.status === 'success' ? 'success' : 'error',
+                    title: data.status === 'success' ? 'Success' : 'Error',
+                    text: data.message,
+                });
             })
             .catch(error => {
                 console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: 'Something went wrong!',
+                });
             });
     });
 }
+
+
+// plan purchase login reguired control
+
+document.addEventListener('DOMContentLoaded', () => {
+    const purchasebutton = document.getElementById('purchasebutton');
+    const planIdElement = document.getElementById('planId');
+    if (purchasebutton && planIdElement) {
+        purchasebutton.addEventListener('click', testisauth);
+    }
+    function testisauth(event) {
+        event.preventDefault();
+        if (!isAuthenticated) {
+            login();
+        } else {
+            const planId = planIdElement.textContent.trim();
+            const url = `${window.location.origin}/payment/${planId}`;
+            console.log('Redirecting to:', url);
+            window.location.href = url;
+        }
+    }
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const addToCartButton = document.getElementById('addtocart');
+    if (addToCartButton) {
+        addToCartButton.addEventListener('click', testisauth)
+    }
+    function testisauth(event) {
+        const months = document.getElementById("months").value
+        const planId = document.getElementById("planId").textContent;
+        event.preventDefault();
+        if (!isAuthenticated) {
+            login();
+        } else {
+            fetch(`/add_to_wishlist/${planId}/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify({ months })
+            })
+                .then(response => response.json())
+                .then(data => {
+                    Swal.fire({
+                        icon: data.status === 'success' ? 'success' : 'error',
+                        title: data.status === 'success' ? 'Success' : 'Error',
+                        text: data.message,
+                    });
+                })
+                .then(() => { checkcart() })
+        }
+    }
+});
+
+if (wishview) {
+    wishview.addEventListener("click", wishviewer)
+}
+
+
+function wishviewer() {
+    closewindow();
+    overlays[9].style.display = 'flex';
+    fetch(`/wishlist/`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        }
+    })
+        .then(response => response.json())
+        .then(data => {
+            const wishlistItems = document.getElementById('wishlist-items');
+            wishlistItems.innerHTML = '';
+
+            if (data.status === 'success') {
+                data.wishlist_items.forEach(item => {
+                    const listItem = document.createElement('li');
+                    listItem.innerHTML = `
+                    <span id="planidhidden" style="display: none;">${item.plan.id}</span>
+                    <strong>Plan:</strong> ${item.plan.name} <br><br>
+                    <strong>User:</strong> ${item.user.username} <br><br>
+                    <strong>Amount:</strong> $ ${item.amount} <br><br>
+                    <strong>Months:</strong> ${item.months} <br><br>
+                    <strong>Added At:</strong> ${new Date(item.added_at).toLocaleString()}
+                `;
+                    wishlistItems.appendChild(listItem);
+                });
+
+                setupSlider();
+            } else {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error',
+                    text: data.message,
+                });
+            }
+        })
+        .catch(error => {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'An error occurred while fetching wishlist items.',
+            });
+        });
+
+    closer();
+}
+
+function setupSlider() {
+    const itemsWrapper = document.getElementById('wishlist-items-wrapper');
+    const items = document.getElementById('wishlist-items');
+    const prevBtn = document.getElementById('prev-btn');
+    const nextBtn = document.getElementById('next-btn');
+
+    let currentIndex = 0;
+    const itemWidth = items.querySelector('li').offsetWidth;
+    const itemCount = items.children.length;
+
+    function updateButtons() {
+        prevBtn.disabled = currentIndex === 0;
+        nextBtn.disabled = currentIndex >= itemCount - 1;
+    }
+
+    function moveTo(index) {
+        items.style.transform = `translateX(-${index * itemWidth}px)`;
+        currentIndex = index;
+        updateButtons();
+    }
+
+    prevBtn.addEventListener('click', () => {
+        if (currentIndex > 0) {
+            moveTo(currentIndex - 1);
+        }
+    });
+
+    nextBtn.addEventListener('click', () => {
+        if (currentIndex < itemCount - 1) {
+            moveTo(currentIndex + 1);
+        }
+    });
+
+    updateButtons();
+}
+
+
+
+// get CSRF token
+// function getCookie(name) {
+//     let cookieValue = null;
+//     if (document.cookie && document.cookie !== '') {
+//         const cookies = document.cookie.split(';');
+//         for (let i = 0; i < cookies.length; i++) {
+//             const cookie = cookies[i].trim();
+//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
+//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+//                 break;
+//             }
+//         }
+//     }
+//     return cookieValue;
+// }
+
 //Mirqafar js kodlar
 
 const lists = [...document.querySelectorAll(".introduction_col")];
@@ -1056,3 +1209,4 @@ lists.map((li) => {
         icon.classList.add("fa-angle-up");
     });
 });
+
