@@ -353,6 +353,7 @@ def payment_view(request, plan_id, months):
     plan = get_object_or_404(Plan, id=plan_id)
     total=plan.price * months
     context = {
+        'id':plan_id,
         'plan_name': plan.name,
         'price': plan.price,
         'classes': plan.classes,
@@ -365,6 +366,20 @@ def payment_view(request, plan_id, months):
         'total' :total
     }
     return render(request, 'payment.html', context)
+
+
+def purchase(request, plan_id,total_amount):
+    if request.method == 'POST':
+        user = request.user
+        payment = Payment(
+            user=user,
+            plan=plan_id,
+            amount=total_amount
+        )
+        payment.save()
+        return JsonResponse({'status': 'success', 'message': 'Payment successfully,item removed wishlist '})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
 
 
 def wishlist_purchase(request, wishlist_id):

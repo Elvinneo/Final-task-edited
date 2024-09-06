@@ -1220,6 +1220,7 @@ function wishviewer() {
         .catch(error => {
             closewindow();
             localStorage.removeItem(userName);
+            localStorage.removeItem("wishlist")
             checkcart();
             Swal.fire({
                 icon: 'info',
@@ -1292,6 +1293,7 @@ if (wishdelete) {
                 if (Object.keys(resulter).length === 0) {
                     localStorage.removeItem(userName)
                     temporary = {}
+                    localStorage.removeItem("wishlist")
                     checkcart()
                 } else {
                     wishviewer()
@@ -1332,41 +1334,82 @@ async function payandsave() {
     console.log(currentIndex);
     let storedData = localStorage.getItem("wishlist");
     if (!storedData) {
-        console.log("Data is not found");
-        return;
-    }
-    let parsedData = JSON.parse(storedData);
-    let wishId = parsedData[currentIndex];
-    const form = document.getElementById('confirmandpay');
-    if (form) {
-        form.addEventListener('submit', async function (event) {
-            event.preventDefault();
-            const formData = new FormData(this);
-            try {
-                const response = await fetch(`/wishlist/purchase/${wishId}/`, {
-                    method: 'POST',
-                    body: formData,
-                    headers: {
-                        'X-Requested-With': 'XMLHttpRequest',
-                        'X-CSRFToken': csrfToken
-                    }
-                });
-                const data = await response.json();
-                await Swal.fire({
-                    icon: data.status === 'success' ? 'success' : 'error',
-                    title: data.status === 'success' ? 'Success' : 'Error',
-                    text: data.message
-                });
+        console.log("This sale without  wishlist");
+        let plan_id
+        let total_amount
+        if (form) {
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                try {
+                    const response = await fetch(`/purchase/${plan_id}/${total_amount}/`, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRFToken': csrfToken
+                        }
+                    });
+                    const data = await response.json();
+                    await Swal.fire({
+                        icon: data.status === 'success' ? 'success' : 'error',
+                        title: data.status === 'success' ? 'Success' : 'Error',
+                        text: data.message
+                    });
+                    wishviewer();
+                } catch (error) {
+                    await Swal.fire({
+                        title: 'Error',
+                        text: 'An error occurred',
+                        icon: 'error'
+                    });
+                }
+            });
+        }
 
-                wishviewer();
-            } catch (error) {
-                await Swal.fire({
-                    title: 'Error',
-                    text: 'An error occurred',
-                    icon: 'error'
-                });
-            }
-        });
+
+
+
+
+
+
+
+
+        return;
+    } else {
+        console.log("This sale with wishlist");
+        let parsedData = JSON.parse(storedData);
+        let wishId = parsedData[currentIndex];
+        const form = document.getElementById('confirmandpay');
+        if (form) {
+            form.addEventListener('submit', async function (event) {
+                event.preventDefault();
+                const formData = new FormData(this);
+                try {
+                    const response = await fetch(`/wishlist/purchase/${wishId}/`, {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-Requested-With': 'XMLHttpRequest',
+                            'X-CSRFToken': csrfToken
+                        }
+                    });
+                    const data = await response.json();
+                    await Swal.fire({
+                        icon: data.status === 'success' ? 'success' : 'error',
+                        title: data.status === 'success' ? 'Success' : 'Error',
+                        text: data.message
+                    });
+                    wishviewer();
+                } catch (error) {
+                    await Swal.fire({
+                        title: 'Error',
+                        text: 'An error occurred',
+                        icon: 'error'
+                    });
+                }
+            });
+        }
     }
 }
 
