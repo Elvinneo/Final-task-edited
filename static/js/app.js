@@ -1,7 +1,7 @@
+let isAuthenticated = document.querySelector('meta[name="is_authenticated"]').getAttribute('content') === 'True';
 let menu = document.querySelector(".drop").childNodes[1]
 let dropmenu = document.getElementById("dropmenu")
 let nav = document.querySelector("nav")
-let test = true
 let overlays = document.querySelectorAll(".overlay")
 let closeoverlays = document.querySelectorAll(".close")
 let signupbuttons = document.querySelectorAll(".signupButton")
@@ -25,6 +25,9 @@ let buttoncontinue = document.getElementById("confirmContinue")
 let forgotmailarea = document.getElementById("forgotmailarea")
 let pass = document.querySelectorAll(".pass")
 let globalemail
+let test = true
+let nextBtn
+let prevBtn
 let resendbutton = document.getElementById("resend")
 let path = window.location.pathname;
 let page = path.split("/")
@@ -50,18 +53,46 @@ let addtocart = document.querySelector("#addtocart")
 let months = document.getElementById("months");
 let priceElement = document.getElementById("price");
 let total = document.getElementById("total");
-let price
+let wishdelete = document.getElementById("wishdelete")
 let updater = document.getElementById("profileUpdater")
 let changebutton = document.getElementById("changephoto")
 let profilicon = document.querySelector(".profiles");
-let isAuthenticated = document.querySelector('meta[name="is_authenticated"]').getAttribute('content') === 'True';
-let faqform = document.getElementById('faqform')
-const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 let wishview = document.getElementById("wishview")
-const result = {};
+let faqform = document.getElementById('faqform')
 let currentIndex = 0;
-let wishdelete = document.getElementById("wishdelete")
 let temporary = {}
+let userName
+let purchaseButton
+let planIdElement
+let price
+let paymethod
+let resulter = {};
+const welcomeMessageElement = document.getElementById("wellcome_message")
+const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+let paypal = document.getElementById("paypal")
+let applepay = document.getElementById("applepay")
+let cardholder = document.getElementById('cardholder');
+let cardnumber = document.getElementById('cardnumber');
+let expiry = document.getElementById('expiryDate');
+let cvv = document.getElementById('cvv');
+let postal = document.getElementById('postalcode');
+
+
+if (welcomeMessageElement) {
+    const welcomeMessage = welcomeMessageElement.textContent.trim();
+    const userNameMatch = welcomeMessage.match(/^Welcome, (.+)!$/);
+    if (userNameMatch) {
+        userName = userNameMatch[1];
+    }
+}
+
+
+if (!isAuthenticated) {
+    document.querySelector(".red").style.display = 'none'
+    document.getElementById("wishview").disabled = true
+} else {
+    checkcart()
+}
 
 
 if (menu) {
@@ -338,7 +369,7 @@ function login() {
 
 document.querySelectorAll('form').forEach(form => {
     form.addEventListener('submit', function (event) {
-        if (form.id === 'faqform' || form.id === 'contactform' || form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm" || form.id === 'signupmailform') {
+        if (form.id === 'paymentform' || form.id === 'faqform' || form.id === 'contactform' || form.id === 'securitypasswordform' || form.id === 'logoutForm' || form.id === "loginForm" || form.id === 'signupmailform') {
             return;
         }
         event.preventDefault();
@@ -386,6 +417,9 @@ if (passwordfield && usernamefield) {
 function testbuttons() {
     test = false
     for (i = 1; i <= testedusers.length - 1; i++) {
+        if (!testedusers[i]) {
+            continue
+        }
         if (testedusers[i].username == usernamelogin.value) {
             confirmedemail.innerText = testedusers[i].email
             poster.value = testedusers[i].email
@@ -623,7 +657,7 @@ document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
 
 function checkcart() {
     if (wishlist) {
-        if (!localStorage.getItem('temporary')) {
+        if (!localStorage.getItem(userName)) {
             overlays[9].style.display = 'none';
             document.querySelector(".red").style.display = 'none'
             document.getElementById("wishview").disabled = true
@@ -1029,28 +1063,76 @@ if (faqform) {
 
 // plan purchase login reguired control
 
-document.addEventListener('DOMContentLoaded', () => {
-    const purchasebutton = document.getElementById('purchasebutton');
-    const planIdElement = document.getElementById('planId');
-    if (purchasebutton && planIdElement) {
-        purchasebutton.addEventListener('click', testisauth);
+function sentsale(months, planId) {
+    const url = `${window.location.origin}/payment/${planId}/${months}/`;
+    console.log('Redirecting to:', url);
+    window.location.href = url;
+}
+purchaseButton = document.getElementById('purchasebutton');
+if (purchaseButton) {
+    planIdElement = document.getElementById('planId');
+    const planId = planIdElement.textContent.trim();
+    if (purchaseButton && planIdElement) {
+        purchaseButton.addEventListener('click', testIsAuth);
     }
-    function testisauth(event) {
+    function testIsAuth(event) {
         event.preventDefault();
         if (!isAuthenticated) {
             login();
         } else {
-            const planId = planIdElement.textContent.trim();
-            const url = `${window.location.origin}/payment/${planId}`;
-            console.log('Redirecting to:', url);
-            window.location.href = url;
+            console.log(months.value + planId)
+            sentsale(months.value, planId)
         }
+
     }
-});
+}
+
+// wishlist to paymentpage
+
+let selectandpay = document.getElementById('selectandpay')
+
+if (selectandpay) {
+    selectandpay.addEventListener('click', selector)
+}
+
+async function selector() {
+    try {
+        const wishId = resulter[currentIndex];
+
+        const response = await fetch(`/wishlistcont/${wishId}/`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrfToken
+            }
+        });
+
+        console.log(`Response status: ${response.status}`);
+
+        if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        console.log('Data received:', data);
+
+        if (data.error) {
+            console.error('Error:', data.error);
+            return;
+        }
+        const { user: userId, plan: planid, added_at: addedAt, amount, months: month } = data;
+
+        console.log(`Months: ${month}, Plan ID: ${planid}`);
+        sentsale(month, planid);
+
+
+    } catch (error) {
+        console.error('Fetch error:', error);
+    }
+}
+
 
 document.addEventListener('DOMContentLoaded', () => {
-
-    checkcart()
     const addToCartButton = document.getElementById('addtocart');
     if (addToCartButton) {
         addToCartButton.addEventListener('click', testisauth)
@@ -1079,8 +1161,8 @@ document.addEventListener('DOMContentLoaded', () => {
                     });
                 })
                 .then(() => {
-                    temporary[1] = planId
-                    localStorage.setItem('temporary', temporary);
+                    temporary[userName] = planId
+                    localStorage.setItem(userName, temporary);
                     checkcart()
                 })
         }
@@ -1090,6 +1172,8 @@ document.addEventListener('DOMContentLoaded', () => {
 if (wishview) {
     wishview.addEventListener("click", wishviewer)
 }
+
+
 
 
 function wishviewer() {
@@ -1107,10 +1191,11 @@ function wishviewer() {
             const wishlistItems = document.getElementById('wishlist-items');
             wishlistItems.innerHTML = '';
             if (data.status === 'success') {
-                let startid = 0
+                let startid = 0;
                 data.wishlist_items.forEach(item => {
-                    result[startid] = item.id;
-                    startid++
+                    resulter[startid] = item.id;
+                    localStorage.setItem("wishlist", JSON.stringify(resulter));
+                    startid++;
                     const listItem = document.createElement('li');
                     listItem.innerHTML = `
                     <span id="planidhidden" style="display: block;">${item.id}</span>
@@ -1121,9 +1206,9 @@ function wishviewer() {
                     <strong>Added At: </strong> ${new Date(item.added_at).toLocaleString()}
                 `;
                     wishlistItems.appendChild(listItem);
-                }); console.log(result)
-
-                setupSlider();
+                });
+                console.log(resulter);
+                setupSliderfunc();
             } else {
                 Swal.fire({
                     icon: 'error',
@@ -1133,23 +1218,27 @@ function wishviewer() {
             }
         })
         .catch(error => {
+            closewindow();
+            localStorage.removeItem(userName);
+            checkcart();
             Swal.fire({
-                icon: 'error',
-                title: 'Error',
-                text: 'An error occurred while fetching wishlist items.',
+                icon: 'info',
+                title: 'Info',
+                text: 'Your wishlist is empty',
             });
         });
 
     closer();
 }
 
-function setupSlider() {
+
+function setupSliderfunc() {
     const itemsWrapper = document.getElementById('wishlist-items-wrapper');
     const items = document.getElementById('wishlist-items');
-    const prevBtn = document.getElementById('prev-btn');
-    const nextBtn = document.getElementById('next-btn');
+    prevBtn = document.getElementById('prev-btn');
     const itemWidth = items.querySelector('li').offsetWidth;
     const itemCount = items.children.length;
+    nextBtn = document.getElementById('next-btn');
 
     function updateButtons() {
         prevBtn.disabled = currentIndex === 0;
@@ -1180,7 +1269,7 @@ if (wishdelete) {
     wishdelete.addEventListener('submit', function (event) {
         event.preventDefault();
         const formData = new FormData(this);
-        wishId = result[currentIndex]
+        wishId = resulter[currentIndex]
         formData.append('form_id', this.id);
         fetch(`/wishdelete/${wishId}/`, {
             method: 'POST',
@@ -1199,20 +1288,112 @@ if (wishdelete) {
                 });
             })
             .then(() => {
-                delete result[currentIndex];
-                if (Object.keys(result).length === 0) {
-                    localStorage.removeItem('temporary');
-                    temporary={}
+                delete resulter[currentIndex];
+                if (Object.keys(resulter).length === 0) {
+                    localStorage.removeItem(userName)
+                    temporary = {}
                     checkcart()
-
+                } else {
+                    wishviewer()
+                    prevBtn.click()
                 }
             })
     })
 };
 
-checkcart()
+
+//payment checkboxes
+
+const paypalCheckbox = document.getElementById('paypal');
+const applepayCheckbox = document.getElementById('applepay');
+
+if (paypalCheckbox) {
+    paypalCheckbox.addEventListener('change', handleCheckboxChange);
+    applepayCheckbox.addEventListener('change', handleCheckboxChange);
+}
+function handleCheckboxChange() {
+    if (paypalCheckbox.checked) {
+        applepayCheckbox.checked = false;
+    } else if (applepayCheckbox.checked) {
+        paypalCheckbox.checked = false;
+    } else {
+        paypalCheckbox.checked = false;
+        applepayCheckbox.checked = false;
+    }
+}
 
 
+let confirmpay = document.getElementById('confirmpay')
+if (confirmpay) {
+    confirmpay.addEventListener('click', payandsave)
+}
+
+async function payandsave() {
+    console.log(currentIndex);
+    let storedData = localStorage.getItem("wishlist");
+    if (!storedData) {
+        console.log("Data is not found");
+        return;
+    }
+    let parsedData = JSON.parse(storedData);
+    let wishId = parsedData[currentIndex];
+    const form = document.getElementById('confirmandpay');
+    if (form) {
+        form.addEventListener('submit', async function (event) {
+            event.preventDefault();
+            const formData = new FormData(this);
+            try {
+                const response = await fetch(`/wishlist/purchase/${wishId}/`, {
+                    method: 'POST',
+                    body: formData,
+                    headers: {
+                        'X-Requested-With': 'XMLHttpRequest',
+                        'X-CSRFToken': csrfToken
+                    }
+                });
+                const data = await response.json();
+                await Swal.fire({
+                    icon: data.status === 'success' ? 'success' : 'error',
+                    title: data.status === 'success' ? 'Success' : 'Error',
+                    text: data.message
+                });
+
+                wishviewer();
+            } catch (error) {
+                await Swal.fire({
+                    title: 'Error',
+                    text: 'An error occurred',
+                    icon: 'error'
+                });
+            }
+        });
+    }
+}
+
+if (cardholder || cardnumber || expiry || cvv) {
+    cardholder.addEventListener('change', paytester);
+    cardnumber.addEventListener('change', paytester);
+    expiry.addEventListener('change', paytester);
+    cvv.addEventListener('change', paytester);
+    postal.addEventListener('change', paytester);
+    paypal.addEventListener('change', paytester);
+    applepay.addEventListener('change', paytester);
+}
+
+function paytester() {
+    if (paypal.checked == true) {
+        paymethod = "paypal"
+    } else if (applepay.checked == true) {
+        paymethod = "applepay"
+    } else if (paypal.checked == false && applepay.checked == false) {
+        if (cardholder.value != '' && cardnumber.value != '' && expiry.value != '' && cvv.value != '' && postal.value != '') {
+            paymethod = "card"
+        }
+    }
+    if (paymethod) {
+        confirmpay.disabled = false
+    }
+}
 
 
 

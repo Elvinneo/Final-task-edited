@@ -1626,14 +1626,18 @@ nav {
     width: 500px;
 }
 
-.paybuttons{
+#wishview {
+    background-color: transparent;
+}
+
+.paybuttons {
     display: flex;
-    gap: 0px;
+    gap: 66px;
     flex-wrap: wrap;
     flex-direction: row-reverse;
     align-items: baseline;
     align-content: space-around;
-    justify-content: space-around;
+    justify-content: center;
 }
 
 .wishheader {
@@ -1643,7 +1647,6 @@ nav {
     flex-direction: column;
     padding: 0 40px;
 }
-
 
 .wishcontent {
     width: 100%;
@@ -1658,7 +1661,7 @@ nav {
     align-items: center;
     position: relative;
     width: 100%;
- 
+
 }
 
 #wishlist-items-wrapper {
@@ -1684,7 +1687,11 @@ nav {
     display: inline;
 }
 
-button {
+#del {
+    font-size: 22px;
+}
+
+.wishbuttons {
     background: none;
     border: none;
     cursor: pointer;
@@ -1735,11 +1742,15 @@ button:hover {
     margin: 0 auto;
 }
 
+#selectandpay {
+    font-size: 16px;
+}
+
 #forgotnext,
 #selectandpay {
     display: flex;
     width: 350px;
-    padding: 12px;
+    padding: 16px;
     margin-top: 20px;
     justify-content: center;
     align-items: center;
