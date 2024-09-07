@@ -1335,14 +1335,15 @@ async function payandsave() {
     let storedData = localStorage.getItem("wishlist");
     if (!storedData) {
         console.log("This sale without  wishlist");
-        let plan_id
-        let total_amount
+        let plan_id = document.getElementById("plan_idforpurchase").textContent
+        let total_amount = document.getElementById("total").textContent.replace('$', '').trim();
+        const form = document.getElementById('confirmandpay');
         if (form) {
             form.addEventListener('submit', async function (event) {
                 event.preventDefault();
                 const formData = new FormData(this);
                 try {
-                    const response = await fetch(`/purchase/${plan_id}/${total_amount}/`, {
+                    const response = await fetch(`/purchase/${plan_id}/${total_amount}/${paymethod}/`, {
                         method: 'POST',
                         body: formData,
                         headers: {
@@ -1352,11 +1353,17 @@ async function payandsave() {
                     });
                     const data = await response.json();
                     await Swal.fire({
-                        icon: data.status === 'success' ? 'success' : 'error',
-                        title: data.status === 'success' ? 'Success' : 'Error',
-                        text: data.message
+                        icon: data.status === 'success' ? 'success' :
+                              data.status === 'error' ? 'error' :
+                              data.status === 'info' ? 'info' :
+                              'warning',
+                        title: data.status === 'success' ? 'Success' :
+                               data.status === 'error' ? 'Error' :
+                               data.status === 'info' ? 'Info' :
+                               'Warning',
+                        text: `${data.message}${data.remaining_days ? ` ${data.remaining_days} days remaining` : ''}`
                     });
-                    wishviewer();
+                    window.location.reload();
                 } catch (error) {
                     await Swal.fire({
                         title: 'Error',
@@ -1366,16 +1373,6 @@ async function payandsave() {
                 }
             });
         }
-
-
-
-
-
-
-
-
-
-        return;
     } else {
         console.log("This sale with wishlist");
         let parsedData = JSON.parse(storedData);
@@ -1386,7 +1383,7 @@ async function payandsave() {
                 event.preventDefault();
                 const formData = new FormData(this);
                 try {
-                    const response = await fetch(`/wishlist/purchase/${wishId}/`, {
+                    const response = await fetch(`/wishlist/purchase/${wishId}/${paymethod}/`, {
                         method: 'POST',
                         body: formData,
                         headers: {
@@ -1401,6 +1398,7 @@ async function payandsave() {
                         text: data.message
                     });
                     wishviewer();
+                    window.location.reload();
                 } catch (error) {
                     await Swal.fire({
                         title: 'Error',
@@ -1433,11 +1431,10 @@ function paytester() {
             paymethod = "card"
         }
     }
-    if (paymethod) {
+    if (paymethod || priceElement.textContent == '$ 0.00') {
         confirmpay.disabled = false
     }
-}
-
+}paytester()
 
 
 

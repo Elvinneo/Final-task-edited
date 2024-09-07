@@ -32,8 +32,8 @@ urlpatterns = [
     path('add_to_wishlist/<int:plan_id>/',add_to_wishlist, name='add_to_wishlist'),
     path('wishlist/', wishlist_view, name='wishlist'),
     path('wishdelete/<int:id>/', wishdelete, name='wishdelete'),
-    path('wishlist/purchase/<int:wishlist_id>/', wishlist_purchase, name='wishlist-purchase'),
-    path('purchase/<int:plan_id>/<int:total_amount>/', purchase, name='purchase'),
+    path('wishlist/purchase/<int:wishlist_id>/<paymethod>/', wishlist_purchase, name='wishlist-purchase'),
+    path('purchase/<int:plan_id>/<int:total_amount>/<paymethod>/', purchase, name='purchase'),
     path('wishlistcont/<int:id>/', wishlistcont, name='wishlistcont'),
 
 

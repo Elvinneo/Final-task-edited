@@ -2158,6 +2158,10 @@ button:hover {
     width: 100%;
 }
 
+#remainingdaysfield{
+    color: red;
+}
+
 .profilecontents {
     display: none;
     color: #1d1d94;
@@ -2171,7 +2175,7 @@ button:hover {
     z-index: 3;
     right: 20px;
     width: 260px;
-    height: 180px;
+    height: 220px;
     background-color: #bfe1e7;
     border-radius: 12px;
     align-items: flex-start;

@@ -3,16 +3,20 @@ from django.contrib.auth.models import User
 import random
 from django.utils import timezone
 from ckeditor.fields import RichTextField
+from datetime import timedelta
+from django.utils import timezone
 
 class Plan(models.Model):
-    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00,verbose_name='Plan dəyəri')
-    name = models.CharField(max_length=100,verbose_name='Plan adı')
-    classes = models.CharField(max_length=100,verbose_name='Daxil olan sinif sayı')
-    packages = models.CharField(max_length=100,verbose_name='Daxil olanlar')
-    tutorials=models.CharField(max_length=100,verbose_name='Qaynaqlar')
-    content=RichTextField(max_length=500,verbose_name='Məlumat',default='')
-    about=RichTextField(max_length=1000,verbose_name='Haqqında',default='')
-    istheright=RichTextField(max_length=1000,verbose_name='Niye bu plan?',default='')
+    price = models.DecimalField(max_digits=10, decimal_places=2, default=0.00, verbose_name='Plan dəyəri')
+    name = models.CharField(max_length=100, verbose_name='Plan adı')
+    classes = models.CharField(max_length=100, verbose_name='Daxil olan sinif sayı')
+    packages = models.CharField(max_length=100, verbose_name='Daxil olanlar')
+    tutorials = models.CharField(max_length=100, verbose_name='Qaynaqlar')
+    content = RichTextField(max_length=500, verbose_name='Məlumat', default='')
+    about = RichTextField(max_length=1000, verbose_name='Haqqında', default='')
+    istheright = RichTextField(max_length=1000, verbose_name='Niye bu plan?', default='')
+    duration_days = models.PositiveIntegerField(default=30, verbose_name='Planın müddəti (gün)')
+
     
 class Program(models.Model):
     name = models.CharField(max_length=100,verbose_name='Program adı')
@@ -39,7 +43,20 @@ class Profile(models.Model):
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
     program = models.ForeignKey('Program', on_delete=models.SET_NULL, null=True, blank=True, related_name='profiles')
     plan = models.ForeignKey('Plan', on_delete=models.SET_NULL, null=True, blank=True, related_name='profiles')
+    remaining_days = models.PositiveIntegerField(default=0, verbose_name='Kalan Gün Sayısı')
 
+    def __str__(self):
+        return self.user.username
+
+    def update_remaining_days(self):
+        if self.plan:
+            payments = self.plan.payment_set.filter(user=self.user)
+            if payments.exists():
+                paid_at = payments.latest('paid_at').paid_at
+                end_date = paid_at + timedelta(days=self.plan.duration_days)
+                now = timezone.now()
+                self.remaining_days = max(0, (end_date - now).days)
+                self.save()
     def get_plan_name(self):
         return self.plan.name if self.plan else "No Plan"
     
@@ -48,6 +65,7 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.user.username
+
 
 class EmailVerification(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)

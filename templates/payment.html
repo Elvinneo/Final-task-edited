@@ -93,6 +93,7 @@
         </div>
         <div class="aisle">
             <div class="reserveprice">
+                <span id="plan_idforpurchase" style="display: none;">{{ id }}</span>
                 <span id="price">$ {{ price }}</span>
                 <span id="month">/Month</span>
             </div>
@@ -123,8 +124,6 @@
             </div>
             <div class="tad">
                 <div class="reserveduration">
-                    <p>Package Duration</p>
-                    <p>Selected Months: {{ months }}</p>
                     <select id="months">
                         <option value="1" {% if months == 1 %}selected{% endif %}>1 Month</option>
                         <option value="8" {% if months == 8 %}selected{% endif %}>8 Months</option>

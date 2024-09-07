@@ -65,6 +65,7 @@
             <span id="usernamfield">{{ user.username }}</span>
             <span id="programfield">Program : {{ user.profile.get_program_name }}</span>
             <span id="planfield"> Plan : {{ user.profile.get_plan_name }}</span>
+            <span id="remainingdaysfield"> Remaining Days : {{ user.profile.remaining_days }}</span>
             <div class="buttons">
                 <div id="changephoto">Change photo</div>
                 <form id="logoutForm" method="post">

@@ -368,33 +368,53 @@ def payment_view(request, plan_id, months):
     return render(request, 'payment.html', context)
 
 
-def purchase(request, plan_id,total_amount):
+def purchase(request, plan_id,total_amount,paymethod):
     if request.method == 'POST':
         user = request.user
+        plan = get_object_or_404(Plan, id=plan_id)
+        user_profile, created = Profile.objects.get_or_create(user=user)
+        if user_profile.plan and user_profile.plan.id == plan_id:
+            return JsonResponse({'status': 'info', 'message': 'This plan was already purchased.', 'remaining_days': user_profile.remaining_days})
+        user_profile.plan = plan
+        user_profile.update_remaining_days()
+        user_profile.save()
+        request.session['success_message'] = 'Membership successfully updated!'
         payment = Payment(
             user=user,
-            plan=plan_id,
-            amount=total_amount
+            plan=plan,
+            amount=total_amount,
+            method=paymethod
         )
         payment.save()
-        return JsonResponse({'status': 'success', 'message': 'Payment successfully,item removed wishlist '})
+        return JsonResponse({'status': 'success', 'message': 'Payment successfully '})
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
 
 
 
-def wishlist_purchase(request, wishlist_id):
+def wishlist_purchase(request, wishlist_id, paymethod):
     if request.method == 'POST':
         user = request.user
         wishlist_item = get_object_or_404(Wishlist, id=wishlist_id, user=user)
+        plan_id = wishlist_item.plan_id
+        plan = get_object_or_404(Plan, id=plan_id)
+        user_profile, created = Profile.objects.get_or_create(user=user)
+        if user_profile.plan and user_profile.plan.id == plan_id:
+            return JsonResponse({'status': 'info', 'message': 'This plan was already purchased.','remaining_days': user_profile.remaining_days})
+        user_profile.plan = plan
+        user_profile.update_remaining_days()
+        user_profile.save()
         payment = Payment(
             user=user,
-            plan=wishlist_item.plan,
-            amount=wishlist_item.amount
+            plan=plan,
+            amount=wishlist_item.amount,
+            method=paymethod
         )
         payment.save()
         wishlist_item.delete()
-        return JsonResponse({'status': 'success', 'message': 'Payment successfully,item removed wishlist '})
+        
+        return JsonResponse({'status': 'success', 'message': 'Payment successfully, item removed from wishlist.'})
     return JsonResponse({'status': 'error', 'message': 'Invalid request'}, status=400)
+
 
 def wishlistcont(request, id):
     try:

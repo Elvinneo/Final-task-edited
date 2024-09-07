@@ -1,4 +1,5 @@
 from pathlib import Path
+from django.contrib import messages
 import os
 
 
@@ -27,10 +28,10 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'article',
     'ckeditor',
     'account',
     'core.apps.CoreConfig',
+    'rest_framework',
 ]
 
 MIDDLEWARE = [
@@ -63,6 +64,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                'core.context_processors.social_context',
             ],
         },
     },
@@ -104,12 +106,9 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-# Internationalization
-# https://docs.djangoproject.com/en/5.0/topics/i18n/
-
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Baku'
 
 USE_I18N = True
 
@@ -120,27 +119,40 @@ AUTHENTICATION_BACKENDS = [
     'django.contrib.auth.backends.ModelBackend',
 ]
 
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/5.0/howto/static-files/
 
 STATIC_URL = 'static/'
-
-# Default primary key field type
-# https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-
 STATIC_URL = 'static/'
+
 STATICFILES_DIRS = BASE_DIR / "static",
+
 STATIC_ROOT =os.path.join(BASE_DIR, 'staticfiles')
 
+MEDIA_URL = '/media/'
 
-MEDIA_URL='Media/'
-MEDIA_ROOT=(BASE_DIR,'static/Media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
 CKEDITOR_UPLOAD_PATH = "uploads/"
 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 LOGIN_REDIRECT_URL = '/'
 
+MESSAGE_TAGS = {
+    messages.DEBUG: 'debug',
+    messages.INFO: 'info',
+    messages.SUCCESS: 'success',
+    messages.WARNING: 'warning',
+    messages.ERROR: 'error',
+}
+
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'Full',
+        'height': 300,
+        'width': 800,
+        'extraAllowedContent': 'div(*)',
+    },
+}
