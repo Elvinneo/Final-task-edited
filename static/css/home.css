@@ -635,6 +635,8 @@ nav {
     align-items: center;
     border-radius: 24px;
     background: #BCFF5E;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .membershipzone {
@@ -978,6 +980,8 @@ nav {
 }
 
 .submit button {
+    font-size: 16px;
+    font-weight: 500;
     display: flex;
     padding: 16px 40px;
     justify-content: center;
