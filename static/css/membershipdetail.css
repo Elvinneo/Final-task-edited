@@ -1,13 +1,15 @@
 .membershipdetail {
+    width: 100%;
     margin: 4% auto;
     background: #F9F9FB;
     display: flex;
     justify-content: space-between;
-    flex-wrap: wrap;
+    flex-direction: row;
 
 }
 
 .detailcontent {
+    width: 60%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

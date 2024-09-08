@@ -607,11 +607,12 @@ function iforgotpassword() {
     closewindow()
     resetFormInDiv(overlays[4].id)
     overlays[4].style.display = "flex"
-    document.getElementById("forgotnext").addEventListener("click", forgotnext)
+    next.addEventListener("click", forgotnext)
     closer()
 }
 
 function forgotnext() {
+    closewindow()
     verificationCodeSender('forgotmailform')
     resetFormInDiv(overlays[5].id)
     overlays[5].style.display = "flex"
@@ -1613,7 +1614,7 @@ if (save_card) {
 
 function savecard(e) {
     e.preventDefault();
-    const cardnumber = document.getElementById('cardnumber').value;
+    const cardnumber = document.getElementById('cardnumber').value
     const cardholder = document.getElementById('cardholder').value;
     const expiry = document.getElementById('expiryDate').value;
     const cvv = document.getElementById('cvv').value;
@@ -1715,4 +1716,3 @@ lists.map((li) => {
         icon.classList.add("fa-angle-up");
     });
 });
-

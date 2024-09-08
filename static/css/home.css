@@ -227,6 +227,7 @@ nav {
     display: flex;
     gap: 14px;
     align-items: center;
+    justify-content: flex-start;
 }
 
 .account i {
@@ -249,6 +250,8 @@ nav {
     align-items: center;
     border-radius: 20px;
     border: 1px solid#FFF;
+    font-size: 14px;
+    font-weight:500 ;
 }
 
 #signup {
@@ -260,6 +263,8 @@ nav {
     align-items: center;
     border-radius: 20px;
     background: #BCFF5E;
+    font-size: 14px;
+    font-weight:500 ;
 }
 
 .container {
@@ -604,6 +609,8 @@ nav {
     border-radius: 6px;
     outline: none;
     color: #121257;
+    font-size: 14px;
+    font-weight: 600;
 
 }
 #delcard i{
@@ -618,11 +625,6 @@ nav {
     flex-wrap: wrap;
     gap: 30px;
 }
-
-/* .description h2,
-.description1 h2 {
-    width: 90%;
-} */
 
 .description ul li,
 .description1 ul li {
@@ -1645,6 +1647,7 @@ nav {
 
 .forgotVerify {
     height: 480px;
+    width: 500px;
 }
 
 #wishmain {
@@ -1773,11 +1776,20 @@ button:hover {
     font-size: 16px;
 }
 
+
+#selectandpay {
+    width: 70%;
+
+}
+#forgotnext{
+    width: 100%;
+}
 #forgotnext,
 #selectandpay {
     display: flex;
-    width: 350px;
-    padding: 16px;
+    font-size: 16px;
+    font-weight: 500;
+    padding: 14px;
     margin-top: 20px;
     justify-content: center;
     align-items: center;
@@ -1860,7 +1872,9 @@ button:hover {
     align-items: center;
     border-radius: 24px;
     background: #BCFF5E;
-    border: none
+    border: none;
+    font-size: 16px;
+    font-weight: 500;
 }
 
 .resendbutton {

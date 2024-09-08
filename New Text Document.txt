@@ -1,91 +1,21 @@
-        function savecard(e) {
-            if (!cardnumber in usercards) {
-                if (paymethod == "card") {
-                    e.preventDefault();
-                    const formData = new FormData(this);
-                    fetch('/add-card/', {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-CSRFToken': csrfToken
-                        }
-                    })
-                        .then(response => response.json())
-                        .then(data => {
-                            if (data.status === 'success') {
-                                alert('Card added successfully');
-                                location.reload();
-                            } else {
-                                alert('Error: ' + data.message);
-                            }
-                        })
-                        .catch(error => {
-                            console.error('Error:', error);
-                        });
-                }
+function slicer() {
+    let value1 = cardnumber.value
+    cardnumber.value = (value1.slice(0, 4) + ' ' + value1.slice(4, 8) + ' ' + value1.slice(8, 12) + ' ' + value1.slice(12, 16))
+}
+
+
+if (cardnumber){
+
+    cardnumber.addEventListener('input', function(e) {
+        let value = e.target.value;
+        value = value.replace(/\D/g, '');
+        let formattedValue = '';
+        for (let i = 0; i < value.length; i += 4) {
+            if (i > 0) {
+                formattedValue += ' ';
             }
+            formattedValue += value.substring(i, i + 4);
         }
-
-
-
-
-
-
-
-
-
-@login_required
-def add_card(request):
-    if request.method == 'POST':
-        cardholder = request.POST.get('cardholder')
-        card_number = request.POST.get('card_number')
-        expiration_date = request.POST.get('expiration_date')
-        cvv = request.POST.get('cvv')
-        postal = request.POST.get('postal')
-
-        if all([cardholder, card_number, expiration_date, cvv, postal]):
-            card = Card(
-                user=request.user,
-                cardholder=cardholder,
-                card_number=card_number,
-                expiration_date=expiration_date,
-                cvv=cvv,
-                postal=postal
-            )
-            card.save()
-            return JsonResponse({'status': 'success'})
-        else:
-            return JsonResponse({'status': 'error', 'message': 'All fields are required'})
-    return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
-
-
-
-
-
-
-
-
-
-
-
-
-path('add-card/', add_card, name='add_card'),
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+        e.target.value = formattedValue;
+    });
+}
