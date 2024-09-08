@@ -22,12 +22,12 @@
             <span>Resource Center</span>
             <h2>{{ blog.title}}</h2>
         </div>
+
         <div class="bdheaderright">
-            <ul>
-                <li><a target=”_blank” href="https://www.facebook.com/madbulking/"><i><img src="{% static 'media/facebook.svg' %}" alt=""></i></a></li>
-                <li><a target=”_blank” href="https://www.linkedin.com/company/bulking/"><i><img src="{% static 'media/linkedin.svg' %}" alt=""></i></a></li>
-                <li><a target=”_blank” href="https://x.com/bulkingbroo/"><i><img src="{% static 'media/twitter.svg' %}" alt=""></i></a></li>
-                <li><a target=”_blank” href="https://www.youtube.com/@Bulkingchanel/"><i><img src="{% static 'media/social.svg' %}" alt=""></i></a></li>
+            <ul id="blogdetailsocial">
+                {% for social in socials %}
+                <li ><a target="_blank" href="{{ social.address }}"><img src="{{ social.icon.url }}" alt=""></a></li>
+                {% endfor %}
             </ul>
         </div>
     </div>
@@ -64,13 +64,13 @@
                     <div class="accordion-body">
                         <ul class="articles-list">
                             {% for fitness_blog in fitness_blogs %}
-                                <li>
-                                    <a href="{% url 'blogdetail' fitness_blog.id %}">
-                                        {{ fitness_blog.title }}
-                                    </a>
-                                </li>
+                            <li>
+                                <a href="{% url 'blogdetail' fitness_blog.id %}">
+                                    {{ fitness_blog.title }}
+                                </a>
+                            </li>
                             {% empty %}
-                                <li>No Fitness articles found.</li>
+                            <li>No Fitness articles found.</li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -83,13 +83,13 @@
                     <div class="accordion-body">
                         <ul class="articles-list">
                             {% for health_blog in health_blogs %}
-                                <li>
-                                    <a href="{% url 'blogdetail' health_blog.id %}">
-                                        {{ health_blog.title }}
-                                    </a>
-                                </li>
+                            <li>
+                                <a href="{% url 'blogdetail' health_blog.id %}">
+                                    {{ health_blog.title }}
+                                </a>
+                            </li>
                             {% empty %}
-                                <li>No Health articles found.</li>
+                            <li>No Health articles found.</li>
                             {% endfor %}
                         </ul>
                     </div>
@@ -102,13 +102,13 @@
                     <div class="accordion-body">
                         <ul class="articles-list">
                             {% for recipes_blog in recipes_blogs %}
-                                <li>
-                                    <a href="{% url 'blogdetail' recipes_blog.id %}">
-                                        {{ recipes_blog.title }}
-                                    </a>
-                                </li>
+                            <li>
+                                <a href="{% url 'blogdetail' recipes_blog.id %}">
+                                    {{ recipes_blog.title }}
+                                </a>
+                            </li>
                             {% empty %}
-                                <li>No Recipes articles found.</li>
+                            <li>No Recipes articles found.</li>
                             {% endfor %}
                         </ul>
                     </div>

@@ -22,6 +22,7 @@ urlpatterns = [
     path('faq/',faq_view,name="faq"),
     path('programdetail/<int:program_id>/', programdetail_view, name='programdetail'),
     path('api/users/', user_data, name='user_data'),
+    path('api/cards/', user_cards, name='user_cards'),
     path('email_verification/', email_verification_view, name='email_verification'),
     path('get-verification-code/', get_verification_code, name='get_verification_code'),
     path('login/', login_view, name='login_view'),
@@ -35,6 +36,9 @@ urlpatterns = [
     path('wishlist/purchase/<int:wishlist_id>/<paymethod>/', wishlist_purchase, name='wishlist-purchase'),
     path('purchase/<int:plan_id>/<int:total_amount>/<paymethod>/', purchase, name='purchase'),
     path('wishlistcont/<int:id>/', wishlistcont, name='wishlistcont'),
+    path('add-card/', add_card, name='add_card'),
+    path('deletecard/',delete_card, name='delete_card'),
+    
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,3 +1,7 @@
+const welcomeMessageElement = document.getElementById("wellcome_message")
+const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+const selectElement = document.getElementById('mycards');
+const deleteCardForm = document.getElementById('deletecard');
 let isAuthenticated = document.querySelector('meta[name="is_authenticated"]').getAttribute('content') === 'True';
 let menu = document.querySelector(".drop").childNodes[1]
 let dropmenu = document.getElementById("dropmenu")
@@ -23,32 +27,21 @@ let passwordfield = document.getElementById("passwordlogin")
 let usernamefield = document.getElementById("usernamelogin")
 let buttoncontinue = document.getElementById("confirmContinue")
 let forgotmailarea = document.getElementById("forgotmailarea")
-let pass = document.querySelectorAll(".pass")
-let globalemail
-let test = true
-let nextBtn
-let prevBtn
-let resendbutton = document.getElementById("resend")
-let path = window.location.pathname;
-let page = path.split("/")
-let activeClass
 let articleoptions = document.getElementById("articleoptions")
-let testedusers = [];
+let resendbutton = document.getElementById("resend")
+let pass = document.querySelectorAll(".pass")
+let path = window.location.pathname;
 let eye = document.querySelectorAll('.eye')
 let eye1 = document.querySelectorAll('.eye1')
 let arrows = document.getElementById("arrows")
 let arrowleft = document.getElementById("arrowleft")
 let arrowright = document.getElementById("arrowright")
-let happyClientsCount = 2
-let startcount = 1
 let passes = document.querySelectorAll(".pass")
 let next = document.getElementById("forgotnext")
 let characterverifies = document.querySelectorAll(".characterverify")
-let verifycode = []
 let pause = document.getElementById("pausebutton")
 let play = document.getElementById("playbutton")
 let video = document.getElementById("myvideo")
-let wishlist = ["basic"]
 let addtocart = document.querySelector("#addtocart")
 let months = document.getElementById("months");
 let priceElement = document.getElementById("price");
@@ -59,16 +52,6 @@ let changebutton = document.getElementById("changephoto")
 let profilicon = document.querySelector(".profiles");
 let wishview = document.getElementById("wishview")
 let faqform = document.getElementById('faqform')
-let currentIndex = 0;
-let temporary = {}
-let userName
-let purchaseButton
-let planIdElement
-let price
-let paymethod
-let resulter = {};
-const welcomeMessageElement = document.getElementById("wellcome_message")
-const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
 let paypal = document.getElementById("paypal")
 let applepay = document.getElementById("applepay")
 let cardholder = document.getElementById('cardholder');
@@ -76,6 +59,27 @@ let cardnumber = document.getElementById('cardnumber');
 let expiry = document.getElementById('expiryDate');
 let cvv = document.getElementById('cvv');
 let postal = document.getElementById('postalcode');
+let page = path.split("/")
+let happyClientsCount = 2
+let wishlist = ["basic"]
+let testedusers = [];
+let usercards = []
+let verifycode = []
+let currentIndex = 0;
+let startcount = 1
+let activeClass
+let temporary = {}
+let resulter = {};
+let purchaseButton
+let planIdElement
+let globalemail
+let test = true
+let paymethod
+let userName
+let price
+let nextBtn
+let prevBtn
+let save_card = document.querySelector("#save-card")
 
 
 if (welcomeMessageElement) {
@@ -142,6 +146,37 @@ function resize() {
         dropmenu.classList.remove("Show")
     }
 }
+
+document.addEventListener('DOMContentLoaded', function () {
+    const token = 'bvmVNBMBMHB24512vbnmmm45vbgfhvn53VGBHJbjghj275fgcgvnf';
+    fetch('/api/cards/', {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': token
+        }
+    })
+        .then(response => {
+            if (!response.ok) {
+                throw new Error('Network response was not ok');
+            }
+            return response.json();
+        })
+        .then(data => {
+            data.forEach(card => {
+                usercards[card.id] = {
+                    card_number: card.card_number,
+                    cardholder: card.cardholder,
+                    expiry: card.expiry,
+                    cvv: card.cvv,
+                    postal: card.postal
+                };
+            });
+        })
+        .catch(error => console.error('Error', error));
+});
+
+// user cards data
 
 document.addEventListener('DOMContentLoaded', function () {
     const token = 'bvmVNBMBMHB24512vbnmmm45vbgfhvn53VGBHJbjghj275fgcgvnf';
@@ -789,6 +824,8 @@ function changer() {
 
 // profiles
 
+// Select the profile icon element
+
 if (profilicon) {
     profilicon.addEventListener("click", toggledrop);
 }
@@ -806,18 +843,33 @@ function toggledrop() {
             setTimeout(() => {
                 profileContents.classList.add("showed");
             }, 10);
-
-            setTimeout(() => {
-                if (profileContents.classList.contains("showed")) {
-                    profileContents.classList.remove("showed");
-                    setTimeout(() => {
-                        profileContents.style.display = 'none';
-                    }, 300);
-                }
-            }, 3000);
+            profileContents.addEventListener('mouseover', handleMouseOver);
+            profileContents.addEventListener('mouseout', handleMouseOut);
         }
     }
 }
+
+let hideTimeout;
+
+function handleMouseOver() {
+    if (hideTimeout) {
+        clearTimeout(hideTimeout);
+        hideTimeout = null;
+    }
+}
+
+function handleMouseOut() {
+    hideTimeout = setTimeout(() => {
+        let profileContents = document.querySelector(".profilecontents");
+        if (profileContents && profileContents.classList.contains("showed")) {
+            profileContents.classList.remove("showed");
+            setTimeout(() => {
+                profileContents.style.display = 'none';
+            }, 300);
+        }
+    }, 2500);
+}
+
 
 
 if (updater && changephoto) {
@@ -1338,6 +1390,10 @@ async function payandsave() {
         let plan_id = document.getElementById("plan_idforpurchase").textContent
         let total_amount = document.getElementById("total").textContent.replace('$', '').trim();
         const form = document.getElementById('confirmandpay');
+        if (paymethod == 'card') {
+
+
+        }
         if (form) {
             form.addEventListener('submit', async function (event) {
                 event.preventDefault();
@@ -1354,13 +1410,13 @@ async function payandsave() {
                     const data = await response.json();
                     await Swal.fire({
                         icon: data.status === 'success' ? 'success' :
-                              data.status === 'error' ? 'error' :
-                              data.status === 'info' ? 'info' :
-                              'warning',
+                            data.status === 'error' ? 'error' :
+                                data.status === 'info' ? 'info' :
+                                    'warning',
                         title: data.status === 'success' ? 'Success' :
-                               data.status === 'error' ? 'Error' :
-                               data.status === 'info' ? 'Info' :
-                               'Warning',
+                            data.status === 'error' ? 'Error' :
+                                data.status === 'info' ? 'Info' :
+                                    'Warning',
                         text: `${data.message}${data.remaining_days ? ` ${data.remaining_days} days remaining` : ''}`
                     });
                     window.location.reload();
@@ -1428,34 +1484,204 @@ function paytester() {
         paymethod = "applepay"
     } else if (paypal.checked == false && applepay.checked == false) {
         if (cardholder.value != '' && cardnumber.value != '' && expiry.value != '' && cvv.value != '' && postal.value != '') {
-            paymethod = "card"
+            if (cardnumber.value.length != 16) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Invalid card number',
+                    icon: 'error'
+                })
+                return;
+
+            } else if (cvv.value.length != 3) {
+                Swal.fire({
+                    title: 'Error',
+                    text: 'Invalid CVV',
+                    icon: 'error'
+                })
+                return;
+
+            }
+            else {
+                paymethod = "card"
+            }
+
         }
     }
     if (paymethod || priceElement.textContent == '$ 0.00') {
         confirmpay.disabled = false
     }
-}paytester()
+} paytester()
+
+
+if (deleteCardForm) {
+    if (selectElement.value == '') {
+        document.getElementById("delcard").disabled = true
+    }
+    deleteCardForm.addEventListener('submit', async function (event) {
+        const selectedCardnumber = selectElement.value;
+
+        event.preventDefault();
+        try {
+            const response = await fetch('/deletecard/', {
+                method: 'POST',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest',
+                    'X-CSRFToken': csrfToken
+                },
+                body: new URLSearchParams({
+                    'card_number': selectedCardnumber
+                })
+            });
+            const data = await response.json();
+            await Swal.fire({
+                icon: data.status === 'success' ? 'success' : 'error',
+                title: data.status === 'success' ? 'Success' : 'Error',
+                text: data.message
+            });
+            window.location.reload()
+        } catch (error) {
+            Swal.fire({
+                icon: 'error',
+                title: 'Error',
+                text: 'An error occurred'
+            });
+        }
+    });
+}
+
+
+
+window.addEventListener('load', function () {
+    updateCardInfo();
+});
+
+function updateCardInfo() {
+    if (usercards.length > 0) {
+        const defaultcard = usercards[usercards.length - 1];
+        document.getElementById('cardholder').value = defaultcard.cardholder;
+        document.getElementById('cardnumber').value = defaultcard.card_number;
+        document.getElementById('expiryDate').value = defaultcard.expiry;
+        document.getElementById('cvv').value = defaultcard.cvv;
+        document.getElementById('postalcode').value = defaultcard.postal;
+    }
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    selectElement.addEventListener('change', function () {
+        const selectedCardNumber = selectElement.value.trim();
+        console.log('Selected card number:', selectedCardNumber);
+        console.log('User cards:', usercards);
+        if (selectedCardNumber) {
+            const selectedIndex = usercards.findIndex(card => {
+                if (card && card.card_number) {
+                    return card.card_number.trim() === selectedCardNumber;
+                }
+                return false;
+            });
+
+            console.log('Selected index:', selectedIndex);
+
+            if (selectedIndex !== -1) {
+                const selectedCard = usercards[selectedIndex];
+                cardholder.value = selectedCard.cardholder;
+                cardnumber.value = selectedCard.card_number;
+                expiryDate.value = selectedCard.expiry;
+                cvv.value = selectedCard.cvv;
+                postal.value = selectedCard.postal;
+
+            } else {
+                console.log('Card not found in usercards');
+                cardholder.value = '';
+                cardnumber.value = '';
+                expiryDate.value = '';
+                cvv.value = '';
+            }
+        } else {
+            cardholder.value = '';
+            cardnumber.value = '';
+            expiryDate.value = '';
+            cvv.value = '';
+        }
+    });
+});
+
+
+// add card
+if (save_card) {
+    save_card.addEventListener("click", savecard);
+}
+
+function savecard(e) {
+    e.preventDefault();
+    const cardnumber = document.getElementById('cardnumber').value;
+    const cardholder = document.getElementById('cardholder').value;
+    const expiry = document.getElementById('expiryDate').value;
+    const cvv = document.getElementById('cvv').value;
+    const postal = document.getElementById('postalcode').value;
+    const cardExists = usercards.some(card => card.card_number === cardnumber);
+
+    if (cardExists) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Card number already exists',
+            text: 'This card number is already registered.',
+            confirmButtonText: 'OK'
+        });
+    } else {
+        if (paymethod === "card") {
+            const data = {
+                card_number: cardnumber,
+                cardholder: cardholder,
+                expiration_date: expiry,
+                cvv: cvv,
+                postal: postal
+            };
+
+            fetch('/add-card/', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrfToken
+                },
+                body: JSON.stringify(data)
+            })
+                .then(response => response.json())
+                .then(data => {
+                    if (data.status === 'success') {
+                        Swal.fire({
+                            icon: 'success',
+                            title: 'Card added successfully',
+                            text: 'The card has been added.',
+                            confirmButtonText: 'OK'
+                        }).then(() => {
+                            location.reload();
+                        });
+                    } else {
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Error',
+                            text: data.message,
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                })
+                .catch(error => {
+                    console.error('Error:', error);
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'An error occurred',
+                        text: 'Please try again.',
+                        confirmButtonText: 'OK'
+                    });
+                });
+        }
+    }
+}
 
 
 
 
 
-
-// get CSRF token
-// function getCookie(name) {
-//     let cookieValue = null;
-//     if (document.cookie && document.cookie !== '') {
-//         const cookies = document.cookie.split(';');
-//         for (let i = 0; i < cookies.length; i++) {
-//             const cookie = cookies[i].trim();
-//             if (cookie.substring(0, name.length + 1) === (name + '=')) {
-//                 cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
-//                 break;
-//             }
-//         }
-//     }
-//     return cookieValue;
-// }
 
 //Mirqafar js kodlar
 
@@ -1489,9 +1715,4 @@ lists.map((li) => {
         icon.classList.add("fa-angle-up");
     });
 });
-
-
-
-
-
 

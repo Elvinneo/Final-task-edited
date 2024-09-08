@@ -352,4 +352,10 @@ ul {
 .articles-list li:last-child {
     border-bottom: none;
 }
-
+#articleoptions{
+    transition: 0.3s;
+}
+#articleoptions a:hover{
+    transform: scale(1.07);
+    color: #064BB4;
+}

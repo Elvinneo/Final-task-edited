@@ -1,0 +1,91 @@
+        function savecard(e) {
+            if (!cardnumber in usercards) {
+                if (paymethod == "card") {
+                    e.preventDefault();
+                    const formData = new FormData(this);
+                    fetch('/add-card/', {
+                        method: 'POST',
+                        body: formData,
+                        headers: {
+                            'X-CSRFToken': csrfToken
+                        }
+                    })
+                        .then(response => response.json())
+                        .then(data => {
+                            if (data.status === 'success') {
+                                alert('Card added successfully');
+                                location.reload();
+                            } else {
+                                alert('Error: ' + data.message);
+                            }
+                        })
+                        .catch(error => {
+                            console.error('Error:', error);
+                        });
+                }
+            }
+        }
+
+
+
+
+
+
+
+
+
+@login_required
+def add_card(request):
+    if request.method == 'POST':
+        cardholder = request.POST.get('cardholder')
+        card_number = request.POST.get('card_number')
+        expiration_date = request.POST.get('expiration_date')
+        cvv = request.POST.get('cvv')
+        postal = request.POST.get('postal')
+
+        if all([cardholder, card_number, expiration_date, cvv, postal]):
+            card = Card(
+                user=request.user,
+                cardholder=cardholder,
+                card_number=card_number,
+                expiration_date=expiration_date,
+                cvv=cvv,
+                postal=postal
+            )
+            card.save()
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'All fields are required'})
+    return JsonResponse({'status': 'error', 'message': 'Invalid request method'})
+
+
+
+
+
+
+
+
+
+
+
+
+path('add-card/', add_card, name='add_card'),
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

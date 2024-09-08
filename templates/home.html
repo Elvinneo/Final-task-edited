@@ -26,7 +26,7 @@
                 <p>It doesn’t matter if your goal is to get stronger, burn fat, or to just stay fit our world
                     class
                     coaches will guide you every step of the way.</p>
-                <button type="submit"><a href="{% url 'programs' %}">Book a class</a></button>
+                <a href="{% url 'programs' %}"><button id="bookaclassbutton" type="submit">Book a class</button></a>
                 <div class="logos">
                     <p>Sponsored by</p>
                     <ul>
@@ -54,7 +54,7 @@
         </div>
         <div class="programs">
                 <div class="selections">
-                {% for program in programs%}
+                {% for program in programs %}
                 {% if forloop.counter == 2 %}
                 <div class="selection" id="selection1">
                     <i><img src="{{program.icon.url}}" alt=""></i>

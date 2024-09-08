@@ -68,6 +68,12 @@ body {
     gap: 16px;
     border-radius: 16px;
     background: #FFF;
+    transition: 0.2s;
+}
+
+.trainerscard:hover{
+    transform: scale(1.06);
+
 }
 
 .picture {

@@ -187,6 +187,7 @@ class Card(models.Model):
     card_number = models.CharField(max_length=16)
     expiration_date = models.CharField(max_length=5)
     cvv = models.CharField(max_length=3)
+    postal=models.CharField(max_length=10,default='')
 
 
 class Social(models.Model):

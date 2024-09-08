@@ -92,6 +92,7 @@
     border-radius: 24px;
     border: 1px #E9EBED;
     background: #FFF;
+    padding-left: 20px;
 }
 
 
@@ -116,12 +117,6 @@
     background: #FFF;
 }
 
-.mistake button {
-    padding: 16px 40px;
-    border-radius: 24px;
-    background: #BCFF5E;
-
-}
 
 .mistake button h5 {
     color: #1C1C1E;
@@ -251,6 +246,8 @@
 
 #sendmessagebutton {
     display: flex;
+    font-size: 16px;
+    font-weight: 500;
     padding: 16px 40px;
     justify-content: center;
     align-items: center;

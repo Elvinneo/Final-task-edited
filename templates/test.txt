@@ -1,0 +1,8 @@
+                <li><a target=”_blank” href="https://www.facebook.com/madbulking/"><i><img
+                                src="{% static 'media/facebook.svg' %}" alt=""></i></a></li>
+                <li><a target=”_blank” href="https://www.linkedin.com/company/bulking/"><i><img
+                                src="{% static 'media/linkedin.svg' %}" alt=""></i></a></li>
+                <li><a target=”_blank” href="https://x.com/bulkingbroo/"><i><img src="{% static 'media/twitter.svg' %}"
+                                alt=""></i></a></li>
+                <li><a target=”_blank” href="https://www.youtube.com/@Bulkingchanel/"><i><img
+                                src="{% static 'media/social.svg' %}" alt=""></i></a></li>

@@ -98,6 +98,24 @@ def user_data(request):
         })
     return JsonResponse(user_data, safe=False)
 
+def user_cards(request):
+    token = request.headers.get('Authorization', '').split(' ')[-1]
+    if token != 'bvmVNBMBMHB24512vbnmmm45vbgfhvn53VGBHJbjghj275fgcgvnf':
+        return HttpResponseForbidden('Unauthorized')
+    user_id = request.user.id
+    cards = Card.objects.filter(user_id=user_id)
+    user_card = []
+    for card in cards:
+        user_card.append({
+            'id': card.id,
+            'card_number':card.card_number,
+            'cardholder': card.cardholder,
+            'cvv': card.cvv,
+            'expiry':card.expiration_date,
+            'postal':card.postal
+        })
+    return JsonResponse(user_card, safe=False)
+
 username_global = None
 password_global = None
 
@@ -350,7 +368,10 @@ def wishdelete(request,id):
 
 def payment_view(request, plan_id, months):
     user_auth(request)
+    user=request.user
     plan = get_object_or_404(Plan, id=plan_id)
+    cards = Card.objects.filter(user_id=user.id)
+    print(cards)
     total=plan.price * months
     context = {
         'id':plan_id,
@@ -363,7 +384,9 @@ def payment_view(request, plan_id, months):
         'about': plan.about,
         'istheright': plan.istheright,
         'months': months,
-        'total' :total
+        'total' :total,
+        'cards':cards,
+ 
     }
     return render(request, 'payment.html', context)
 
@@ -429,3 +452,45 @@ def wishlistcont(request, id):
         return JsonResponse(data)
     except Wishlist.DoesNotExist:
         return JsonResponse({ 'status': 'error','message': 'Wishlist not found'}, status=404)
+    
+    
+    
+@login_required
+def delete_card(request):
+    if request.method == 'POST':
+        card_number = request.POST.get('card_number')
+        card = get_object_or_404(Card, card_number=card_number, user=request.user)
+        card.delete()
+        return JsonResponse({'status': 'success', 'message': 'Your card has been deleted.'})
+    return JsonResponse({'status': 'error', 'message': 'Card is not deleted'}, status=404)
+
+
+
+@login_required
+@require_POST
+def add_card(request):
+    try:
+        data = json.loads(request.body)
+        user = request.user
+        cardholder = data.get('cardholder')
+        card_number = data.get('card_number')
+        expiration_date = data.get('expiration_date')  # Önemli: JSON'daki isimle uyumlu olmalı
+        cvv = data.get('cvv')
+        postal = data.get('postal')
+
+        if all([user, cardholder, card_number, expiration_date, cvv, postal]):
+            card = Card(
+                user=user,
+                cardholder=cardholder,
+                card_number=card_number,
+                expiration_date=expiration_date,
+                cvv=cvv,
+                postal=postal
+            )
+            card.save()
+            return JsonResponse({'status': 'success'})
+        else:
+            return JsonResponse({'status': 'error', 'message': 'All fields are required'})
+    except json.JSONDecodeError:
+        return JsonResponse({'status': 'error', 'message': 'Invalid JSON'})
+

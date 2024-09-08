@@ -155,9 +155,14 @@
 }
 
 .thus {
+    margin-top: 20px;
     display: flex;
+    width: 450px;
     align-items: center;
-    gap: 12px;
+    gap: 40px;
+    justify-content: space-evenly;
+    border: 1px solid rgb(188, 191, 224);
+    border-radius: 15px;
 }
 
 .thus h6 {
