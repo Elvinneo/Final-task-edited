@@ -253,6 +253,7 @@ def blogdetail_view(request, blog_id):
     }
     return render(request, 'blogdetail.html', context)
 
+
 def contact_view(request):
     user_auth(request)
     contacts = Contact.objects.get()

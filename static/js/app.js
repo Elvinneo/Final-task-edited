@@ -5,7 +5,9 @@ const selectElement = document.getElementById('mycards');
 const deleteCardForm = document.getElementById('deletecard');
 const paypalCheckbox = document.getElementById('paypal');
 const applepayCheckbox = document.getElementById('applepay');
+const sendmessagebutton=document.querySelector("#sendmessagebutton")
 let menu = document.querySelector(".drop").childNodes[1]
+let signupcontinue =document.querySelector('#signupcontinue')
 let dropmenu = document.getElementById("dropmenu")
 let nav = document.querySelector("nav")
 let overlays = document.querySelectorAll(".overlay")
@@ -83,7 +85,25 @@ let price
 let nextBtn
 let prevBtn
 
+if (signupcontinue) {
+    signupcontinue.addEventListener("click", passwordControlFunction);
+}
 
+function passwordControlFunction(e) {
+    e.preventDefault();
+    const password = document.querySelector("#password").value;
+    const passwordRepeat = document.querySelector("#password_repeat").value;
+    if (password !== passwordRepeat) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning',
+            text: 'Passwords is not same',
+        });
+        return; 
+    }
+    const form = document.getElementById("securitypasswordform")
+    form.submit();
+}
 
 if (welcomeMessageElement) {
     const welcomeMessage = welcomeMessageElement.textContent.trim();
@@ -459,9 +479,9 @@ function testbuttons() {
             continue
         }
         if (testedusers[i].username == usernamelogin.value) {
-            confirmedemail.innerText = testedusers[i].email
+            confirmedemail.innerText = testedusers[i].email.replace(/^(.{6})/, '******');
             poster.value = testedusers[i].email
-            confirmedphone.innerText = testedusers[i].phone
+            confirmedphone.innerText = testedusers[i].phone.replace(/^(.{6})/, '******');
             test = true
             break
         }
@@ -481,7 +501,7 @@ function testmailfields() {
     test = false
     for (i = 1; i <= testedusers.length - 1; i++) {
         if (testedusers[i].email == forgotmailarea.value) {
-            confirmedemail.innerText = testedusers[i].email
+            confirmedemail.innerText = testedusers[i].email.replace(/^(.{6})/, '******');
             document.getElementById("verifyemailaddress").textContent = forgotmailarea.value
             test = true
             break
@@ -1117,6 +1137,23 @@ if (faqform) {
 }
 
 
+// isauth control when  send message button is clicked
+
+if (sendmessagebutton){
+    sendmessagebutton.addEventListener("click",sendmessagecontrol)
+}
+
+function sendmessagecontrol(e){
+    const form =document.getElementById('contactform')
+    if (!isAuthenticated){
+        e.preventDefault()
+        login()
+    }else{
+        return;
+    }
+}
+
+
 // plan purchase login reguired control
 
 function sentsale(months, planId) {
@@ -1540,10 +1577,8 @@ function paytester() {
     }
     if (paymethod || priceElement.textContent == '$ 0.00') {
         confirmpay.disabled = false
-
     }
-} paytester()
-
+} 
 if (deleteCardForm) {
     if (selectElement.value == '') {
         document.getElementById("delcard").disabled = true
