@@ -38,7 +38,7 @@ urlpatterns = [
     path('wishlistcont/<int:id>/', wishlistcont, name='wishlistcont'),
     path('add-card/', add_card, name='add_card'),
     path('deletecard/',delete_card, name='delete_card'),
-    
+    path('send-newsletter/', send_newsletter_message, name='send_newsletter'),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

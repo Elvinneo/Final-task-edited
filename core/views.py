@@ -12,7 +12,7 @@ import random
 import string
 import json
 from django.contrib.auth.models import User
-from .forms import SignupForm,ContactMessageForm,ProfilePictureForm,FAQForm
+from .forms import SignupForm,ContactMessageForm,ProfilePictureForm,FAQForm,NewsletterMessageForm
 from django.contrib.auth.forms import SetPasswordForm,AuthenticationForm
 from django.conf import settings
 import re
@@ -495,3 +495,37 @@ def add_card(request):
     except json.JSONDecodeError:
         return JsonResponse({'status': 'error', 'message': 'Invalid JSON'})
 
+def send_newsletter_message(request):
+    if request.method == 'POST':
+        message_text = request.POST.get('message')
+        if message_text:
+            username=request.user.username
+            message_instance = NewsletterMessage(
+                name=username,
+                email=Profile.objects.get(user=request.user).email,
+                subject='Newsletter Message',
+                message=message_text
+            )
+            message_instance.save()
+            try:
+                to_email = Contact.objects.first().email 
+                from_email = Profile.objects.get(user=request.user).email
+                subject = 'Newsletter Message'
+                message = f"From: {from_email}\n\n{message_text}"
+                send_mail(subject, message, from_email, [to_email])
+                response_data = {'success': True, 'message': 'Your message has been sent successfully!'}
+            except Exception as e:
+                response_data = {'success': False, 'message': str(e)}
+            return JsonResponse(response_data)
+    return JsonResponse({'success': False, 'message': 'Invalid request method.'}, status=400)
+
+
+
+
+def HappyClients(request):
+    ishappy = NewsletterMessage.objects.get(ishappy)
+    profile_picture=Profile.objects.
+    clients={
+        "username":
+    }
+    return render(request, 'happy_clients.html',{"clients": clients})

@@ -5,9 +5,9 @@ const selectElement = document.getElementById('mycards');
 const deleteCardForm = document.getElementById('deletecard');
 const paypalCheckbox = document.getElementById('paypal');
 const applepayCheckbox = document.getElementById('applepay');
-const sendmessagebutton=document.querySelector("#sendmessagebutton")
+const sendmessagebutton = document.querySelector("#sendmessagebutton")
 let menu = document.querySelector(".drop").childNodes[1]
-let signupcontinue =document.querySelector('#signupcontinue')
+let signupcontinue = document.querySelector('#signupcontinue')
 let dropmenu = document.getElementById("dropmenu")
 let nav = document.querySelector("nav")
 let overlays = document.querySelectorAll(".overlay")
@@ -99,7 +99,7 @@ function passwordControlFunction(e) {
             title: 'Warning',
             text: 'Passwords is not same',
         });
-        return; 
+        return;
     }
     const form = document.getElementById("securitypasswordform")
     form.submit();
@@ -113,14 +113,12 @@ if (welcomeMessageElement) {
     }
 }
 
-
 if (!isAuthenticated) {
     document.querySelector(".red").style.display = 'none'
     document.getElementById("wishview").disabled = true
 } else {
     checkcart()
 }
-
 
 if (menu) {
     menu.addEventListener('click', openMenu)
@@ -1139,20 +1137,19 @@ if (faqform) {
 
 // isauth control when  send message button is clicked
 
-if (sendmessagebutton){
-    sendmessagebutton.addEventListener("click",sendmessagecontrol)
+if (sendmessagebutton) {
+    sendmessagebutton.addEventListener("click", sendmessagecontrol)
 }
 
-function sendmessagecontrol(e){
-    const form =document.getElementById('contactform')
-    if (!isAuthenticated){
+function sendmessagecontrol(e) {
+    const form = document.getElementById('contactform')
+    if (!isAuthenticated) {
         e.preventDefault()
         login()
-    }else{
+    } else {
         return;
     }
 }
-
 
 // plan purchase login reguired control
 
@@ -1266,9 +1263,6 @@ if (wishview) {
     wishview.addEventListener("click", wishviewer)
 }
 
-
-
-
 function wishviewer() {
     closewindow();
     overlays[9].style.display = 'flex';
@@ -1324,7 +1318,6 @@ function wishviewer() {
 
     closer();
 }
-
 
 function setupSliderfunc() {
     const itemsWrapper = document.getElementById('wishlist-items-wrapper');
@@ -1529,7 +1522,7 @@ function carddatetester() {
         save_card.disabled = true
         return;
     }
-    const [year,month] = expiryDateValue.split('-').map(num => parseInt(num, 10));
+    const [year, month] = expiryDateValue.split('-').map(num => parseInt(num, 10));
     const enteredYear = year;
     const enteredMonth = month;
     if (enteredYear > new Date().getFullYear() || (enteredYear === new Date().getFullYear() && enteredMonth >= new Date().getMonth() + 1)) {
@@ -1578,7 +1571,7 @@ function paytester() {
     if (paymethod || priceElement.textContent == '$ 0.00') {
         confirmpay.disabled = false
     }
-} 
+}
 if (deleteCardForm) {
     if (selectElement.value == '') {
         document.getElementById("delcard").disabled = true
@@ -1746,7 +1739,6 @@ function slicer() {
     cardnumber.value = (value1.slice(0, 4) + ' ' + value1.slice(4, 8) + ' ' + value1.slice(8, 12) + ' ' + value1.slice(12, 16))
 }
 
-
 if (cardnumber) {
     cardnumber.addEventListener('input', slicer1)
     cardnumber.addEventListener('change', slicer1)
@@ -1765,9 +1757,6 @@ function slicer1(e) {
     }
     e.target.value = formattedValue;
 }
-
-
-
 
 //Mirqafar js kodlar
 
@@ -1802,3 +1791,51 @@ lists.map((li) => {
     });
 });
 
+document.getElementById('newslettersend').addEventListener('submit', function (event) {
+    if (!isAuthenticated) {
+        login()
+        return;
+    }
+    else {
+        event.preventDefault();
+        const form = document.getElementById("newslettersend")
+        const formData = new FormData(form);
+
+        fetch('/send-newsletter/', {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-CSRFToken': csrfToken
+            },
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    Swal.fire({
+                        icon: 'success',
+                        title: 'Success!',
+                        text: data.message,
+                        confirmButtonText: 'OK',
+                    }).then(() => {
+                        form.reset();
+                    });
+                } else {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Error!',
+                        text: data.message,
+                        confirmButtonText: 'OK',
+                    });
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Error!',
+                    text: 'An unexpected error occurred.',
+                    confirmButtonText: 'OK',
+                });
+            });
+    }
+});

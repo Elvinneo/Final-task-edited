@@ -92,11 +92,6 @@ class Sponsore(models.Model):
     email = models.EmailField(max_length=100,verbose_name="Email")
     icon = models.ImageField(verbose_name='Sponsor ikonu')
 
-class Member(models.Model):
-    user= models.OneToOneField(User, on_delete=models.CASCADE)
-    programs = models.ManyToManyField(Program)
-    plans = models.OneToOneField(Plan,on_delete=models.CASCADE)
-    ishappy=models.BooleanField(default=False)
     
 class Trainer(models.Model):
     name = models.CharField(max_length=100,verbose_name='Adı')
@@ -196,5 +191,13 @@ class Social(models.Model):
     icon =  models.FileField(upload_to='social_icons/')
 
 
+class NewsletterMessage(models.Model):
+    username = models.CharField(max_length=100)
+    email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    sent_at = models.DateTimeField(auto_now_add=True)
+    ishappy=models.BooleanField(default=False)
 
-    
+    def __str__(self):
+        return self.subject

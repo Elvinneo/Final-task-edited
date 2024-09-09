@@ -19,3 +19,23 @@ if (cardnumber){
         e.target.value = formattedValue;
     });
 }
+
+
+
+John D.
+"Joining this fitness program was a game-changer for me. The trainers are fantastic and the results have been incredible. Highly recommend to anyone seeking improvement!"
+
+Emily R.
+"I love the supportive community here! The workouts are challenging but rewarding, and the staff is always encouraging. I've seen amazing results and feel better than ever."
+
+Michael S.
+"This gym has transformed my life. The personalized training plans and friendly environment have made working out something I look forward to every day. Truly life-changing!"
+
+Sophie L.
+"Amazing experience from start to finish. The coaches are professional and the facilities are top-notch. I've achieved my fitness goals and built lasting healthy habits."
+
+David K.
+"The dedication of the trainers and the quality of the equipment are unmatched. I've made great progress and the positive energy keeps me motivated. Fantastic place to train!"
+
+Laura M.
+"I’m so grateful for this fitness program. The results speak for themselves, and the support from the team has been phenomenal. It's the best investment I've made in myself!"

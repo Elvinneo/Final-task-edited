@@ -69,9 +69,10 @@
                 <div class="mail">
                     <p>Newsletter</p>
                     <div class="form">
-                        <form action="">
-                            <input id="mailforminput" type="textarea" placeholder="Your email here">
-                            <button id="mailbutton">Send</button>
+                        <form id="newslettersend" method="post">
+                            {% csrf_token %}
+                            <input id="messageinput" type="text" name="message" placeholder="Your message here" required>
+                            <button type="submit" id="mailbutton">Send</button>
                         </form>
                     </div>
                 </div>
@@ -80,10 +81,10 @@
             <div class="social">
                 <p>© 2024 Nguli® Global Inc.</p>
                 <ul>
-                {% for social in socials %}
+                    {% for social in socials %}
                     <li><a target="_blank" href="{{ social.address }}"><img src="{{ social.icon.url }}" alt=""></a></li>
-                {% endfor %}
-                
+                    {% endfor %}
+
                 </ul>
                 <div class="policy">
                     <a href="{% url 'terms' %}">

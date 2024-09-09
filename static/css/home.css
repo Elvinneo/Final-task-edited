@@ -1785,7 +1785,7 @@ button:hover {
     width: 100%;
 }
 #forgotnext,
-#selectandpay {
+#selectandpay,#mailbutton{
     display: flex;
     font-size: 16px;
     font-weight: 500;

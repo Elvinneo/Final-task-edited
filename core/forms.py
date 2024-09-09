@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth.models import User
 from django.core.exceptions import ValidationError
-from .models import Profile,ContactMessage
+from .models import Profile,ContactMessage,NewsletterMessage
 
 class SignupForm(forms.ModelForm):
     password = forms.CharField(widget=forms.PasswordInput, label='Password')
@@ -40,3 +40,12 @@ class FAQForm(forms.Form):
     full_name = forms.CharField(max_length=255, widget=forms.TextInput(attrs={'placeholder': 'Full Name'}))
     email = forms.EmailField(widget=forms.EmailInput(attrs={'placeholder': 'Email'}))
     message = forms.CharField(widget=forms.Textarea(attrs={'placeholder': 'Write your message...', 'rows': 7}))
+
+
+class NewsletterMessageForm(forms.ModelForm):
+    class Meta:
+        model = NewsletterMessage
+        fields = ['name', 'email', 'subject', 'message']
+        widgets = {
+            'message': forms.Textarea(attrs={'rows': 4}),
+        }
