@@ -1,8 +1,10 @@
-const welcomeMessageElement = document.getElementById("wellcome_message")
+const isAuthenticated = document.querySelector('meta[name="is_authenticated"]').getAttribute('content') === 'True';
 const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
+const welcomeMessageElement = document.getElementById("wellcome_message")
 const selectElement = document.getElementById('mycards');
 const deleteCardForm = document.getElementById('deletecard');
-let isAuthenticated = document.querySelector('meta[name="is_authenticated"]').getAttribute('content') === 'True';
+const paypalCheckbox = document.getElementById('paypal');
+const applepayCheckbox = document.getElementById('applepay');
 let menu = document.querySelector(".drop").childNodes[1]
 let dropmenu = document.getElementById("dropmenu")
 let nav = document.querySelector("nav")
@@ -57,8 +59,9 @@ let applepay = document.getElementById("applepay")
 let cardholder = document.getElementById('cardholder');
 let cardnumber = document.getElementById('cardnumber');
 let expiry = document.getElementById('expiryDate');
-let cvv = document.getElementById('cvv');
 let postal = document.getElementById('postalcode');
+let save_card = document.querySelector("#save-card")
+let cvv = document.getElementById('cvv');
 let page = path.split("/")
 let happyClientsCount = 2
 let wishlist = ["basic"]
@@ -79,7 +82,7 @@ let userName
 let price
 let nextBtn
 let prevBtn
-let save_card = document.querySelector("#save-card")
+
 
 
 if (welcomeMessageElement) {
@@ -1359,9 +1362,6 @@ if (wishdelete) {
 
 //payment checkboxes
 
-const paypalCheckbox = document.getElementById('paypal');
-const applepayCheckbox = document.getElementById('applepay');
-
 if (paypalCheckbox) {
     paypalCheckbox.addEventListener('change', handleCheckboxChange);
     applepayCheckbox.addEventListener('change', handleCheckboxChange);
@@ -1381,6 +1381,7 @@ function handleCheckboxChange() {
 let confirmpay = document.getElementById('confirmpay')
 if (confirmpay) {
     confirmpay.addEventListener('click', payandsave)
+
 }
 
 async function payandsave() {
@@ -1471,11 +1472,41 @@ async function payandsave() {
 if (cardholder || cardnumber || expiry || cvv) {
     cardholder.addEventListener('change', paytester);
     cardnumber.addEventListener('change', paytester);
-    expiry.addEventListener('change', paytester);
+    expiry.addEventListener('change', carddatetester);
     cvv.addEventListener('change', paytester);
     postal.addEventListener('change', paytester);
     paypal.addEventListener('change', paytester);
     applepay.addEventListener('change', paytester);
+}
+
+
+function carddatetester() {
+    const expiryDateValue = expiry.value.trim();
+    const datePattern = /^\d{4}-\d{2}$/;
+    if (!datePattern.test(expiryDateValue)) {
+        Swal.fire({
+            title: 'warning',
+            text: 'Invalid date format',
+            icon: 'error'
+        })
+        save_card.disabled = true
+        return;
+    }
+    const [year,month] = expiryDateValue.split('-').map(num => parseInt(num, 10));
+    const enteredYear = year;
+    const enteredMonth = month;
+    if (enteredYear > new Date().getFullYear() || (enteredYear === new Date().getFullYear() && enteredMonth >= new Date().getMonth() + 1)) {
+        save_card.disabled = false
+    } else {
+        Swal.fire({
+            title: 'warning',
+            text: 'Expiration date is late',
+            icon: 'warning'
+        })
+        save_card.disabled = true
+        return;
+    }
+    save_card.disabled = false
 }
 
 function paytester() {
@@ -1485,7 +1516,7 @@ function paytester() {
         paymethod = "applepay"
     } else if (paypal.checked == false && applepay.checked == false) {
         if (cardholder.value != '' && cardnumber.value != '' && expiry.value != '' && cvv.value != '' && postal.value != '') {
-            if (cardnumber.value.length != 16) {
+            if (cardnumber.value.length != 19) {
                 Swal.fire({
                     title: 'Error',
                     text: 'Invalid card number',
@@ -1500,7 +1531,6 @@ function paytester() {
                     icon: 'error'
                 })
                 return;
-
             }
             else {
                 paymethod = "card"
@@ -1510,9 +1540,9 @@ function paytester() {
     }
     if (paymethod || priceElement.textContent == '$ 0.00') {
         confirmpay.disabled = false
+
     }
 } paytester()
-
 
 if (deleteCardForm) {
     if (selectElement.value == '') {
@@ -1567,11 +1597,10 @@ function updateCardInfo() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
+
+if (selectElement) {
     selectElement.addEventListener('change', function () {
         const selectedCardNumber = selectElement.value.trim();
-        console.log('Selected card number:', selectedCardNumber);
-        console.log('User cards:', usercards);
         if (selectedCardNumber) {
             const selectedIndex = usercards.findIndex(card => {
                 if (card && card.card_number) {
@@ -1579,9 +1608,6 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
                 return false;
             });
-
-            console.log('Selected index:', selectedIndex);
-
             if (selectedIndex !== -1) {
                 const selectedCard = usercards[selectedIndex];
                 cardholder.value = selectedCard.cardholder;
@@ -1589,6 +1615,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 expiryDate.value = selectedCard.expiry;
                 cvv.value = selectedCard.cvv;
                 postal.value = selectedCard.postal;
+                slicer()
 
             } else {
                 console.log('Card not found in usercards');
@@ -1604,7 +1631,7 @@ document.addEventListener('DOMContentLoaded', function () {
             cvv.value = '';
         }
     });
-});
+}
 
 
 // add card
@@ -1631,7 +1658,7 @@ function savecard(e) {
     } else {
         if (paymethod === "card") {
             const data = {
-                card_number: cardnumber,
+                card_number: cardnumber.replace(/\s+/g, ''),
                 cardholder: cardholder,
                 expiration_date: expiry,
                 cvv: cvv,
@@ -1679,7 +1706,30 @@ function savecard(e) {
     }
 }
 
+function slicer() {
+    let value1 = cardnumber.value
+    cardnumber.value = (value1.slice(0, 4) + ' ' + value1.slice(4, 8) + ' ' + value1.slice(8, 12) + ' ' + value1.slice(12, 16))
+}
 
+
+if (cardnumber) {
+    cardnumber.addEventListener('input', slicer1)
+    cardnumber.addEventListener('change', slicer1)
+    cardnumber.addEventListener('click', slicer1)
+}
+
+function slicer1(e) {
+    let value = e.target.value;
+    value = value.replace(/\D/g, '');
+    let formattedValue = '';
+    for (let i = 0; i < value.length; i += 4) {
+        if (i > 0) {
+            formattedValue += ' ';
+        }
+        formattedValue += value.substring(i, i + 4);
+    }
+    e.target.value = formattedValue;
+}
 
 
 
@@ -1716,3 +1766,4 @@ lists.map((li) => {
         icon.classList.add("fa-angle-up");
     });
 });
+

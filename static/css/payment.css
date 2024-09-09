@@ -16,6 +16,11 @@
     gap: 48px;
 }
 
+#cvv,#expirydate,#postalcode{
+    font-size: 16px;
+    font-weight: 400;
+}
+
 .messed {
     color: #09080D;
     font-size: 32px;
