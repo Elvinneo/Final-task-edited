@@ -39,6 +39,7 @@ urlpatterns = [
     path('add-card/', add_card, name='add_card'),
     path('deletecard/',delete_card, name='delete_card'),
     path('send-newsletter/', send_newsletter_message, name='send_newsletter'),
+    path('happy_clients/', happy_clients, name='happy_clients'),
 
 
 ]+ static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -45,7 +45,7 @@ class FAQForm(forms.Form):
 class NewsletterMessageForm(forms.ModelForm):
     class Meta:
         model = NewsletterMessage
-        fields = ['name', 'email', 'subject', 'message']
+        fields = ['user', 'email', 'subject', 'message']
         widgets = {
             'message': forms.Textarea(attrs={'rows': 4}),
         }

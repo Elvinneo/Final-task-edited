@@ -11,7 +11,7 @@
     <meta name="is_authenticated" content="{{ user.is_authenticated }}">
     <title>Bulking</title>
     <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
-    <link rel="shortcut icon" href="{% static '/media/fitness-biceps.ico' %}">
+    <link rel="shortcut icon" href="{% static 'media/fitness-biceps.ico' %}" type="image/x-icon">
 </head>
 
 <body>
@@ -86,6 +86,8 @@
                     {% endfor %}
 
                 </ul>
+                
+                
                 <div class="policy">
                     <a href="{% url 'terms' %}">
                         <p>Terms of Service</p>

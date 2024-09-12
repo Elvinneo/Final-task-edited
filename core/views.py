@@ -499,9 +499,9 @@ def send_newsletter_message(request):
     if request.method == 'POST':
         message_text = request.POST.get('message')
         if message_text:
-            username=request.user.username
+            user=request.user
             message_instance = NewsletterMessage(
-                name=username,
+                user=user,
                 email=Profile.objects.get(user=request.user).email,
                 subject='Newsletter Message',
                 message=message_text
@@ -520,12 +520,27 @@ def send_newsletter_message(request):
     return JsonResponse({'success': False, 'message': 'Invalid request method.'}, status=400)
 
 
+def happy_clients(request):
+    ishappy_list = NewsletterMessage.objects.filter(ishappy=True).select_related('user')
+    memberlist = []
+    idlist = []
 
+    for item in ishappy_list:
+        user = item.user
+        profile = Profile.objects.filter(user=user).first()
+        idlist.append(item.id)
+        client = {
+            "first_name": user.first_name,
+            "last_name": user.last_name,
+            "profile_picture": user.profile.profile_picture.url if profile and profile.profile_picture else None,
+            "message": item.message,
+        }
+        memberlist.append(client)
 
-def HappyClients(request):
-    ishappy = NewsletterMessage.objects.get(ishappy)
-    profile_picture=Profile.objects.
-    clients={
-        "username":
-    }
-    return render(request, 'happy_clients.html',{"clients": clients})
+    membercount = len(memberlist)
+
+    return JsonResponse({
+        'memberlist': memberlist,
+        'membercount': membercount,
+        'idlist': idlist,
+    })

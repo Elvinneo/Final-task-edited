@@ -39,3 +39,20 @@ David K.
 
 Laura M.
 "I’m so grateful for this fitness program. The results speak for themselves, and the support from the team has been phenomenal. It's the best investment I've made in myself!"
+
+
+
+
+
+class NewsletterMessage(models.Model):
+    username = models.CharField(max_length=100)
+    first_name = models.CharField(max_length=100,default='')
+    last_name = models.CharField(max_length=100,default='')
+    email = models.EmailField()
+    subject = models.CharField(max_length=255)
+    message = models.TextField()
+    sent_at = models.DateTimeField(auto_now_add=True)
+    ishappy=models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.subject

@@ -43,7 +43,7 @@ class Profile(models.Model):
     profile_picture = models.ImageField(upload_to='profile_pictures/', blank=True, null=True)
     program = models.ForeignKey('Program', on_delete=models.SET_NULL, null=True, blank=True, related_name='profiles')
     plan = models.ForeignKey('Plan', on_delete=models.SET_NULL, null=True, blank=True, related_name='profiles')
-    remaining_days = models.PositiveIntegerField(default=0, verbose_name='Kalan Gün Sayısı')
+    remaining_days = models.PositiveIntegerField(default=0, verbose_name='Qalan Gün Sayı')
 
     def __str__(self):
         return self.user.username
@@ -65,8 +65,7 @@ class Profile(models.Model):
     
     def __str__(self):
         return self.user.username
-
-
+    
 class EmailVerification(models.Model):
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     verification_code = models.CharField(max_length=6)
@@ -192,7 +191,7 @@ class Social(models.Model):
 
 
 class NewsletterMessage(models.Model):
-    username = models.CharField(max_length=100)
+    user=models.ForeignKey(User, on_delete=models.CASCADE,default='1')
     email = models.EmailField()
     subject = models.CharField(max_length=255)
     message = models.TextField()
