@@ -1008,7 +1008,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 return;
             }
             event.preventDefault();
-            if (profile_programId) {
+            if (profile_programId !== 'None') {
                 if (profile_programId == programId) {
                     Swal.fire({
                         title: 'Existing Program Selection',
@@ -1042,7 +1042,15 @@ document.addEventListener('DOMContentLoaded', function () {
                     });
                 }
             } else {
-                document.querySelector('#bookaclass').submit();
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Program added successfully!',
+                    icon: 'success',
+                    confirmButtonText: 'Ok'})
+                
+                .then(() => {
+                    document.querySelector('#bookaclass').submit();
+                });
             }
         });
     }
