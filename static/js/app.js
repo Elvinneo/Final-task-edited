@@ -52,6 +52,7 @@ let priceElement = document.getElementById("price");
 let total = document.getElementById("total");
 let wishdelete = document.getElementById("wishdelete")
 let updater = document.getElementById("profileUpdater")
+let selectandpay = document.getElementById('selectandpay')
 let changebutton = document.getElementById("changephoto")
 let profilicon = document.querySelector(".profiles");
 let wishview = document.getElementById("wishview")
@@ -85,6 +86,13 @@ let userName
 let price
 let nextBtn
 let prevBtn
+let hideTimeout;
+let start
+
+buttonhider()
+
+
+let memberCounter = 0;
 
 if (signupcontinue) {
     signupcontinue.addEventListener("click", passwordControlFunction);
@@ -344,7 +352,8 @@ function pagecontrol() {
         arrows.childNodes[startcount + (startcount + 1)].firstElementChild.classList.add("rectangle")
     }
 }
-let memberCounter = 0;
+
+
 function less() {
     testarrow()
     if (startcount > 1) {
@@ -426,8 +435,6 @@ function buttonhider() {
 }
 
 
-buttonhider()
-
 if (signupbuttons) {
     signupbuttons.forEach(signupbutton => {
         signupbutton.addEventListener("click", signup)
@@ -496,9 +503,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
         })
             .then(response => response.json())
-            .then(data => {
-                const messageElement = document.getElementById('responseMessage');
-            })
             .catch(error => {
                 console.error('error', error);
             });
@@ -794,7 +798,6 @@ document.querySelectorAll('input[type="checkbox"]').forEach(checkbox => {
 
 //verifycharacter tester
 
-let start
 document.querySelectorAll(".characterverify").forEach(char => {
     char.addEventListener("change", function () {
         verifier(start);
@@ -922,7 +925,6 @@ function toggledrop() {
     }
 }
 
-let hideTimeout;
 
 function handleMouseOver() {
     if (hideTimeout) {
@@ -1228,8 +1230,6 @@ if (purchaseButton) {
 
 // wishlist to paymentpage
 
-let selectandpay = document.getElementById('selectandpay')
-
 if (selectandpay) {
     selectandpay.addEventListener('click', selector)
 }
@@ -1461,10 +1461,6 @@ async function payandsave() {
         let plan_id = document.getElementById("plan_idforpurchase").textContent
         let total_amount = document.getElementById("total").textContent.replace('$', '').trim();
         const form = document.getElementById('confirmandpay');
-        if (paymethod == 'card') {
-
-
-        }
         if (form) {
             form.addEventListener('submit', async function (event) {
                 event.preventDefault();
@@ -1645,8 +1641,6 @@ if (deleteCardForm) {
         }
     });
 }
-
-
 
 window.addEventListener('load', function () {
     updateCardInfo();

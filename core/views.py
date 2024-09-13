@@ -453,8 +453,7 @@ def wishlistcont(request, id):
         return JsonResponse(data)
     except Wishlist.DoesNotExist:
         return JsonResponse({ 'status': 'error','message': 'Wishlist not found'}, status=404)
-    
-    
+
     
 @login_required
 def delete_card(request):
@@ -466,7 +465,6 @@ def delete_card(request):
     return JsonResponse({'status': 'error', 'message': 'Card is not deleted'}, status=404)
 
 
-
 @login_required
 @require_POST
 def add_card(request):
@@ -475,7 +473,7 @@ def add_card(request):
         user = request.user
         cardholder = data.get('cardholder')
         card_number = data.get('card_number')
-        expiration_date = data.get('expiration_date')  # Önemli: JSON'daki isimle uyumlu olmalı
+        expiration_date = data.get('expiration_date')  
         cvv = data.get('cvv')
         postal = data.get('postal')
 

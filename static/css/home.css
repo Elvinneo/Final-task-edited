@@ -2241,7 +2241,7 @@ button:hover {
     width: 120px;
     height: 40px;
     background-color: #5ef03254;
-    color: #fff;
+    color: #0f25e3;
     border-radius: 15px;
 }
 
@@ -2250,7 +2250,7 @@ button:hover {
     font-size: 14px;
     background-color: #ec0c0c57;
     border-radius: 15px;
-    color: white;
+    color: #0f25e3;
 }
 
 #logoutbutton:hover,
