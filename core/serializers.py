@@ -22,7 +22,6 @@ class PlanSerializer(serializers.ModelSerializer):
 class WishlistSerializer(serializers.ModelSerializer):
     user = UserSerializer() 
     plan = PlanSerializer()
-
     class Meta:
         model = Wishlist
         fields = ['id', 'user', 'plan', 'added_at', 'amount', 'months']

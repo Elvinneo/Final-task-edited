@@ -14,9 +14,7 @@
         left: 112px;
     }
 
-    nav {
-        justify-content: space-around;
-    }
+
 
     .aisle {
         width: 80% !important;
@@ -87,7 +85,7 @@
     #barsblack {
         display: block;
         color: black;
-        margin-left: 2%;
+        margin-right: 10%;
         font-size: 1.5rem;
     }
 
@@ -392,7 +390,6 @@
     }
 }
 
-
 @media only screen and (max-width:770px) {
 
     /*-----------------------------------------------Home.CSS-----------------------------------------------------*/
@@ -405,21 +402,6 @@
 
     .newsleft {
         width: 100%;
-    }
-
-    .homeaccount,
-    .otheraccount {
-        gap: 5px;
-    }
-
-    nav {
-        flex-wrap: nowrap;
-        justify-content: space-around;
-        gap: 15px;
-    }
-
-    .drop i {
-        padding-left: 20px;
     }
 
     .heading p {
@@ -864,14 +846,6 @@
         padding: 15px 0px;
         justify-content: flex-start;
         gap: 80px;
-
-    }
-
-
-    #barsblack {
-        display: block;
-        width: 30px;
-        height: 30px;
 
     }
 

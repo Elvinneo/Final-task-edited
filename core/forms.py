@@ -33,7 +33,6 @@ class ContactMessageForm(forms.ModelForm):
     class Meta:
         model = ContactMessage
         fields = ['full_name', 'email', 'phone', 'title', 'message']
-        
         from django import forms
 
 class FAQForm(forms.Form):

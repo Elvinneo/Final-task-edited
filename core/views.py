@@ -387,7 +387,7 @@ def payment_view(request, plan_id, months):
         'months': months,
         'total' :total,
         'cards':cards,
- 
+
     }
     return render(request, 'payment.html', context)
 
