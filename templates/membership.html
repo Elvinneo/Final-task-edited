@@ -35,7 +35,7 @@
                         <div class="plancontent">
                             <p>{{plan.content|safe}}</p>
                         </div>
-                        <a href="{% url 'membership_detail' plan.id %}"><button id="purchase">Purchase Plan</button></a>
+                        <a class="purchasebutt" href="{% url 'membership_detail' plan.id %}"><button id="purchase">Purchase Plan</button></a>
                     </div>
                     {% else %}
                     <div class="plan">
@@ -47,7 +47,7 @@
                         <div class="plancontent">
                             <p>{{plan.content|safe}}</p>
                         </div>
-                        <a href="{% url 'membership_detail' plan.id %}"><button id="purchase">Purchase Plan</button></a>
+                        <a class="purchasebutt" href="{% url 'membership_detail' plan.id %}"><button id="purchase">Purchase Plan</button></a>
                     </div>
                     {% endif %}
                     {% endfor %}

@@ -19,11 +19,6 @@
     {% block navbar %}
 
     {% endblock %}
-    <div class="status">
-        {% if user.is_authenticated %}
-        <h2 id='wellcome_message'>Welcome, {{ user.username }}!</h2>
-        {% endif %}
-    </div>
 
 
     {% block body %}

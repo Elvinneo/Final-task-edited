@@ -165,8 +165,8 @@ function openMenu() {
         test = true
     }
     setTimeout(() => {
-        dropmenu.classList.toggle("Show");
-    }, 8000);
+        dropmenu.classList.remove("Show");
+    }, 6000);
 
 }
 
@@ -378,15 +378,15 @@ function more() {
 
 
 document.addEventListener('DOMContentLoaded', function () {
-    fetch('/happy_clients/') 
+    fetch('/happy_clients/')
         .then(response => response.json())
         .then(data => {
-            happyClientsData = data; 
+            happyClientsData = data;
             updateHappyMembers(memberCounter);
             if (Array.isArray(happyClientsData.memberlist)) {
                 happyClientsCount = happyClientsData.memberlist.length;
             }
-            
+
         })
         .catch(error => console.error('Error fetching data:', error));
 });
@@ -1046,11 +1046,12 @@ document.addEventListener('DOMContentLoaded', function () {
                     title: 'Success!',
                     text: 'Program added successfully!',
                     icon: 'success',
-                    confirmButtonText: 'Ok'})
-                
-                .then(() => {
-                    document.querySelector('#bookaclass').submit();
-                });
+                    confirmButtonText: 'Ok'
+                })
+
+                    .then(() => {
+                        document.querySelector('#bookaclass').submit();
+                    });
             }
         });
     }
@@ -1464,92 +1465,98 @@ if (confirmpay) {
 }
 
 async function payandsave() {
-    let storedData = localStorage.getItem("wishlist");
-    if (!storedData) {
-        let plan_id = document.getElementById("plan_idforpurchase").textContent
-        let total_amount = document.getElementById("total").textContent.replace('$', '').trim();
-        const form = document.getElementById('confirmandpay');
-        if (form) {
-            form.addEventListener('submit', async function (event) {
-                event.preventDefault();
-                const formData = new FormData(this);
-                try {
-                    const response = await fetch(`/purchase/${plan_id}/${total_amount}/${paymethod}/`, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'X-CSRFToken': csrfToken
-                        }
-                    });
-                    const data = await response.json();
-                    await Swal.fire({
-                        icon: data.status === 'success' ? 'success' :
-                            data.status === 'error' ? 'error' :
-                                data.status === 'info' ? 'info' :
-                                    'warning',
-                        title: data.status === 'success' ? 'Success' :
-                            data.status === 'error' ? 'Error' :
-                                data.status === 'info' ? 'Info' :
-                                    'Warning',
-                        text: `${data.message}${data.remaining_days ? ` ${data.remaining_days} days remaining` : ''}`
-                    });
-                    window.location.reload();
-                } catch (error) {
-                    await Swal.fire({
-                        title: 'Error',
-                        text: 'An error occurred',
-                        icon: 'error'
-                    });
-                }
-            });
-        }
-    } else {
-        let parsedData = JSON.parse(storedData);
-        let wishId = parsedData[currentIndex];
-        const form = document.getElementById('confirmandpay');
-        if (form) {
-            form.addEventListener('submit', async function (event) {
-                event.preventDefault();
-                const formData = new FormData(this);
-                try {
-                    const response = await fetch(`/wishlist/purchase/${wishId}/${paymethod}/`, {
-                        method: 'POST',
-                        body: formData,
-                        headers: {
-                            'X-Requested-With': 'XMLHttpRequest',
-                            'X-CSRFToken': csrfToken
-                        }
-                    });
-                    const data = await response.json();
-                    await Swal.fire({
-                        icon: data.status === 'success' ? 'success' : 'error',
-                        title: data.status === 'success' ? 'Success' : 'Error',
-                        text: data.message
-                    });
-                    wishviewer();
-                    window.location.reload();
-                } catch (error) {
-                    await Swal.fire({
-                        title: 'Error',
-                        text: 'An error occurred',
-                        icon: 'error'
-                    });
-                }
-            });
+    if (paytester()) {
+
+        let storedData = localStorage.getItem("wishlist");
+        if (!storedData) {
+            let plan_id = document.getElementById("plan_idforpurchase").textContent
+            let total_amount = document.getElementById("total").textContent.replace('$', '').trim();
+            const form = document.getElementById('confirmandpay');
+            if (form) {
+                form.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+                    const formData = new FormData(this);
+                    try {
+                        const response = await fetch(`/purchase/${plan_id}/${total_amount}/${paymethod}/`, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'X-CSRFToken': csrfToken
+                            }
+                        });
+                        const data = await response.json();
+                        await Swal.fire({
+                            icon: data.status === 'success' ? 'success' :
+                                data.status === 'error' ? 'error' :
+                                    data.status === 'info' ? 'info' :
+                                        'warning',
+                            title: data.status === 'success' ? 'Success' :
+                                data.status === 'error' ? 'Error' :
+                                    data.status === 'info' ? 'Info' :
+                                        'Warning',
+                            text: `${data.message}${data.remaining_days ? ` ${data.remaining_days} days remaining` : ''}`
+                        });
+                        window.location.reload();
+                    } catch (error) {
+                        await Swal.fire({
+                            title: 'Error',
+                            text: 'An error occurred',
+                            icon: 'error'
+                        });
+                    }
+                });
+            }
+        } else {
+            let parsedData = JSON.parse(storedData);
+            let wishId = parsedData[currentIndex];
+            const form = document.getElementById('confirmandpay');
+            if (form) {
+                form.addEventListener('submit', async function (event) {
+                    event.preventDefault();
+                    const formData = new FormData(this);
+                    try {
+                        const response = await fetch(`/wishlist/purchase/${wishId}/${paymethod}/`, {
+                            method: 'POST',
+                            body: formData,
+                            headers: {
+                                'X-Requested-With': 'XMLHttpRequest',
+                                'X-CSRFToken': csrfToken
+                            }
+                        });
+                        const data = await response.json();
+                        await Swal.fire({
+                            icon: data.status === 'success' ? 'success' : 'error',
+                            title: data.status === 'success' ? 'Success' : 'Error',
+                            text: data.message
+                        });
+                        wishviewer();
+                        window.location.reload();
+                    } catch (error) {
+                        await Swal.fire({
+                            title: 'Error',
+                            text: 'An error occurred',
+                            icon: 'error'
+                        });
+                    }
+                });
+            }
         }
     }
 }
 
-if (cardholder || cardnumber || expiry || cvv) {
-    cardholder.addEventListener('change', paytester);
-    cardnumber.addEventListener('change', paytester);
-    expiry.addEventListener('change', carddatetester);
-    cvv.addEventListener('change', paytester);
-    postal.addEventListener('change', paytester);
-    paypal.addEventListener('change', paytester);
-    applepay.addEventListener('change', paytester);
-}
+
+if (cvv) {
+    cvv.addEventListener('change', () => {
+        if (cvv.value.length != 3) {
+            Swal.fire({
+                title: 'Error',
+                text: 'Invalid CVV',
+                icon: 'error'
+            })
+        };
+    })
+};
 
 
 function carddatetester() {
@@ -1561,8 +1568,7 @@ function carddatetester() {
             text: 'Invalid date format',
             icon: 'error'
         })
-        save_card.disabled = true
-        return;
+        return false;
     }
     const [year, month] = expiryDateValue.split('-').map(num => parseInt(num, 10));
     const enteredYear = year;
@@ -1575,19 +1581,20 @@ function carddatetester() {
             text: 'Expiration date is late',
             icon: 'warning'
         })
-        save_card.disabled = true
-        return;
+        return false;
     }
-    save_card.disabled = false
+    return true;
 }
 
 function paytester() {
     if (paypal.checked == true) {
         paymethod = "paypal"
+        return true;
     } else if (applepay.checked == true) {
         paymethod = "applepay"
+        return true;
     } else if (paypal.checked == false && applepay.checked == false) {
-        if (cardholder.value != '' && cardnumber.value != '' && expiry.value != '' && cvv.value != '' && postal.value != '') {
+        if (carddatetester()) {
             if (cardnumber.value.length != 19) {
                 Swal.fire({
                     title: 'Error',
@@ -1596,24 +1603,26 @@ function paytester() {
                 })
                 return;
 
-            } else if (cvv.value.length != 3) {
+            }
+            if (cvv.value.length != 3) {
                 Swal.fire({
                     title: 'Error',
                     text: 'Invalid CVV',
                     icon: 'error'
                 })
+                save_card.disabled = true
                 return;
             }
             else {
                 paymethod = "card"
+                save_card.disabled = false
+                return true;
             }
-
         }
-    }
-    if (paymethod || priceElement.textContent == '$ 0.00') {
-        confirmpay.disabled = false
+
     }
 }
+
 if (deleteCardForm) {
     if (selectElement.value == '') {
         document.getElementById("delcard").disabled = true
@@ -1656,12 +1665,14 @@ window.addEventListener('load', function () {
 
 function updateCardInfo() {
     if (usercards.length > 0) {
-        const defaultcard = usercards[usercards.length - 1];
-        document.getElementById('cardholder').value = defaultcard.cardholder;
-        document.getElementById('cardnumber').value = defaultcard.card_number;
-        document.getElementById('expiryDate').value = defaultcard.expiry;
-        document.getElementById('cvv').value = defaultcard.cvv;
-        document.getElementById('postalcode').value = defaultcard.postal;
+        if (document.getElementById('cardholder')) {
+            const defaultcard = usercards[usercards.length - 1];
+            document.getElementById('cardholder').value = defaultcard.cardholder;
+            document.getElementById('cardnumber').value = defaultcard.card_number;
+            document.getElementById('expiryDate').value = defaultcard.expiry;
+            document.getElementById('cvv').value = defaultcard.cvv;
+            document.getElementById('postalcode').value = defaultcard.postal;
+        }
     }
 }
 
@@ -1722,52 +1733,54 @@ function savecard(e) {
             confirmButtonText: 'OK'
         });
     } else {
-        if (paymethod === "card") {
-            const data = {
-                card_number: cardnumber.replace(/\s+/g, ''),
-                cardholder: cardholder,
-                expiration_date: expiry,
-                cvv: cvv,
-                postal: postal
-            };
+        if (paytester()) {
+            if (paymethod === "card") {
+                const data = {
+                    card_number: cardnumber.replace(/\s+/g, ''),
+                    cardholder: cardholder,
+                    expiration_date: expiry,
+                    cvv: cvv,
+                    postal: postal
+                };
 
-            fetch('/add-card/', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrfToken
-                },
-                body: JSON.stringify(data)
-            })
-                .then(response => response.json())
-                .then(data => {
-                    if (data.status === 'success') {
-                        Swal.fire({
-                            icon: 'success',
-                            title: 'Card added successfully',
-                            text: 'The card has been added.',
-                            confirmButtonText: 'OK'
-                        }).then(() => {
-                            location.reload();
-                        });
-                    } else {
+                fetch('/add-card/', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRFToken': csrfToken
+                    },
+                    body: JSON.stringify(data)
+                })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.status === 'success') {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Card added successfully',
+                                text: 'The card has been added.',
+                                confirmButtonText: 'OK'
+                            }).then(() => {
+                                location.reload();
+                            });
+                        } else {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Error',
+                                text: data.message,
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error:', error);
                         Swal.fire({
                             icon: 'error',
-                            title: 'Error',
-                            text: data.message,
+                            title: 'An error occurred',
+                            text: 'Please try again.',
                             confirmButtonText: 'OK'
                         });
-                    }
-                })
-                .catch(error => {
-                    console.error('Error:', error);
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'An error occurred',
-                        text: 'Please try again.',
-                        confirmButtonText: 'OK'
                     });
-                });
+            }
         }
     }
 }

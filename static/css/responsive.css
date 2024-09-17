@@ -9,12 +9,29 @@
         margin: 0 auto;
     }
 
+    .overviewcontent {
+        justify-content: space-around;
+    }
+
+    .overview ul li {
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .overviewinfo {
+        width: 100%;
+        padding: 16px 0;
+        gap: 4px;
+    }
 
     .status {
         left: 112px;
     }
 
-
+    .plans {
+        padding-left: 0;
+    }
 
     .aisle {
         width: 80% !important;
@@ -227,6 +244,7 @@
     .titleanddescription h5 {
         font-size: 40px;
         line-height: 44px;
+        text-align: center;
     }
 
     .titleanddescription p {
@@ -643,15 +661,10 @@
     }
 
     .plan {
-        width: 80%;
-        padding: 40px;
         gap: 20px;
-        border-radius: 24px;
-        background: #FFF;
     }
 
     #purchase {
-        width: 70%;
         padding: 12px 16px;
         border-radius: 20px;
         background: #BCFF5E;
@@ -861,27 +874,32 @@
         width: 100%;
     }
 
+    .overview ul li {
+        justify-content: flex-start;
+        flex-direction: column;
+        align-items: center;
+    }
+
     .overviewinfo {
-        width: 50%;
-        padding: 16px 12px;
+        width: 100%;
+        padding: 16px 0;
         gap: 4px;
     }
 
+
+
     .overviewcontent {
-        width: 50%;
+        width: 100%;
         align-items: flex-start;
         gap: 32px;
     }
 
     .overviewcontent i,
     .overviewcontent p {
-        width: 70%;
-        height: 5vh;
-        margin: 0;
-        padding: 16px 12px;
         gap: 4px;
     }
 
+    .overview ul,
     .overview ul li {
         width: 100%;
     }
@@ -902,11 +920,7 @@
         letter-spacing: 0.09px;
     }
 
-    .overview>p {
-        width: 100%;
-        margin-bottom: 5vh;
-        color: #064BB4;
-    }
+
 
     /*---------------------------------------- Membershipdetail.CSS-----------------------------------------------------*/
 
@@ -1445,6 +1459,7 @@
     .titleanddescription h5 {
         font-size: 40px;
         line-height: 44px;
+        text-align: center;
     }
 
     .titleanddescription p {
@@ -1681,6 +1696,7 @@
         width: 80% !important;
         margin: 0 auto;
     }
+
     .status {
         left: 112px;
     }

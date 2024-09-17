@@ -46,7 +46,7 @@ body {
 }
 
 .people {
-    width: 90%;
+    width: 75%;
     margin-top: 50px;
     display: flex;
     margin: 50px auto;
@@ -60,7 +60,6 @@ body {
 
 .trainerscard {
     display: flex;
-    width: 25%;
     padding: 12px 12px 24px 12px;
     flex-direction: column;
     justify-content: center;
@@ -101,7 +100,7 @@ body {
 
 .realname {
     color: #1C1C1E;
-    font-size: 24px;
+    font-size: 22px;
     font-weight: 500;
     line-height: 32px;
     letter-spacing: 0.12px;
