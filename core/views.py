@@ -128,12 +128,33 @@ def login_view(request):
         password_global = request.POST.get('password')
     return render(request,request.path)
 
+
+
+def login_after_change_password(request):
+    if request.method == 'POST':
+        try:
+            data = json.loads(request.body)
+            username = data.get('username')
+            password = data.get('password')
+            try:
+                user = User.objects.get(username=username)
+            except User.DoesNotExist:
+                return JsonResponse({'error': 'Invalid credentials'}, status=400)
+            
+            login(request, user) 
+            return JsonResponse({'message': 'Login successful'}, status=200)
+        except json.JSONDecodeError:
+            return JsonResponse({'error': 'Invalid JSON'}, status=400)
+
+    return JsonResponse({'error': 'Invalid request method'}, status=405)
+
+
+
 def user_auth(request):
     if request.method == 'POST':
         form_id = request.POST.get('form_id')
         action = request.POST.get('action')
         if form_id == 'securitypasswordform':
-            print(username_global ,password_global)
             user = authenticate(username=username_global, password=password_global)
             if user is not None:
                 login(request, user)
@@ -141,6 +162,8 @@ def user_auth(request):
             logout(request)
     else:
         form = AuthenticationForm()
+
+
 
 @csrf_exempt
 def password_change(request):
@@ -390,7 +413,6 @@ def payment_view(request, plan_id, months):
 
     }
     return render(request, 'payment.html', context)
-
 
 def purchase(request, plan_id,total_amount,paymethod):
     if request.method == 'POST':

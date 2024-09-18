@@ -316,10 +316,7 @@
                     <h2>Success!</h2>
                     <p>Your password is succesfully changed</p>
                 </div>
-                <form method="post">
-                    {% csrf_token %}
-                    <button id='successContinue' type="submit">Continue</button>
-                </form>
+                <button id='successContinue' type="submit" onclick="loginafterchangepassword()">Continue</button>
             </div>
         </div>
     </div>

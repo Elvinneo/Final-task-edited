@@ -23,6 +23,7 @@ let forgotoverlay = document.getElementById("forgotOverlay")
 let forgotVerify = document.getElementById("forgotVerifyOverlay")
 let newPasswordOverlay = document.getElementById("newPasswordOverlay")
 let successOverlay = document.getElementById("successOverlay")
+let successContinue = document.getElementById("successContinue")
 let poster = document.getElementById("poster")
 let mailto = document.getElementById("mailto")
 let confirmedemail = document.getElementById("confirmedemail")
@@ -101,16 +102,44 @@ if (signupcontinue) {
 
 function passwordControlFunction(e) {
     e.preventDefault();
-    const password = document.querySelector("#password").value;
-    const passwordRepeat = document.querySelector("#password_repeat").value;
-    if (password !== passwordRepeat) {
+    const password = document.querySelector("#password");
+    const passwordRepeat = document.querySelector("#password_repeat");
+    const username = document.querySelector("#username");
+    const email = document.querySelector("#email");
+
+    if (!username.value) {
         Swal.fire({
             icon: 'warning',
             title: 'Warning',
-            text: 'Passwords is not same',
+            text: 'Username field is empty',
         });
+        username.style.border = '1px solid red'
+        return;
+
+    } else if (!email.value) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning',
+            text: 'Email field is empty',
+        });
+        username.style.border = 'none'
+        email.style.border = '1px solid red'
         return;
     }
+    else {
+        if (password.value !== passwordRepeat.value || password.value == '') {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Passwords is not same',
+            });
+            email.style.border = 'none'
+            password.style.border = '1px solid red'
+            passwordRepeat.style.border = '1px solid red'
+            return;
+        }
+    }
+
     const form = document.getElementById("securitypasswordform")
     form.submit();
 }
@@ -474,8 +503,8 @@ function signup() {
 
 function login() {
     closewindow()
-    resetFormInDiv(overlays[1].id)
     overlays[1].style.display = "flex"
+    resetFormInDiv(overlays[1].id)
     closer()
     document.getElementById("toconfirm").addEventListener("click", confirmaccount)
     document.getElementById("forgotpassword").addEventListener("click", iforgotpassword)
@@ -509,15 +538,34 @@ document.addEventListener('DOMContentLoaded', function () {
     });
 });
 
-function resetFormInDiv(divId) {
-    let div = document.getElementById(divId);
-    if (div) {
-        let form = div.querySelector('form');
-        if (form) {
-            form.reset();
-        }
-    }
+
+function loginafterchangepassword() {
+    const data = {
+        username: usernameafterchangepassword,
+        password: passwordafterchangepassword
+    };
+
+    fetch('/login_after_change_password/', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrfToken
+        },
+        body: JSON.stringify(data)
+    })
+        .then(response => {
+            if (!response.ok) {
+                return response.json().then(errorData => {
+                    throw new Error(errorData.error || 'Something went wrong');
+                });
+            }
+            return response.json();
+        })
+        .then(data => {
+            window.location.reload()
+        });
 }
+
 
 // verification login fields
 
@@ -549,9 +597,20 @@ function testbuttons() {
 if (next) {
     next.addEventListener("click", testmailfields)
 }
+function resetFormInDiv(divId) {
+    let div = document.getElementById(divId);
+    if (div) {
+        let form = div.querySelector('form');
+        if (form) {
+            form.reset();
+        }
+    }
+}
 
 
 let foundIndex
+let usernameafterchangepassword
+let passwordafterchangepassword
 
 
 function testmailfields() {
@@ -565,6 +624,7 @@ function testmailfields() {
         foundUser = testedusers[foundIndex];
         confirmedemail.innerText = foundUser.email.replace(/^(.{6})/, '******');
         document.getElementById("verifyemailaddress").textContent = forgotmailarea.value;
+        usernameafterchangepassword = testedusers[foundIndex].username
         document.getElementById("forgotnext").disabled = false;
         return true;
     } else {
@@ -618,9 +678,17 @@ function confirmaccount() {
 // send email
 function verificationCodeSender(form) {
     if (document.getElementById("getcodebyphone").checked) {
-        mailto.innerText = testedusers[foundIndex].phone
+        if (form == "emailform") {
+            mailto.innerText = testedusers[foundIndex].phone
+        } else {
+            mailto.innerText = testedusers[i].phone
+        }
     } else {
-        mailto.innerText = testedusers[foundIndex].email
+        if (form == "emailform") {
+            mailto.innerText = testedusers[i].email
+        } else {
+            mailto.innerText = testedusers[foundIndex].email
+        }
     }
     var formElement = document.getElementById(form);
     if (!(formElement instanceof HTMLFormElement)) {
@@ -767,9 +835,11 @@ function moveToNext(previousFieldId, current, nextFieldId) {
     }
 }
 
+
 function createpass() {
     closewindow()
     overlays[7].style.display = "flex"
+    passwordafterchangepassword = document.querySelector("#id_new_password1").value
     closer()
 }
 
@@ -939,7 +1009,7 @@ function changer() {
 
 }
 
-// profiles
+
 
 // Select the profile icon element
 
@@ -1538,7 +1608,6 @@ if (confirmpay) {
 
 async function payandsave() {
     if (paytester()) {
-
         let storedData = localStorage.getItem("wishlist");
         if (!storedData) {
             let plan_id = document.getElementById("plan_idforpurchase").textContent

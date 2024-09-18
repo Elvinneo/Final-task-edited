@@ -1261,6 +1261,10 @@
         width: 320px;
     }
 
+    #forgotmailform label {
+        padding-left: 15px;
+    }
+
     #forgotVerifyNext {
         display: flex;
         width: 320px;
@@ -1276,6 +1280,10 @@
     .verifypass {
         gap: 10px;
         width: 280px;
+    }
+
+    .signinicon {
+        margin-bottom: 30px;
     }
 
     .characterverify input {
