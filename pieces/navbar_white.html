@@ -1,43 +1,45 @@
 {% load static %}
 <nav>
     <div class="otherlogo">
-        <img src="{% static 'media/heart_blue.svg' %}" alt="">
-        <p>Bulking</p>
+        <a href="{% url 'home' %}">
+            <img src="{% static 'media/heart_blue.svg' %}" alt="">
+            <p>Bulking</p>
+        </a>
     </div>
     <div id="homemenudiv">
-        <ul id="othermenu" >
+        <ul id="othermenu">
             <li>
                 <a href="{% url 'home' %}">Home</a>
                 {% if request.path == '/' %}
                 <div class="green_dot"><img src="{% static 'media/green_dot.svg' %}" alt=""></div>
                 {% endif %}
             </li>
-            <li >
+            <li>
                 <a href="{% url 'programs' %}">Programs</a>
                 {% if request.path == '/programs/' %}
                 <div class="green_dot"><img src="{% static 'media/green_dot.svg' %}" alt=""></div>
                 {% endif %}
             </li>
-            <li >
+            <li>
                 <a href="{% url 'trainers' %}">Trainers</a>
                 {% if request.path == '/trainers/' %}
                 <div class="green_dot"><img src="{% static 'media/green_dot.svg' %}" alt=""></div>
                 {% endif %}
             </li>
-            <li >
+            <li>
                 <a href="{% url 'membership' %}">Membership</a>
                 {% if request.path == '/membership/' %}
                 <div class="green_dot"><img src="{% static 'media/green_dot.svg' %}" alt=""></div>
                 {% endif %}
             </li>
-            <li >
+            <li>
                 <a href="{% url 'contact' %}">Contact</a>
                 {% if request.path == '/contact/' %}
                 <div class="green_dot"><img src="{% static 'media/green_dot.svg' %}" alt=""></div>
                 {% endif %}
             </li>
         </ul>
-        
+
     </div>
     <div class="otheraccount">
         <div class="bask">

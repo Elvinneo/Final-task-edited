@@ -101,7 +101,7 @@
                         <label for="password">Password</label>
                         <input class="passs" id="passwordlogin" type="password" placeholder="Enter your password"
                             name="password" required>
-                        <button type="submit" id="toconfirm" name="login" disabled>Login</button>
+                        <button type="submit" id="toconfirm" name="login">Login</button>
                     </div>
                 </form>
             </div>
@@ -216,7 +216,7 @@
                     <input type="text" id="forgotmailarea" name="email" placeholder="Enter your username" required
                         autocomplete="email">
                 </form>
-                <button id='forgotnext' type="submit" disabled>Next</button>
+                <button id='forgotnext' type="submit">Next</button>
             </div>
         </div>
     </div>
@@ -314,7 +314,7 @@
             <div class="newPasswordform">
                 <div class="successheader">
                     <h2>Success!</h2>
-                    <p>Your password is succesfully created</p>
+                    <p>Your password is succesfully changed</p>
                 </div>
                 <form method="post">
                     {% csrf_token %}

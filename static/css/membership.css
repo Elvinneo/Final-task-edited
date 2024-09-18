@@ -30,6 +30,7 @@
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
+    padding: 0 10px;
 }
 
 .overviewcontent i,
@@ -88,6 +89,7 @@
     font-weight: 500;
     line-height: 1.8rem;
     letter-spacing: 0.09px;
+    padding-left: 10px;
 }
 
 .purchasebutt{

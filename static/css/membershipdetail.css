@@ -1,7 +1,6 @@
 .membershipdetail {
     width: 100%;
     margin: 4% auto;
-    background: #F9F9FB;
     display: flex;
     justify-content: space-between;
     flex-direction: row;
@@ -112,20 +111,22 @@
 }
 
 .reserve {
+    background: #F9F9FB;
     display: flex;
     padding: 24px;
     width: 35%;
     flex-direction: column;
-    justify-content: center;
     align-items: flex-start;
     gap: 32px;
     flex: 1;
     border: 1px solid rgb(235, 217, 217);
     border-radius: 20px;
+    height: 142vh;
 
 }
 
 .reserveheader {
+    margin-top: 80px;
     display: flex;
     flex-direction: column;
     align-items: flex-start;

@@ -1,0 +1,242 @@
+.abouthero {
+    width: 100%;
+    background-color: #064BB4;
+}
+
+
+.aboutmain {
+    margin: 0;
+    display: flex;
+    padding: 0;
+    justify-content: space-around;
+    position: relative;
+}
+
+.aboutmainleft {
+    width: 50%;
+}
+
+.aboutmainleft button {
+    color: #BCFF5E;
+    font-size: 0.875rem;
+    font-weight: 500;
+    line-height: 22px;
+    letter-spacing: 0.07px;
+    display: flex;
+    padding: 8px 16px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 20px;
+    border: 1px solid #BCFF5E;
+    background: #064BB4;
+    margin: 5% 0;
+}
+
+.aboutmainleft h2 {
+    color: #FFF;
+    font-size: 4rem;
+    font-weight: 400;
+    line-height: 80px;
+    letter-spacing: 0.36px;
+    width: 80%;
+
+}
+
+.aboutmainright {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 16px;
+    width: 50%;
+}
+
+.aboutmainright h3 {
+    color: #FFF;
+    font-size: 1.5rem;
+    font-weight: 500;
+    line-height: 32px;
+    letter-spacing: 0.12px;
+}
+
+.aboutmainright p {
+    color: #D1D1D6;
+    font-size: 1.125rem;
+    font-weight: 400;
+    line-height: 26px;
+    letter-spacing: 0.09px;
+}
+
+.aboutrelative {
+    width: 100%;
+    position: relative;
+}
+
+.relimage {
+    width: 60%;
+    margin: 0 auto;
+}
+
+.relimage img {
+    width: 100%;
+}
+
+.aboutrelativediv {
+    display: flex;
+    padding: 20px;
+    gap: 8px;
+    border-radius: 16px;
+    background: linear-gradient(76deg, rgba(255, 255, 255, 0.24) 3.01%, rgba(255, 255, 255, 0.00) 112.22%);
+    box-shadow: 48px 48px 80px 0px rgba(8, 23, 45, 0.12);
+    backdrop-filter: blur(10px);
+}
+
+.relleft i {
+    display: flex;
+    padding: 4px;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+}
+
+.relright {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 4px;
+}
+
+.relvalue {
+    color: #FFF;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 40px;
+    letter-spacing: 0.16px;
+}
+
+.reltext {
+    color: #FFF;
+    font-size: 0.875rem;
+    font-weight: 400;
+    line-height: 22px;
+    letter-spacing: 0.07px;
+}
+
+#relativ1 {
+    position: absolute;
+    top: 10%;
+    right: 20%;
+}
+
+#relativ2 {
+    position: absolute;
+    bottom: 25%;
+    left: 10%;
+}
+
+.circleabsolute {
+    width: 52%;
+    height: 20%;
+    transform: rotate(-15.623deg);
+    border-radius: 50%;
+    border: 3px solid rgba(188, 255, 94, 0.45);
+    position: absolute;
+    top: 50%;
+    left: 20%;
+
+}
+
+.aboutpagecontent {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 56px;
+    margin: 5% 0;
+
+}
+
+.pageheader {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+}
+
+.pageheader h2 {
+    color: #000;
+    font-size: 3rem;
+    font-weight: 500;
+    line-height: 56px;
+    letter-spacing: 0.24px;
+}
+
+.pageheader p {
+    color: #636366;
+    text-align: center;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+}
+
+.aboutpagebody {
+    margin-top: 2%;
+}
+
+.aboutpagebodyrow {
+    margin-bottom: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
+
+.aboutpagebodyrowleft,
+.responsivetext {
+    display: flex;
+    padding: 40px;
+    width: 40%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+    border-radius: 20px;
+    background:#FFF;
+}
+
+.aboutpagebodyrowleft i,
+.responsivetext i {
+    width: 48px;
+    height: 48px;
+}
+
+.aboutpagebodyrowleft h3,
+.responsivetext h3 {
+    color: #1C1C1E;
+    font-size: 2rem;
+    font-weight: 500;
+    line-height: 40px;
+    letter-spacing: 0.16px;
+}
+
+.aboutpagebodyrowleft p,
+.responsivetext p {
+    color:#1C1C1E;
+    font-size: 1.125rem;
+    font-weight: 500;
+    line-height: 26px;
+    letter-spacing: 0.09px;
+}
+
+.aboutpagebodyright {
+    width: 60%;
+}
+
+.aboutpagebodyright img {
+    width: 100%;
+}
+
+.responsivetext {
+    display: none;
+
+}

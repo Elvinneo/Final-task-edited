@@ -88,6 +88,7 @@ let nextBtn
 let prevBtn
 let hideTimeout;
 let start
+let foundUser
 
 buttonhider()
 
@@ -472,7 +473,6 @@ function signup() {
 }
 
 function login() {
-    document.getElementById("toconfirm").disabled = true
     closewindow()
     resetFormInDiv(overlays[1].id)
     overlays[1].style.display = "flex"
@@ -546,27 +546,68 @@ function testbuttons() {
 
 // verification forgot password fields
 
-if (forgotmailarea) {
-    forgotmailarea.addEventListener("change", testmailfields)
+if (next) {
+    next.addEventListener("click", testmailfields)
 }
 
+
+let foundIndex
+
+
 function testmailfields() {
-    test = false
-    for (i = 1; i <= testedusers.length - 1; i++) {
-        if (testedusers[i].email == forgotmailarea.value) {
-            confirmedemail.innerText = testedusers[i].email.replace(/^(.{6})/, '******');
-            document.getElementById("verifyemailaddress").textContent = forgotmailarea.value
-            test = true
-            break
-        }
+    if (forgotmailarea.value == '') {
+        forgotmailarea.style.border = '1px solid red'
+        return false;
     }
-    if (test) {
-        document.getElementById("forgotnext").disabled = false
+
+    foundIndex = testedusers.findIndex(user => user && user.email === forgotmailarea.value);
+    if (foundIndex !== -1) {
+        foundUser = testedusers[foundIndex];
+        confirmedemail.innerText = foundUser.email.replace(/^(.{6})/, '******');
+        document.getElementById("verifyemailaddress").textContent = forgotmailarea.value;
+        document.getElementById("forgotnext").disabled = false;
+        return true;
+    } else {
+        Swal.fire({
+            icon: 'warning',
+            title: 'Warning',
+            text: 'Email address is not registered.',
+        });
+        return false;
     }
 }
 
 function confirmaccount() {
-    buttoncontinue.disabled = true
+    buttoncontinue.disabled = true;
+    const usernamefield = document.getElementById('usernamelogin');
+
+    if (usernamefield) {
+        const username = usernamefield.value.trim();
+        if (username === '') {
+            usernamefield.style.border = "1px solid red";
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Username is required',
+            });
+            buttoncontinue.disabled = false;
+            return;
+        } else {
+            usernamefield.classList.remove('error');
+            usernamefield.style.border = "1px solid #ccc";
+        }
+        const userExists = testedusers.some(user => user.username === username);
+        if (!userExists) {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Username is not available',
+            });
+            buttoncontinue.disabled = false;
+            return;
+        }
+
+    }
     closewindow()
     resetFormInDiv(overlays[2].id)
     document.getElementById("confirmContinue").addEventListener("click", security);
@@ -577,9 +618,9 @@ function confirmaccount() {
 // send email
 function verificationCodeSender(form) {
     if (document.getElementById("getcodebyphone").checked) {
-        mailto.innerText = testedusers[i].phone
+        mailto.innerText = testedusers[foundIndex].phone
     } else {
-        mailto.innerText = testedusers[i].email
+        mailto.innerText = testedusers[foundIndex].email
     }
     var formElement = document.getElementById(form);
     if (!(formElement instanceof HTMLFormElement)) {
@@ -688,15 +729,17 @@ function iforgotpassword() {
 }
 
 function forgotnext() {
-    closewindow()
-    verificationCodeSender('forgotmailform')
-    resetFormInDiv(overlays[5].id)
-    overlays[5].style.display = "flex"
-    start = 7
-    document.getElementById("forgotVerifyNext").addEventListener("click", verifypass)
-    globalemail = forgotmailarea.value
-    document.getElementById("input7").focus()
-    closer()
+    if (testmailfields()) {
+        closewindow()
+        verificationCodeSender('forgotmailform')
+        resetFormInDiv(overlays[5].id)
+        overlays[5].style.display = "flex"
+        start = 7
+        document.getElementById("forgotVerifyNext").addEventListener("click", verifypass)
+        globalemail = forgotmailarea.value
+        document.getElementById("input7").focus()
+        closer()
+    }
 }
 
 function verifypass() {
@@ -772,10 +815,8 @@ function checkcart() {
         if (!localStorage.getItem(userName)) {
             overlays[9].style.display = 'none';
             document.querySelector(".red").style.display = 'none'
-            document.getElementById("wishview").disabled = true
         } else {
             document.querySelector(".red").style.display = 'block'
-            document.getElementById("wishview").disabled = false
         }
     }
 
@@ -910,11 +951,35 @@ function toggledrop() {
     let profileContents = document.querySelector(".profilecontents");
     if (profileContents) {
         if (profileContents.classList.contains("showed")) {
+            if (window.innerWidth > 993) {
+                if (document.querySelector('#leftzone h1')) {
+                    document.querySelector('#leftzone h1').style.margin = '0 auto'
+                }
+            }
+            else {
+                if (document.querySelector('#leftzone h1')) {
+                    document.querySelector('#leftzone h1').style.margin = '0'
+                }
+            }
+
             profileContents.classList.remove("showed");
             setTimeout(() => {
+                if (window.innerWidth > 993) {
+                    if (document.querySelector('#leftzone h1')) {
+                        document.querySelector('#leftzone h1').style.margin = '0 auto'
+                    }
+                }
+                else {
+                    if (document.querySelector('#leftzone h1')) {
+                        document.querySelector('#leftzone h1').style.margin = '0'
+                    }
+                }
                 profileContents.style.display = 'none';
             }, 300);
         } else {
+            if (document.querySelector('#leftzone h1')) {
+                document.querySelector('#leftzone h1').style.margin = '90px auto 0'
+            }
             profileContents.style.display = 'flex';
             setTimeout(() => {
                 profileContents.classList.add("showed");
@@ -924,6 +989,7 @@ function toggledrop() {
         }
     }
 }
+
 
 
 function handleMouseOver() {
@@ -940,6 +1006,12 @@ function handleMouseOut() {
             profileContents.classList.remove("showed");
             setTimeout(() => {
                 profileContents.style.display = 'none';
+                if (window.innerWidth > 993) {
+                    document.querySelector('#leftzone h1').style.margin = '0 auto'
+                }
+                else {
+                    document.querySelector('#leftzone h1').style.margin = '0'
+                }
             }, 300);
         }
     }, 2500);
@@ -1336,7 +1408,7 @@ function wishviewer() {
                     startid++;
                     const listItem = document.createElement('li');
                     listItem.innerHTML = `
-                    <span id="planidhidden" style="display: block;">${item.id}</span>
+                    <span id="planidhidden" style="display: none;">${item.id}</span>
                     <strong>Plan: </strong> ${item.plan.name} <br><br>
                     <strong>User: </strong> ${item.user.username} <br><br>
                     <strong>Amount: </strong> $ ${item.amount} <br><br>
@@ -1602,7 +1674,6 @@ function paytester() {
                     icon: 'error'
                 })
                 return;
-
             }
             if (cvv.value.length != 3) {
                 Swal.fire({
@@ -1619,7 +1690,6 @@ function paytester() {
                 return true;
             }
         }
-
     }
 }
 

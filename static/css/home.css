@@ -203,8 +203,8 @@ nav {
     transition: 20ms;
 }
 
-.homelogo,
-.otherlogo {
+.homelogo a, 
+.otherlogo a {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -221,6 +221,7 @@ nav {
 .otherlogo p {
     color: #064BB4;
 }
+
 
 .homeaccount,
 .otheraccount {
@@ -1730,7 +1731,7 @@ nav {
 }
 
 button:hover {
-    color: #007bff !important;
+    color: #2927bd !important;
     transform: scale(1.02);
 }
 

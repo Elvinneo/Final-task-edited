@@ -398,6 +398,7 @@ def purchase(request, plan_id,total_amount,paymethod):
         plan = get_object_or_404(Plan, id=plan_id)
         user_profile, created = Profile.objects.get_or_create(user=user)
         if user_profile.plan and user_profile.plan.id == plan_id:
+            print(user.profile.plan_id)
             return JsonResponse({'status': 'info', 'message': 'This plan was already purchased.', 'remaining_days': user_profile.remaining_days})
         user_profile.plan = plan
         user_profile.update_remaining_days()
@@ -423,6 +424,7 @@ def wishlist_purchase(request, wishlist_id, paymethod):
         plan = get_object_or_404(Plan, id=plan_id)
         user_profile, created = Profile.objects.get_or_create(user=user)
         if user_profile.plan and user_profile.plan.id == plan_id:
+            print(user.profile.plan_id)
             return JsonResponse({'status': 'info', 'message': 'This plan was already purchased.','remaining_days': user_profile.remaining_days})
         user_profile.plan = plan
         user_profile.update_remaining_days()
