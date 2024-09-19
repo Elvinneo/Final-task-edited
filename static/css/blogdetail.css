@@ -63,6 +63,10 @@
     letter-spacing: 0.24px;
 }
 
+.content{
+    padding-bottom: 70px;
+}
+
 .bdheaderright ul {
     display: flex;
     width: 190px;

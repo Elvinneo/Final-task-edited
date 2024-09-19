@@ -1,5 +1,10 @@
 @media only screen and (min-width:770px) and (max-width:992px) {
 
+    #blogdetailsocial {
+        margin: 0;
+        padding: 30px 0 30px 85px;
+    }
+
     .wire {
         flex-direction: column-reverse !important;
     }
@@ -1708,6 +1713,7 @@
     .status {
         left: 112px;
     }
+
 
 
 

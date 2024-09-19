@@ -12,92 +12,117 @@
     <title>Bulking</title>
     <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
     <link rel="shortcut icon" href="/static/media/fitness-biceps.ico" type="image/x-icon">
+    <style>#content { display: none;}
+    </style>
 
 </head>
 
 <body>
-    {% block navbar %}
 
-    {% endblock %}
-
-
-    {% block body %}
+    <div id="loading" class="loading-animation">Loading...</div>
+    <div id="content" style="display: none;">
+        {% block content %}
 
 
-    {% endblock %}
+        {% block navbar %}
+
+        {% endblock %}
 
 
-    {% block review %}
+
+        {% block body %}
 
 
-    {% endblock %}
+        {% endblock %}
 
-    {% block getstarted %}
 
-    {% endblock %}
+        {% block review %}
 
-    <div class="mainfooter">
-        <div class="container">
-            <div class="maincontent">
-                <div class="symbol">
-                    <div class="info">
-                        <img src="{% static 'media/heart_white.svg' %}" alt="">
-                        <p>Bulking</p>
+
+        {% endblock %}
+
+        {% block getstarted %}
+
+        {% endblock %}
+
+        <div class="mainfooter">
+            <div class="container">
+                <div class="maincontent">
+                    <div class="symbol">
+                        <div class="info">
+                            <img src="{% static 'media/heart_white.svg' %}" alt="">
+                            <p>Bulking</p>
+                        </div>
+                        <div class="infocontent">
+                            <p>Get fit, stay healthy, and live life on their terms without fitness being an
+                                obstacle.
+                            </p>
+                        </div>
                     </div>
-                    <div class="infocontent">
-                        <p>Get fit, stay healthy, and live life on their terms without fitness being an
-                            obstacle.
-                        </p>
+                    <div class="menus">
+                        <ul id="row1">
+                            <li><a href="{% url 'home' %}">Home</a></li>
+                            <li><a href="{% url 'programs' %}">Programs</a></li>
+                            <li><a href="{% url 'membership' %}">Membership</a></li>
+                        </ul>
+                        <ul id="row2">
+                            <li><a href="{% url 'blog' %}">Blog</a></li>
+                            <li><a href="{% url 'contact' %}">Contact</a></li>
+                            <li><a href="{% url 'about' %}">About us</a></li>
+                        </ul>
+                    </div>
+                    <div class="mail">
+                        <p>Newsletter</p>
+                        <div class="form">
+                            <form id="newslettersend" method="post">
+                                {% csrf_token %}
+                                <input id="messageinput" type="text" name="message" placeholder="Your message here"
+                                    required>
+                                <button type="submit" id="mailbutton">Send</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
-                <div class="menus">
-                    <ul id="row1">
-                        <li><a href="{% url 'home' %}">Home</a></li>
-                        <li><a href="{% url 'programs' %}">Programs</a></li>
-                        <li><a href="{% url 'membership' %}">Membership</a></li>
+                <hr>
+                <div class="social">
+                    <p>© 2024 Nguli® Global Inc.</p>
+                    <ul>
+                        {% for social in socials %}
+                        <li><a target="_blank" href="{{ social.address }}"><img src="{{ social.icon.url }}" alt=""></a>
+                        </li>
+                        {% endfor %}
+
                     </ul>
-                    <ul id="row2">
-                        <li><a href="{% url 'blog' %}">Blog</a></li>
-                        <li><a href="{% url 'contact' %}">Contact</a></li>
-                        <li><a href="{% url 'about' %}">About us</a></li>
-                    </ul>
-                </div>
-                <div class="mail">
-                    <p>Newsletter</p>
-                    <div class="form">
-                        <form id="newslettersend" method="post">
-                            {% csrf_token %}
-                            <input id="messageinput" type="text" name="message" placeholder="Your message here" required>
-                            <button type="submit" id="mailbutton">Send</button>
-                        </form>
-                    </div>
-                </div>
-            </div>
-            <hr>
-            <div class="social">
-                <p>© 2024 Nguli® Global Inc.</p>
-                <ul>
-                    {% for social in socials %}
-                    <li><a target="_blank" href="{{ social.address }}"><img src="{{ social.icon.url }}" alt=""></a></li>
-                    {% endfor %}
 
-                </ul>
-                
-                
-                <div class="policy">
-                    <a href="{% url 'terms' %}">
-                        <p>Terms of Service</p>
-                    </a>
-                    <a href="{% url 'privacy_policy' %}">
-                        <p>Privacy Policy</p>
-                    </a>
+
+                    <div class="policy">
+                        <a href="{% url 'terms' %}">
+                            <p>Terms of Service</p>
+                        </a>
+                        <a href="{% url 'privacy_policy' %}">
+                            <p>Privacy Policy</p>
+                        </a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-    </div>
     <span id="resulterspan" type="hidden"></span>
+    {% endblock %}
+    </div>
 </body>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        document.getElementById("loading").style.display = "flex";
+    });
+
+    window.onload = function () {
+        setTimeout(function () {
+            document.getElementById("loading").style.display = "none";
+            document.getElementById("content").style.display = "block";
+        }, 100);
+    };
+</script>
 
 <script type="application/json" id="config-data">
     {

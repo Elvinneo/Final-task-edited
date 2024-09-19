@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect,get_object_or_404
+from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
@@ -129,7 +130,6 @@ def login_view(request):
     return render(request,request.path)
 
 
-
 def login_after_change_password(request):
     if request.method == 'POST':
         try:
@@ -140,14 +140,12 @@ def login_after_change_password(request):
                 user = User.objects.get(username=username)
             except User.DoesNotExist:
                 return JsonResponse({'error': 'Invalid credentials'}, status=400)
-            
-            login(request, user) 
+            login(request, user)  
+            update_session_auth_hash(request, user) 
             return JsonResponse({'message': 'Login successful'}, status=200)
         except json.JSONDecodeError:
             return JsonResponse({'error': 'Invalid JSON'}, status=400)
-
     return JsonResponse({'error': 'Invalid request method'}, status=405)
-
 
 
 def user_auth(request):

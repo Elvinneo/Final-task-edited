@@ -211,6 +211,7 @@
     flex-wrap: wrap;
     justify-content: space-between;
     margin: 0 auto;
+    padding-bottom: 70px;
 }
 
 .card {

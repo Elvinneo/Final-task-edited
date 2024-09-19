@@ -144,13 +144,13 @@ function passwordControlFunction(e) {
     form.submit();
 }
 
-if (welcomeMessageElement) {
-    const welcomeMessage = welcomeMessageElement.textContent.trim();
-    const userNameMatch = welcomeMessage.match(/^Welcome, (.+)!$/);
-    if (userNameMatch) {
-        userName = userNameMatch[1];
-    }
-}
+// if (welcomeMessageElement) {
+//     const welcomeMessage = welcomeMessageElement.textContent.trim();
+//     const userNameMatch = welcomeMessage.match(/^Welcome, (.+)!$/);
+//     if (userNameMatch) {
+//         userName = userNameMatch[1];
+//     }
+// }
 
 if (!isAuthenticated) {
     document.querySelector(".red").style.display = 'none'
@@ -540,11 +540,11 @@ document.addEventListener('DOMContentLoaded', function () {
 
 
 function loginafterchangepassword() {
+    const csrfToken = document.querySelector('[name=csrfmiddlewaretoken]').value;
     const data = {
         username: usernameafterchangepassword,
         password: passwordafterchangepassword
     };
-
     fetch('/login_after_change_password/', {
         method: 'POST',
         headers: {
@@ -553,18 +553,22 @@ function loginafterchangepassword() {
         },
         body: JSON.stringify(data)
     })
-        .then(response => {
-            if (!response.ok) {
-                return response.json().then(errorData => {
-                    throw new Error(errorData.error || 'Something went wrong');
-                });
-            }
-            return response.json();
-        })
-        .then(data => {
-            window.location.reload()
-        });
+    .then(response => {
+        if (!response.ok) {
+            return response.json().then(errorData => {
+                throw new Error(errorData.error || 'Something went wrong');
+            });
+        }
+        return response.json();
+    })
+    .then(data => {
+         window.location.href = '/'
+    })
+    .catch(error => {
+        console.error('Error:', error);
+    });
 }
+
 
 
 // verification login fields
@@ -640,9 +644,11 @@ function testmailfields() {
 function confirmaccount() {
     buttoncontinue.disabled = true;
     const usernamefield = document.getElementById('usernamelogin');
+    const passwordfield = document.getElementById('passwordlogin');
 
     if (usernamefield) {
         const username = usernamefield.value.trim();
+        const password = passwordfield.value.trim();
         if (username === '') {
             usernamefield.style.border = "1px solid red";
             Swal.fire({
@@ -652,7 +658,18 @@ function confirmaccount() {
             });
             buttoncontinue.disabled = false;
             return;
-        } else {
+    
+        } else if(password === ''){
+            Swal.fire({
+                icon: 'warning',
+                title: 'Warning',
+                text: 'Password is required',
+            });
+            buttoncontinue.disabled = false;
+            return;
+
+        }
+        else {
             usernamefield.classList.remove('error');
             usernamefield.style.border = "1px solid #ccc";
         }
