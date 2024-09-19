@@ -12,13 +12,10 @@
     <title>Bulking</title>
     <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
     <link rel="shortcut icon" href="/static/media/fitness-biceps.ico" type="image/x-icon">
-    <style>#content { display: none;}
-    </style>
-
+    <style>#content { display: none;}</style>
 </head>
 
 <body>
-
     <div id="loading" class="loading-animation">Loading...</div>
     <div id="content" style="display: none;">
         {% block content %}
@@ -27,7 +24,6 @@
         {% block navbar %}
 
         {% endblock %}
-
 
 
         {% block body %}

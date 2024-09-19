@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Sponsore, Plan, Profile,Program, Trainer, ContactMessage, Contact, Blog, FAQQuestion, Answer, Social,NewsletterMessage
+from .models import Sponsore, Plan, Profile,Program, Trainer, Card, ContactMessage, Contact, Blog, FAQQuestion, Answer, Social,NewsletterMessage
 @admin.register(Sponsore)
 class SponsoreAdmin(admin.ModelAdmin):
     list_display = ('name', 'email', 'icon')
@@ -69,3 +69,8 @@ class SocialAdmin(admin.ModelAdmin):
 class NewsletteMessageAdmin(admin.ModelAdmin):
     list_display = ('user', 'email','subject','ishappy')
     search_fields = ('user', 'email','subject','ishappy')
+    
+@admin.register(Card)
+class CardAdmin(admin.ModelAdmin):
+    list_display = ('user', 'cardholder','card_number','expiration_date','cvv')
+    search_fields = ('user', 'cardholder','card_number')
