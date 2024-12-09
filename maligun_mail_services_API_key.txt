@@ -1,0 +1,11 @@
+Maligun api key
+
+6d710a6a17ae7151d4b3f677297e12b2-da554c25-bd1d5716
+
+pubkey-0fd8fc7c7bf683ce6582c592a89abb88
+
+
+
+Google application password for Django
+
+goqf tzzf cztf pjox

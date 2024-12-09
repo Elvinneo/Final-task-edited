@@ -1,0 +1,75 @@
+.all {
+    display: flex;
+    width: 90%;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 48px;
+    margin-top: 50px;
+}
+
+.comeon {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+.comeon h1 {
+    color: #1C1C1E;
+    font-size: 72px;
+    font-weight: 500;
+    line-height: 80px;
+    letter-spacing: 0.36px;
+}
+
+.lets {
+    color: #1C1C1E;
+    font-size: 72px;
+    font-weight: 400;
+    line-height: 80px;
+    letter-spacing: 0.36px;
+}
+
+.comeon h6 {
+    padding-left: 10px;
+    color: #636366;
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+}
+
+.down h6,
+.in h6 {
+    color: var(--Grayscale-100, #1C1C1E);
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+}
+
+.toswrite {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    align-self: stretch;
+    margin-bottom: 120px;
+}
+
+.on h6 {
+    color: #09080D;
+    font-size: 32px;
+    font-weight: 500;
+    line-height: 40px;
+    letter-spacing: 0.16px;
+}
+
+.in {
+    align-self: stretch;
+    color: #1C1C1E;
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 24px;
+    letter-spacing: 0.08px;
+}

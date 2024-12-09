@@ -11,15 +11,40 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
-EMAIL_HOST = 'smtp.office365.com'
-EMAIL_PORT = 587
-EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'elvinbagirov@windowslive.com'
-EMAIL_HOST_PASSWORD = '0844045EBb'
-DEFAULT_FROM_EMAIL = 'elvinbagirov@windowslive.com'
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.mailgun.org'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'postmaster@sandbox4cbaa958014f4ab09f636dbb6d5426e7.mailgun.org'
+# EMAIL_HOST_PASSWORD = '6d710a6a17ae7151d4b3f677297e12b2-da554c25-bd1d5716'
+# DEFAULT_FROM_EMAIL = 'noreply@sandbox4cbaa958014f4ab09f636dbb6d5426e7.mailgun.org'
 
-# Application definition
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.office365.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True
+# EMAIL_HOST_USER = 'elvinbagirov@windowslive.com'
+# EMAIL_HOST_PASSWORD = '0844045EBb'
+# DEFAULT_FROM_EMAIL = 'elvinbagirov@windowslive.com'
+
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_PORT = 587
+# EMAIL_USE_TLS = True 
+# EMAIL_HOST_USER = 'bulkingsite@gmail.com'
+# EMAIL_HOST_PASSWORD = 'goqf tzzf cztf pjox'
+# DEFAULT_FROM_EMAIL = 'bulkingsite@gmail.com'
+
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_USE_TLS = True 
+EMAIL_HOST_USER = 'elvinbagirovebay@gmail.com'
+EMAIL_HOST_PASSWORD = 'goqf tzzf cztf pjox'
+DEFAULT_FROM_EMAIL = 'elvinbagirovebay@gmail.com'
+
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -75,8 +100,6 @@ TEMPLATES = [
 WSGI_APPLICATION = 'Bulking.wsgi.application'
 
 
-# Database
-# https://docs.djangoproject.com/en/5.0/ref/settings/#databases
 
 DATABASES = {
     'default': {
@@ -86,8 +109,6 @@ DATABASES = {
 }
 
 
-# Password validation
-# https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {

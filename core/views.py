@@ -42,8 +42,9 @@ def generate_verification_code():
 def send_verification_email(email, code):
     subject = 'Your Verification Code'
     message = f'Your verification code is {code}.'
-    from_email = 'elvinbagirov@windowslive.com'
+    from_email = settings.DEFAULT_FROM_EMAIL
     try:
+        print(from_email,email,code)
         mail_sent = send_mail(subject, message, from_email, [email])
         return mail_sent > 0
     except Exception as e:
