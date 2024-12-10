@@ -12,7 +12,11 @@
     <title>Bulking</title>
     <link rel="stylesheet" href="{% static 'CSS/main.css' %}">
     <link rel="shortcut icon" href="/static/media/fitness-biceps.ico" type="image/x-icon">
-    <style>#content { display: none;}</style>
+    <style>
+        #content {
+            display: none;
+        }
+    </style>
 </head>
 
 <body>
@@ -131,6 +135,6 @@
     let programId = "{{ program.id }}";
 </script>
 <script src="{% static 'js/app.js' %}"></script>
-<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="{% static  'js/sweetalert2.min.js' %}"></script>
 
 </html>
